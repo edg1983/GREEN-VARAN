@@ -1,0 +1,147 @@
+{
+    "BEDTOOLS": "bedtools",
+    "SVTYPE": "SVTYPE",
+    "END": "END",
+    "RES_DIR": "resources/SV_annotations",
+
+    "overlap": {
+        "AF_datasets": ["0.75", "FALSE"],
+        "custom_datasets": ["0.10", "FALSE"],
+        "genes": ["10e-9","FALSE"]
+    },
+
+    "AF_datasets": {
+        "GRCh38": {
+            "IMH": [
+                ["INS", "GRCh38_20190404_IMH_INS_SV.sorted.bed", "5", "AF", "Float"],
+                ["DEL", "GRCh38_20190404_IMH_DEL_SV.sorted.bed", "5", "AF", "Float"],
+                ["DUP", "GRCh38_20190404_IMH_DUP_SV.sorted.bed", "5", "AF", "Float"],
+                ["INV", "GRCh38_20190404_IMH_INV_SV.sorted.bed", "5", "AF", "Float"]
+            ],
+            "gnomAD": [
+                ["INS", "GRCh38_gnomad_v2.1_sv.INS.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"],
+                ["DEL", "GRCh38_gnomad_v2.1_sv.DEL.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"],
+                ["DUP", "GRCh38_gnomad_v2.1_sv.DUP.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"],
+                ["INV", "GRCh38_gnomad_v2.1_sv.INV.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"]
+            ],
+            "1000G": [
+                ["INS", "GRCh38_1000G_phase3_SV.INS.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"],
+                ["DEL", "GRCh38_1000G_phase3_SV.DEL.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"],
+                ["DUP", "GRCh38_1000G_phase3_SV.DUP.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"],
+                ["INV", "GRCh38_1000G_phase3_SV.INV.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"]
+            ]
+        },
+        "GRCh37": {
+            "IMH": [
+                ["INS", "GRCh37_20190404_IMH_INS_SV.sorted.bed", "5", "AF", "Float"],
+                ["DEL", "GRCh37_20190404_IMH_DEL_SV.sorted.bed", "5", "AF", "Float"],
+                ["DUP", "GRCh37_20190404_IMH_DUP_SV.sorted.bed", "5", "AF", "Float"],
+                ["INV", "GRCh37_20190404_IMH_INV_SV.sorted.bed", "5", "AF", "Float"]
+            ],
+            "gnomAD": [
+                ["INS", "GRCh37_gnomad_v2.1_sv.INS.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"],
+                ["DEL", "GRCh37_gnomad_v2.1_sv.DEL.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"],
+                ["DUP", "GRCh37_gnomad_v2.1_sv.DUP.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"],
+                ["INV", "GRCh37_gnomad_v2.1_sv.INV.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"]
+            ],
+            "1000G": [
+                ["INS", "GRCh37_1000G_phase3_SV.INS.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"],
+                ["DEL", "GRCh37_1000G_phase3_SV.DEL.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"],
+                ["DUP", "GRCh37_1000G_phase3_SV.DUP.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"],
+                ["INV", "GRCh37_1000G_phase3_SV.INV.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"]
+            ]
+        },
+        "hg19": {
+            "IMH": [
+                ["INS", "hg19_20190404_IMH_INS_SV.sorted.bed", "5", "AF", "Float"],
+                ["DEL", "hg19_20190404_IMH_DEL_SV.sorted.bed", "5", "AF", "Float"],
+                ["DUP", "hg19_20190404_IMH_DUP_SV.sorted.bed", "5", "AF", "Float"],
+                ["INV", "hg19_20190404_IMH_INV_SV.sorted.bed", "5", "AF", "Float"]
+            ],
+            "gnomAD": [
+                ["INS", "hg19_gnomad_v2.1_sv.INS.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"],
+                ["DEL", "hg19_gnomad_v2.1_sv.DEL.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"],
+                ["DUP", "hg19_gnomad_v2.1_sv.DUP.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"],
+                ["INV", "hg19_gnomad_v2.1_sv.INV.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,OTH_AF", "Float"]
+            ],
+            "1000G": [
+                ["INS", "hg19_1000G_phase3_SV.INS.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"],
+                ["DEL", "hg19_1000G_phase3_SV.DEL.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"],
+                ["DUP", "hg19_1000G_phase3_SV.DUP.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"],
+                ["INV", "hg19_1000G_phase3_SV.INV.bed", "4,5,6,7,8,9", "AF,AFR_AF,AMR_AF,EAS_AF,EUR_AF,SAS_AF", "Float"]
+            ]
+        }
+    },
+
+    "custom_datasets": {
+        "GRCh38": {
+            "GREENDB": [
+                ["INS", "GRCh38_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["DEL", "GRCh38_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["DUP", "GRCh38_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["INV", "GRCh38_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"]            
+            ]
+        },
+        "GRCh37": {
+            "GREENDB": [
+                ["INS", "GRCh37_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["DEL", "GRCh37_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["DUP", "GRCh37_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["INV", "GRCh37_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"]            
+            ]
+        },
+        "hg19": {
+            "GREENDB": [
+                ["INS", "hg19_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["DEL", "hg19_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["DUP", "hg19_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["INV", "hg19_GREENDB.bed", "4,5,7,13", "id,type,constraint,gene", "String"]            
+            ]
+        }
+    },
+
+    "genes": {
+        "GRCh38": {
+            "gene": [
+                ["INS", "GRCh38_gencode33.basic_gene.bed", "4", "symbol", "String"],
+                ["DEL", "GRCh38_gencode33.basic_gene.bed", "4", "symbol", "String"],
+                ["DUP", "GRCh38_gencode33.basic_gene.bed", "4", "symbol", "String"],
+                ["INV", "GRCh38_gencode33.basic_gene.bed", "4", "symbol", "String"]            
+            ],
+            "CDS": [
+                ["INS", "GRCh38_gencode33.basic_CDS.bed", "4", "symbol", "String"],
+                ["DEL", "GRCh38_gencode33.basic_CDS.bed", "4", "symbol", "String"],
+                ["DUP", "GRCh38_gencode33.basic_CDS.bed", "4", "symbol", "String"],
+                ["INV", "GRCh38_gencode33.basic_CDS.bed", "4", "symbol", "String"]            
+            ]           
+        },
+        "GRCh37": {
+            "gene": [
+                ["INS", "GRCh37_gencode33.basic_gene.bed", "4", "symbol", "String"],
+                ["DEL", "GRCh37_gencode33.basic_gene.bed", "4", "symbol", "String"],
+                ["DUP", "GRCh37_gencode33.basic_gene.bed", "4", "symbol", "String"],
+                ["INV", "GRCh37_gencode33.basic_gene.bed", "4", "symbol", "String"]            
+            ],
+            "CDS": [
+                ["INS", "GRCh37_gencode33.basic_CDS.bed", "4", "symbol", "String"],
+                ["DEL", "GRCh37_gencode33.basic_CDS.bed", "4", "symbol", "String"],
+                ["DUP", "GRCh37_gencode33.basic_CDS.bed", "4", "symbol", "String"],
+                ["INV", "GRCh37_gencode33.basic_CDS.bed", "4", "symbol", "String"]            
+            ]             
+        },
+        "hg19": {
+            "gene": [
+                ["INS", "hg19_gencode33.basic_gene.bed", "4", "symbol", "String"],
+                ["DEL", "hg19_gencode33.basic_gene.bed", "4", "symbol", "String"],
+                ["DUP", "hg19_gencode33.basic_gene.bed", "4", "symbol", "String"],
+                ["INV", "hg19_gencode33.basic_gene.bed", "4", "symbol", "String"]            
+            ],
+            "CDS": [
+                ["INS", "hg19_gencode33.basic_CDS.bed", "4", "symbol", "String"],
+                ["DEL", "hg19_gencode33.basic_CDS.bed", "4", "symbol", "String"],
+                ["DUP", "hg19_gencode33.basic_CDS.bed", "4", "symbol", "String"],
+                ["INV", "hg19_gencode33.basic_CDS.bed", "4", "symbol", "String"]            
+            ]  
+        }
+    }
+}
