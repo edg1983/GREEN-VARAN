@@ -1,9 +1,11 @@
 '''
-Regulatory regions annotator
-Annotate non-coding regions from RegDB
+GREEN-VARAN
+Genome Regulatory Elements ENcyclopedia VARiant ANnotation
+Annotate non-coding variants with information from GREEN-DB
 Regulatory variant impact predictions from LINSight, FIRE, ExPECTO, NCBoost, ReMM, CADD, DANN
 Can add var AF from gnomAD and conservation from PhyloP100
 The tool runs vcfanno under the cover for fast annotation
+
 Author: Edoardo Giacopuzzi
 '''
 
