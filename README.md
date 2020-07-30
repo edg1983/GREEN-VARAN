@@ -140,6 +140,43 @@ GREEN-DB_query.py [-h] (-v VCF | -r REGIDS | -t TABLE)
 
 GREEN-VARAN and the other tools are also provided as Singularity image. A Singularity recipe is included in this distribution or you can download a pre-compiled image from zenodo(LINK).
 
+### Usage
+
+The image contains all 3 GREEN-VARAN tools:
+- GREEN-VARAN: annotation of small variants VCF
+- SV_annotation: annotation of SV VCF
+- GREEN-DB_query: query the GREEN-DB for detailed information 
+
+To run one of the tool use:
+
+```
+singularity run \
+--bind resources_folder:/opt/GREEN_VARAN/resources \
+GREEN-VARAN.sif tool_name [tool arguments]
+```  
+
+**NB.** The host resources_folder must contain the standard subfolders and files expected by GREEN-VARAN. If you have stores resources in other locations you have to bind them manually into the container and then pass the mounted path to the tool with the corresponding argument (see below)
+    
+By default you are expected to read/write from the present working directory:
+- all input files are read from present working directory
+- output files and tmp folders are created in the present working directory
+
+#### If you have input/output/resources in other folders
+You can change folders locations by creating additional folder binds and then use the mounted paths accordingly in input/output arguments. Example:
+
+```    
+singularity run \
+--bind resources_folder:/opt/GREEN_VARAN/resources \
+--bind input_folder:/input \
+--bind output_fodler:/output \
+--bind bed_files:/bed_files \
+GREEN-VARAN.sif \
+GREEN-VARAN -i /input/input.vcf \
+-o /output/output.vcf \
+--bed_dir /bed_files \ 
+[tool arguments]
+```
+
 ## Citation
 
 If you use GREEN-DB annotations or GREEN-VARAN please cite:

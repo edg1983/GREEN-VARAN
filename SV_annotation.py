@@ -213,7 +213,7 @@ if args.tmpdir:
     tmp_folder = args.tmpdir
 else:
     tmp_folder = "tmp" + now("","long")
-if os.makedirs(tmp_folder, exist_ok=True)
+os.makedirs(tmp_folder, exist_ok=True)
 out_filename = checkfile(args.out,"write","rename",logger)
 
 logger.info("Input file: %s", input_file)
