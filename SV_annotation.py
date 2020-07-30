@@ -16,7 +16,7 @@ import tempfile
 import re
 import logging
 import pandas as pd
-from shutil import which
+from shutil import which, rmtree
 from datetime import datetime, timedelta
 from collections import OrderedDict
 from cyvcf2 import VCF
@@ -177,9 +177,9 @@ def now(sep=":", string_format="short"):
 parser = argparse.ArgumentParser(description='Script to add annotSV annotations to VCF file')
 parser.add_argument("-i", "--inputvcf", help="Input VCF file to be annotated", action="store", required=True)
 parser.add_argument("-o", "--out", help="Output VCF file", action="store", required=True)
-parser.add_argument("-t", "--tmpdir", help="Folder to store temp files", action="store", required=False, default=tempfile.gettempdir())
+parser.add_argument("-t", "--tmpdir", help="Folder to store temp files", action="store", required=False)
 parser.add_argument("-b", "--build", help="Genome build", action="store", choices=["GRCh37", "GRCh38"], required=True)
-parser.add_argument("-c", "--config", help="Config file (json)", action="store", required=True)
+parser.add_argument("-c", "--config", help="Config file (json)", action="store", required=False, default="SV_annotation.json")
 parser.add_argument("-k", "--keeptmp", help="Set to keep tmp files", action="store_true", required=False)
 parser.add_argument("--logfile", help="Log file", action="store", required=False)
 args = parser.parse_args()
@@ -209,13 +209,17 @@ start_time = time.time()
 input_file = args.inputvcf
 build = args.build
 json_file = args.config
-tmp_folder = args.tmpdir
+if args.tmpdir:
+    tmp_folder = args.tmpdir
+else:
+    tmp_folder = "tmp" + now("","long")
+if os.makedirs(tmp_folder, exist_ok=True)
 out_filename = checkfile(args.out,"write","rename",logger)
 
 logger.info("Input file: %s", input_file)
 logger.info("Output file: %s", out_filename)
 logger.info("Config file: %s", json_file)
-logger.info("Geonome build: %s", build)
+logger.info("Genome build: %s", build)
 
 checkfile([input_file, json_file], logger=logger)
 
@@ -412,10 +416,11 @@ logger.info("### ANNOTATION FINISHED ###")
 
 if not args.keeptmp:
     logger.info("Removing temp files")
-    tmp_files = os.listdir(tmp_folder)
-    for myfile in tmp_files:
-        if myfile.startswith('SVannot.tmp_'):
-            os.remove(tmp_folder + "/" + myfile)
+    rmtree(tmp_folder)
+    #tmp_files = os.listdir(tmp_folder)
+    #for myfile in tmp_files:
+    #    if myfile.startswith('SVannot.tmp_'):
+    #        os.remove(tmp_folder + "/" + myfile)
 
 end_time = time.time() - start_time
 end_time = str(timedelta(seconds=round(end_time)))

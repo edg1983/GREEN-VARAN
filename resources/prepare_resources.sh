@@ -8,12 +8,30 @@ create expected sub-folder.
 
 Usage:
     prepare_resources.sh
-        [-r,--resource RESOURCES_FILE]
-        [-n,--name RESOURCE_NAME] (default all = download all)
-        [-o,--out OUTPUT_DIR] (default to current dir)
-        [-l,--list] (list available resources)
-        [-h,--help] (get help message)
+        [-r,--resource RESOURCES_FILE]  GREEN-VARAN_resources.txt (default)
+        [-n,--name RESOURCE_NAME]       all = download all (default)
+                                        scores = download all scores
+                                        bed_files = download all bed_files
+                                        AF = download AF files
+                                        SV_annotation = download all SV annotations
+                                        specific_name (see --list)
+        [-o,--out OUTPUT_DIR]           current directory (default)
+        [-l,--list]                     list available resources
+        [-h,--help]                     get help message
 EOM
+
+function downloadRepoGroup {
+    repo_class = $1
+    n_repos=$(cat $RESOURCE_FILE | awk -F"\t" -v name="$repo_class" '{$2 == name}' | wc -l)
+        echo "$n_repos scores found in resource file"
+        while read -r repo_id repo_dir repo_http; do
+            mdkir -p $repo_dir
+            cd $repo_dir
+            echo "Downloading $repo_id in $OUTDIR/$repo_dir"
+            wget --backups=1 -nv $repo_http
+            cd ..    
+        done < $(awk -F"\t" -v name="$repo_name" '{$2 == name}')   
+}
 
 if [ $# == 0 ]
 then
@@ -38,7 +56,6 @@ while test $# -gt 0; do
                 export RESOURCE_FILE="GREEN-VARAN_resources.txt"
             fi
             shift
-        ;;
         -n|--name)
             shift
             if test $# -gt 0; then
@@ -109,6 +126,9 @@ case "$REPO_NAME" in
             wget --backups=1 -nv $repo_http
             cd ..    
         done < $RESOURCE_FILE
+    ;;
+    scores|bed_files|SV_annotation|AF)
+        downloadRepoGroup($REPO_NAME)
     ;;
     *)
         repo_id=$(grep $REPO_NAME $RESOURCE_FILE | cut -f1)
