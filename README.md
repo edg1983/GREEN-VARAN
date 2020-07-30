@@ -138,7 +138,7 @@ GREEN-DB_query.py [-h] (-v VCF | -r REGIDS | -t TABLE)
 
 ## Run using singularity container
 
-GREEN-VARAN and the other tools are also provided as Singularity image. A Singularity recipe is included in this distribution or you can download a pre-compiled image from zenodo(LINK).
+GREEN-VARAN and the other tools are also provided as Singularity image (tested on singularity >= 3.2). A Singularity recipe is included in this distribution or you can download a pre-compiled image from zenodo(LINK).
 
 ### Usage
 
@@ -186,4 +186,3 @@ If you use GREEN-VARAN for annotation please also cite:
 ###vcfanno ref###
 
 Additionally, when you use any prediction score for annotation, please cite also the corresponding publication.
-
