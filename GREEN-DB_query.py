@@ -58,12 +58,12 @@ def create_connection(db_file):
         cur.execute('PRAGMA temp_store = 2')
         cur.execute('PRAGMA synchronous = 0')
         cur.execute('PRAGMA journal_mode = OFF')
-        cur.execute('PRAGMA threads = 10')
+        cur.execute('PRAGMA threads = 8')
     except:
         conn = None
  
     return conn
- 
+
 #prepare query for methods or genes tables 
 def prepare_query(table, build, ids):
     if table in ["DNase", "TFBS"]:
@@ -375,6 +375,5 @@ end_time = time.time() - start_time
 end_time = str(timedelta(seconds=round(end_time)))
 logger.info("Process completed in %s", end_time)
 
-                    
 #TODO Develop plotting for detail mode
 #TODO Add genome browser integration for detail mode

@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "/well/gel/HICF2/software/anaconda3/envs/BRC_tools/bin/python",
+    "restructuredtext.confPath": "${workspaceFolder}/docs"
+}

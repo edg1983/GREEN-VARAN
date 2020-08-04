@@ -30,7 +30,7 @@ Annotate non-coding regulatory variants in a VCF with a combination of
 Detailed description of GREEN-DB and GREEN-VARAN tools is provided in readthedocs_link
 
 ## Installation
-GREEN-VARAN tools are written in Python 3. GREEN-VARAN relies on [vcfanno](https://github.com/brentp/vcfanno) for fast VCF processing. GREEN-DB files and a set of additional files are needed for annotation (see below)
+GREEN-VARAN tools are written in Python 3. GREEN-VARAN relies on [vcfanno](https://github.com/brentp/vcfanno) (Copyright (c) 2015 Brent Pedersen and Aaron Quinlan) for fast VCF processing. GREEN-DB files and a set of additional files are needed for annotation (see Download the supporting files)
 
 ### Get the tools from the repository
 ```
@@ -90,7 +90,9 @@ The SV_annotation tool can annotate any SV VCF as long as it has:
 - a unique var ID in ID column
 - END and SVTYPE information in the INFO column (actual tags can be configured)
 
-It provides annotations by overlapping input SV with a set of configurable bed file resources. Configuration file for population AF, genes and GREEN-DB annotations are provided with this release. Supporting files needed for annotation are provided on Zenodo (see Download the supporting files) 
+It provides annotations by overlapping input SV with a set of configurable bed file resources. Configuration file for population AF, genes and GREEN-DB annotations is provided with this release. Supporting files needed for annotation are provided on Zenodo (see Download the supporting files).
+
+Currently, it annotates DEL, DUP, INV based on the configured overlap threshold, while for INS only the breakpoint is annotated. BND are ignored.
 
 ```
 SV_annotation.py [-h] -i INPUTVCF 
@@ -109,12 +111,10 @@ Script to add annotSV annotations to VCF file
 |-c, --config        |  | json configuration file |
 
 ### GREEN-DB_query
-GREEN-DB_query can take as input one of:
+GREEN-DB_query queries the GREEN-DB and output a series of tables containing full information for each region. If variants are provided as input, the output tables will be limited to relevant informations only. Input can be one of:
 - A VCF file annotated with GREEN-VARAN
 - A list of GREEN-DB region IDs
 - A tab-delemited file containing variant IDs (chr_pos_ref_alt) and comma-separated region IDs
-
-It queries the GREEN-DB and output a series of tables containing full information for each region. If variants are provided as input, the output tables will be limited to relevant informations only.
 
 ```
 GREEN-DB_query.py [-h] (-v VCF | -r REGIDS | -t TABLE) 
@@ -129,14 +129,9 @@ GREEN-DB_query.py [-h] (-v VCF | -r REGIDS | -t TABLE)
 |-o, --outprefix     |              | Prefix for output files |
 |-b, --build         | GRCh37<br>GRCh38 | Genome build of input VCF |
 
-### Arguments for additional annotations
-| Argument           | Choices      | Description |
-|:---------          |:-----------: |:------------|
-|--allelefreq | global<br>afr, amr, eas, fin, nfe, sas, oth | Add gnomAD AF annotations based on global AF or specific pop |
-| -s, --scores | ReMM,LinSight,NCBoost<br>ExPECTO,FIRE,DANN,CADD | Add selected prediction score for non-coding vars. Repeat to add multiple scores |
-| -a, --allscores | | Add all prediction scores for non-coding vars |
-
 ## Run using singularity container
+
+[![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/4619)
 
 GREEN-VARAN and the other tools are also provided as Singularity image (tested on singularity >= 3.2). A Singularity recipe is included in this distribution or you can download a pre-compiled image from zenodo(LINK).
 
@@ -155,7 +150,7 @@ singularity run \
 GREEN-VARAN.sif tool_name [tool arguments]
 ```  
 
-**NB.** The host resources_folder must contain the standard subfolders and files expected by GREEN-VARAN. If you have stores resources in other locations you have to bind them manually into the container and then pass the mounted path to the tool with the corresponding argument (see below)
+**NB.** The host resources_folder must contain the standard subfolders and files expected by GREEN-VARAN in resources/. If you have stored resources in other locations you have to bind them manually into the container and then pass the mounted path to the tool with the corresponding argument (see below)
     
 By default you are expected to read/write from the present working directory:
 - all input files are read from present working directory
@@ -169,11 +164,13 @@ singularity run \
 --bind resources_folder:/opt/GREEN_VARAN/resources \
 --bind input_folder:/input \
 --bind output_fodler:/output \
---bind bed_files:/bed_files \
+--bind bed_dir:/bed_dir \
+--bind scores_dir:/scores_dir \
 GREEN-VARAN.sif \
 GREEN-VARAN -i /input/input.vcf \
 -o /output/output.vcf \
---bed_dir /bed_files \ 
+--bed_dir /bed_dir \ 
+--scores_dir /scores_dir \
 [tool arguments]
 ```
 
@@ -182,7 +179,9 @@ GREEN-VARAN -i /input/input.vcf \
 If you use GREEN-DB annotations or GREEN-VARAN please cite:
 ###ourpaper###
 
-If you use GREEN-VARAN for annotation please also cite:
-###vcfanno ref###
+If you use GREEN-VARAN for small variants annotation please also cite:
+
+[Vcfanno: fast, flexible annotation of genetic variants](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0973-5) 
+Brent S. Pedersen, Ryan M. Layer & Aaron R. Quinlan. Genome Biology volume 17, Article number: 118 (2016)
 
 Additionally, when you use any prediction score for annotation, please cite also the corresponding publication.

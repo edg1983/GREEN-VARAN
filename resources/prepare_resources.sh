@@ -22,15 +22,15 @@ EOM
 
 function downloadRepoGroup {
     repo_class = $1
-    n_repos=$(cat $RESOURCE_FILE | awk -F"\t" -v name="$repo_class" '{$2 == name}' | wc -l)
-        echo "$n_repos scores found in resource file"
+    n_repos=$(cat $RESOURCE_FILE | awk -F"\t" -v name="$repo_class" '$2 == name' | wc -l)
+        echo "$n_repos for $repo_class found in resource file"
         while read -r repo_id repo_dir repo_http; do
             mdkir -p $repo_dir
             cd $repo_dir
             echo "Downloading $repo_id in $OUTDIR/$repo_dir"
             wget --backups=1 -nv $repo_http
             cd ..    
-        done < $(awk -F"\t" -v name="$repo_name" '{$2 == name}')   
+        done < $(awk -F"\t" -v name="$repo_name" '$2 == name')   
 }
 
 if [ $# == 0 ]

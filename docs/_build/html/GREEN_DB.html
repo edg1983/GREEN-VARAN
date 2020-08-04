@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The GREEN-DB &mdash; GREEN-DB and GREEN-VARAN  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GREEN-VARAN tool set" href="GREEN_VARAN.html" />
+    <link rel="prev" title="GREEN: Genomic Regulatory Elements ENcyclopedia" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> GREEN-DB and GREEN-VARAN
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The GREEN-DB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#information-in-the-database">Information in the database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sqlite-database-structure">SQLite database structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-constraint-metric">The constraint metric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary-of-the-building-process">Summary of the building process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GREEN_VARAN.html">GREEN-VARAN tool set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GREEN-DB and GREEN-VARAN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>The GREEN-DB</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/GREEN_DB.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-green-db">
+<h1>The GREEN-DB<a class="headerlink" href="#the-green-db" title="Permalink to this headline">¶</a></h1>
+<p>GREEN-DB is a comprehensive collection of potential regulatory regions in the human genome
+including ~2.4M regions from 16 data sources and covering ~1.5Gb evenly distributed across chromosomes.
+The regulatory regions are grouped in 5 categories:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 31%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>GREEN-DB</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Bases covered</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>N Enhancer</p></td>
+<td><p>1832830</p></td>
+<td><p>1449153178</p></td>
+</tr>
+<tr class="row-odd"><td><p>N Promoter</p></td>
+<td><p>565323</p></td>
+<td><p>234315553</p></td>
+</tr>
+<tr class="row-even"><td><p>N Silencer</p></td>
+<td><p>4302</p></td>
+<td><p>11210309</p></td>
+</tr>
+<tr class="row-odd"><td><p>N Bivalent</p></td>
+<td><p>8409</p></td>
+<td><p>894792</p></td>
+</tr>
+<tr class="row-even"><td><p>N Insulator</p></td>
+<td><p>23</p></td>
+<td><p>17504</p></td>
+</tr>
+<tr class="row-odd"><td><p>All regions</p></td>
+<td><p>2410887</p></td>
+<td><p>1502180018</p></td>
+</tr>
+</tbody>
+</table>
+<p>Each region is described by its genomic location, region type, method(s) of detection, data source and closest gene;
+~35% of regions are annotated with controlled genes, ~40% with tissue(s) of activity, and ~14% have associated phenotype(s).
+GREEN-DB is available as an SQLite database and regions information with controlled genes are also provided as
+extended bed files for easy integration into existing analysis pipelines.</p>
+<div class="section" id="information-in-the-database">
+<h2>Information in the database<a class="headerlink" href="#information-in-the-database" title="Permalink to this headline">¶</a></h2>
+<p>For details on how the database was compiled please refer to the original publication
+##OURPAPER##</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="_images/Figure_1_color.png"><img alt="Summary of the database" src="_images/Figure_1_color.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text"><strong>Main information in the database</strong></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="_images/Figure_2_color.png"><img alt="Gene-region connections" src="_images/Figure_2_color.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text"><strong>Summary information on gene-region connections</strong></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="sqlite-database-structure">
+<h2>SQLite database structure<a class="headerlink" href="#sqlite-database-structure" title="Permalink to this headline">¶</a></h2>
+<p>The SQLite database contains 16 tables:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>GRCh37 / GRCh38 regions</dt><dd><p>GREEN-DB regions coordinate; region type; constraint percentile; closest gene symbol, Ensembl ID and distance; PhyloP100 statistics</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Tissues</dt><dd><p>tissue(s) of activity for a region or a region-gene interaction</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Genes</dt><dd><p>controlled gene(s)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Methods</dt><dd><p>method(s) supporting each region and region-gene interaction. This may correspond to the data source when no specific method information was available.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Phenotypes</dt><dd><p>potentially associated phenotypes</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>GRCh37 / GRCh38 TFBS</dt><dd><p>transcription factor binding sites</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>GRCh37 / GRCh38 DNase</dt><dd><p>DNase hypersensitivity peaks</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>GRCh37 / GRCh38 dbSuper</dt><dd><p>super-enhancers as defined by dbSuper</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>GRCh37 / GRCh38 LoF_tolerance</dt><dd><p>the probability of LoF tolerance for enhancers</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>GRCh37 / GRCh38 UCNE</dt><dd><p>ultraconserved noncoding elements</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Main tables (regions, tissues, genes and methods) are linked by the unique region ID.
+Additionally, a unique interaction ID identifies each gene-region pair in the gene table and it’s linked to methods and tissues tables.
+Linking tables are included that map the overlap between GREEN-DB region IDs and each of TFBS, DNase, dbSuper and LoF_tolerance region IDs, reporting also the fraction of overlap.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="_images/GREEN-DB_diagram.png"><img alt="SQlite DB structure" src="_images/GREEN-DB_diagram.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text"><strong>A schematic representation of GREEN-DB.</strong></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="the-constraint-metric">
+<h2>The constraint metric<a class="headerlink" href="#the-constraint-metric" title="Permalink to this headline">¶</a></h2>
+<p>For each region we calculated a contraint metric representing the tolerance to genetic variations.
+Constraint ranges 0-1 with higher values associated to higher level of variation constraint.
+Regions with high constraint values (especially &gt; 0.9) are more likely to control essential genes and genes involved in human diseases.</p>
+<div class="figure align-center" id="id4">
+<a class="reference internal image-reference" href="_images/Figure_4_color.png"><img alt="Constraint metric distribution" src="_images/Figure_4_color.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text"><strong>Constraint values for regions associated to essential/pathogenic genes</strong></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="summary-of-the-building-process">
+<h2>Summary of the building process<a class="headerlink" href="#summary-of-the-building-process" title="Permalink to this headline">¶</a></h2>
+<p>In GREEN-DB we collected and aggregated information from 16 different sources, including</p>
+<ul class="simple">
+<li><p>7 previously published curated databases</p></li>
+<li><p>6 experimental datasets from recently published articles</p></li>
+<li><p>predicted regulatory regions from 3 different algorithms</p></li>
+</ul>
+<p>Four additional datasets were included to integrate region to gene / phenotype relationships.
+We also collected additional data useful in evaluating the regulatory role of genomic regions, including
+- TFBS and DNase peaks
+- ultraconserved non-coding elements (UCNE)
+- super-enhancer definitions
+- enhancer LoF tolerance</p>
+<div class="figure align-center" id="id5">
+<a class="reference internal image-reference" href="_images/NC_annotations.png"><img alt="Build the database" src="_images/NC_annotations.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text"><strong>Summary of the GREEN-DB building process</strong></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="GREEN_VARAN.html" class="btn btn-neutral float-right" title="GREEN-VARAN tool set" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="GREEN: Genomic Regulatory Elements ENcyclopedia" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Edoardo Giacopuzzi
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

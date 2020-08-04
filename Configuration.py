@@ -1,6 +1,6 @@
 ### RESOURCES LOCATIONS ###
 # Modify values according to file locations
-# {base_dir} is the directory where python script is located
+# {base_dir} is translated to the directory where python script is located
 
 VCF_ANNO = "{base_dir}/vcfanno"
 BCFTOOLS = "bcftools"
@@ -27,20 +27,6 @@ NC_ANNO_DATATYPES = {
     'NC_tolerant_label' : 'String',
     'NC_median_PhyloP100' : 'Float'}
 NC_ANNO_TAGS = NC_ANNO_DATATYPES.keys()
-#NC_ANNO_DROP = [
-#    'NC_support',
-#    'NC_regionID',
-#    'NC_region_type',
-#    'NC_constraint',
-#    'NC_methods',
-#    'NC_genes',
-#    'NC_closestGene',
-#    'NC_closestGene_dist',
-#    'NC_closestProt',
-#    'NC_closestProt_dist',
-#    'NC_tolerant_P',
-#    'NC_tolerant_label',
-#    'NC_median_PhyloP100']
 
 HEADER_VOI = '##INFO=<ID=NC_VOI,Number=1,Type=Integer,Description="This is a variant of interest from NC annotation"'
 HEADER_CLASS = '##INFO=<ID=NC_VARCLASS,Number=1,Type=Integer,Description="Variant class based on GREEN-VARAN prioritization. Higher values means higher probability of regulatory impact"'
@@ -50,7 +36,7 @@ for tag, datatype in NC_ANNO_DATATYPES.items():
     HEADER_SEPARATED.append('##INFO=<ID={tag},Number=1,Type={datatype},Description="Non-coding region annotation: {tag}">'.format(tag=tag,datatype=datatype))
 
 TOML = '''[[annotation]]
-file="{bed_dir}/{build}_regions.annotated.bed.gz"
+file="{bed_dir}/{build}_GREEN-DB.bed.gz"
 names=["TMPNC_regionID","TMPNC_region_type","TMPNC_constraint","TMPNC_median_PhyloP100","TMPNC_closestGene","TMPNC_closestGene_dist", "TMPNC_closestProt", "TMPNC_closestProt_dist","TMPNC_genes","TMPNC_methods"]
 ops=["self","self","self","max","uniq","uniq","uniq","uniq","uniq","max"]
 columns=[4,5,7,8,9,10,11,12,13,14]
