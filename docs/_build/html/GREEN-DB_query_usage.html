@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GREEN-DB_query tool usage &mdash; GREEN-DB and GREEN-VARAN  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Download resources" href="Download.html" />
+    <link rel="prev" title="SV_annotation tool usage" href="SV_annotation_usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> GREEN-DB and GREEN-VARAN
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="GREEN_DB.html">The GREEN-DB</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="GREEN_VARAN.html">GREEN-VARAN tool set</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#singularity">Singularity</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="GREEN_VARAN.html#single-tools-usage">Single tools usage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="GREEN-VARAN_usage.html">GREEN-VARAN tool usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SV_annotation_usage.html">SV_annotation tool usage</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GREEN-DB_query tool usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#possible-inputs">Possible inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-tables">Output tables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arguments-list">Arguments list</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GREEN-DB and GREEN-VARAN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="GREEN_VARAN.html">GREEN-VARAN tool set</a> &raquo;</li>
+        
+      <li>GREEN-DB_query tool usage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/GREEN-DB_query_usage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="green-db-query-tool-usage">
+<h1>GREEN-DB_query tool usage<a class="headerlink" href="#green-db-query-tool-usage" title="Permalink to this headline">¶</a></h1>
+<p>GREEN-DB_query.py assists in quering the GREEN-DB.
+Given a list of region IDs or a VCF annotated by GREEN-VARAN the tool generates a set of tables
+containing detailed information on the regions of interest, including overlap with additional supporting regions
+(TFBS, DNase HS peaks, UCNE, dbSuper)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GREEN</span><span class="o">-</span><span class="n">DB_query</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">(</span><span class="o">-</span><span class="n">v</span> <span class="n">VCF</span> <span class="o">|</span> <span class="o">-</span><span class="n">r</span> <span class="n">REGIDS</span> <span class="o">|</span> <span class="o">-</span><span class="n">t</span> <span class="n">TABLE</span><span class="p">)</span> <span class="o">-</span><span class="n">o</span> <span class="n">OUTPREFIX</span> <span class="o">-</span><span class="n">b</span>
+                     <span class="p">{</span><span class="n">GRCh37</span><span class="p">,</span><span class="n">GRCh38</span><span class="p">}</span> <span class="p">[</span><span class="o">--</span><span class="n">regDB</span> <span class="n">REGDB</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">logfile</span> <span class="n">LOGFILE</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="possible-inputs">
+<h2>Possible inputs<a class="headerlink" href="#possible-inputs" title="Permalink to this headline">¶</a></h2>
+<p>The tools allows to query GREEN-DB using 3 different type of inputs.
+Only one type of input can be specified.</p>
+<div class="section" id="list-of-regions-r">
+<h3>1. List of regions (-r)<a class="headerlink" href="#list-of-regions-r" title="Permalink to this headline">¶</a></h3>
+<p>If you are simply interested in detailed information on a list of regions, you can use the -r input.
+This argument accepts a comma-separated list of regions (like <code class="docutils literal notranslate"><span class="pre">ID1,ID2</span></code>) or a text file with one region ID per line.</p>
+</div>
+<div class="section" id="vcf-file-v">
+<h3>2. VCF file (-v)<a class="headerlink" href="#vcf-file-v" title="Permalink to this headline">¶</a></h3>
+<p>If you have a VCF files previously annotated using GREEN-VARAN, the tool can extract region IDs directly from this file
+One of NC_ANNO or NC_RegionID fields are expected in the INFO column.</p>
+</div>
+<div class="section" id="variant-regions-table-t">
+<h3>3. Variant-regions table (-t)<a class="headerlink" href="#variant-regions-table-t" title="Permalink to this headline">¶</a></h3>
+<p>If you have a list of variants of interest for which you know the relevant GREEN-DB region IDs
+you can query the DB directly providing a tab separated text file with <strong>no header</strong> and 2 columns:</p>
+<ul class="simple">
+<li><p>column 1: variant ID in the format chrom_pos_ref_alt</p></li>
+<li><p>column 2: comma-separated list of region IDs overlapping the variant</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="output-tables">
+<h2>Output tables<a class="headerlink" href="#output-tables" title="Permalink to this headline">¶</a></h2>
+<p>The tool will generate up to 6 tables with the provided prefix. Only tables containing elements will be created.
+Output tables structure is described below</p>
+<div class="section" id="regions">
+<h3>regions<a class="headerlink" href="#regions" title="Permalink to this headline">¶</a></h3>
+<p>Details on the regions of interest</p>
+<div class="line-block">
+<div class="line"><strong>1. regionID</strong>: GREEN-DB region ID</div>
+<div class="line"><strong>2-4. chrom, start, stop</strong>: genomic location of the region</div>
+<div class="line"><strong>5. type</strong>: region type as extracted from the source dataset</div>
+<div class="line"><strong>6. std_type</strong>: one of the 5 main region types (enhancer, promoter, silencer, bivalent, insulator)</div>
+<div class="line"><strong>7. DB_source</strong>: comma-separated list of sources supporting the region</div>
+<div class="line"><strong>8. PhyloP100_median</strong>: median PhyloP100 conservation value across the region</div>
+<div class="line"><strong>9. constraint_pct</strong>: constraint metric. range 0-1 with higher values equals more intolerant to variants</div>
+<div class="line"><strong>10. controlled_gene</strong>: comma-separated list of gene symbols for controlled genes with experimental support</div>
+<div class="line"><strong>11-13. closestGene_symbol, _ensg, _dist</strong>: symbol, ensembl IDs and distance for the closeset gene</div>
+<div class="line"><strong>14. cell_or_tissues</strong>: comma-seprated list of cell types and tissues where the region is active</div>
+<div class="line"><strong>15. detection_method</strong>: comma-separated list of methods supporting this regions</div>
+<div class="line"><strong>16. phenotype</strong>: comma-separated list of phenotypes eventually associated to this region</div>
+</div>
+</div>
+<div class="section" id="gene-details">
+<h3>gene_details<a class="headerlink" href="#gene-details" title="Permalink to this headline">¶</a></h3>
+<p>Details on the controlled genes, reporting the tissue where the gene-region interaction is detected</p>
+<div class="line-block">
+<div class="line"><strong>1. regionID</strong>: GREEN-DB region ID</div>
+<div class="line"><strong>2-4. chrom, start, stop</strong>: genomic location of the region</div>
+<div class="line"><strong>5. std_type</strong>: one of the 5 main region types (enhancer, promoter, silencer, bivalent, insulator)</div>
+<div class="line"><strong>6. controlled_gene</strong>: gene symbol for controlled gene</div>
+<div class="line"><strong>7. tissue_of_interaction</strong>: comma-separated list of cell types and tissues where this region-gene interaction is detected</div>
+</div>
+</div>
+<div class="section" id="dnase-dbsuper-tfbs-ucne">
+<h3>DNase, dbSuper, TFBS, UCNE<a class="headerlink" href="#dnase-dbsuper-tfbs-ucne" title="Permalink to this headline">¶</a></h3>
+<p>For each of the 4 functional elements a table is generated with details on each element overlapping the region(s) / variant(s) of interest.</p>
+<div class="line-block">
+<div class="line"><strong>1. regionID</strong>: GREEN-DB region ID</div>
+<div class="line"><strong>2-4. dataset_chrom, _start, _stop</strong>: genomic location of the functional element</div>
+<div class="line"><strong>5. dataset_ID</strong>: database ID of the functional element</div>
+<div class="line"><strong>6. dataset_cell_or_tissue</strong>: comma-separated list of cell types and tissues where the element is detected</div>
+<div class="line-block">
+<div class="line">cell and tissue information is not available for UCNE</div>
+</div>
+</div>
+</div>
+<div class="section" id="variant-s-of-interest">
+<h3>Variant(s) of interest<a class="headerlink" href="#variant-s-of-interest" title="Permalink to this headline">¶</a></h3>
+<p>When the input contains variants of interest (-t, -v), an additional column is added to all tables.
+A region or element is reported in the output only if it overlaps with one of the variants.</p>
+<div class="line-block">
+<div class="line"><strong>var_id</strong>: comma-separated list of variant ID(s) (chrom_pos_ref_alt) of the variant(s) overlapping this feature</div>
+</div>
+</div>
+</div>
+<div class="section" id="arguments-list">
+<h2>Arguments list<a class="headerlink" href="#arguments-list" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mandatory-arguments">
+<h3>Mandatory Arguments<a class="headerlink" href="#mandatory-arguments" title="Permalink to this headline">¶</a></h3>
+<dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">show help message and exit</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-v <var>VCF</var></span>, <span class="option">--vcf <var>VCF</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Input vcf[.gz] file.</div>
+<div class="line">Must be annotated with GREEN-VARAN</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-r <var>REGIDS</var></span>, <span class="option">--regIDs <var>REGIDS</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Comma separated list of region IDs or file with a list of region IDs</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-t <var>TABLE</var></span>, <span class="option">--table <var>TABLE</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Tab-separated file with</div>
+<div class="line">col1 (chr_pos_ref_alt)</div>
+<div class="line">col2 comma-separated list of region IDs</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-o <var>OUTPREFIX</var></span>, <span class="option">--outprefix <var>OUTPREFIX</var></span></kbd></dt>
+<dd><p>Prefix for output files</p>
+</dd>
+<dt><kbd><span class="option">-b <var>BUILD</var></span>, <span class="option">--build <var>BUILD</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Possible values: <code class="docutils literal notranslate"><span class="pre">{GRCh37,GRCh38}</span></code></div>
+<div class="line">Genome build of the input file</div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="customize-files-locations">
+<h3>Customize files locations<a class="headerlink" href="#customize-files-locations" title="Permalink to this headline">¶</a></h3>
+<dl class="option-list">
+<dt><kbd><span class="option">--regDB <var>REGDB</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">DEFAULT: resources/SQlite/RegulatoryRegions.db</div>
+<div class="line">Location of the GREEN-DB database file (.db)</div>
+</div>
+</dd>
+<dt><kbd><span class="option">--logfile <var>LOGFILE</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Custom location for the log file</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Download.html" class="btn btn-neutral float-right" title="Download resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SV_annotation_usage.html" class="btn btn-neutral float-left" title="SV_annotation tool usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Edoardo Giacopuzzi
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

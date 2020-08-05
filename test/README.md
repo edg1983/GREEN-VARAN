@@ -40,12 +40,12 @@ python SV_annotation.py -i test/VCF/GRCh38.test.SV.vcf.gz -o test/out/SV_test.vc
 We use a file containing a list of region IDs, one per line
 
 ```
-GREEN-DB_query.py -r REGIDS test/query/regions_IDs.list -o test/out/query_regionIDs -b GRCh38
+GREEN-DB_query.py -r test/query/regions_IDs.list -o test/out/query_regionIDs -b GRCh38
 ```
 
 ### Variants table input 
 We use a table containing some example variants regulating SOX10 gene.
 
 ```
-GREEN-DB_query.py -r REGIDS test/query/SOX10_example.tsv -o test/out/query_SOX10 -b GRCh38
+GREEN-DB_query.py -t test/query/SOX10_example.tsv -o test/out/query_SOX10 -b GRCh37
 ```

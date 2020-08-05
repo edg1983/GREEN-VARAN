@@ -1,0 +1,20 @@
+Annotation tag,Data type,Description
+NC_support,Float ,Sum of max NC_constraint; NC_methods; NC_median_PhyloP100 positive values and binary values for presence/absence of NC_genes; NC_TFname; NC_DNase; NC_UCNE; NC_dbSUPER
+NC_regionID,String,Comma separated list of GREEN-DB region IDs for regions overlapping the variants
+NC_region_type,String,Comma separated list of standard region types for regions overlapping the variants
+NC_constraint,Float,The maximum constraint value for GREEN-DB regions overlapping the variant
+NC_methods,Integer,Number of methods supporting this location as regulatory regions; calculated as the number of distinct methods supporting the GREEN-DB regions overlapping the variant
+NC_genes ,String ,Comma separated list of controlled genes from GREEN-DB
+NC_closestGene,String,Comma separated list of the closest genes from GREEN-DB
+NC_closestGene_dist ,Integer,Comma separated list of the distance of the closest genes from GREEN-DB
+NC_closestProt ,String,Comma separated list of the closest protein-coding genes from GREEN-DB
+NC_closestProt_dist,Integer,Comma separated list of the distance of the closest protein-coding genes from GREEN-DB
+NC_TFname ,String,Comma separated list of transcription factors binding at the variant location
+NC_DNase ,Integer,Binary value representing the presence of a DNase HS site at the variant location
+NC_UCNE ,Integer,Binary value representing the presence of a UCNE at the variant location
+NC_dbSUPER,Integer,Binary value representing the presence of a dbSuper cluster at the variant location
+NC_tolerant_P,Float,Maximum value of variant tolerant P across regions overlapping the variant
+NC_tolerant_label,String,Comma separated list of TOLERANT/INTOLERANT labels based on LoF tolerance probability across regions overlapping the variant
+NC_median_PhyloP100 ,Float,Maximum value of median PhyloP100 across GREEN-DB regions overlapping the variant
+NC_VOI,Integer,When gene annotation is active; this is set to one for variants overlapping a GREEN-DB region controlling a gene in the provided list
+NC_VARCLASS,Integer,When prioritize mode is active; variants are classified in 13 classes according to prediction scores and annotations; with higher values corresponding to variants with higher probability of regulatory impact

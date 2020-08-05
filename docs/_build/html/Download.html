@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="GREEN-VARAN tool set" href="GREEN_VARAN.html" /> 
+    <link rel="prev" title="GREEN-DB_query tool usage" href="GREEN-DB_query_usage.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -153,7 +153,176 @@
             
   <div class="section" id="download-resources">
 <h1>Download resources<a class="headerlink" href="#download-resources" title="Permalink to this headline">¶</a></h1>
-<p>Work in progress</p>
+<p>To perform annotations GREEN-VARAN tools require a series of supporting files.
+By default, various resources are expected in the <code class="docutils literal notranslate"><span class="pre">resources</span></code> folder within the tool folder.
+The expected folder structure in resources is as follow</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
+<span class="p">|</span>-- SQlite
+<span class="p">|</span>   <span class="sb">`</span>-- RegulatoryRegions.db
+<span class="p">|</span>-- SV_annotations
+<span class="p">|</span>   <span class="sb">`</span>-- BED files used <span class="k">for</span> SV annotations
+<span class="p">|</span>-- bed_files
+<span class="p">|</span>   <span class="sb">`</span>-- GREEN-DB BED files
+<span class="p">|</span>-- scores
+<span class="p">|</span>   <span class="sb">`</span>-- scores annotations
+<span class="sb">`</span>-- AF
+    <span class="sb">`</span>-- population AF annotations
+</pre></div>
+</div>
+<p>When you clone the GREEN-VARAN repository a prepare_resources.sh script is provided in resources folder
+to automatically download supporting files and setup the resources folder.</p>
+<p>Otherwise, single files are available for download from Zenodo repository</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Annotation</p></th>
+<th class="head"><p>Sub-folder</p></th>
+<th class="head"><p>Link</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GRCh37_CADD</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956385/GRCh37_CADD.tsv.gz">https://zenodo.org/record/3956385/GRCh37_CADD.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_CADD</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956385/GRCh37_CADD.tsv.gz.csi">https://zenodo.org/record/3956385/GRCh37_CADD.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_DANN</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957486/GRCh37_DANN.tsv.gz">https://zenodo.org/record/3957486/GRCh37_DANN.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_DANN</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957486/GRCh37_DANN.tsv.gz.csi">https://zenodo.org/record/3957486/GRCh37_DANN.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_ExPECTO</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956168/GRCh37_ExPECTO.tsv.gz">https://zenodo.org/record/3956168/GRCh37_ExPECTO.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_ExPECTO</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956168/GRCh37_ExPECTO.tsv.gz.csi">https://zenodo.org/record/3956168/GRCh37_ExPECTO.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_FIRE</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957356/GRCh37_FIRE.tsv.gz">https://zenodo.org/record/3957356/GRCh37_FIRE.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_FIRE</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957356/GRCh37_FIRE.tsv.gz.csi">https://zenodo.org/record/3957356/GRCh37_FIRE.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_LinSight</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956168/GRCh37_LinSight.bed.gz">https://zenodo.org/record/3956168/GRCh37_LinSight.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_LinSight</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956168/GRCh37_LinSight.bed.gz.csi">https://zenodo.org/record/3956168/GRCh37_LinSight.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_NCBoost</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956168/GRCh37_NCBoost.tsv.gz">https://zenodo.org/record/3956168/GRCh37_NCBoost.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_NCBoost</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956168/GRCh37_NCBoost.tsv.gz.csi">https://zenodo.org/record/3956168/GRCh37_NCBoost.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_ReMM</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956168/GRCh37_ReMM.tsv.gz">https://zenodo.org/record/3956168/GRCh37_ReMM.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_ReMM</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956168/GRCh37_ReMM.tsv.gz.csi">https://zenodo.org/record/3956168/GRCh37_ReMM.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_gnomAD</p></td>
+<td><p>AF</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957637/GRCh37_gnomad.genomes.vcf.gz">https://zenodo.org/record/3957637/GRCh37_gnomad.genomes.vcf.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_gnomAD</p></td>
+<td><p>AF</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957637/GRCh37_gnomad.genomes.vcf.gz.csi">https://zenodo.org/record/3957637/GRCh37_gnomad.genomes.vcf.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_CADD</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956227/GRCh38_CADD.tsv.gz">https://zenodo.org/record/3956227/GRCh38_CADD.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_CADD</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3956227/GRCh38_CADD.tsv.gz.csi">https://zenodo.org/record/3956227/GRCh38_CADD.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_DANN</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957428/GRCh38_DANN.tsv.gz">https://zenodo.org/record/3957428/GRCh38_DANN.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_DANN</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957428/GRCh38_DANN.tsv.gz.csi">https://zenodo.org/record/3957428/GRCh38_DANN.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_ExPECTO</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3955933/GRCh38_ExPECTO.tsv.gz">https://zenodo.org/record/3955933/GRCh38_ExPECTO.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_ExPECTO</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3955933/GRCh38_ExPECTO.tsv.gz.csi">https://zenodo.org/record/3955933/GRCh38_ExPECTO.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_FIRE</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957216/GRCh38_FIRE.tsv.gz">https://zenodo.org/record/3957216/GRCh38_FIRE.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_FIRE</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957216/GRCh38_FIRE.tsv.gz.csi">https://zenodo.org/record/3957216/GRCh38_FIRE.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_LinSight</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3955933/GRCh38_LinSight.bed.gz">https://zenodo.org/record/3955933/GRCh38_LinSight.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_LinSight</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3955933/GRCh38_LinSight.bed.gz.csi">https://zenodo.org/record/3955933/GRCh38_LinSight.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_NCBoost</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3955933/GRCh38_NCBoost.tsv.gz">https://zenodo.org/record/3955933/GRCh38_NCBoost.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_NCBoost</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3955933/GRCh38_NCBoost.tsv.gz.csi">https://zenodo.org/record/3955933/GRCh38_NCBoost.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_ReMM</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3955933/GRCh38_ReMM.tsv.gz">https://zenodo.org/record/3955933/GRCh38_ReMM.tsv.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_ReMM</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3955933/GRCh38_ReMM.tsv.gz.csi">https://zenodo.org/record/3955933/GRCh38_ReMM.tsv.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_gnomAD</p></td>
+<td><p>AF</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957637/GRCh38_gnomad.genomes.vcf.gz">https://zenodo.org/record/3957637/GRCh38_gnomad.genomes.vcf.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_gnomAD</p></td>
+<td><p>AF</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3957637/GRCh38_gnomad.genomes.vcf.gz.csi">https://zenodo.org/record/3957637/GRCh38_gnomad.genomes.vcf.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>SV_annotations</p></td>
+<td><p>SV_annotations</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3970785/files/SV_annotations.tar.gz">https://zenodo.org/record/3970785/files/SV_annotations.tar.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>bed_files</p></td>
+<td><p>bed_files</p></td>
+<td><p>none</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -165,7 +334,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="GREEN_VARAN.html" class="btn btn-neutral float-left" title="GREEN-VARAN tool set" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="GREEN-DB_query_usage.html" class="btn btn-neutral float-left" title="GREEN-DB_query tool usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

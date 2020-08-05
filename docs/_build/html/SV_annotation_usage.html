@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SV_annotation tool usage &mdash; GREEN-DB and GREEN-VARAN  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GREEN-DB_query tool usage" href="GREEN-DB_query_usage.html" />
+    <link rel="prev" title="GREEN-VARAN tool usage" href="GREEN-VARAN_usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> GREEN-DB and GREEN-VARAN
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="GREEN_DB.html">The GREEN-DB</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="GREEN_VARAN.html">GREEN-VARAN tool set</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#singularity">Singularity</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="GREEN_VARAN.html#single-tools-usage">Single tools usage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="GREEN-VARAN_usage.html">GREEN-VARAN tool usage</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">SV_annotation tool usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-it-works">How it works</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-configuration-file">The configuration file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arguments-list">Arguments list</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN-DB_query_usage.html">GREEN-DB_query tool usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN-DB_query_usage.html#vcf-file">1. VCF file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN-DB_query_usage.html#mandatory-arguments">Mandatory Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN-DB_query_usage.html#customize-files-locations">Customize files locations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GREEN-DB and GREEN-VARAN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="GREEN_VARAN.html">GREEN-VARAN tool set</a> &raquo;</li>
+        
+      <li>SV_annotation tool usage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/SV_annotation_usage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sv-annotation-tool-usage">
+<h1>SV_annotation tool usage<a class="headerlink" href="#sv-annotation-tool-usage" title="Permalink to this headline">¶</a></h1>
+<p>SV_annotation.py allows annotation of structural variants VCF based on overlap with known regions in external bed files.
+Overlap threshold is configurable and the resources provided with GREEN-VARAN allow annotation of population AF
+from gnomAD and 1000G, overlapping genes and GREEN-DB information</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SV_annotation.py <span class="o">[</span>-h<span class="o">]</span> -i INPUTVCF
+              -o OUT <span class="o">[</span>-t TMPDIR<span class="o">]</span> -b <span class="o">{</span>GRCh37,GRCh38<span class="o">}</span>
+              -c CONFIG <span class="o">[</span>-k<span class="o">]</span> <span class="o">[</span>--logfile LOGFILE<span class="o">]</span>
+</pre></div>
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>SV annotation requires a standard VCF as input and output an uncompressed VCF with annotations.
+Annotation files, overlap thresholds and other parameters can be configured modifying the configuration json file.
+The input VCF must contain the following information:</p>
+<ul>
+<li><p>a unique variant ID in ID column</p></li>
+<li><dl>
+<dt>SVTYPE and END fields in the INFO column.</dt><dd><div class="line-block">
+<div class="line">SVTYPE must follow the standard types definition: DEL, DUP, INS, INV, BND</div>
+<div class="line">The exact name of the INFO fields containing SVTYPE and END informations can be configured in the config file</div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The standard settings will work directly on the output of popular SV caller like Lumpy, Manta and CANVAS</p>
+<p><strong>Deletions, duplications and inversion</strong>
+SV_annotation annotate deletions, duplications and inversion by overlap with the set of known intervals provided in configuration.
+The tool uses different overlap strategies for the different type of dataset provided in the configuration file (see the configuration section).
+Considering a structural variants (A), an annotation region (B) and a given overlap threshold (T):</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>AF datasets</dt><dd><p>region A is annotated with AF from region B only if at least T fraction of A is overlapped by B</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>custom datasets</dt><dd><p>region A is annotated with information from region B only if at least T fraction of B is overlapped by A</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>genes datasets</dt><dd><p>work same as custom datasets</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Insertions</strong>
+Since the exact nature of an insertion is difficult to be determined, the tool will only try to annotate the break point where the insertion occurred.
+Given that this is a single base position, it may be difficult that it overlaps exactly across different dataset.
+As results, most insertions do not get an AF annotation, while you get information on which regions from custom dataset and genes are interrupted by the insertion</p>
+<p><strong>BND</strong>
+Generic break-point, usually defined as BND in the VCF are not annotated.</p>
+<div class="section" id="output-annotations-fields">
+<h3>Output annotations fields<a class="headerlink" href="#output-annotations-fields" title="Permalink to this headline">¶</a></h3>
+<p>Based on the dataset name and field names provided in the configuration file, the tool will add a single field
+like <code class="docutils literal notranslate"><span class="pre">DATASET_FIELDNAME=value</span></code> for each configured annotation.</p>
+</div>
+</div>
+<div class="section" id="the-configuration-file">
+<h2>The configuration file<a class="headerlink" href="#the-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>A default configuration fils (SV_annotation.json) is provided in the GREEN-VARAN repository.
+The configuration file is a standard json file oragnized as follows:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;BEDTOOLS&quot;</span><span class="p">:</span> <span class="s2">&quot;bedtools&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;SVTYPE&quot;</span><span class="p">:</span> <span class="s2">&quot;SVTYPE&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;END&quot;</span><span class="p">:</span> <span class="s2">&quot;END&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;RES_DIR&quot;</span><span class="p">:</span> <span class="s2">&quot;resources/SV_annotations&quot;</span><span class="p">,</span>
+
+    <span class="nt">&quot;overlap&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;AF_datasets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;0.75&quot;</span><span class="p">,</span> <span class="s2">&quot;FALSE&quot;</span><span class="p">],</span>
+        <span class="nt">&quot;custom_datasets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;0.10&quot;</span><span class="p">,</span> <span class="s2">&quot;FALSE&quot;</span><span class="p">],</span>
+        <span class="nt">&quot;genes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;10e-9&quot;</span><span class="p">,</span><span class="s2">&quot;FALSE&quot;</span><span class="p">]</span>
+    <span class="p">},</span>
+
+    <span class="nt">&quot;AF_datasets&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;genome_build&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;Dataset1&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">[</span><span class="s2">&quot;INS&quot;</span><span class="p">,</span> <span class="s2">&quot;INS_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;DEL&quot;</span><span class="p">,</span> <span class="s2">&quot;DEL_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;DUP&quot;</span><span class="p">,</span> <span class="s2">&quot;DUP_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;INV&quot;</span><span class="p">,</span> <span class="s2">&quot;INV_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;custom_datasets&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;genome_build&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;Dataset1&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">[</span><span class="s2">&quot;INS&quot;</span><span class="p">,</span> <span class="s2">&quot;INS_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;DEL&quot;</span><span class="p">,</span> <span class="s2">&quot;DEL_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;DUP&quot;</span><span class="p">,</span> <span class="s2">&quot;DUP_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;INV&quot;</span><span class="p">,</span> <span class="s2">&quot;INV_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;genes&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;genome_build&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;gene&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">[</span><span class="s2">&quot;INS&quot;</span><span class="p">,</span> <span class="s2">&quot;INS_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;DEL&quot;</span><span class="p">,</span> <span class="s2">&quot;DEL_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;DUP&quot;</span><span class="p">,</span> <span class="s2">&quot;DUP_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;INV&quot;</span><span class="p">,</span> <span class="s2">&quot;INV_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">]</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;CDS&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">[</span><span class="s2">&quot;INS&quot;</span><span class="p">,</span> <span class="s2">&quot;INS_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;DEL&quot;</span><span class="p">,</span> <span class="s2">&quot;DEL_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;DUP&quot;</span><span class="p">,</span> <span class="s2">&quot;DUP_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;INV&quot;</span><span class="p">,</span> <span class="s2">&quot;INV_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="header">
+<h3>Header<a class="headerlink" href="#header" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;BEDTOOLS&quot;</span><span class="p">:</span> <span class="s2">&quot;bedtools&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SVTYPE&quot;</span><span class="p">:</span> <span class="s2">&quot;SVTYPE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;END&quot;</span><span class="p">:</span> <span class="s2">&quot;END&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RES_DIR&quot;</span><span class="p">:</span> <span class="s2">&quot;resources/SV_annotations&quot;</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>These tags at the beginning of the file defines the location of bedtools executable and the
+exact INFO field names for SVTYPE and END. RES_DIR defines the folder containing the annotation files provided
+in the subsequent section. This folder is added before the file names and can be left empty when each file
+is provided in a different location.</p>
+</div>
+<div class="section" id="overlap">
+<h3>Overlap<a class="headerlink" href="#overlap" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;overlap&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;AF_datasets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;0.75&quot;</span><span class="p">,</span> <span class="s2">&quot;FALSE&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;custom_datasets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;0.10&quot;</span><span class="p">,</span> <span class="s2">&quot;FALSE&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;genes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;10e-9&quot;</span><span class="p">,</span><span class="s2">&quot;FALSE&quot;</span><span class="p">]</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">overlap</span></code> block defines the thresholds for each of the files types.
+Only the three annotation types defined above are accepted. The first value define the fraction of overlap
+and the second value can be TRUE or FALSE and set if overlap must be reciprocal.</p>
+</div>
+<div class="section" id="datasets">
+<h3>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;dataset_type&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;genome_build&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;Dataset1&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span><span class="s2">&quot;INS&quot;</span><span class="p">,</span> <span class="s2">&quot;INS_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;DEL&quot;</span><span class="p">,</span> <span class="s2">&quot;DEL_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;DUP&quot;</span><span class="p">,</span> <span class="s2">&quot;DUP_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;INV&quot;</span><span class="p">,</span> <span class="s2">&quot;INV_file.bed&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;Float&quot;</span><span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For each accepted dataset type (AF_datasets, custom_datasets, genes) you can define a set of data sources
+for each genome build (like GRCh37, GRCh38). Within the genome_build block you define a dataset name which must
+contain 4 files definition, one for each variant type (INS, DEL, DUP, INV).
+Each data source contains the following setting:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>variant type</dt><dd><p>Must be one of INS, DEL, DUP, INV</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>annotation bed file location</dt><dd><p>BED like files must be provided as input. First 3 columns are chrom,start,end</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>comma-separated list of column numbers from which extract annotations</dt><dd><p>For example to get values from column 4 and 5 use <code class="docutils literal notranslate"><span class="pre">&quot;4,5&quot;</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>comma-separated list of field names to be used in INFO field</dt><dd><p>The final field generated in the INFO output will be equal to <code class="docutils literal notranslate"><span class="pre">dataset_fieldname</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>data type of annotation according to VCF standard (String, Integer, Float)</dt><dd><p>single value expected, use String if you want to extract mixed values</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="arguments-list">
+<h2>Arguments list<a class="headerlink" href="#arguments-list" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mandatory-arguments">
+<h3>Mandatory Arguments<a class="headerlink" href="#mandatory-arguments" title="Permalink to this headline">¶</a></h3>
+<dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Shows help message and exit</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-i <var>INPUTVCF</var></span>, <span class="option">--inputvcf <var>INPUTVCF</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Input vcf[.gz] file</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-o <var>OUT</var></span>, <span class="option">--out <var>OUT</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">VCF output file (at the moment only support plain VCF output)</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-b <var>BUILD</var></span>, <span class="option">--build <var>BUILD</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Possible values: <code class="docutils literal notranslate"><span class="pre">{GRCh37,GRCh38}</span></code></div>
+<div class="line">Specify the genome build of input VCF</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-c <var>CONFIG_FILE</var></span>, <span class="option">--config <var>CONFIG_FILE</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Configuration file (json)</div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="additional-arguments">
+<h3>Additional Arguments<a class="headerlink" href="#additional-arguments" title="Permalink to this headline">¶</a></h3>
+<dl class="option-list">
+<dt><kbd><span class="option">-t <var>TMPDIR</var></span>, <span class="option">--tmpdir <var>TMPDIR</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Location of temporaty folder to store temp files</div>
+<div class="line">By default a tmp folder will be created in the working directory</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-k</span>, <span class="option">--keeptmp</span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Set to keep temporary files</div>
+</div>
+</dd>
+<dt><kbd><span class="option">--logfile <var>LOGFILE</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Specify alternative location for the log file</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="GREEN-DB_query_usage.html" class="btn btn-neutral float-right" title="GREEN-DB_query tool usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="GREEN-VARAN_usage.html" class="btn btn-neutral float-left" title="GREEN-VARAN tool usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Edoardo Giacopuzzi
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -16,6 +16,7 @@ import pandas as pd
 from cyvcf2 import VCF
 
 VERSION=1.0
+pd.set_option('mode.chained_assignment',None)
 BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 RESOURCE_DIR = "resources"
 REG_DB="SQlite/RegulatoryRegions.db"
@@ -211,7 +212,7 @@ def fillVarID(var_id, query_tables):
                 variant_fields = var_id.split("_")
                 variant_chrom = variant_fields[0]
                 variant_pos = int(variant_fields[1])
-                df.loc[(df.iloc[:,1] == variant_chrom) & (df.iloc[:,2] <= variant_pos) & (df.iloc[:,3] >= variant_pos), 'var_id'] = var_id
+                df.loc[(df.iloc[:,1] == variant_chrom) & (df.iloc[:,2] <= variant_pos) & (df.iloc[:,3] >= variant_pos), 'var_id'] += "," + var_id
                 var_tables[table] = df
     return var_tables
 
@@ -274,7 +275,7 @@ build = args.build
 out_prefix = args.outprefix
 checkfile(regDB, logger=logger)
 
-logger.info("#####  RegDB QUERY version %s  #####", str(VERSION))
+logger.info("#####  GREEN-DB QUERY version %s  #####", str(VERSION))
 logger.info("# EFFECTIVE CONFIGURATION #")
 logger.info("Python version: %s.%s", str(sys.version_info[0]), str(sys.version_info[1]))
 if sys.version_info[0] < 3:
@@ -282,7 +283,7 @@ if sys.version_info[0] < 3:
 
 #Detected configuration
 logger.info("Genome build: %s", build)
-logger.info("RegDB: %s", regDB)
+logger.info("GREEN-DB: %s", regDB)
 
 #Open connection to database
 anno_db = create_connection(regDB)
@@ -290,7 +291,7 @@ if anno_db is None:
     logger.critical("Failed to connect to Regulatory regions db")
     sys.exit()
 
-logger.info("# REGDB QUERY START #")
+logger.info("# GREEN-DB QUERY START #")
 
 ### Query from region list without variants ###
 if args.regIDs:
@@ -367,6 +368,7 @@ for table in TABLES:
         if not query_tables[table].empty:
             df = query_tables[table]
             df = df[df.var_id != "VAR_ID"]
+            df['var_id'] = df['var_id'].str.replace('VAR_ID,', '')
             query_tables[table] = df
 
 saveTables(TABLES,query_tables,logger)

@@ -56,7 +56,9 @@ All tools are tested with Python >=3.4
 Singularity
 ~~~~~~~~~~~
 GREEN-VARAN tool set is also provided as Singularity image (tested on singularity >= 3.2). 
-A Singularity recipe is included in the repository or you can download a pre-compiled image from zenodo(LINK).
+A Singularity recipe is included in the repository or you can pull an image from Singularity Hub using
+
+``singularity pull shub://edg1983/GREEN-VARAN:green-varan_v1``
 
 Usage
 #####
@@ -71,13 +73,14 @@ To run one of the tool use:
 
 .. code-block:: bash
 
-    standard run
     singularity run \
     --bind resources_folder:/opt/GREEN_VARAN/resources \
-    GREEN-VARAN.sif tool_name [tool arguments]
+    GREEN-VARAN_green-varan_v1.sif \
+    tool_name [tool arguments]
 
 
-**NB.** The host resources_folder must contain the standard subfolders and files expected by GREEN-VARAN.
+**NB.** tool_name is one of GREEN-VARAN, SV_annotation, GREEN-DB_query.
+The host resources_folder must contain the standard subfolders and files expected by GREEN-VARAN.
 
 Bind specific folders for resources or data
 ###########################################
@@ -97,7 +100,7 @@ Example if you have input/output/resources in other folders
     --bind input_folder:/input \
     --bind output_fodler:/output \
     --bind bed_files:/bed_files \
-    GREEN-VARAN.sif \
+    GREEN-VARAN_green-varan_v1.sif \
     GREEN-VARAN -i /input/input.vcf \
     -o /output/output.vcf \
     --bed_dir /bed_files \ 
@@ -112,11 +115,11 @@ The GREEN-VARAN tool set includes 3 tools to annotate variants and interact with
     select variants on genes already affected by a coding variants and a prioritization function for
     regulatory variants
 2. SV_annotation.py
-    This tool allow annotation of SV VCF based on overlap with known regions in external bed files.
+    Allows annotation of SV VCF based on overlap with known regions in external bed files.
     Overlap threshold is configurable and the provided resources allow annotation of population AF
     from gnomAD and 1000G, genes overlap and GREEN-DB
 3. GREEN-DB_query.py
-    This tool assist in quering the GREEN-DB. Given a list of region IDs or a VCF annotated by GREEN-VARAN
+    Assists in quering the GREEN-DB. Given a list of region IDs or a VCF annotated by GREEN-VARAN
     the tool generates a set of tables containing detailed information on the regions of interest
 
 For detailed instruction on the single tools usage please refer to the corresponding page
@@ -124,7 +127,7 @@ For detailed instruction on the single tools usage please refer to the correspon
 .. toctree::
    :maxdepth: 2
    
-   GREEN_DB
-   GREEN_VARAN
-   Download
+   GREEN-VARAN_usage
+   SV_annotation_usage
+   GREEN-DB_query_usage 
 

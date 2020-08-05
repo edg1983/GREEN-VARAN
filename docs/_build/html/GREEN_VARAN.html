@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Download resources" href="Download.html" />
+    <link rel="next" title="GREEN-VARAN tool usage" href="GREEN-VARAN_usage.html" />
     <link rel="prev" title="The GREEN-DB" href="GREEN_DB.html" /> 
 </head>
 
@@ -98,8 +98,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#single-tools-usage">Single tools usage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="GREEN_DB.html">The GREEN-DB</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Download.html">Download resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN-VARAN_usage.html">GREEN-VARAN tool usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SV_annotation_usage.html">SV_annotation tool usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN-DB_query_usage.html">GREEN-DB_query tool usage</a></li>
 </ul>
 </li>
 </ul>
@@ -241,7 +242,8 @@ Supporting files can be obtained from Zenodo (see Download):</p>
 <div class="section" id="singularity">
 <h2>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h2>
 <p>GREEN-VARAN tool set is also provided as Singularity image (tested on singularity &gt;= 3.2).
-A Singularity recipe is included in the repository or you can download a pre-compiled image from zenodo(LINK).</p>
+A Singularity recipe is included in the repository or you can pull an image from Singularity Hub using</p>
+<p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span> <span class="pre">shub://edg1983/GREEN-VARAN:green-varan_v1</span></code></p>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <p>The image contains all 3 GREEN-VARAN tools:</p>
@@ -251,13 +253,14 @@ A Singularity recipe is included in the repository or you can download a pre-com
 <li><p>GREEN-DB_query: query the GREEN-DB for detailed information</p></li>
 </ul>
 <p>To run one of the tool use:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>standard run
-singularity run <span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity run <span class="se">\</span>
 --bind resources_folder:/opt/GREEN_VARAN/resources <span class="se">\</span>
-GREEN-VARAN.sif tool_name <span class="o">[</span>tool arguments<span class="o">]</span>
+GREEN-VARAN_green-varan_v1.sif <span class="se">\</span>
+tool_name <span class="o">[</span>tool arguments<span class="o">]</span>
 </pre></div>
 </div>
-<p><strong>NB.</strong> The host resources_folder must contain the standard subfolders and files expected by GREEN-VARAN.</p>
+<p><strong>NB.</strong> tool_name is one of GREEN-VARAN, SV_annotation, GREEN-DB_query.
+The host resources_folder must contain the standard subfolders and files expected by GREEN-VARAN.</p>
 </div>
 <div class="section" id="bind-specific-folders-for-resources-or-data">
 <h3>Bind specific folders for resources or data<a class="headerlink" href="#bind-specific-folders-for-resources-or-data" title="Permalink to this headline">¶</a></h3>
@@ -274,7 +277,7 @@ By default you are expected to read/write from the present working directory. Th
 --bind input_folder:/input <span class="se">\</span>
 --bind output_fodler:/output <span class="se">\</span>
 --bind bed_files:/bed_files <span class="se">\</span>
-GREEN-VARAN.sif <span class="se">\</span>
+GREEN-VARAN_green-varan_v1.sif <span class="se">\</span>
 GREEN-VARAN -i /input/input.vcf <span class="se">\</span>
 -o /output/output.vcf <span class="se">\</span>
 --bed_dir /bed_files <span class="se">\</span>
@@ -295,14 +298,14 @@ regulatory variants</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>SV_annotation.py</dt><dd><p>This tool allow annotation of SV VCF based on overlap with known regions in external bed files.
+<dt>SV_annotation.py</dt><dd><p>Allows annotation of SV VCF based on overlap with known regions in external bed files.
 Overlap threshold is configurable and the provided resources allow annotation of population AF
 from gnomAD and 1000G, genes overlap and GREEN-DB</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>GREEN-DB_query.py</dt><dd><p>This tool assist in quering the GREEN-DB. Given a list of region IDs or a VCF annotated by GREEN-VARAN
+<dt>GREEN-DB_query.py</dt><dd><p>Assists in quering the GREEN-DB. Given a list of region IDs or a VCF annotated by GREEN-VARAN
 the tool generates a set of tables containing detailed information on the regions of interest</p>
 </dd>
 </dl>
@@ -310,22 +313,28 @@ the tool generates a set of tables containing detailed information on the region
 </ol>
 <p>For detailed instruction on the single tools usage please refer to the corresponding page</p>
 <div class="toctree-wrapper compound">
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="GREEN_DB.html">The GREEN-DB</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="GREEN_DB.html#information-in-the-database">Information in the database</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GREEN_DB.html#sqlite-database-structure">SQLite database structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GREEN_DB.html#the-constraint-metric">The constraint metric</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GREEN_DB.html#summary-of-the-building-process">Summary of the building process</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GREEN-VARAN_usage.html">GREEN-VARAN tool usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#basic-usage">Basic usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#prioritization">Prioritization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#gene-mode">Gene mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#activate-additional-annotations">Activate additional annotations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#fields-added-to-info">Fields added to INFO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#arguments-list">Arguments list</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">GREEN-VARAN tool set</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#singularity">Singularity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#single-tools-usage">Single tools usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SV_annotation_usage.html">SV_annotation tool usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SV_annotation_usage.html#how-it-works">How it works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SV_annotation_usage.html#the-configuration-file">The configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SV_annotation_usage.html#arguments-list">Arguments list</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GREEN-DB_query_usage.html">GREEN-DB_query tool usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-DB_query_usage.html#possible-inputs">Possible inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-DB_query_usage.html#output-tables">Output tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-DB_query_usage.html#arguments-list">Arguments list</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -339,7 +348,7 @@ the tool generates a set of tables containing detailed information on the region
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Download.html" class="btn btn-neutral float-right" title="Download resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="GREEN-VARAN_usage.html" class="btn btn-neutral float-right" title="GREEN-VARAN tool usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="GREEN_DB.html" class="btn btn-neutral float-left" title="The GREEN-DB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
