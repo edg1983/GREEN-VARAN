@@ -285,7 +285,7 @@ parser.add_argument("-l", "--genes_list", help="List of genes of interest, can b
 parser.add_argument("--impact", help="Only report NC vars if the controlled at least this impact", action="store", required=False, choices=['HIGH', 'MODERATE', 'LOW', 'MODIFIER'])
 
 parser.add_argument("--allelefreq", help="Add gnomAD AF annotations based on global AF or specific pop", action="store", choices=['global','afr','amr','eas','fin','nfe','sas','oth'], required=False)
-parser.add_argument("-s", "--scores", help="Add selected prediction score for non-coding vars. Repeat to add multiple scores", choices=['ReMM','FIRE','LinSight','ExPECTO','NCBoost','DANN','CADD'], action="append", required=False)
+parser.add_argument("-s", "--scores", help="Add selected prediction score for non-coding vars. Repeat to add multiple scores", choices=SCORES, action="append", required=False)
 parser.add_argument("-a", "--allscores", help="Add all prediction score for non-coding vars (ReMM,FIRE,LinSight,ExPECTO,NCBoost)", action="store_true", required=False)
 
 parser.add_argument("--separate_fields", help="Make multiple fields instead of a single NC_ANNO annotation", action="store_true", required=False)
@@ -353,7 +353,7 @@ if args.AF_file:
 else:
     AF_file = AF_FILE.format(base_dir=BASE_DIR, build=args.build)
 if args.allscores:
-    scores = set(['ReMM','FIRE','LinSight','ExPECTO','NCBoost','DANN','CADD'])
+    scores = set(SCORES)
 elif args.scores:
     scores = set(args.scores)
 else:

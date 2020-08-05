@@ -29,7 +29,7 @@ The Download section lists locations to download the GREEN-DB and other resource
    GREEN_DB
    GREEN_VARAN
    Download
-   How_to_cite
+   how_to_cite
 
 
 Indices and tables

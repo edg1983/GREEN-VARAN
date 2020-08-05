@@ -21,7 +21,7 @@ Usage:
 EOM
 
 function downloadRepoGroup {
-    repo_class = $1
+    local repo_class=$1
     n_repos=$(cat $RESOURCE_FILE | awk -F"\t" -v name="$repo_class" '$2 == name' | wc -l)
         echo "$n_repos for $repo_class found in resource file"
         while read -r repo_id repo_dir repo_http; do
@@ -29,8 +29,16 @@ function downloadRepoGroup {
             cd $repo_dir
             echo "Downloading $repo_id in $OUTDIR/$repo_dir"
             wget --backups=1 -nv $repo_http
+            decompress($repo_http)
             cd ..    
         done < $(awk -F"\t" -v name="$repo_name" '$2 == name')   
+}
+
+function decompress {
+    local http_address=$1
+    echo "Decompress downloaded file"
+    repo_file=${http_address##*/}
+    tar -zxvf $repo_file
 }
 
 if [ $# == 0 ]
@@ -124,6 +132,7 @@ case "$REPO_NAME" in
             cd $repo_dir
             echo "Downloading $repo_id in $OUTDIR/$repo_dir"
             wget --backups=1 -nv $repo_http
+            decompress($repo_http)
             cd ..    
         done < $RESOURCE_FILE
     ;;
@@ -141,7 +150,8 @@ case "$REPO_NAME" in
         mdkir -p $repo_dir
         cd $repo_dir
         echo "Downloading $repo_id in $OUTDIR/$repo_dir"
-        wget --backups=1 -nv $repo_http  
+        wget --backups=1 -nv $repo_http
+        decompress($repo_http)
     ;;
 esac
 

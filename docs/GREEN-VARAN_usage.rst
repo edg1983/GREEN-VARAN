@@ -14,7 +14,7 @@ and a prioritization function for regulatory variants
                     [-g {annotate,filter}] [-t {controlled,closest,both}]
                     [-l GENES_LIST] [--impact {HIGH,MODERATE,LOW,MODIFIER}]
                     [--allelefreq {global,afr,amr,eas,fin,nfe,sas,oth}]
-                    [-s {ReMM,FIRE,LinSight,ExPECTO,NCBoost,DANN,CADD}] [-a]
+                    [-s {ReMM,FIRE,LinSight,ExPECTO,NCBoost,DANN,CADD,PhyloP100}] [-a]
                     [--separate_fields] [--logfile LOGFILE]
                     [--threads THREADS] [-w]
 
@@ -158,6 +158,8 @@ Available scores included with the GREEN-VARAN release
     `NCBoost classifies pathogenic non-coding variants in Mendelian diseases through supervised learning on purifying selection signals in humans <https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1634-2>`_
 - ReMM v0.3.1 
     `A Whole-Genome Analysis Framework for Effective Identification of Pathogenic Regulatory Variants in Mendelian Disease <https://www.sciencedirect.com/science/article/pii/S0002929716302786>`_
+- PhyloP100
+    Conservation values calculated from multiple-alignment of 100 vertebrates
 
 Population allele frequency
 ###########################
@@ -206,6 +208,11 @@ The following fields are always added as separated fields in the INFO column
     NC_dbSUPER,Integer,Binary value representing the presence of a dbSuper cluster at the variant location
     NC_VOI,Integer,When gene mode is active this is set to one for variants overlapping a GREEN-DB region controlling a gene of interest
     NC_VARCLASS,Integer,When prioritize mode is active this value is set to the prioritization level (0-13)
+
+Scores fields
+#############
+When you activate annotation for a prediction/conservation scores the correponding field is added to INFO column.
+Each field is in the for ``NC_scorename=value``
 
 Arguments list
 ~~~~~~~~~~~~~~

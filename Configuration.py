@@ -12,6 +12,8 @@ AF_FILE='{base_dir}/' + RESOURCE_DIR + '/AF/{build}_gnomad.genomes.vcf.gz'
 
 ### ANNOTATION CONFIGURATION ###
 # You are not supposed to modify this part
+SCORES = ['ReMM','FIRE','LinSight','ExPECTO','NCBoost','DANN','CADD', 'PhyloP100']
+
 NC_ANNO_DATATYPES = {
     'NC_support': 'Float',
     'NC_regionID': 'String',
@@ -119,7 +121,13 @@ columns=[5]''',
 file="{scores_dir}/{build}_DANN.tsv.gz"
 names=["NC_DANN"]
 ops=["max"]
-columns=[5]'''
+columns=[5]''',
+
+'PhyloP100' : '''[[annotation]]
+file="{scores_dir}/{build}_PhyloP100.bed.gz"
+names=["NC_PhyloP100"]
+ops=["max"]
+columns=[4]''',
 }
 
 TOML_AF = '''[[annotation]]
