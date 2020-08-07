@@ -85,14 +85,20 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">The GREEN-DB</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#information-in-the-database">Information in the database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary-statistics-on-the-database">Summary statistics on the database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sqlite-database-structure">SQLite database structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-constraint-metric">The constraint metric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#summary-of-the-building-process">Summary of the building process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extract-database-tables">Extract database tables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-bash">Using bash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-r">Using R</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="GREEN_VARAN.html">GREEN-VARAN tool set</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_cite.html">How to cite</a></li>
 </ul>
 
             
@@ -206,22 +212,22 @@ The regulatory regions are grouped in 5 categories:</p>
 ~35% of regions are annotated with controlled genes, ~40% with tissue(s) of activity, and ~14% have associated phenotype(s).
 GREEN-DB is available as an SQLite database and regions information with controlled genes are also provided as
 extended bed files for easy integration into existing analysis pipelines.</p>
-<div class="section" id="information-in-the-database">
-<h2>Information in the database<a class="headerlink" href="#information-in-the-database" title="Permalink to this headline">¶</a></h2>
 <p>For details on how the database was compiled please refer to the original publication
 ##OURPAPER##</p>
+<div class="section" id="summary-statistics-on-the-database">
+<h2>Summary statistics on the database<a class="headerlink" href="#summary-statistics-on-the-database" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-center" id="id1">
-<a class="reference internal image-reference" href="_images/Figure_1_color.png"><img alt="Summary of the database" src="_images/Figure_1_color.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="_images/Figure_1_color.png"><img alt="Summary of the database" src="_images/Figure_1_color.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><strong>Main information in the database</strong></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-center" id="id2">
-<a class="reference internal image-reference" href="_images/Figure_2_color.png"><img alt="Gene-region connections" src="_images/Figure_2_color.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="_images/Figure_2_color.png"><img alt="Gene-region connections" src="_images/Figure_2_color.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><strong>Summary information on gene-region connections</strong></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="sqlite-database-structure">
 <h2>SQLite database structure<a class="headerlink" href="#sqlite-database-structure" title="Permalink to this headline">¶</a></h2>
-<p>The SQLite database contains 16 tables:</p>
+<p>The SQLite database contains 16 tables (expected columns are listed in the image):</p>
 <ul class="simple">
 <li><dl class="simple">
 <dt>GRCh37 / GRCh38 regions</dt><dd><p>GREEN-DB regions coordinate; region type; constraint percentile; closest gene symbol, Ensembl ID and distance; PhyloP100 statistics</p>
@@ -278,7 +284,7 @@ extended bed files for easy integration into existing analysis pipelines.</p>
 Additionally, a unique interaction ID identifies each gene-region pair in the gene table and it’s linked to methods and tissues tables.
 Linking tables are included that map the overlap between GREEN-DB region IDs and each of TFBS, DNase, dbSuper and LoF_tolerance region IDs, reporting also the fraction of overlap.</p>
 <div class="figure align-center" id="id3">
-<a class="reference internal image-reference" href="_images/GREEN-DB_diagram.png"><img alt="SQlite DB structure" src="_images/GREEN-DB_diagram.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="_images/GREEN-DB_diagram.png"><img alt="SQlite DB structure" src="_images/GREEN-DB_diagram.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><strong>A schematic representation of GREEN-DB.</strong></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 </div>
@@ -307,8 +313,52 @@ We also collected additional data useful in evaluating the regulatory role of ge
 - super-enhancer definitions
 - enhancer LoF tolerance</p>
 <div class="figure align-center" id="id5">
-<a class="reference internal image-reference" href="_images/NC_annotations.png"><img alt="Build the database" src="_images/NC_annotations.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="_images/NC_annotations.png"><img alt="Build the database" src="_images/NC_annotations.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><strong>Summary of the GREEN-DB building process</strong></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="extract-database-tables">
+<h2>Extract database tables<a class="headerlink" href="#extract-database-tables" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="using-bash">
+<h3>Using bash<a class="headerlink" href="#using-bash" title="Permalink to this headline">¶</a></h3>
+<p>You can extract all tables of the database to tab-separated tables using a bash script.
+In the following example the db file is provided as argument and all tables are saved as
+.tsv files in the present folder</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">dbfile</span><span class="o">=</span><span class="nv">$1</span>
+
+<span class="c1"># obtains all data tables from database</span>
+<span class="nv">TS</span><span class="o">=</span><span class="sb">`</span>sqlite3 <span class="nv">$1</span> <span class="s2">&quot;SELECT tbl_name FROM sqlite_master WHERE type=&#39;table&#39; and tbl_name not like &#39;sqlite_%&#39;;&quot;</span><span class="sb">`</span>
+
+<span class="c1"># exports each table to tsv</span>
+<span class="k">for</span> T in <span class="nv">$TS</span><span class="p">;</span> <span class="k">do</span>
+sqlite3 <span class="nv">$1</span> &lt;&lt;!
+.headers on
+.mode tabs
+.output <span class="nv">$T</span>.tsv
+<span class="k">select</span> * from <span class="nv">$T</span><span class="p">;</span>
+!
+<span class="k">done</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-r">
+<h3>Using R<a class="headerlink" href="#using-r" title="Permalink to this headline">¶</a></h3>
+<p>You can extract tables from the database in R using the RSQLite package.
+In the example below we extract all tables to data frames in a named list (dbtables)</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="s">&quot;RSQLite&quot;</span><span class="p">)</span>
+
+<span class="c1">## connect to the SQLite database</span>
+    <span class="n">con</span> <span class="o">&lt;-</span> <span class="nf">dbConnect</span><span class="p">(</span><span class="n">drv</span><span class="o">=</span><span class="n">RSQLite</span><span class="o">::</span><span class="nf">SQLite</span><span class="p">(),</span> <span class="n">dbname</span><span class="o">=</span><span class="s">&quot;SQlite/RegulatoryRegions.db&quot;</span><span class="p">)</span>
+
+<span class="c1">## list all data tables</span>
+    <span class="n">tables</span> <span class="o">&lt;-</span> <span class="nf">dbListTables</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
+
+<span class="c1">## create a data.frame for each table</span>
+    <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="nf">seq</span><span class="p">(</span><span class="n">along</span><span class="o">=</span><span class="n">tables</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">dbtables</span><span class="p">[[</span><span class="n">tables</span><span class="p">[</span><span class="n">i</span><span class="p">]]]</span> <span class="o">&lt;-</span> <span class="nf">dbGetQuery</span><span class="p">(</span><span class="n">conn</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">statement</span><span class="o">=</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;SELECT * FROM &#39;&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="p">[[</span><span class="n">i</span><span class="p">]],</span> <span class="s">&quot;&#39;&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">))</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>

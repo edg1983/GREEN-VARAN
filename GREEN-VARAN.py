@@ -314,7 +314,7 @@ formatter = logging.Formatter('%(asctime)s: %(levelname)-8s %(message)s', datefm
 console.setFormatter(formatter)
 logger.addHandler(console)
                   
-print('''
+print('\033[32m' + '''
  / __)(  _ \(  __)(  __)(  ( \ ___ / )( \ / _\ (  _ \ / _\ (  ( \\
 ( (_ \ )   / ) _)  ) _) /    /(___)\ \/ //    \ )   //    \/    /
  \___/(__\_)(____)(____)\_)__)      \__/ \_/\_/(__\_)\_/\_/\_)__)                    
@@ -330,8 +330,8 @@ print('''
 ',    `/- \   \      __/  (_                /-\-\-`
   `;'-..___)   |     `/-\-\-`
     `-.       .'
-       `~~~~``
-''')
+ jgs   `~~~~``
+''', '\033[m')
 
 logger.info("###  GREEN-VARAN version %s ###", str(VERSION))
 logger.info("# EFFECTIVE CONFIGURATION #")

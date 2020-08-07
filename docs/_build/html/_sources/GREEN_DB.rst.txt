@@ -26,21 +26,21 @@ Each region is described by its genomic location, region type, method(s) of dete
 GREEN-DB is available as an SQLite database and regions information with controlled genes are also provided as 
 extended bed files for easy integration into existing analysis pipelines. 
 
-Information in the database
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 For details on how the database was compiled please refer to the original publication
 ##OURPAPER##
 
+Summary statistics on the database
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. figure:: images/Figure_1_color.png
-    :width: 800
+    :width: 600
     :align: center
     :alt: Summary of the database
 
     **Main information in the database**
 
 .. figure:: images/Figure_2_color.png
-    :width: 800
+    :width: 600
     :alt: Gene-region connections
     :align: center
 
@@ -49,7 +49,7 @@ For details on how the database was compiled please refer to the original public
 SQLite database structure
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The SQLite database contains 16 tables:
+The SQLite database contains 16 tables (expected columns are listed in the image):
 
 - GRCh37 / GRCh38 regions 
     GREEN-DB regions coordinate; region type; constraint percentile; closest gene symbol, Ensembl ID and distance; PhyloP100 statistics
@@ -77,7 +77,7 @@ Additionally, a unique interaction ID identifies each gene-region pair in the ge
 Linking tables are included that map the overlap between GREEN-DB region IDs and each of TFBS, DNase, dbSuper and LoF_tolerance region IDs, reporting also the fraction of overlap.
 
 .. figure:: images/GREEN-DB_diagram.png
-    :width: 800
+    :width: 600
     :alt: SQlite DB structure
     :align: center
 
@@ -115,10 +115,53 @@ We also collected additional data useful in evaluating the regulatory role of ge
 - enhancer LoF tolerance
 
 .. figure:: images/NC_annotations.png
-    :width: 800
+    :width: 600
     :alt: Build the database
     :align: center
 
     **Summary of the GREEN-DB building process**
 
+Extract database tables
+~~~~~~~~~~~~~~~~~~~~~~~
+Using bash
+##########
+You can extract all tables of the database to tab-separated tables using a bash script. 
+In the following example the db file is provided as argument and all tables are saved as
+.tsv files in the present folder
 
+.. code-block:: bash
+
+    dbfile=$1
+
+    # obtains all data tables from database
+    TS=`sqlite3 $1 "SELECT tbl_name FROM sqlite_master WHERE type='table' and tbl_name not like 'sqlite_%';"`
+
+    # exports each table to tsv
+    for T in $TS; do
+    sqlite3 $1 <<!
+    .headers on
+    .mode tabs
+    .output $T.tsv
+    select * from $T;
+    !
+    done
+
+Using R
+#######
+You can extract tables from the database in R using the RSQLite package.
+In the example below we extract all tables to data frames in a named list (dbtables)
+
+.. code-block:: R
+
+    library("RSQLite")
+	
+    ## connect to the SQLite database
+	con <- dbConnect(drv=RSQLite::SQLite(), dbname="SQlite/RegulatoryRegions.db")
+	
+    ## list all data tables
+	tables <- dbListTables(con)
+	
+    ## create a data.frame for each table
+	for (i in seq(along=tables)) {
+  		dbtables[[tables[i]]] <- dbGetQuery(conn=con, statement=paste("SELECT * FROM '", tables[[i]], "'", sep=""))
+	}

@@ -106,6 +106,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_cite.html">How to cite</a></li>
 </ul>
 
             
@@ -185,7 +186,7 @@ and a prioritization function for regulatory variants</p>
                 <span class="o">[</span>-g <span class="o">{</span>annotate,filter<span class="o">}]</span> <span class="o">[</span>-t <span class="o">{</span>controlled,closest,both<span class="o">}]</span>
                 <span class="o">[</span>-l GENES_LIST<span class="o">]</span> <span class="o">[</span>--impact <span class="o">{</span>HIGH,MODERATE,LOW,MODIFIER<span class="o">}]</span>
                 <span class="o">[</span>--allelefreq <span class="o">{</span>global,afr,amr,eas,fin,nfe,sas,oth<span class="o">}]</span>
-                <span class="o">[</span>-s <span class="o">{</span>ReMM,FIRE,LinSight,ExPECTO,NCBoost,DANN,CADD<span class="o">}]</span> <span class="o">[</span>-a<span class="o">]</span>
+                <span class="o">[</span>-s <span class="o">{</span>ReMM,FIRE,LinSight,ExPECTO,NCBoost,DANN,CADD,PhyloP100<span class="o">}]</span> <span class="o">[</span>-a<span class="o">]</span>
                 <span class="o">[</span>--separate_fields<span class="o">]</span> <span class="o">[</span>--logfile LOGFILE<span class="o">]</span>
                 <span class="o">[</span>--threads THREADS<span class="o">]</span> <span class="o">[</span>-w<span class="o">]</span>
 </pre></div>
@@ -436,6 +437,11 @@ Default location is <code class="docutils literal notranslate"><span class="pre"
 </dd>
 </dl>
 </li>
+<li><dl class="simple">
+<dt>PhyloP100</dt><dd><p>Conservation values calculated from multiple-alignment of 100 vertebrates</p>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <div class="section" id="population-allele-frequency">
@@ -562,6 +568,11 @@ Otherwise, they are collpsed in a single NC_ANNO field, separated by pipe symbol
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="scores-fields">
+<h3>Scores fields<a class="headerlink" href="#scores-fields" title="Permalink to this headline">¶</a></h3>
+<p>When you activate annotation for a prediction/conservation scores the correponding field is added to INFO column.
+Each field is in the for <code class="docutils literal notranslate"><span class="pre">NC_scorename=value</span></code></p>
 </div>
 </div>
 <div class="section" id="arguments-list">
