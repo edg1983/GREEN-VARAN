@@ -40,7 +40,7 @@ function checkFile {
 
 function downloadRepoGroup {
     local repo_class=$1
-    n_repos=$(cat $RESOURCE_FILE | awk -F"\t" -v name="$repo_class" '$2 == name' | wc -l)
+    n_repos=$(cat $RESOURCE_FILE | awk -v name="$repo_class" '$2 == name' | wc -l)
         echo "$n_repos for $repo_class found in resource file"
         while read -r repo_id repo_dir repo_http; do
             mdkir -p $repo_dir
@@ -53,7 +53,7 @@ function downloadRepoGroup {
                 decompress $repo_http
             fi
             cd ..    
-        done < $(awk -F"\t" -v name="$repo_name" '$2 == name')   
+        done < $(awk -v name="$repo_name" '$2 == name' $RESOURCE_FILE)   
 }
 
 if [ $# == 0 ]
@@ -162,9 +162,9 @@ case "$REPO_NAME" in
         downloadRepoGroup $REPO_NAME 
     ;;
     *)
-        repo_id=$(grep $REPO_NAME $RESOURCE_FILE | cut -f1)
-        repo_dir=$(grep $REPO_NAME $RESOURCE_FILE | cut -f2)
-        repo_http=$(grep $REPO_NAME $RESOURCE_FILE | cut -f3)
+        repo_id=$(grep $REPO_NAME $RESOURCE_FILE | cut -d" " -f1)
+        repo_dir=$(grep $REPO_NAME $RESOURCE_FILE | cut -d" " -f2)
+        repo_http=$(grep $REPO_NAME $RESOURCE_FILE | cut -d" " -f3)
         if [ "$repo_id" == ""]; then
             echo "FATAL! - Resource name $REPO_NAME not found in resource file. Use -l to list available resources"
             exit 1
