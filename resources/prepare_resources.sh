@@ -25,10 +25,9 @@ export OUTDIR="./"
 export RESOURCE_FILE="GREEN-VARAN_resources.txt"
 
 function decompress {
-    local http_address=$1
+    local $myfile=$1
     echo "Decompress downloaded file"
-    repo_file=${http_address##*/}
-    tar -zxvf $repo_file
+    tar -zxvf $myfile
 }
 
 function downloadRepoGroup {
@@ -38,7 +37,11 @@ function downloadRepoGroup {
         while read -r repo_id repo_dir repo_http; do
             mdkir -p $repo_dir
             cd $repo_dir
+            repo_file=${repo_http##*/}
             echo "Downloading $repo_id in $OUTDIR/$repo_dir"
+            if [ -f $repo_file ]; then
+                mv $repo_file ${repo_file}.OLD
+            fi
             wget --backups=1 -nv $repo_http
             if [ $repo_dir != "scores" ]; then
                 decompress $repo_http
@@ -137,12 +140,16 @@ case "$REPO_NAME" in
         n_repos=$(cat $RESOURCE_FILE | wc -l)
         echo "$n_repos sources found in resource file"
         while read -r repo_id repo_dir repo_http; do
-            mdkir -p $repo_dir
+            mkdir -p $repo_dir
             cd $repo_dir
+            repo_file=${repo_http##*/}
             echo "Downloading $repo_id in $OUTDIR/$repo_dir"
+            if [ -f $repo_file ]; then
+                mv $repo_file ${repo_file}.OLD
+            fi
             wget --backups=1 -nv $repo_http
             if [ $repo_dir != "scores" ]; then
-                decompress $repo_http 
+                decompress $repo_file 
             fi
             cd ..    
         done < $RESOURCE_FILE
@@ -160,7 +167,11 @@ case "$REPO_NAME" in
         fi
         mdkir -p $repo_dir
         cd $repo_dir
+        repo_file=${repo_http##*/}
         echo "Downloading $repo_id in $OUTDIR/$repo_dir"
+        if [ -f $repo_file ]; then
+            mv $repo_file ${repo_file}.OLD
+        fi
         wget --backups=1 -nv $repo_http
         if [ $repo_dir != "scores" ]; then
             decompress $repo_http 
