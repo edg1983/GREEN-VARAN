@@ -172,8 +172,8 @@ class NC_ANNO():
 
 #Set variant class level for prioritization
 def prioritize(parameters):
-    if (parameters['remm'] >= 0.961 or \
-        parameters['linsight'] >= 0.857 or \
+    if (parameters['remm'] >= 0.963 or \
+        parameters['fathmm_mkl'] >= 0.908 or \
         parameters['ncboost'] >= 0.238) and \
         parameters['is_RegDB'] == 1 and \
         (parameters['is_TFBS'] == 1 or \
@@ -182,19 +182,19 @@ def prioritize(parameters):
         parameters['is_UCNE'] == 1) and \
         parameters['constraint_max'] >= 0.9:
         level = 13
-    elif (parameters['remm'] >= 0.961 or \
-        parameters['linsight'] >= 0.857 or \
+    elif (parameters['remm'] >= 0.963 or \
+        parameters['fathmm_mkl'] >= 0.908 or \
         parameters['ncboost'] >= 0.238) and \
         parameters['is_RegDB'] == 1 and \
         parameters['constraint_max'] >= 0.9:
         level = 12
-    elif (parameters['remm'] >= 0.961 or \
-        parameters['linsight'] >= 0.857 or \
+    elif (parameters['remm'] >= 0.963 or \
+        parameters['fathmm_mkl'] >= 0.908 or \
         parameters['ncboost'] >= 0.238) and \
         parameters['is_RegDB'] == 1:
         level = 11
     elif (parameters['remm'] >= 0.203 or \
-        parameters['linsight'] >= 0.058 or \
+        parameters['fathmm_mkl'] >= 0.058 or \
         parameters['ncboost'] >= 0.062) and \
         parameters['is_RegDB'] == 1 and \
         (parameters['is_TFBS'] == 1 or \
@@ -204,18 +204,18 @@ def prioritize(parameters):
         parameters['constraint_max'] >= 0.9:
         level = 10
     elif (parameters['remm'] >= 0.203 or \
-        parameters['linsight'] >= 0.058 or \
+        parameters['fathmm_mkl'] >= 0.058 or \
         parameters['ncboost'] >= 0.062) and \
         parameters['is_RegDB'] == 1 and \
         parameters['constraint_max'] >= 0.9:
         level = 9
     elif (parameters['remm'] >= 0.203 or \
-        parameters['linsight'] >= 0.058 or \
+        parameters['fathmm_mkl'] >= 0.058 or \
         parameters['ncboost'] >= 0.062) and \
         parameters['is_RegDB'] == 1:
         level = 8
-    elif (parameters['remm'] >= 0.961 or \
-        parameters['linsight'] >= 0.857 or \
+    elif (parameters['remm'] >= 0.963 or \
+        parameters['fathmm_mkl'] >= 0.908 or \
         parameters['ncboost'] >= 0.238) and \
         (parameters['is_TFBS'] == 1 or \
         parameters['is_DNase'] == 1 or \
@@ -223,7 +223,7 @@ def prioritize(parameters):
         parameters['is_UCNE'] == 1):
         level = 7
     elif (parameters['remm'] >= 0.203 or \
-        parameters['linsight'] >= 0.058 or \
+        parameters['fathmm_mkl'] >= 0.058 or \
         parameters['ncboost'] >= 0.062) and \
         (parameters['is_TFBS'] == 1 or \
         parameters['is_DNase'] == 1 or \
@@ -231,7 +231,7 @@ def prioritize(parameters):
         parameters['is_UCNE'] == 1):
         level = 6
     elif parameters['remm'] < 0.203 and \
-        parameters['linsight'] < 0.058 and \
+        parameters['fathmm_mkl'] < 0.058 and \
         parameters['ncboost'] < 0.062 and \
         parameters['is_RegDB'] == 1 and \
         (parameters['is_TFBS'] == 1 or \
@@ -241,22 +241,22 @@ def prioritize(parameters):
         parameters['constraint_max'] >= 0.9:
         level = 5
     elif parameters['remm'] < 0.203 and \
-        parameters['linsight'] < 0.058 and \
+        parameters['fathmm_mkl'] < 0.058 and \
         parameters['ncboost'] < 0.062 and \
         parameters['is_RegDB'] == 1 and \
         parameters['constraint_max'] >= 0.9:
         level = 4
     elif parameters['remm'] < 0.203 and \
-        parameters['linsight'] < 0.058 and \
+        parameters['fathmm_mkl'] < 0.058 and \
         parameters['ncboost'] < 0.062 and \
         parameters['is_RegDB'] == 1:
         level = 3
-    elif (parameters['remm'] >= 0.961 or \
-        parameters['linsight'] >= 0.857 or \
+    elif (parameters['remm'] >= 0.963 or \
+        parameters['fathmm_mkl'] >= 0.908 or \
         parameters['ncboost'] >= 0.238):
         level = 2
     elif (parameters['remm'] >= 0.203 or \
-        parameters['linsight'] >= 0.058 or \
+        parameters['fathmm_mkl'] >= 0.058 or \
         parameters['ncboost'] >= 0.062):
         level = 1
     else:
@@ -286,11 +286,11 @@ parser.add_argument("--impact", help="Only report NC vars if the controlled at l
 
 parser.add_argument("--allelefreq", help="Add gnomAD AF annotations based on global AF or specific pop", action="store", choices=['global','afr','amr','eas','fin','nfe','sas','oth'], required=False)
 parser.add_argument("-s", "--scores", help="Add selected prediction score for non-coding vars. Repeat to add multiple scores", choices=SCORES, action="append", required=False)
-parser.add_argument("-a", "--allscores", help="Add all prediction score for non-coding vars (ReMM,FIRE,LinSight,ExPECTO,NCBoost)", action="store_true", required=False)
+parser.add_argument("-a", "--allscores", help="Add all prediction scores for non-coding vars (ReMM,FIRE,LinSight,ExPECTO,NCBoost)", action="store_true", required=False)
 
 parser.add_argument("--separate_fields", help="Make multiple fields instead of a single NC_ANNO annotation", action="store_true", required=False)
 parser.add_argument("--logfile", help="Log file", action="store", required=False)
-parser.add_argument("--threads", help="Number of threads for annotation", action="store", required=False, default=4)
+parser.add_argument("--threads", help="Number of threads for annotation", action="store", required=False, default="4")
 parser.add_argument("-w", "--overwrite", help="Set if you want to overwrite output file if already exists", action="store_true", required=False)
 args = parser.parse_args()
 
@@ -397,10 +397,10 @@ anno_configuration = TOML.format(bed_dir=bed_dir, build=args.build)
 
 if args.prioritize:
     logger.info("Variant prioritization active")
-    logger.info("Variant class will be addedd to as NC_class") 
-    if not all(elem in scores for elem in ["ReMM","LinSight","NCBoost"]):
-        logger.warning("ReMM,LinSight,NCBoost required for prioritization. They have been addedd to score annotations")
-    scores.update(["ReMM","LinSight","NCBoost"])
+    logger.info("Variant class will be addedd to as NC_VARCLASS") 
+    if not all(elem in scores for elem in ["ReMM","FATHMM_MKL","NCBoost"]):
+        logger.warning("ReMM,FATHMM_MKL,NCBoost required for prioritization. They have been addedd to score annotations")
+    scores.update(["ReMM","FATHMM_MKL","NCBoost"])
 
 if len(scores) > 0: 
     for score in scores:
@@ -612,7 +612,7 @@ for line in get_stdout([vcf_anno,"-p",threads,toml_file,args.vcf]):
 
         if args.prioritize:
             parameters['remm'] = float(info.infos.get('NC_ReMM', 0))
-            parameters['linsight'] = float(info.infos.get('NC_LinSight', 0))
+            parameters['fathmm_mkl'] = float(info.infos.get('NC_FATHMM_MKL', 0))
             parameters['ncboost'] = float(info.infos.get('NC_NCBoost', 0))
             var_class = prioritize(parameters)
             info.addINFO({'NC_VARCLASS' : var_class})

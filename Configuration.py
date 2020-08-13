@@ -12,7 +12,7 @@ AF_FILE='{base_dir}/' + RESOURCE_DIR + '/AF/{build}_gnomad.genomes.vcf.gz'
 
 ### ANNOTATION CONFIGURATION ###
 # You are not supposed to modify this part
-SCORES = ['ReMM','FIRE','LinSight','ExPECTO','NCBoost','DANN','CADD', 'PhyloP100']
+SCORES = ['ReMM','FIRE','LinSight','ExPECTO','NCBoost','DANN','CADD', 'PhyloP100', 'FATHMM_MKL', 'FATHMM_XF','GWAVA', 'EIGEN']
 
 NC_ANNO_DATATYPES = {
     'NC_support': 'Float',
@@ -81,6 +81,30 @@ columns=[5,6]
 #columns=[7,8,9,10]
 
 TOML_SCORES = {
+'FATHMM_MKL' : '''[[annotation]]
+file="{scores_dir}/{build}_FATHMM-MKL_NC.tsv.gz"
+names=["NC_FATHMM_MKL"]
+ops=["max"]
+columns=[5]''',
+
+'FATHMM_XF' : '''[[annotation]]
+file="{scores_dir}/{build}_FATHMM-XF_NC.tsv.gz"
+names=["NC_FATHMM_XF"]
+ops=["max"]
+columns=[5]''',
+
+'EIGEN' : '''[[annotation]]
+file="{scores_dir}/{build}_Eigen.tsv.gz"
+names=["NC_EIGEN","NC_EIGEN_PC"]
+ops=["max","max"]
+columns=[5,6]''',
+
+'GWAVA' : '''[[annotation]]
+file="{scores_dir}/{build}_gwava.bed.gz"
+names=["NC_GWAVA"]
+ops=["max"]
+columns=[5]''',
+
 'FIRE' : '''[[annotation]]
 file="{scores_dir}/{build}_FIRE.tsv.gz"
 names=["NC_FIRE"]

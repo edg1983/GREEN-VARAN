@@ -11,7 +11,7 @@ Usage:
         [-r,--resource RESOURCES_FILE]  GREEN-VARAN_resources.txt (default)
         [-n,--name RESOURCE_NAME]       all = download all (default)
                                         scores = download all scores
-                                        bed_files = download all bed_files
+                                        bed_files = download GREEN_DB bed files
                                         AF = download AF files
                                         SV_annotation = download all SV annotations
                                         specific_name (see --list)
@@ -19,6 +19,10 @@ Usage:
         [-l,--list]                     list available resources
         [-h,--help]                     get help message
 EOM
+
+export REPO_NAME="NOTSET"
+export OUTDIR="./"
+export RESOURCE_FILE="GREEN-VARAN_resources.txt"
 
 function downloadRepoGroup {
     local repo_class=$1
@@ -29,7 +33,9 @@ function downloadRepoGroup {
             cd $repo_dir
             echo "Downloading $repo_id in $OUTDIR/$repo_dir"
             wget --backups=1 -nv $repo_http
-            decompress($repo_http)
+            if [ $repo_dir != "scores" ]; then
+                decompress($repo_http)
+            fi
             cd ..    
         done < $(awk -F"\t" -v name="$repo_name" '$2 == name')   
 }
@@ -59,9 +65,8 @@ while test $# -gt 0; do
             if test $# -gt 0; then
                 export RESOURCE_FILE=$1
             else
-                echo "No resource file specified (-r)"
-                echo "Using default: GREEN-VARAN_resources.txt"
-                export RESOURCE_FILE="GREEN-VARAN_resources.txt"
+                echo "No resource file specified after -r/--resource"
+                exit 1
             fi
             shift
         -n|--name)
@@ -69,9 +74,8 @@ while test $# -gt 0; do
             if test $# -gt 0; then
                     export REPO_NAME=$1
             else
-                echo "No resource name specified (-n)"
-                echo "Downloading all resources"
-                export REPO_NAME="all"
+                echo "No resource name specified after -n/--name"
+                exit 1
             fi
             shift
         ;;        
@@ -80,7 +84,8 @@ while test $# -gt 0; do
             if test $# -gt 0; then
                 export OUTDIR=$1
             else
-                export OUTDIR="./"
+                echo "No output folder specified after -o/--output"
+                exit 1
             fi
             shift
         ;;
@@ -97,6 +102,11 @@ done
 #Check resource file
 if [ ! -f $RESOURCE_FILE ]; then
     echo "FATAL! - Resource file $RESOURCE_FILE do not exists!"
+    exit 1
+fi
+
+if [ $REPO_NAME == "NOTSET" ]; then
+    echo "FATAL! - No resource name specified, -n/--name option is mandatory"
     exit 1
 fi
 
@@ -132,7 +142,9 @@ case "$REPO_NAME" in
             cd $repo_dir
             echo "Downloading $repo_id in $OUTDIR/$repo_dir"
             wget --backups=1 -nv $repo_http
-            decompress($repo_http)
+            if [ $repo_dir != "scores" ]; then
+                decompress($repo_http)
+            fi
             cd ..    
         done < $RESOURCE_FILE
     ;;
@@ -151,7 +163,9 @@ case "$REPO_NAME" in
         cd $repo_dir
         echo "Downloading $repo_id in $OUTDIR/$repo_dir"
         wget --backups=1 -nv $repo_http
-        decompress($repo_http)
+        if [ $repo_dir != "scores" ]; then
+            decompress($repo_http)
+        fi
     ;;
 esac
 
