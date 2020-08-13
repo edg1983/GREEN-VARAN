@@ -229,9 +229,9 @@ The default location is <code class="docutils literal notranslate"><span class="
 <p>If prioritization is active (-p, –prioritize), an additional NC_VARCLASS field will be added.
 This fields is an integer from 0 to 13 wich summarize evidences supporting a regulatory impact for the variant.
 Higher values are associated to a higher probability of regulatory impact.</p>
-<p><strong>NB.</strong> You need ReMM, LinSight and NCBoost scores available to run priotization mode.
+<p><strong>NB.</strong> You need ReMM, FATHMM-MKL and NCBoost scores available to run priotization mode.
 These scores will be automatically addedd to annotations when prioritization mode is activated.</p>
-<p>Levels are based on GREEN-DB annotation and 3 prediction scores (ReMM, LinSight, NCBoost).
+<p>Levels are based on GREEN-DB annotation and 3 prediction scores (ReMM, FATHMM-MKL, NCBoost).
 The FDR50 and TPR90 thresholds are defined in the GREEN-VARAN paper.</p>
 <table class="docutils align-default">
 <colgroup>
@@ -244,7 +244,7 @@ The FDR50 and TPR90 thresholds are defined in the GREEN-VARAN paper.</p>
 <thead>
 <tr class="row-odd"><th class="head"><p>Level</p></th>
 <th class="head"><p>1 score above threshold
-(ReMM, LinSight, NCBoost)</p></th>
+(ReMM,FATHMM-MKL,NCBoost)</p></th>
 <th class="head"><p>Overlap GREEN-DB region</p></th>
 <th class="head"><p>GREEN-DB
 constraint &gt;= 0.9</p></th>

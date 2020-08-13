@@ -5,7 +5,7 @@ To perform annotations GREEN-VARAN tools require a series of supporting files.
 By default, various resources are expected in the ``resources`` folder within the tool folder.
 The expected folder structure in resources is as follow
 
-.. code-block:: bash
+.. code-block::
 
     .
     |-- SQlite
@@ -15,7 +15,7 @@ The expected folder structure in resources is as follow
     |-- bed_files
     |   `-- GREEN-DB BED files
     |-- scores
-    |   `-- scores annotations
+    |   `--scores annotations
     `-- AF
         `-- population AF annotations
 
@@ -28,37 +28,58 @@ Otherwise, single files are available for download from Zenodo repository
     :header: "Annotation","Sub-folder","Link"
     :widths: 20,20,60
 
-    GRCh37_CADD,scores,https://zenodo.org/record/3956385/GRCh37_CADD.tsv.gz
-    GRCh37_CADD,scores,https://zenodo.org/record/3956385/GRCh37_CADD.tsv.gz.csi
-    GRCh37_DANN,scores,https://zenodo.org/record/3957486/GRCh37_DANN.tsv.gz
-    GRCh37_DANN,scores,https://zenodo.org/record/3957486/GRCh37_DANN.tsv.gz.csi
-    GRCh37_ExPECTO,scores,https://zenodo.org/record/3956168/GRCh37_ExPECTO.tsv.gz
-    GRCh37_ExPECTO,scores,https://zenodo.org/record/3956168/GRCh37_ExPECTO.tsv.gz.csi
-    GRCh37_FIRE,scores,https://zenodo.org/record/3957356/GRCh37_FIRE.tsv.gz
-    GRCh37_FIRE,scores,https://zenodo.org/record/3957356/GRCh37_FIRE.tsv.gz.csi
-    GRCh37_LinSight,scores,https://zenodo.org/record/3956168/GRCh37_LinSight.bed.gz
-    GRCh37_LinSight,scores,https://zenodo.org/record/3956168/GRCh37_LinSight.bed.gz.csi
-    GRCh37_NCBoost,scores,https://zenodo.org/record/3956168/GRCh37_NCBoost.tsv.gz
-    GRCh37_NCBoost,scores,https://zenodo.org/record/3956168/GRCh37_NCBoost.tsv.gz.csi
-    GRCh37_ReMM,scores,https://zenodo.org/record/3956168/GRCh37_ReMM.tsv.gz
-    GRCh37_ReMM,scores,https://zenodo.org/record/3956168/GRCh37_ReMM.tsv.gz.csi
-    GRCh37_gnomAD,AF,https://zenodo.org/record/3957637/GRCh37_gnomad.genomes.vcf.gz
-    GRCh37_gnomAD,AF,https://zenodo.org/record/3957637/GRCh37_gnomad.genomes.vcf.gz.csi
-    GRCh38_CADD,scores,https://zenodo.org/record/3956227/GRCh38_CADD.tsv.gz
-    GRCh38_CADD,scores,https://zenodo.org/record/3956227/GRCh38_CADD.tsv.gz.csi
-    GRCh38_DANN,scores,https://zenodo.org/record/3957428/GRCh38_DANN.tsv.gz
-    GRCh38_DANN,scores,https://zenodo.org/record/3957428/GRCh38_DANN.tsv.gz.csi
-    GRCh38_ExPECTO,scores,https://zenodo.org/record/3955933/GRCh38_ExPECTO.tsv.gz
-    GRCh38_ExPECTO,scores,https://zenodo.org/record/3955933/GRCh38_ExPECTO.tsv.gz.csi
-    GRCh38_FIRE,scores,https://zenodo.org/record/3957216/GRCh38_FIRE.tsv.gz
-    GRCh38_FIRE,scores,https://zenodo.org/record/3957216/GRCh38_FIRE.tsv.gz.csi
-    GRCh38_LinSight,scores,https://zenodo.org/record/3955933/GRCh38_LinSight.bed.gz
-    GRCh38_LinSight,scores,https://zenodo.org/record/3955933/GRCh38_LinSight.bed.gz.csi
-    GRCh38_NCBoost,scores,https://zenodo.org/record/3955933/GRCh38_NCBoost.tsv.gz
-    GRCh38_NCBoost,scores,https://zenodo.org/record/3955933/GRCh38_NCBoost.tsv.gz.csi
-    GRCh38_ReMM,scores,https://zenodo.org/record/3955933/GRCh38_ReMM.tsv.gz
-    GRCh38_ReMM,scores,https://zenodo.org/record/3955933/GRCh38_ReMM.tsv.gz.csi
-    GRCh38_gnomAD,AF,https://zenodo.org/record/3957637/GRCh38_gnomad.genomes.vcf.gz
-    GRCh38_gnomAD,AF,https://zenodo.org/record/3957637/GRCh38_gnomad.genomes.vcf.gz.csi
+    GRCh37_CADD,scores,https://zenodo.org/record/3956385/files/GRCh37_CADD.tsv.gz
+    GRCh37_CADD,scores,https://zenodo.org/record/3956385/files/GRCh37_CADD.tsv.gz.csi
+    GRCh37_DANN,scores,https://zenodo.org/record/3957486/files/GRCh37_DANN.tsv.gz
+    GRCh37_DANN,scores,https://zenodo.org/record/3957486/files/GRCh37_DANN.tsv.gz.csi
+    GRCh37_ExPECTO,scores,https://zenodo.org/record/3956168/files/GRCh37_ExPECTO.tsv.gz
+    GRCh37_ExPECTO,scores,https://zenodo.org/record/3956168/files/GRCh37_ExPECTO.tsv.gz.csi
+    GRCh37_FIRE,scores,https://zenodo.org/record/3957356/files/GRCh37_FIRE.tsv.gz
+    GRCh37_FIRE,scores,https://zenodo.org/record/3957356/files/GRCh37_FIRE.tsv.gz.csi
+    GRCh37_LinSight,scores,https://zenodo.org/record/3956168/files/GRCh37_LinSight.bed.gz
+    GRCh37_LinSight,scores,https://zenodo.org/record/3956168/files/GRCh37_LinSight.bed.gz.csi
+    GRCh37_NCBoost,scores,https://zenodo.org/record/3956168/files/GRCh37_NCBoost.tsv.gz
+    GRCh37_NCBoost,scores,https://zenodo.org/record/3956168/files/GRCh37_NCBoost.tsv.gz.csi
+    GRCh37_ReMM,scores,https://zenodo.org/record/3956168/files/GRCh37_ReMM.tsv.gz
+    GRCh37_ReMM,scores,https://zenodo.org/record/3956168/files/GRCh37_ReMM.tsv.gz.csi
+    GRCh37_PhyloP100,scores,https://zenodo.org/record/3973181/files/GRCh37_PhyloP100.bed.gz
+    GRCh37_PhyloP100,scores,https://zenodo.org/record/3973181/files/GRCh37_PhyloP100.bed.gz.csi
+    GRCh37_Eigen,scores,https://zenodo.org/record/3982095/files/GRCh37_Eigen.tsv.gz
+    GRCh37_Eigen,scores,https://zenodo.org/record/3982095/files/GRCh37_Eigen.tsv.gz.csi
+    GRCh37_FATHMM_XF,scores,https://zenodo.org/record/3982392/files/GRCh37_FATHMM-XF_NC.tsv.gz
+    GRCh37_FATHMM_XF,scores,https://zenodo.org/record/3982392/files/GRCh37_FATHMM-XF_NC.tsv.gz.csi
+    GRCh37_FATHMM_MKL,scores,https://zenodo.org/record/3981113/files/GRCh37_FATHMM-MKL_NC.tsv.gz
+    GRCh37_FATHMM_MKL,scores,https://zenodo.org/record/3981113/files/GRCh37_FATHMM-MKL_NC.tsv.gz
+    GRCh37_GWAVA,scores,https://zenodo.org/record/3956168/files/GRCh37_gwava.bed.gz
+    GRCh37_GWAVA,scores,https://zenodo.org/record/3956168/files/GRCh37_gwava.bed.gz.csi
+    GRCh37_gnomAD,AF,https://zenodo.org/record/3957637/files/GRCh37_gnomad.genomes.vcf.gz
+    GRCh37_gnomAD,AF,https://zenodo.org/record/3957637/files/GRCh37_gnomad.genomes.vcf.gz.csi
+    GRCh38_CADD,scores,https://zenodo.org/record/3956227/files/GRCh38_CADD.tsv.gz
+    GRCh38_CADD,scores,https://zenodo.org/record/3956227/files/GRCh38_CADD.tsv.gz.csi
+    GRCh38_DANN,scores,https://zenodo.org/record/3957428/files/GRCh38_DANN.tsv.gz
+    GRCh38_DANN,scores,https://zenodo.org/record/3957428/files/GRCh38_DANN.tsv.gz.csi
+    GRCh38_ExPECTO,scores,https://zenodo.org/record/3955933/files/GRCh38_ExPECTO.tsv.gz
+    GRCh38_ExPECTO,scores,https://zenodo.org/record/3955933/files/GRCh38_ExPECTO.tsv.gz.csi
+    GRCh38_FIRE,scores,https://zenodo.org/record/3957216/files/GRCh38_FIRE.tsv.gz
+    GRCh38_FIRE,scores,https://zenodo.org/record/3957216/files/GRCh38_FIRE.tsv.gz.csi
+    GRCh38_LinSight,scores,https://zenodo.org/record/3955933/files/GRCh38_LinSight.bed.gz
+    GRCh38_LinSight,scores,https://zenodo.org/record/3955933/files/GRCh38_LinSight.bed.gz.csi
+    GRCh38_NCBoost,scores,https://zenodo.org/record/3955933/files/GRCh38_NCBoost.tsv.gz
+    GRCh38_NCBoost,scores,https://zenodo.org/record/3955933/files/GRCh38_NCBoost.tsv.gz.csi
+    GRCh38_ReMM,scores,https://zenodo.org/record/3955933/files/GRCh38_ReMM.tsv.gz
+    GRCh38_ReMM,scores,https://zenodo.org/record/3955933/files/GRCh38_ReMM.tsv.gz.csi
+    GRCh38_PhyloP100,scores,https://zenodo.org/record/3973181/files/GRCh38_PhyloP100.bed.gz
+    GRCh38_PhyloP100,scores,https://zenodo.org/record/3973181/files/GRCh38_PhyloP100.bed.gz.csi
+    GRCh38_Eigen,scores,https://zenodo.org/record/3982182/files/GRCh38_Eigen.tsv.gz
+    GRCh38_Eigen,scores,https://zenodo.org/record/3982182/files/GRCh38_Eigen.tsv.gz.csi
+    GRCh38_FATHMM_XF,scores,https://zenodo.org/record/3982484/files/GRCh38_FATHMM-XF_NC.tsv.gz
+    GRCh38_FATHMM_XF,scores,https://zenodo.org/record/3982484/files/GRCh38_FATHMM-XF_NC.tsv.gz.csi
+    GRCh38_FATHMM_MKL,scores,https://zenodo.org/record/3981121/files/GRCh38_FATHMM-MKL_NC.tsv.gz
+    GRCh38_FATHMM_MKL,scores,https://zenodo.org/record/3981121/files/GRCh38_FATHMM-MKL_NC.tsv.gz
+    GRCh38_GWAVA,scores,https://zenodo.org/record/3956168/files/GRCh38_gwava.bed.gz
+    GRCh38_GWAVA,scores,https://zenodo.org/record/3956168/files/GRCh38_gwava.bed.gz.csi
+    GRCh38_gnomAD,AF,https://zenodo.org/record/3957637/files/GRCh38_gnomad.genomes.vcf.gz
+    GRCh38_gnomAD,AF,https://zenodo.org/record/3957637/files/GRCh38_gnomad.genomes.vcf.gz.csi
     SV_annotations,SV_annotations,https://zenodo.org/record/3970785/files/SV_annotations.tar.gz
-    bed_files,bed_files,none
+    GREEN_DB_bed,bed_files,https://zenodo.org/record/3981033/files/GREEN-DB_v2_bedfiles.tar.gz
+    GREEN_DB_sqlite,SQlite,https://zenodo.org/record/3981033/files/GREEN-DB_v2_SQLite.tar.gz 

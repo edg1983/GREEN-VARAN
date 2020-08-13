@@ -50,15 +50,15 @@ If prioritization is active (-p, --prioritize), an additional NC_VARCLASS field 
 This fields is an integer from 0 to 13 wich summarize evidences supporting a regulatory impact for the variant.
 Higher values are associated to a higher probability of regulatory impact.
 
-**NB.** You need ReMM, LinSight and NCBoost scores available to run priotization mode.
+**NB.** You need ReMM, FATHMM-MKL and NCBoost scores available to run priotization mode.
 These scores will be automatically addedd to annotations when prioritization mode is activated.
 
-Levels are based on GREEN-DB annotation and 3 prediction scores (ReMM, LinSight, NCBoost).
+Levels are based on GREEN-DB annotation and 3 prediction scores (ReMM, FATHMM-MKL, NCBoost).
 The FDR50 and TPR90 thresholds are defined in the GREEN-VARAN paper.
 
 +---------+---------------------------+-------------------------+-------------------+----------------------------+
 | Level   | 1 score above threshold   | Overlap GREEN-DB region | GREEN-DB          | Overlap any of             |
-|         | (ReMM, LinSight, NCBoost) |                         | constraint >= 0.9 | TFBS, DNase, UCNE, dbSuper |
+|         | (ReMM,FATHMM-MKL,NCBoost) |                         | constraint >= 0.9 | TFBS, DNase, UCNE, dbSuper |
 +=========+===========================+=========================+===================+============================+
 | 13      |           FDR50           |            X            |         X         |                 X          |
 +---------+---------------------------+-------------------------+-------------------+----------------------------+

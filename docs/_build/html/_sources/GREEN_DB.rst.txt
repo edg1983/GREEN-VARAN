@@ -29,6 +29,9 @@ extended bed files for easy integration into existing analysis pipelines.
 For details on how the database was compiled please refer to the original publication
 ##OURPAPER##
 
+The GREEN-DB database is available for free for **academic use** and available for download 
+in a `Zenodo repository <https://zenodo.org/record/3981033>`_
+
 Summary statistics on the database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

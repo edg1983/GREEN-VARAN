@@ -18,7 +18,8 @@ jgs    `~~~~``
 This is the home of the GREEN-DB and companion tools (GREEN-VARAN)
 #### GREEN-DB 
 **Genomic Regulatory Elements ENcyclopedia Database**
-A collection of ~2.4M regulatory regions in the human genome, with information about controlled genes, tissues of activity and associated phenotypes.
+A collection of ~2.4M regulatory regions in the human genome, with information about controlled genes, tissues of activity and associated phenotypes. GREEN-DB is available for free for academic usage in a [Zenodo repository](https://zenodo.org/record/3981033)
+
 #### GREEN-VARAN
 **Genomic Regulatory Elements ENcyclopedia VARiant ANnotation**
 Annotate non-coding regulatory variants in a VCF with a combination of
@@ -27,7 +28,7 @@ Annotate non-coding regulatory variants in a VCF with a combination of
 - AF from gnomAD genomes 
 - conservation with PhyloP100
 
-[Detailed documentation](https://green-varan.readthedocs.io/en/latest) of GREEN-DB and GREEN-VARAN tools is provided in ReadTheDocs
+[Detailed documentation](https://green-varan.readthedocs.io/en/latest) on GREEN-DB and GREEN-VARAN tools is provided in ReadTheDocs
 
 ## Installation
 GREEN-VARAN tools are written in Python 3. GREEN-VARAN relies on [vcfanno](https://github.com/brentp/vcfanno) (Copyright (c) 2015 Brent Pedersen and Aaron Quinlan) for fast VCF processing. GREEN-DB files and a set of additional files are needed for annotation (see Download the supporting files)
