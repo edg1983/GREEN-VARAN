@@ -38,21 +38,27 @@ function checkFile {
     fi
 }
 
+function getResource {
+    mkdir -p $repo_dir
+    cd $repo_dir
+    
+    repo_file=${repo_http##*/}
+    checkFile $repo_file
+    
+    echo "Downloading $repo_id in $OUTDIR/$repo_dir"
+    wget -nv $repo_http
+    if [ $repo_dir != "scores" ]; then
+        decompress $repo_file 
+    fi
+    cd .. 
+}
+
 function downloadRepoGroup {
     local repo_class=$1
     n_repos=$(cat $RESOURCE_FILE | awk -v name="$repo_class" '$2 == name' | wc -l)
         echo "$n_repos for $repo_class found in resource file"
         while read -r repo_id repo_dir repo_http; do
-            mdkir -p $repo_dir
-            cd $repo_dir
-            repo_file=${repo_http##*/}
-            checkFile $repo_file
-            echo "Downloading $repo_id in $OUTDIR/$repo_dir"
-            wget -nv $repo_http
-            if [ $repo_dir != "scores" ]; then
-                decompress $repo_http
-            fi
-            cd ..    
+            getResource   
         done < <(awk -v name="$repo_class" '$2 == name' $RESOURCE_FILE)   
 }
 
@@ -146,16 +152,7 @@ case "$REPO_NAME" in
         n_repos=$(cat $RESOURCE_FILE | wc -l)
         echo "$n_repos sources found in resource file"
         while read -r repo_id repo_dir repo_http; do
-            mkdir -p $repo_dir
-            cd $repo_dir
-            repo_file=${repo_http##*/}
-            checkFile $repo_file
-            echo "Downloading $repo_id in $OUTDIR/$repo_dir"
-            wget -nv $repo_http
-            if [ $repo_dir != "scores" ]; then
-                decompress $repo_file 
-            fi
-            cd ..    
+            getResource 
         done < $RESOURCE_FILE
     ;;
     scores|bed_files|SV_annotation|AF)
@@ -169,15 +166,7 @@ case "$REPO_NAME" in
             echo "FATAL! - Resource name $REPO_NAME not found in resource file. Use -l to list available resources"
             exit 1
         fi
-        mdkir -p $repo_dir
-        cd $repo_dir
-        repo_file=${repo_http##*/}
-        checkFile $repo_file
-        echo "Downloading $repo_id in $OUTDIR/$repo_dir"
-        wget -nv $repo_http
-        if [ $repo_dir != "scores" ]; then
-            decompress $repo_http 
-        fi
+        getResource
     ;;
 esac
 
