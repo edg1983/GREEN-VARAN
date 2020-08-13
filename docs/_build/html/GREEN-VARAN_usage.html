@@ -392,57 +392,15 @@ will be considered as “variant of interest” and annotated / filtered</p>
 </div>
 <div class="section" id="activate-additional-annotations">
 <h2>Activate additional annotations<a class="headerlink" href="#activate-additional-annotations" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="predictions-scores">
-<h3>Predictions scores<a class="headerlink" href="#predictions-scores" title="Permalink to this headline">¶</a></h3>
-<p>You can annotate variants using 7 different prediction scores. To activate one ore more of these annotations use the
+<div class="section" id="prediction-scores">
+<h3>Prediction scores<a class="headerlink" href="#prediction-scores" title="Permalink to this headline">¶</a></h3>
+<p>You can annotate variants using 13 different prediction scores and PhyloP100 conservartion score. To activate one ore more of these annotations use the
 <code class="docutils literal notranslate"><span class="pre">-s,</span> <span class="pre">--scores</span></code> option providing a single score name. The option can be repeated multiple time to add more scores.
 Alternatively, you can set <code class="docutils literal notranslate"><span class="pre">--allscores</span></code> to activate all scores. Note that annotating with all scores can slow down the annotation
 considerably. Our suggestion for rare variants is to use ReMM, NCBoost and LinSight.</p>
 <p><strong>NB.</strong> Score annotations requires the corresponding tables from GREEN-VARAN release to be present in the resources folder.
 Default location is <code class="docutils literal notranslate"><span class="pre">resources\scores</span></code> within the tool folder, but you can set a different one using <code class="docutils literal notranslate"><span class="pre">--scores_dir</span></code></p>
-<p>Available scores included with the GREEN-VARAN release</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>CADD v1.5</dt><dd><p><a class="reference external" href="https://academic.oup.com/nar/article/47/D1/D886/5146191">CADD: predicting the deleteriousness of variants throughout the human genome</a></p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>DANN</dt><dd><p><a class="reference external" href="https://academic.oup.com/bioinformatics/article/31/5/761/2748191">DANN: a deep learning approach for annotating the pathogenicity of genetic variants</a></p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>ExPECTO</dt><dd><p><a class="reference external" href="https://www.nature.com/articles/s41588-018-0160-6">Deep learning sequence-based ab initio prediction of variant effects on expression and disease risk</a></p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>FIRE</dt><dd><p><a class="reference external" href="https://academic.oup.com/bioinformatics/article/33/24/3895/4093216">FIRE: functional inference of genetic variants that regulate gene expression</a></p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>LinSight</dt><dd><p><a class="reference external" href="https://www.nature.com/articles/ng.3810">Fast, scalable prediction of deleterious noncoding variants from functional and population genomic data</a></p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>NCBoost</dt><dd><p><a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1634-2">NCBoost classifies pathogenic non-coding variants in Mendelian diseases through supervised learning on purifying selection signals in humans</a></p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>ReMM v0.3.1</dt><dd><p><a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0002929716302786">A Whole-Genome Analysis Framework for Effective Identification of Pathogenic Regulatory Variants in Mendelian Disease</a></p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>PhyloP100</dt><dd><p>Conservation values calculated from multiple-alignment of 100 vertebrates</p>
-</dd>
-</dl>
-</li>
-</ul>
+<p>Available scores included with the GREEN-VARAN releass</p>
 </div>
 <div class="section" id="population-allele-frequency">
 <h3>Population allele frequency<a class="headerlink" href="#population-allele-frequency" title="Permalink to this headline">¶</a></h3>

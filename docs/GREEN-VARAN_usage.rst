@@ -132,9 +132,9 @@ will be considered as "variant of interest" and annotated / filtered
 
 Activate additional annotations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Predictions scores
-##################
-You can annotate variants using 7 different prediction scores. To activate one ore more of these annotations use the
+Prediction scores
+#################
+You can annotate variants using 12 different prediction scores and PhyloP100 conservartion score. To activate one ore more of these annotations use the
 ``-s, --scores`` option providing a single score name. The option can be repeated multiple time to add more scores.
 Alternatively, you can set ``--allscores`` to activate all scores. Note that annotating with all scores can slow down the annotation
 considerably. Our suggestion for rare variants is to use ReMM, NCBoost and LinSight. 
@@ -148,10 +148,18 @@ Available scores included with the GREEN-VARAN release
     `CADD: predicting the deleteriousness of variants throughout the human genome <https://academic.oup.com/nar/article/47/D1/D886/5146191>`_
 - DANN
     `DANN: a deep learning approach for annotating the pathogenicity of genetic variants <https://academic.oup.com/bioinformatics/article/31/5/761/2748191>`_
+- EIGEN / EIGEN-PC
+    `A spectral approach integrating functional genomic annotations for coding and noncoding variants <https://www.nature.com/articles/ng.3477>`_
 - ExPECTO
     `Deep learning sequence-based ab initio prediction of variant effects on expression and disease risk <https://www.nature.com/articles/s41588-018-0160-6>`_
+- FATHMM_MKL
+    `An integrative approach to predicting the functional effects of non-coding and coding sequence variation <https://academic.oup.com/bioinformatics/article/31/10/1536/177080>`_
+- FATHMM_XF
+    `FATHMM-XF: accurate prediction of pathogenic point mutations via extended features <https://academic.oup.com/bioinformatics/article/34/3/511/4104409>`_
 - FIRE
     `FIRE: functional inference of genetic variants that regulate gene expression <https://academic.oup.com/bioinformatics/article/33/24/3895/4093216>`_
+- GWAVA
+    `Functional annotation of noncoding sequence variants <https://www.nature.com/articles/nmeth.2832>`_
 - LinSight
     `Fast, scalable prediction of deleterious noncoding variants from functional and population genomic data <https://www.nature.com/articles/ng.3810>`_
 - NCBoost
@@ -160,6 +168,7 @@ Available scores included with the GREEN-VARAN release
     `A Whole-Genome Analysis Framework for Effective Identification of Pathogenic Regulatory Variants in Mendelian Disease <https://www.sciencedirect.com/science/article/pii/S0002929716302786>`_
 - PhyloP100
     Conservation values calculated from multiple-alignment of 100 vertebrates
+
 
 Population allele frequency
 ###########################
