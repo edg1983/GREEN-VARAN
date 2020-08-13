@@ -53,7 +53,7 @@ function downloadRepoGroup {
                 decompress $repo_http
             fi
             cd ..    
-        done < <(awk -v name="$repo_name" '$2 == name' $RESOURCE_FILE)   
+        done < <(awk -v name="$repo_class" '$2 == name' $RESOURCE_FILE)   
 }
 
 if [ $# == 0 ]
@@ -124,7 +124,7 @@ if [ $LIST_RES == 1 ]; then
     cut -f1 $RESOURCE_FILE
 else
     echo "## OPTIONS AS INTERPRETED ##"
-    echo -e "\tresource file: $RESOURCE_FILE
+    echo -e "resource file: $RESOURCE_FILE
     output dir: $OUTDIR
     resource name: $REPO_NAME
     "
