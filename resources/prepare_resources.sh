@@ -20,7 +20,7 @@ Usage:
         [-h,--help]                     get help message
 EOM
 
-export REPO_NAME="NOTSET"
+export REPO_NAME="all"
 export OUTDIR="./"
 export RESOURCE_FILE="GREEN-VARAN_resources.txt"
 
@@ -49,9 +49,7 @@ function downloadRepoGroup {
 
 if [ $# == 0 ]
 then
-    echo -e "Missing mandatory arguments\n"
-    echo "$HELP_MESSAGE"
-    exit 1
+    echo -e "No arguments provided. Proceding with default settings"
 fi
 
 while test $# -gt 0; do
@@ -69,6 +67,7 @@ while test $# -gt 0; do
                 exit 1
             fi
             shift
+        ;;
         -n|--name)
             shift
             if test $# -gt 0; then
