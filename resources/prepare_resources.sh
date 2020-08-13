@@ -53,7 +53,7 @@ function downloadRepoGroup {
                 decompress $repo_http
             fi
             cd ..    
-        done < $(awk -v name="$repo_name" '$2 == name' $RESOURCE_FILE)   
+        done < <(awk -v name="$repo_name" '$2 == name' $RESOURCE_FILE)   
 }
 
 if [ $# == 0 ]
