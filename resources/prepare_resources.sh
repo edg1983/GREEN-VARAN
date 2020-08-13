@@ -24,6 +24,13 @@ export REPO_NAME="NOTSET"
 export OUTDIR="./"
 export RESOURCE_FILE="GREEN-VARAN_resources.txt"
 
+function decompress {
+    local http_address=$1
+    echo "Decompress downloaded file"
+    repo_file=${http_address##*/}
+    tar -zxvf $repo_file
+}
+
 function downloadRepoGroup {
     local repo_class=$1
     n_repos=$(cat $RESOURCE_FILE | awk -F"\t" -v name="$repo_class" '$2 == name' | wc -l)
@@ -34,17 +41,10 @@ function downloadRepoGroup {
             echo "Downloading $repo_id in $OUTDIR/$repo_dir"
             wget --backups=1 -nv $repo_http
             if [ $repo_dir != "scores" ]; then
-                decompress($repo_http)
+                decompress $repo_http
             fi
             cd ..    
         done < $(awk -F"\t" -v name="$repo_name" '$2 == name')   
-}
-
-function decompress {
-    local http_address=$1
-    echo "Decompress downloaded file"
-    repo_file=${http_address##*/}
-    tar -zxvf $repo_file
 }
 
 if [ $# == 0 ]
@@ -143,13 +143,13 @@ case "$REPO_NAME" in
             echo "Downloading $repo_id in $OUTDIR/$repo_dir"
             wget --backups=1 -nv $repo_http
             if [ $repo_dir != "scores" ]; then
-                decompress($repo_http)
+                decompress $repo_http 
             fi
             cd ..    
         done < $RESOURCE_FILE
     ;;
     scores|bed_files|SV_annotation|AF)
-        downloadRepoGroup($REPO_NAME)
+        downloadRepoGroup $REPO_NAME 
     ;;
     *)
         repo_id=$(grep $REPO_NAME $RESOURCE_FILE | cut -f1)
@@ -164,7 +164,7 @@ case "$REPO_NAME" in
         echo "Downloading $repo_id in $OUTDIR/$repo_dir"
         wget --backups=1 -nv $repo_http
         if [ $repo_dir != "scores" ]; then
-            decompress($repo_http)
+            decompress $repo_http 
         fi
     ;;
 esac
