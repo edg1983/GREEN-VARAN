@@ -30,6 +30,14 @@ function decompress {
     tar -zxvf $myfile
 }
 
+function checkFile {
+    local myfile=$1
+    if [ -f $repo_file ]; then
+        echo "WARNING - $myfile already exists. Existing file will be renamed with .OLD suffix"
+        mv $repo_file ${repo_file}.OLD
+    fi
+}
+
 function downloadRepoGroup {
     local repo_class=$1
     n_repos=$(cat $RESOURCE_FILE | awk -F"\t" -v name="$repo_class" '$2 == name' | wc -l)
@@ -38,11 +46,9 @@ function downloadRepoGroup {
             mdkir -p $repo_dir
             cd $repo_dir
             repo_file=${repo_http##*/}
+            checkFile $repo_file
             echo "Downloading $repo_id in $OUTDIR/$repo_dir"
-            if [ -f $repo_file ]; then
-                mv $repo_file ${repo_file}.OLD
-            fi
-            wget --backups=1 -nv $repo_http
+            wget -nv $repo_http
             if [ $repo_dir != "scores" ]; then
                 decompress $repo_http
             fi
@@ -143,11 +149,9 @@ case "$REPO_NAME" in
             mkdir -p $repo_dir
             cd $repo_dir
             repo_file=${repo_http##*/}
+            checkFile $repo_file
             echo "Downloading $repo_id in $OUTDIR/$repo_dir"
-            if [ -f $repo_file ]; then
-                mv $repo_file ${repo_file}.OLD
-            fi
-            wget --backups=1 -nv $repo_http
+            wget -nv $repo_http
             if [ $repo_dir != "scores" ]; then
                 decompress $repo_file 
             fi
@@ -168,11 +172,9 @@ case "$REPO_NAME" in
         mdkir -p $repo_dir
         cd $repo_dir
         repo_file=${repo_http##*/}
+        checkFile $repo_file
         echo "Downloading $repo_id in $OUTDIR/$repo_dir"
-        if [ -f $repo_file ]; then
-            mv $repo_file ${repo_file}.OLD
-        fi
-        wget --backups=1 -nv $repo_http
+        wget -nv $repo_http
         if [ $repo_dir != "scores" ]; then
             decompress $repo_http 
         fi
