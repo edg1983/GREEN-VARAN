@@ -76,18 +76,18 @@
     "custom_datasets": {
         "GRCh38": {
             "GREENDB": [
-                ["INS", "GRCh38_GREEN-DB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
-                ["DEL", "GRCh38_GREEN-DB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
-                ["DUP", "GRCh38_GREEN-DB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
-                ["INV", "GRCh38_GREEN-DB.bed", "4,5,7,13", "id,type,constraint,gene", "String"]            
+                ["INS", "GRCh38_GREEN-DB.bed.gz", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["DEL", "GRCh38_GREEN-DB.bed.gz", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["DUP", "GRCh38_GREEN-DB.bed.gz", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["INV", "GRCh38_GREEN-DB.bed.gz", "4,5,7,13", "id,type,constraint,gene", "String"]            
             ]
         },
         "GRCh37": {
             "GREENDB": [
-                ["INS", "GRCh37_GREEN-DB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
-                ["DEL", "GRCh37_GREEN-DB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
-                ["DUP", "GRCh37_GREEN-DB.bed", "4,5,7,13", "id,type,constraint,gene", "String"],
-                ["INV", "GRCh37_GREEN-DB.bed", "4,5,7,13", "id,type,constraint,gene", "String"]            
+                ["INS", "GRCh37_GREEN-DB.bed.gz", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["DEL", "GRCh37_GREEN-DB.bed.gz", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["DUP", "GRCh37_GREEN-DB.bed.gz", "4,5,7,13", "id,type,constraint,gene", "String"],
+                ["INV", "GRCh37_GREEN-DB.bed.gz", "4,5,7,13", "id,type,constraint,gene", "String"]            
             ]
         },
         "hg19": {

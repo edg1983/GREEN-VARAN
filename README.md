@@ -15,6 +15,9 @@
 jgs    `~~~~``
 ```
 
+![https://readthedocs.org/projects/green-varan/badge/?version=latest](https://readthedocs.org/projects/green-varan/badge/?version=latest)
+[![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/4619)
+
 This is the home of the GREEN-DB and companion tools (GREEN-VARAN)
 #### GREEN-DB 
 **Genomic Regulatory Elements ENcyclopedia Database**
@@ -129,8 +132,6 @@ GREEN-DB_query.py [-h] (-v VCF | -r REGIDS | -t TABLE)
 |-b, --build         | GRCh37<br>GRCh38 | Genome build of input VCF |
 
 ## Run using singularity container
-
-[![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/4619)
 
 GREEN-VARAN and the other tools are also provided as Singularity image (tested on singularity >= 3.2). A Singularity recipe is included in this distribution or you can pull the corresponding image from Singularity Hub using
 
