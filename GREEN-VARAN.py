@@ -637,7 +637,7 @@ for line in get_stdout([vcf_anno,"-p",threads,toml_file,args.vcf]):
             step_time = time.time()
             batch_time = time.time() - start_time
             total_time = round(int(tot_vars) / (n/int(batch_time)))
-            eta = timedelta(seconds=(total_time - elapsed_time))
+            eta = timedelta(seconds=(total_time - batch_time))
             logger.info("Last batch %s sec: %d variants processed - %s%% - ETA %s", round(elapsed_time,3), n, round((n/tot_vars) * 100,2), eta)
 
 outVCF.close()
