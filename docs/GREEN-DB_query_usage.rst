@@ -64,7 +64,19 @@ Details on the controlled genes, reporting the tissue where the gene-region inte
 | **2-4. chrom, start, stop**: genomic location of the region
 | **5. std_type**: one of the 5 main region types (enhancer, promoter, silencer, bivalent, insulator)
 | **6. controlled_gene**: gene symbol for controlled gene
-| **7. tissue_of_interaction**: comma-separated list of cell types and tissues where this region-gene interaction is detected
+| **7. detection method**: method supporting this interaction
+| **8. tissue_of_interaction**: comma-separated list of cell types and tissues where this region-gene interaction is detected
+
+pheno_details
+############
+Details on the phenotypes potentially associated with the regions of interest
+
+| **1. regionID**: GREEN-DB region ID
+| **2-4. chrom, start, stop**: genomic location of the region
+| **5. std_type**: one of the 5 main region types (enhancer, promoter, silencer, bivalent, insulator)
+| **6. phenotype**: phenotype eventually associated to this region
+| **7. detection method**: method supporting this association
+| **8. DB source**: source supporting this association
 
 
 DNase, dbSuper, TFBS, UCNE

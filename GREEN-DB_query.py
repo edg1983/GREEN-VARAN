@@ -21,10 +21,11 @@ BASE_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 RESOURCE_DIR = "resources"
 REG_DB="SQlite/RegulatoryRegions.db"
 DB_FILE = "{base_dir}/{resource_dir}/{reg_db}".format(base_dir=BASE_DIR,resource_dir=RESOURCE_DIR,reg_db=REG_DB)
-TABLES = ["regions","gene_details","DNase","dbSuper","TFBS","UCNE"]
+TABLES = ["regions","gene_details","pheno_details", "DNase","dbSuper","TFBS","UCNE"]
 TAB_HEADERS = {
     'regions' : ['regionID','chrom','start','stop','type','std_type','DB_source','PhyloP100_median','constraint_pct','controlled_gene','closestGene_symbol', 'closestGene_ensg', 'closestGene_dist','cell_or_tissues','detection_method','phenotype'],
-    'gene_details' : ['regionID','chrom','start','stop','std_type','controlled_gene','tissue_of_interaction'],
+    'gene_details' : ['regionID','chrom','start','stop','std_type','controlled_gene','detection_method','tissue_of_interaction'],
+    'pheno_details' : ['regionID','chrom','start','stop','std_type','phenotype','detection_method','DB_source'],
     'DNase' : ['regionID','DNase_chrom','DNase_start','DNase_stop','DNase_ID','DNase_cell_or_tissue'],
     'dbSuper' : ['regionID','dbSuper_chrom','dbSuper_start','dbSuper_stop','dbSuper_ID','dbSuper_cell_or_tissue'],
     'TFBS' : ['regionID','TFBS_chrom','TFBS_start','TFBS_stop','TF_name','TFBS_cell_or_tissue'],
@@ -129,10 +130,19 @@ def prepare_query(table, build, ids):
             build=build)
     elif table == "gene_details":
         query = "SELECT r.regionID, r.chromosome, r.start, r.stop, r.std_type, \
-        g.gene_symbol, t.cell_or_tissue \
+        g.gene_symbol, m.method, t.cell_or_tissue \
         FROM {build}_Regions AS r \
         LEFT JOIN genes AS g ON r.regionID = g.regionID \
         LEFT JOIN tissues AS t ON g.interactionID = t.regionID \
+        LEFT JOIN methods AS m ON g.interactionID = m.regionID \
+        WHERE r.regionID IN ({regions})".format(
+            regions=','.join(['?']*len(ids)),
+            build=build)
+    elif table == "pheno_details":
+        query = "SELECT r.regionID, r.chromosome, r.start, r.stop, r.std_type, \
+        p.phenotype, p.method, p.DB_source \
+        FROM {build}_Regions AS r \
+        LEFT JOIN phenos AS p ON r.regionID = p.regionID \
         WHERE r.regionID IN ({regions})".format(
             regions=','.join(['?']*len(ids)),
             build=build)
@@ -377,5 +387,4 @@ end_time = time.time() - start_time
 end_time = str(timedelta(seconds=round(end_time)))
 logger.info("Process completed in %s", end_time)
 
-#TODO Develop plotting for detail mode
-#TODO Add genome browser integration for detail mode
+#TODO Develop a plotting system
