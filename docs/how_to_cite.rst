@@ -4,13 +4,15 @@ How to cite
 GREEN-DB
 ~~~~~~~~
 If you use any information from GREEN-DB please cite:
-##OURPAPER##
+`GREEN-DB: a framework for the annotation and prioritization of non-coding regulatory variants in whole-genome sequencing <https://www.biorxiv.org/content/10.1101/2020.09.17.301960v1>`_
+Giacopuzzi E., Popitsch N., Taylor JC. BiorXiv (2020)
 
 GREEN-VARAN
 ~~~~~~~~~~~
 When you use GREEN-VARAN.py for annotation please cite
 
-| 1. ##OURPAPER##
+| 1. `GREEN-DB: a framework for the annotation and prioritization of non-coding regulatory variants in whole-genome sequencing <https://www.biorxiv.org/content/10.1101/2020.09.17.301960v1>`_
+|    Giacopuzzi E., Popitsch N., Taylor JC. BiorXiv (2020)
 | 2. `Vcfanno: fast, flexible annotation of genetic variants <https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0973-5>`_ 
 |    Brent S. Pedersen, Ryan M. Layer & Aaron R. Quinlan. Genome Biology volume 17, Article number: 118 (2016)
 

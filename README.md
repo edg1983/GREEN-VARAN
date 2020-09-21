@@ -182,11 +182,11 @@ GREEN-VARAN -i /input/input.vcf \
 ## Citation
 
 When you use GREEN-DB or GREEN-VARAN tools please cite:
-###ourpaper###
+[GREEN-DB: a framework for the annotation and prioritization of non-coding regulatory variants in whole-genome sequencing](https://www.biorxiv.org/content/10.1101/2020.09.17.301960v1) Giacopuzzi E., Popitsch N., Taylor JC. BiorXiv (2020)
 
 When you use GREEN-VARAN for small variants annotation please also cite:
 
 [Vcfanno: fast, flexible annotation of genetic variants](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0973-5) 
 Brent S. Pedersen, Ryan M. Layer & Aaron R. Quinlan. Genome Biology volume 17, Article number: 118 (2016)
 
-Additionally, when you use any prediction score for annotation, please cite also the corresponding publication.
+Additionally, when you use any prediction score for annotation, please cite the corresponding publication.
