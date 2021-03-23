@@ -1,0 +1,30 @@
+2020-11-13 16:41:29,988 NCANNO       INFO     #####  GREEN-DB QUERY version 1.0  #####
+2020-11-13 16:41:29,989 NCANNO       INFO     # EFFECTIVE CONFIGURATION #
+2020-11-13 16:41:29,989 NCANNO       INFO     Python version: 3.7
+2020-11-13 16:41:29,989 NCANNO       INFO     Genome build: GRCh38
+2020-11-13 16:41:29,989 NCANNO       INFO     GREEN-DB: /gpfs3/well/gel/HICF2/software/BRC_tools/GREEN-VARAN/resources/SQlite/RegulatoryRegions.db
+2020-11-13 16:41:30,364 NCANNO       INFO     # GREEN-DB QUERY START #
+2020-11-13 16:41:30,364 NCANNO       INFO     Region IDs input with 2 IDs
+2020-11-13 16:41:46,754 NCANNO       INFO     Query completed for regions table
+2020-11-13 16:41:48,923 NCANNO       INFO     Query completed for gene_details table
+2020-11-13 16:41:49,574 NCANNO       INFO     Query completed for pheno_details table
+2020-11-13 16:41:56,044 NCANNO       INFO     Query completed for DNase table
+2020-11-13 16:41:56,211 NCANNO       INFO     Query completed for dbSuper table
+2020-11-13 16:42:02,959 NCANNO       INFO     Query completed for TFBS table
+2020-11-13 16:42:02,960 NCANNO       INFO     Query completed for UCNE table
+2020-11-13 16:42:02,997 NCANNO       INFO     regions table saved to: 010MCP002_PRKAR1B.regions.tsv
+2020-11-13 16:42:03,001 NCANNO       INFO     gene_details table saved to: 010MCP002_PRKAR1B.gene_details.tsv
+2020-11-13 16:42:03,006 NCANNO       INFO     pheno_details table saved to: 010MCP002_PRKAR1B.pheno_details.tsv
+2020-11-13 16:42:03,010 NCANNO       INFO     DNase table saved to: 010MCP002_PRKAR1B.DNase.tsv
+2020-11-13 16:42:03,010 NCANNO       INFO     No info found for dbSuper table
+2020-11-13 16:42:03,016 NCANNO       INFO     TFBS table saved to: 010MCP002_PRKAR1B.TFBS.tsv
+2020-11-13 16:42:03,016 NCANNO       INFO     No info found for UCNE table
+2020-11-13 16:42:03,675 NCANNO       INFO     Query completed for regions table
+2020-11-13 16:42:04,306 NCANNO       INFO     Query completed for gene_details table
+2020-11-13 16:42:04,940 NCANNO       INFO     Query completed for pheno_details table
+2020-11-13 16:42:09,879 NCANNO       INFO     Query completed for DNase table
+2020-11-13 16:42:09,880 NCANNO       INFO     Query completed for dbSuper table
+2020-11-13 16:42:14,961 NCANNO       INFO     Query completed for TFBS table
+2020-11-13 16:42:14,961 NCANNO       INFO     Query completed for UCNE table
+2020-11-13 16:42:14,961 NCANNO       INFO     Finished extracting regions from DB in 11.945 sec
+2020-11-13 16:42:14,961 NCANNO       INFO     Variant annotation started

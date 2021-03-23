@@ -157,6 +157,6 @@ columns=[4]''',
 TOML_AF = '''[[annotation]]
 file="{AF_file}"
 names=["gnomAD_AF"{pop_tag}]
-ops=["self","self"]
+ops=["self"{pop_operation}]
 fields=["AF"{pop_field}]
 '''

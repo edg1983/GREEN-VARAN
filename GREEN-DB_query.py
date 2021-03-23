@@ -32,6 +32,12 @@ TAB_HEADERS = {
     'UCNE' : ['regionID','UCNE_chrom','UCNE_start','UCNE_stop','UCNE_ID']
 }
 
+def exitNow(start_time):
+    end_time = time.time() - start_time
+    end_time = str(timedelta(seconds=round(end_time)))
+    logger.info("Process completed in %s", end_time)
+    sys.exit()
+
 #create string with current time (short) or date+time(long)
 def now(sep=":", string_format="short"):
     now = datetime.now()
@@ -309,6 +315,7 @@ if args.regIDs:
     logger.info("Region IDs input with %d IDs", len(region_IDs))
     out_tables = get_result_tables(anno_db, build, region_IDs, logger=logger)
     saveTables(TABLES,out_tables,logger)
+    exitNow(start_time)
 
 ### Load var and regID from table ###
 if args.table:
@@ -383,8 +390,6 @@ for table in TABLES:
 
 saveTables(TABLES,query_tables,logger)
 
-end_time = time.time() - start_time
-end_time = str(timedelta(seconds=round(end_time)))
-logger.info("Process completed in %s", end_time)
+exitNow(start_time)
 
 #TODO Develop a plotting system

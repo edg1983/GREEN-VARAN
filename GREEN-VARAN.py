@@ -412,10 +412,12 @@ if args.allelefreq:
     if args.allelefreq == "global":
         pop_field = ""
         pop_tag = ""
+        pop_operation = ""
     else:
-        pop_field = ',"AF_"' + args.allelefreq + '"'
-        pop_tag = ',"gnomAD_AF_"' + args.allelefreq + '"'
-    anno_configuration = anno_configuration + '\n' + TOML_AF.format(AF_file=AF_file, pop_field=pop_field, pop_tag=pop_tag)
+        pop_field = ',"AF_' + args.allelefreq + '"'
+        pop_tag = ',"gnomAD_AF_' + args.allelefreq + '"'
+        pop_operation = ',"self"'
+    anno_configuration = anno_configuration + '\n' + TOML_AF.format(AF_file=AF_file, pop_field=pop_field, pop_tag=pop_tag, pop_operation=pop_operation)
     logger.info("gnomAD allele frequency annotation active")
     logger.info("Following fields will be added to VCF: gnomAD_AF %s", pop_tag)
 
@@ -641,7 +643,7 @@ for line in get_stdout([vcf_anno,"-p",threads,toml_file,args.vcf]):
             logger.info("Last batch %s sec: %d variants processed - %s%% - ETA %s", round(elapsed_time,3), n, round((n/tot_vars) * 100,2), eta)
 
 outVCF.close()
-#os.remove(toml_file)
+os.remove(toml_file)
 
 end_time = time.time() - start_time
 end_time = str(timedelta(seconds=round(end_time)))
