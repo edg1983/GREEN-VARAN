@@ -284,6 +284,7 @@ for dataset, items in config['AF_datasets'][build].items():
         group,b_file,cols_idx,fields,data_types = readFileConfig(file_config,res_dir=res_dir)
         a_file = tmp_files[group]
         logger.info("%s: %s", group, b_file)
+        checkfile([b_file], logger=logger)
 
         annotations.append(computeOverlap(dataset,group,a_file,b_file,overlap,reciprocal,cols_idx,fields,tmp_folder))
         tags_dataTypes.update(setDataType(dataset,fields,data_types))
@@ -300,6 +301,7 @@ for dataset, items in config['custom_datasets'][build].items():
         group,b_file,cols_idx,fields,data_types = readFileConfig(file_config, res_dir=res_dir)
         a_file = tmp_files[group]
         logger.info("%s: %s", group, b_file)
+        checkfile([b_file], logger=logger)
 
         annotations.append(computeOverlap(dataset,group,a_file,b_file,overlap,reciprocal,cols_idx,fields,tmp_folder))
         tags_dataTypes.update(setDataType(dataset,fields,data_types))
@@ -326,6 +328,7 @@ for dataset, items in config['genes'][build].items():
         group,b_file,cols_idx,fields,data_types = readFileConfig(file_config, res_dir=res_dir)
         a_file = tmp_files[group]
         logger.info("%s: %s", group, b_file)
+        checkfile([b_file], logger=logger)
 
         annotations.append(computeOverlap(dataset,group,a_file,b_file,overlap,reciprocal,cols_idx,fields,tmp_folder))
         tags_dataTypes.update(setDataType(dataset,fields,data_types))
