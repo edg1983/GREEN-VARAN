@@ -292,6 +292,9 @@ parser.add_argument("--separate_fields", help="Make multiple fields instead of a
 parser.add_argument("--logfile", help="Log file", action="store", required=False)
 parser.add_argument("--threads", help="Number of threads for annotation", action="store", required=False, default="4")
 parser.add_argument("-w", "--overwrite", help="Set if you want to overwrite output file if already exists", action="store_true", required=False)
+
+parser.add_argument("--debug", help="Do not delete vcfanno config file for debug", action="store_true", required=False)
+
 args = parser.parse_args()
 
 ###########################
@@ -643,7 +646,8 @@ for line in get_stdout([vcf_anno,"-p",threads,toml_file,args.vcf]):
             logger.info("Last batch %s sec: %d variants processed - %s%% - ETA %s", round(elapsed_time,3), n, round((n/tot_vars) * 100,2), eta)
 
 outVCF.close()
-os.remove(toml_file)
+if not args.debug:
+    os.remove(toml_file)
 
 end_time = time.time() - start_time
 end_time = str(timedelta(seconds=round(end_time)))
