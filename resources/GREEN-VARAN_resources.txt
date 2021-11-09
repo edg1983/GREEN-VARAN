@@ -45,7 +45,7 @@ GRCh38_Eigen scores https://zenodo.org/record/3982182/files/GRCh38_Eigen.tsv.gz.
 GRCh38_FATHMM_XF scores https://zenodo.org/record/3982484/files/GRCh38_FATHMM-XF_NC.tsv.gz
 GRCh38_FATHMM_XF scores https://zenodo.org/record/3982484/files/GRCh38_FATHMM-XF_NC.tsv.gz.csi
 GRCh38_FATHMM_MKL scores https://zenodo.org/record/3981121/files/GRCh38_FATHMM-MKL_NC.tsv.gz
-GRCh38_FATHMM_MKL scores https://zenodo.org/record/3981121/files/GRCh38_FATHMM-MKL_NC.tsv.gz
+GRCh38_FATHMM_MKL scores https://zenodo.org/record/3981121/files/GRCh38_FATHMM-MKL_NC.tsv.gz.csi
 GRCh38_GWAVA scores https://zenodo.org/record/3956168/files/GRCh38_gwava.bed.gz
 GRCh38_GWAVA scores https://zenodo.org/record/3956168/files/GRCh38_gwava.bed.gz.csi
 GRCh38_gnomAD AF https://zenodo.org/record/3957637/files/GRCh38_gnomad.genomes.vcf.gz

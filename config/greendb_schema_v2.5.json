@@ -1,0 +1,9 @@
+{
+    "id": 3,
+    "stdtype": 4,
+    "dbsource": 5,
+    "constraint": 8,
+    "closest": 10,
+    "closestProt": 12,
+    "genes": 14
+}

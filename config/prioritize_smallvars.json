@@ -1,0 +1,13 @@
+{
+    "af": ["global_gnomAD_AF","global_A1000G_AF"],
+    "maxaf": 0.01,
+    "regions": ["TFBS", "DNase", "UCNE"],
+    "scores": {
+        "FATHMM_MKL_score": 0.9,
+        "ncER_score": 0.95,
+        "ReMM_score": 0.9
+    },
+    "constraint": 0.7,
+    "more_regions": [],
+    "more_values": {}
+}
