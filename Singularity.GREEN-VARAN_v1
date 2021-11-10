@@ -1,5 +1,5 @@
-Bootstrap: docker
-From: ubuntu:bionic
+Bootstrap: library
+From: centos:latest
 
 %labels
     Author Edoardo Giacopuzzi
@@ -48,92 +48,40 @@ From: ubuntu:bionic
                     [other arguments]
 
 %runscript
-    
     #!/usr/bin/bash
     echo "GREEN-VARAN tools image"
-    exec bash /opt/runscript.sh "$@"
+    greenvaran "$@"
     
 %post
-    #Install system libraries
-    apt-get update
-    apt-get -y install apt-transport-https zlib1g-dev libcrypto++-dev libssl-dev libcurl4-openssl-dev liblzma-dev libbz2-dev build-essential wget cmake gcc language-pack-en-base python3 python3-pip make git autoconf
-    update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-    
-    ## Install htslib 1.10
+    yum -y install \
+        curl \
+        bzip2 \
+        bzip2-devel \
+        openssl-devel \
+        libffi-devel \
+        xz-devel \
+        openssl-devel \
+        ncurses-devel \
+        wget \
+        zlib-devel \
+        tar \
+        unzip \
+        procps
+
+    #Install GREEN-VARAN
     cd /opt
-    wget https://github.com/samtools/htslib/releases/download/1.10.2/htslib-1.10.2.tar.bz2
-    tar -jxvf htslib-1.10.2.tar.bz2
-    cd htslib-1.10.2
-    ./configure
-    make
-    make install
-    
-    ## Install bedtools
-    cd /opt
-    mkdir bedtools && cd bedtools
-    wget https://github.com/arq5x/bedtools2/releases/download/v2.29.2/bedtools.static.binary
-    chmod a+x bedtools.static.binary
-    ln --symbolic --force /opt/bedtools/bedtools.static.binary /usr/local/bin/bedtools
-    
-    ## Install python packages
-    pip3 install --upgrade setuptools
-    pip3 install Cython cytoolz toolz
-    pip3 install pandas
+    wget #GREEN-VARAN
+    tar -zxvf 
+    wget #GREEN-VARAN binds
 
-    ## Install cyvcf2
-    cd /opt
-    git clone --recursive https://github.com/brentp/cyvcf2
-    cd cyvcf2/htslib
-    autoheader
-    autoconf
-    ./configure --enable-libcurl
-    make
-
-    cd ..
-    pip3 install -r requirements.txt
-    CYTHONIZE=1 pip3 install -e .
-
-    ## Get GREEN-VARAN
-    cd /opt
-    git clone https://github.com/edg1983/GREEN-VARAN.git
-
-    ## get vcfanno
-    cd GREEN-VARAN
-    wget https://github.com/brentp/vcfanno/releases/download/v0.3.2/vcfanno_linux64 -O vcfanno
-    chmod a+x vcfanno
-
-    ## made runscript
-    echo 'case $1 in
-        GREEN-VARAN|SV_annotation|GREEN-DB_query)
-           echo "You are running tool $1"
-           has_subfolder=$(ls /opt/GREEN_VARAN/resources/*/ &>/dev/null && echo 1 || echo 0)
-           if [ $has_subfolder == 0 ]; then
-               echo "## WARNING - No subfolders found in /opt/GREEN_VARAN/resources"
-               echo "Did you forgot to bind your resources folder?"
-               echo "This is OK if you mounted non-standard resource locations"
-           fi
-           python3 /opt/GREEN-VARAN/${1}.py ${@:2}
-        ;;
-        test)
-           echo "run test OK"
-           exit 0
-        ;;
-        *)
-           echo "First argument must be one of the tool names: GREEN-VARAN, SV_annotation, GREEN-DB_query"
-           exit 1
-        ;; 
-        esac' > /opt/runscript.sh
+    cd /usr/bin
+    ln -s /opt/greenvaran/bin/greenvaran ./
+    ln -s /opt/greenvaran/bin/greendb_query ./
+    ln -s /opt/greenvaran/workflows/bin/* ./
    
 %test
-    echo "## TEST 1: GREEN-VARAN ##"
-    python3 /opt/GREEN-VARAN/GREEN-VARAN.py --help
-    echo "## TEST 2: SV_annotation ##"
-    python3 /opt/GREEN-VARAN/SV_annotation.py --help
-    echo "## TEST 3: GREEN-DB_query ##"
-    python3 /opt/GREEN-VARAN/GREEN-DB_query.py --help
-    echo "## TEST 4: vcfanno"
-    /opt/GREEN-VARAN/vcfanno
-    echo "## TEST 5: bedtools ##"
-    bedtools --version
-    echo "## TEST 6: test runscript ##"
-    bash /opt/runscript.sh test
+    greenvaran version
+    greendb_query --help
+    bgzip --help
+    tabix --help
+    vcfanno --help

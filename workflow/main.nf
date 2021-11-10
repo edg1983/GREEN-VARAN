@@ -66,7 +66,9 @@ if (params.help) {
     println """\
         GREEN-VARAN annotation pipeline - PARAMETERS    
         ============================================
-        --input in.vcf.gz       :   An input VCF file, compressed and indexed
+        --input in.vcf.gz       :   Input VCF file(s), compressed and indexed
+                                    You can input multiple files from a folder using quotes like
+                                    --input 'mypath/*.vcf.gz'
         --build GRCh37/GRCh38   :   Genome build
         --out output_dir        :   Output directory
         --scores best/all/name  :   Annotate prediction scores
@@ -77,7 +79,6 @@ if (params.help) {
                                     best annotate TFBS, DNase, UCNE
                                     all annotate all regions
                                     name annotate only the specified regions (can be comma-separated list)
-        --AF                    :   Annotate population AF
         --greenvaran_config     :   A json config file for GREEN-VARAN tool
         --greenvaran_dbschema   :   A json db schema file for GREEN-VARAN tool
         --resource_folder       :   Specify a custom folder for the annotation files
@@ -222,6 +223,11 @@ workflow {
         WRITE_REGION_TOML(regions_channel, "flag")
         toml_files = toml_files.concat(WRITE_REGION_TOML.out)
         //concat_regions_toml(WRITE_REGION_TOML.out.collect(), "regions")
+    }
+
+    if (params.anno_toml) {
+        anno_toml_channel = Channel.fromPath(params.anno_toml)
+        toml_files = toml_files.concat(anno_toml_channel)
     }
 
     //When regions or scores are active perform vcfanno annotation

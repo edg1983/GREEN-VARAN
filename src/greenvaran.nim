@@ -19,7 +19,8 @@ proc main*() =
   var dispatcher = {
     "smallvars": pair(f:smallvars.main, description:"Annotate small variants VCF"),
     "sv": pair(f:sv.main, description:"Annotate structural variants VCF"),
-    "querytab": pair(f:make_querytab.main, description: "Generate a table for greendb_query from VCF")
+    "querytab": pair(f:make_querytab.main, description: "Generate a table for greendb_query from VCF"),
+    "version": pair(f:version_logo.main, description: "Print version")
     }.toOrderedTable
 
   var args = commandLineParams()
@@ -31,9 +32,6 @@ proc main*() =
     if len(args) > 0 and (args[0] notin dispatcher) and args[0] notin @["-h", "-help"]:
       echo &"unknown program '{args[0]}'"
     quit ""
-  
-  if args[0] == "version":
-      quit fmt"GREEN-VARAN version {VERSION}", QuitSuccess
 
   echo LOGO
   dispatcher[args[0]].f(false)

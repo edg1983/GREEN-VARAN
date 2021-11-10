@@ -18,3 +18,6 @@ const LOGO* = """
     `-.       .'
  jgs   `~~~~``
 """
+
+proc main* (dropfirst:bool=false) =
+   quit "GREEN-VARAN version " & VERSION, QuitSuccess
