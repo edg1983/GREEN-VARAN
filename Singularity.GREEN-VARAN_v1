@@ -14,38 +14,25 @@ From: centos:latest
 %help
     GREEN-VARAN tools for annotation of regulatory variants
     The image contains the following tools:
-    - GREEN-VARAN: annotation of small variants VCF
-    - SV_annotation: annotation of SV VCF
-    - GREEN-DB_query: query the GREEN-DB for detailed information 
+    - greenvaran: annotation of small variants and SV VCF
+    - greendb_query: query the GREEN-DB for detailed information 
     see https://github.com/edg1983/GREEN-VARAN 
   
     To get help on a specific tool use
-    singularity run GREEN-VARAN.sif tool_name --help
+    singularity exec GREEN-VARAN.sif tool_name --help
 
-    To run one of the tool use:
-    singularity run --bind resources_folder:/opt/GREEN_VARAN/resources \
-                    GREEN-VARAN.sif tool_name [arguments]
+    When running one of the tools, the db file and config files must be readable in the container.
+    You can eventually bind a specific path containing these files and then specify the locations
+    using greenvaran options like the following
+    singularity exec --bind mypath:/resources \
+        GREEN-VARAN.sif greenvaran \
+        --db /resources/GRCh38_GREEN-DB.bed.gz \
+        --config /resources/prioritize_smallvars.json \
+        --dbschema /resources/greendb_dbschema_v2.5.json \
+        [arguments]
     
-    NB. resources_folder must contain the standard subfolders and files expected by GREEN-VARAN
-    
-    By default you are expected to read/write from the present working directory
-    - all input files are read from present working directory
-    - output files and tmp folders are created in the present working directory
-
-    You can change input/output/resource folders by creating additional folder binds 
-    and then using the mounted paths accordingly in input/output arguments like:
-    
-    singularity run --bind input_folder:/input \
-                    --bind output_folder:/output \
-                    --bind bed_folder:/bed_files \
-                    --bind scores_fodler:/scores \ 
-                    GREEN-VARAN.sif \
-                    GREEN-VARAN \
-                    -i /input/input.vcf \
-                    -o /output/output.vcf [arguments] \
-                    --bed_dir /bed_files \
-                    --scores_dir /scores \
-                    [other arguments]
+    NB. The default config files included in the github release are accessible
+    in the container in /config
 
 %runscript
     #!/usr/bin/bash
@@ -68,20 +55,33 @@ From: centos:latest
         unzip \
         procps
 
-    #Install GREEN-VARAN
+    #Download GREEN-VARAN binaries
     cd /opt
-    wget #GREEN-VARAN
-    tar -zxvf 
-    wget #GREEN-VARAN binds
+    wget https://github.com/edg1983/GREEN-VARAN/releases/download/v1.0/greenvaran
+    wget https://github.com/edg1983/GREEN-VARAN/releases/download/v1.0/greendb_query
+    chmod a+x greenvaran
+    chmod a+x greendb_query
 
+    wget https://github.com/edg1983/GREEN-VARAN/archive/refs/tags/v1.0.tar.gz
+    tar -zxvf v1.0.tar.gz
+    rm v1.0.tar.gz
+    cd /opt/GREEN-VARAN-1.0/workflow/bin
+    chmod a+x *
+
+    mkdir /config
+    cd /config
+    cp /opt/GREEN-VARAN-1.0/config/* ./
+
+    #Link to path
     cd /usr/bin
-    ln -s /opt/greenvaran/bin/greenvaran ./
-    ln -s /opt/greenvaran/bin/greendb_query ./
-    ln -s /opt/greenvaran/workflows/bin/* ./
+    ln -s /opt/greenvaran ./
+    ln -s /opt/greendb_query ./
+    ln -s /opt/GREEN-VARAN-1.0/workflow/bin/bgzip ./
+    ln -s /opt/GREEN-VARAN-1.0/workflow/bin/tabix ./
+    ln -s /opt/GREEN-VARAN-1.0/workflow/bin/vcfanno ./
    
 %test
     greenvaran version
     greendb_query --help
-    bgzip --help
-    tabix --help
-    vcfanno --help
+    bgzip --version
+    tabix --version
