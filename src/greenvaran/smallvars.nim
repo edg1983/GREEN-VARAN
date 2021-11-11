@@ -24,6 +24,7 @@ proc main* (dropfirst:bool=false) =
         option("-m", "--impact", help="Which impact to assign when updating snpEff field", choices = @["HIGH","MODERATE","LOW","MODIFIER"], default="MODIFIER")
         flag("-u", "--noupdate", help="do not update ANN / BCSQ field")
         flag("-f", "--filter", help="Filter instead of annotate. Only vars with greendb overlap and eventually gene of interest will be written")
+        flag("-p", "--permissive", help="Allows for INFO fields required by prioritization config to be missing")
         option("--chrom", help="Annotate only for specific chromosome")
         option("-g", "--genes", help="Genes of interest, variants connected to those will be flagged with greendb_VOI")
         option("--connection", help="Region-gene connections accepted for annotation", choices = @["all","closest","annotated"], default="all")
@@ -48,7 +49,7 @@ proc main* (dropfirst:bool=false) =
     addHandler(fileLog)
 
     #Check mandatory arguments
-    if opts.invcf.len == 0 or opts.config.len == 0 or opts.db.len == 0 or opts.dbschema.len == 0:
+    if opts.invcf.len == 0 or opts.config.len == 0 or opts.db.len == 0 or opts.dbschema.len == 0 or opts.outvcf.len == 0:
         fatal("One of --vcf, --config, --db or --dbschema is missing")
         quit "", QuitFailure
 
@@ -76,15 +77,6 @@ proc main* (dropfirst:bool=false) =
     #Set update ANN / BSCQ or not
     let updateann = not opts.noupdate
     info(fmt"Update existing gene annotations: {$updateann}")
-
-    #Set output channel
-    var writer: string
-    if opts.outvcf.len == 0:
-        writer = "stdout"
-    else:
-        writer = "vcf"
-        info(fmt"Output to: {opts.outvcf}")
-
     info(fmt"Filter mode active: {opts.filter}")
 
     info("=== Start processing VCF ===")
@@ -115,7 +107,8 @@ proc main* (dropfirst:bool=false) =
             discard vcf.header.get(x, BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
         except KeyError:
             warn(fmt"{x} field defined in config not present in the VCF header")
-            prioritize = false
+            if not opts.permissive: prioritize = false
+      
     if not prioritize: warn("Prioritize is not active and all variants will get level zero")
 
     #See if ANN or BCSQ are defined, otherwise add ANN
