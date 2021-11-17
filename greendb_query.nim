@@ -114,7 +114,7 @@ proc prepare_query(table: string, build: string, ids: seq[string]): SqlQuery =
             GROUP BY r.regionID"""
         of "gene_details":
             query = fmt"""SELECT r.regionID, r.chromosome, r.start, r.stop, r.std_type, 
-            g.gene_symbol, m.method, t.cell_or_tissue 
+            g.gene_symbol, g.sameTAD, m.method, t.cell_or_tissue 
             FROM {build}_Regions AS r 
             LEFT JOIN genes AS g ON r.regionID = g.regionID 
             LEFT JOIN tissues AS t ON g.interactionID = t.regionID 

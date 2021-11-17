@@ -24,7 +24,7 @@ proc main* (dropfirst:bool=false) =
         option("-m", "--impact", help="Which impact to assign when updating snpEff field", choices = @["HIGH","MODERATE","LOW","MODIFIER"], default="MODIFIER")
         flag("-u", "--noupdate", help="do not update ANN / BCSQ field")
         flag("-f", "--filter", help="Filter instead of annotate. Only vars with greendb overlap and eventually gene of interest will be written")
-        flag("-p", "--permissive", help="Allows for INFO fields required by prioritization config to be missing")
+        flag("-p", "--permissive", help="Perform prioritization even if one of INFO fields required by prioritization config is missing")
         option("--chrom", help="Annotate only for specific chromosome")
         option("-g", "--genes", help="Genes of interest, variants connected to those will be flagged with greendb_VOI")
         option("--connection", help="Region-gene connections accepted for annotation", choices = @["all","closest","annotated"], default="all")

@@ -89,6 +89,11 @@ if (params.help) {
 params.list_data = false
 if (params.list_data) {
     println "Available datasets. Star indicate corresponding file is available locally"
+    println "=== GREENDB ==="
+    for (x in known_scores) {
+        print_dataset_items(x, resource_folder, params.annotations[params.build].database) 
+    }
+    
     println "=== SCORES ==="
     for (x in known_scores) {
         print_dataset_items(x, resource_folder, params.annotations[params.build].scores) 
@@ -98,6 +103,10 @@ if (params.list_data) {
     for (x in known_regions) {
         print_dataset_items(x, resource_folder, params.annotations[params.build].regions) 
     }
+
+    println "=== GNOMAD AF ==="
+    print_dataset_items('gnomAD', resource_folder, params.annotations[params.build].regions) 
+
     exit 0
 }
 

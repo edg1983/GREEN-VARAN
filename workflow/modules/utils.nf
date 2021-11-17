@@ -39,24 +39,61 @@ process write_toml {
     id = "$dataset"
     dataset_file = params.annotations[id].file
     file = "${params.resource_folder}/${dataset_file}"
-    if (params.annotations[id].column) {
-        cols = params.annotations[id].column
-    } else {
-        cols = "1"
+    
+    if (params.annotations[id].columns && params.annotations[id].fields) {
+        exit 1, "Only one of columns or fields can be set. Found both for ${id}"
     }
-    n_fields = cols.split(',').size()
-    if (n_fields > 1) {
-        names = (1..n_fields).collect { '"' + "${id}_$it" + '"' }.join(',') 
-        ops = (1..n_fields).collect { '"' + "$op" + '"' }.join(',')
+    
+    if (params.annotations[id].columns) {
+        input_fields = params.annotations[id].columns
+        input_tag = "columns"
+    } else if (params.annotations[id].fields) {
+        single_fields = params.annotations[id].fields.split(',')
+        input_fields = single_fields.collect { '"' + "$it" + '"' }.join(',')
+        input_tag = "fields"
     } else {
-        names = '"' + "$id" + '"'
-        ops = '"' + "$op" + '"'
+        input_fields = "1"
+        input_tag = "columns"
+    }
+    
+    input_fields_string = "${input_tag}=[${input_fields}]"
+    n_fields = input_fields.split(',').size()
+
+    if (params.annotations[id].names) {
+        single_names = params.annotations[id].names.split(',')
+        if (single_names.size() != n_fields) {
+            exit 1, "columns / fields and names must contain the same number of elements. Found $n_fields fields and ${single_names.size()} names for ${id}"
+        }
+        names = single_names.collect { '"' + "$it" + '"' }.join(',')
+    } else {
+        if (n_fields > 1) {
+            names = (1..n_fields).collect { '"' + "${id}_$it" + '"' }.join(',')
+        } else {
+            names = '"' + "$id" + '"'
+        }
+    }
+
+    if (params.annotations[id].ops) {
+        single_ops = params.annotations[id].ops.split(',')
+        if (single_ops.size() == 1) {
+            ops = (1..n_fields).collect { '"' + "${params.annotations[id].ops}" + '"' }.join(',')
+        } else if (single_ops.size() == n_fields) {
+            ops = single_ops.collect { '"' + "$it" + '"' }.join(',')
+        } else {
+            exit 1, "ops must be a single value or must contain the same number of elements of columns/fields. Found $n_fields fields and ${single_ops.size()} ops for ${id}"
+        }
+    } else {
+        if (n_fields > 1) {
+            ops = (1..n_fields).collect { '"' + "$op" + '"' }.join(',')
+        } else {
+            ops = '"' + "$op" + '"'
+        }
     }
     
     """
     echo "[[annotation]]" > ${dataset}.toml
     echo 'file="$file"' >> ${dataset}.toml
-    echo 'columns=[$cols]' >> ${dataset}.toml
+    echo '$input_fields_string' >> ${dataset}.toml
     echo 'names=[$names]' >> ${dataset}.toml
     echo 'ops=[$ops]' >> ${dataset}.toml
     """

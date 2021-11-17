@@ -86,7 +86,10 @@ proc setLevel*(x: var GDBinfo, rec: Variant, c: Config) =
         var val: seq[float32]
         if rec.info.get(k, val) == Status.OK: af_values.add(val[0])
 
-    if af_values.len > 0 and max(af_values) < c.maxaf: level += 1
+    if af_values.len == 0:
+        level += 1
+    elif max(af_values) < c.maxaf:
+        level += 1
     
     for k in c.regions:
         if rec.info.has_flag(k): overlap_regions = true 

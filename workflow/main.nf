@@ -79,6 +79,7 @@ if (params.help) {
                                     best annotate TFBS, DNase, UCNE
                                     all annotate all regions
                                     name annotate only the specified regions (can be comma-separated list)
+        --AF                    :   Annotate global AF from gnomAD genome v3
         --greenvaran_config     :   A json config file for GREEN-VARAN tool
         --greenvaran_dbschema   :   A json db schema file for GREEN-VARAN tool
         --resource_folder       :   Specify a custom folder for the annotation files
@@ -109,6 +110,9 @@ if (params.list_data) {
     for (x in known_regions) {
         print_dataset_items(x, resource_folder, params.annotations[params.build].regions) 
     }
+
+    println "=== GNOMAD AF ==="
+    print_dataset_items('gnomAD', resource_folder, params.annotations[params.build].regions) 
     exit 0
 }
 
@@ -155,16 +159,19 @@ outprefix = file(params.input).getSimpleName()
 include { download_dataset as DOWNLOAD_DB } from './modules/utils' addParams( annotations : params.annotations[params.build].database, resource_folder : resource_folder)
 include { download_dataset as DOWNLOAD_SCORE } from './modules/utils' addParams( annotations : params.annotations[params.build].scores, resource_folder : resource_folder)
 include { download_dataset as DOWNLOAD_REGION } from './modules/utils' addParams( annotations : params.annotations[params.build].regions, resource_folder : resource_folder)
+include { download_dataset as DOWNLOAD_AF } from './modules/utils' addParams( annotations : params.annotations[params.build].AF, resource_folder : resource_folder)
+
 include { write_toml as WRITE_SCORE_TOML } from './modules/utils' addParams( annotations : params.annotations[params.build].scores, resource_folder : resource_folder)
 include { write_toml as WRITE_REGION_TOML } from './modules/utils' addParams( annotations : params.annotations[params.build].regions, resource_folder : resource_folder)
+include { write_toml as WRITE_AF_TOML } from './modules/utils' addParams( annotations : params.annotations[params.build].AF, resource_folder : resource_folder)
 
 include { ANNOTATE } from './modules/annotate'
 include { concat_toml as concat_scores_toml; concat_toml as concat_regions_toml; concat_toml} from './modules/utils'
 
 //WORKFLOW
 workflow {    
-    def missing_data = [scores: [], regions: []]
-    def existing_data = [scores: [], regions: []]
+    def missing_data = [scores: [], regions: [], AF: []]
+    def existing_data = [scores: [], regions: [], AF: []]
 
     //Read input VCF
     input_vcf = Channel
@@ -225,13 +232,33 @@ workflow {
         //concat_regions_toml(WRITE_REGION_TOML.out.collect(), "regions")
     }
 
+    if (params.AF) {
+       if (check_annotation_file('gnomAD', params.annotations[params.build].AF, resource_folder)) {
+            existing_data.AF = existing_data.AF.plus(s)
+        } else {
+            missing_data.AF = missing_data.AF.plus(s)
+        }
+
+        existing_AF_channel = Channel.fromList(existing_data.AF)
+        if (missing_data.AF.size() > 0) {
+            missing_AF_channel = Channel.fromList(missing_data.AF)
+            DOWNLOAD_AF(missing_AF_channel)
+            af_channel = existing_AF_channel.mix(DOWNLOAD_AF.out)
+        } else {
+            af_channel = existing_AF_channel
+        }
+        WRITE_AF_TOML(regions_channel, "max")
+        toml_files = toml_files.concat(WRITE_AF_TOML.out)
+        //concat_regions_toml(WRITE_REGION_TOML.out.collect(), "regions")
+    }
+
     if (params.anno_toml) {
         anno_toml_channel = Channel.fromPath(params.anno_toml)
         toml_files = toml_files.concat(anno_toml_channel)
     }
 
     //When regions or scores are active perform vcfanno annotation
-    if (params.regions || params.scores) {
+    if (params.regions || params.scores || params.AF) {
         //toml_files = Channel.fromPath("$outputdir/*.toml")
         concat_toml(toml_files.collect(), "annotations")
         ANNOTATE(input_vcf, concat_toml.out)

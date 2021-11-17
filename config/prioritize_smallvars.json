@@ -1,5 +1,5 @@
 {
-    "af": ["global_gnomAD_AF","global_A1000G_AF"],
+    "af": ["gnomAD_AF","gnomAD_AF_nfe"],
     "maxaf": 0.01,
     "regions": ["TFBS", "DNase", "UCNE"],
     "scores": {
