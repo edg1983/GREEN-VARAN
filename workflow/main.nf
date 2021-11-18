@@ -179,7 +179,7 @@ workflow {
                 .map { tuple(file("$it"), file("${it}.{csi,tbi}"))}
 
     //Download DB file if missing
-    if (!check_annotation_file('greendb', params.annotations[params.build].database, resource_folder)) {
+    if (!check_annotation_file('greendb_bed', params.annotations[params.build].database, resource_folder)) {
         DOWNLOAD_DB('greendb_bed')
     }
     
@@ -234,9 +234,9 @@ workflow {
 
     if (params.AF) {
        if (check_annotation_file('gnomAD', params.annotations[params.build].AF, resource_folder)) {
-            existing_data.AF = existing_data.AF.plus(s)
+            existing_data.AF = existing_data.AF.plus('gnomAD')
         } else {
-            missing_data.AF = missing_data.AF.plus(s)
+            missing_data.AF = missing_data.AF.plus('gnomAD')
         }
 
         existing_AF_channel = Channel.fromList(existing_data.AF)
@@ -247,7 +247,7 @@ workflow {
         } else {
             af_channel = existing_AF_channel
         }
-        WRITE_AF_TOML(regions_channel, "max")
+        WRITE_AF_TOML(af_channel, "max")
         toml_files = toml_files.concat(WRITE_AF_TOML.out)
         //concat_regions_toml(WRITE_REGION_TOML.out.collect(), "regions")
     }

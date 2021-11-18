@@ -76,8 +76,8 @@ GRCh38_TAD regions https://zenodo.org/record/5705936/files/GRCh38_TAD.bed.gz.csi
 GRCh38_gnomAD AF https://zenodo.org/record/3957637/files/GRCh38_gnomad.genomes.vcf.gz
 GRCh38_gnomAD AF https://zenodo.org/record/3957637/files/GRCh38_gnomad.genomes.vcf.gz.csi
 SV_annotations SV_annotations https://zenodo.org/record/3970785/files/SV_annotations.tar.gz
-GRCh37_GREENDB_bed GREENDB_bed https://zenodo.org/record/3981033/files/GRCh37_GREEN-DB.bed.gz
-GRCh37_GREENDB_bed GREENDB_bed https://zenodo.org/record/3981033/files/GRCh37_GREEN-DB.bed.gz.csi
-GRCh38_GREENDB_bed GREENDB_bed https://zenodo.org/record/3981033/files/GRCh38_GREEN-DB.bed.gz
-GRCh38_GREENDB_bed GREENDB_bed https://zenodo.org/record/3981033/files/GRCh38_GREEN-DB.bed.gz.csi
-GREENDB_sqlite GREENDB_sqlite https://zenodo.org/record/3981033/files/GREEN-DB_v2.5_SQLite.gz 
+GRCh37_GREENDB_bed GREENDB_bed https://zenodo.org/record/5636209/files/GRCh37_GREEN-DB.bed.gz
+GRCh37_GREENDB_bed GREENDB_bed https://zenodo.org/record/5636209/files/GRCh37_GREEN-DB.bed.gz.csi
+GRCh38_GREENDB_bed GREENDB_bed https://zenodo.org/record/5636209/files/GRCh38_GREEN-DB.bed.gz
+GRCh38_GREENDB_bed GREENDB_bed https://zenodo.org/record/5636209/files/GRCh38_GREEN-DB.bed.gz.csi
+GREENDB_sqlite GREENDB_sqlite https://zenodo.org/record/5636209/files/GREEN-DB_v2.5.db.gz 
