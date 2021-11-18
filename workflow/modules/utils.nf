@@ -12,7 +12,7 @@ process download_dataset {
         val(dataset)
 
     output:
-        tuple val(dataset), val("${params.resource_folder}/${dataset_file}"), emit: downloaded_file
+        val(dataset), emit: downloaded_dataset
         file "*.gz*"
 
     script:
@@ -37,6 +37,8 @@ process write_toml {
 
     script:
     id = "$dataset"
+    println "$id"
+    println "${params.annotations[id]}"
     dataset_file = params.annotations[id].file
     file = "${params.resource_folder}/${dataset_file}"
     

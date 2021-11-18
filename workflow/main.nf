@@ -200,7 +200,7 @@ workflow {
         if (missing_data.scores.size() > 0) {
             missing_scores_channel = Channel.fromList(missing_data.scores)
             DOWNLOAD_SCORE(missing_scores_channel)
-            scores_channel = existing_scores_channel.mix(DOWNLOAD_SCORE.out)
+            scores_channel = existing_scores_channel.mix(DOWNLOAD_SCORE.out.downloaded_dataset)
         } else {
             scores_channel = existing_scores_channel
         }
@@ -223,7 +223,7 @@ workflow {
         if (missing_data.regions.size() > 0) {
             missing_regions_channel = Channel.fromList(missing_data.regions)
             DOWNLOAD_REGION(missing_regions_channel)
-            regions_channel = existing_regions_channel.mix(DOWNLOAD_REGION.out)
+            regions_channel = existing_regions_channel.mix(DOWNLOAD_REGION.out.downloaded_dataset)
         } else {
             regions_channel = existing_regions_channel
         }
@@ -243,7 +243,7 @@ workflow {
         if (missing_data.AF.size() > 0) {
             missing_AF_channel = Channel.fromList(missing_data.AF)
             DOWNLOAD_AF(missing_AF_channel)
-            af_channel = existing_AF_channel.mix(DOWNLOAD_AF.out)
+            af_channel = existing_AF_channel.mix(DOWNLOAD_AF.out.downloaded_dataset)
         } else {
             af_channel = existing_AF_channel
         }
