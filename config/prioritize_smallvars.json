@@ -3,9 +3,9 @@
     "maxaf": 0.01,
     "regions": ["TFBS", "DNase", "UCNE"],
     "scores": {
-        "FATHMM_MKL_score": 0.908,
-        "ncER_score": 98.6,
-        "ReMM_score": 0.963
+        "FATHMM_MKLNC": 0.908,
+        "ncER": 98.6,
+        "ReMM": 0.963
     },
     "constraint": 0.7,
     "more_regions": [],
