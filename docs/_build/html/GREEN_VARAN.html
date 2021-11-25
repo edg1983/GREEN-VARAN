@@ -87,24 +87,25 @@
 <li class="toctree-l1"><a class="reference internal" href="GREEN_DB.html">The GREEN-DB</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">GREEN-VARAN tool set</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#get-the-tools-from-the-repository">1. Get the tools from the repository</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#download-the-supporting-files">2. Download the supporting files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-the-tool-binary-from-the-repository">1. Get the tool binary from the repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compile-the-tool">2. Compile the tool</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-green-db-files">Get GREEN-DB files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#green-varan-nextflow-workflow">GREEN-VARAN Nextflow workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#singularity">Singularity</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bind-specific-folders-for-resources-or-data">Bind specific folders for resources or data</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#single-tools-usage">Single tools usage</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="GREEN-VARAN_usage.html">GREEN-VARAN tool usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="SV_annotation_usage.html">SV_annotation tool usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="GREEN-DB_query_usage.html">GREEN-DB_query tool usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN-DB_query_usage.html">greendb_query tool usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nextflow_workflow.html">GREEN-VARAN workflow</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="nextflow_workflow.html">GREEN-VARAN workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how_to_cite.html">How to cite</a></li>
 </ul>
@@ -175,165 +176,115 @@
   <div class="section" id="green-varan-tool-set">
 <h1>GREEN-VARAN tool set<a class="headerlink" href="#green-varan-tool-set" title="Permalink to this headline">¶</a></h1>
 <p><strong>Genomic Regulatory Elements ENcyclopedia VARiant ANnotation</strong></p>
-<p>Annotate non-coding regulatory variants in a VCF with a combination of</p>
-<ul class="simple">
-<li><p>our GREEN-DB collection of regulatory regions</p></li>
-<li><p>non-coding variant prediction scores (NCBoost, FIRE, LinSight, ReMM, CADD, DANN, ExPecto)</p></li>
-<li><p>AF from gnomAD genomes</p></li>
-<li><p>conservation with PhyloP100</p></li>
-</ul>
+<p>Annotate variants in a VCF using GREEN-DB to provide information on non-coding regualtory variants and the controlled genes.
+Additionally perform prioritization summing up evidences of regulatory impact from GREENDB, population AF, functional regions and prediction scores</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="get-the-tools-from-the-repository">
-<h3>1. Get the tools from the repository<a class="headerlink" href="#get-the-tools-from-the-repository" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/edg1983/GREEN-VARAN.git</span></code></p>
+<div class="section" id="get-the-tool-binary-from-the-repository">
+<h3>1. Get the tool binary from the repository<a class="headerlink" href="#get-the-tool-binary-from-the-repository" title="Permalink to this headline">¶</a></h3>
+<p>The easiest way to run GREEN-VARAN is to download the pre-compiled binaries from the latest release at <a class="reference external" href="https://github.com/edg1983/GREEN-VARAN">https://github.com/edg1983/GREEN-VARAN</a></p>
 </div>
-<div class="section" id="download-the-supporting-files">
-<h3>2. Download the supporting files<a class="headerlink" href="#download-the-supporting-files" title="Permalink to this headline">¶</a></h3>
-<p>GREEN-DB files and a set of additional files are needed for annotation (see Downloads)
-Supporting files are supposed to be in resources folder, but location can be configured in Configuration file
-or changed providing options on the command line.
-Supporting files can be obtained from Zenodo (see Download):</p>
-<ul class="simple">
-<li><p>GREEN-DB bed files and sqlite db file</p></li>
-<li><p>processed VCF from gnomAD genomes</p></li>
-<li><p>processed tables of prediction scores and phyloP100</p></li>
-<li><p>bed files for SV annotations</p></li>
-</ul>
+<div class="section" id="compile-the-tool">
+<h3>2. Compile the tool<a class="headerlink" href="#compile-the-tool" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, you can clone the repository
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/edg1983/GREEN-VARAN.git</span></code></p>
+<p>And then compile the greenvaran using Nim compiler (<a class="reference external" href="https://nim-lang.org/">https://nim-lang.org/</a>).
+GREEN-VARAN requires
+- nim &gt;= 0.10
+- hts-nim &gt;= 0.3.4
+- argparse 0.10.1</p>
+<p>If you have Singularity installed, you can use the script <code class="docutils literal notranslate"><span class="pre">nim_compile.sh</span></code> to create a static binary with no dependencies
+This uses musl-hts-nim as described in hts-nim repository (see <a class="reference external" href="https://github.com/brentp/hts-nim#static-binary-with-singularity">https://github.com/brentp/hts-nim#static-binary-with-singularity</a>)</p>
 </div>
 </div>
-<div class="section" id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>All tools are tested with Python &gt;=3.4</p>
-<p><strong>Python libraries</strong></p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 31%" />
-<col style="width: 37%" />
-<col style="width: 31%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>GREEN-VARAN</p></th>
-<th class="head"><p>GREEN-DB_query</p></th>
-<th class="head"><p>SV_annotation</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>cyvcf2 &gt;= 0.20</p></td>
-<td><p>cyvcf2 &gt;= 0.20</p></td>
-<td><p>cyvcf2 &gt;= 0.20</p></td>
-</tr>
-<tr class="row-odd"><td><p>pandas &gt;= 0.25</p></td>
-<td><p>pandas &gt;= 0.25</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td></td>
-<td><p>sqlite3 &gt;= 2.6.0</p></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>External software and libs</strong></p>
-<ul class="simple">
-<li><p>bedtools &gt;= 2.27</p></li>
-<li><p>htslib &gt;= 1.10</p></li>
-<li><p>vcfanno &gt;= 0.3.0 (pre-compiled binary is included in GREEN-VARAN release)</p></li>
-</ul>
+<div class="section" id="get-green-db-files">
+<h2>Get GREEN-DB files<a class="headerlink" href="#get-green-db-files" title="Permalink to this headline">¶</a></h2>
+<p>To perform annotations with GREEN-VARAN you will need the GREEN-DB bed files for your genome build.
+You can download the GREEN-DB BED file for GRCh37 or GRCh38 from <a class="reference external" href="https://zenodo.org/record/5636209">https://zenodo.org/record/5636209</a></p>
+<p>The complete SQLite database is also available from the same repository</p>
+</div>
+<div class="section" id="green-varan-nextflow-workflow">
+<h2>GREEN-VARAN Nextflow workflow<a class="headerlink" href="#green-varan-nextflow-workflow" title="Permalink to this headline">¶</a></h2>
+<p>We also provide a Nextflow workflow that can be used to automate VCF annotation and resource download.
+Given a small variants VCF annotated for gene consequences using snpEff or bcftools the workflow can be used to
+- automatically add functional regions annotations and non-coding prediction scores
+- perform greenvaran prioritization</p>
+<p>Missing datasets will be downloaded automatically during the process.
+See the dedicated page for more usage information</p>
 </div>
 <div class="section" id="singularity">
 <h2>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h2>
-<p>GREEN-VARAN tool set is also provided as Singularity image (tested on singularity &gt;= 3.2).
-A Singularity recipe is included in the repository or you can pull an image from Singularity Hub using</p>
-<p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span> <span class="pre">shub://edg1983/GREEN-VARAN:green-varan_v1</span></code></p>
-<div class="section" id="usage">
-<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<p>The image contains all 3 GREEN-VARAN tools:</p>
-<ul class="simple">
-<li><p>GREEN-VARAN: annotation of small variants VCF</p></li>
-<li><p>SV_annotation: annotation of SV VCF</p></li>
-<li><p>GREEN-DB_query: query the GREEN-DB for detailed information</p></li>
-</ul>
-<p>To run one of the tool use:</p>
+<p>The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as Singularity image (tested on singularity &gt;= 3.2).
+A Singularity recipe is included in the repository or you can pull the image from Singularity Library using</p>
+<p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span> <span class="pre">library://edg1983/greenvaran/greenvaran:latest</span></code></p>
+<p>See GREEN-VARAN usage for more details
+Usage
+#####</p>
+<p>The image contains both greenvaran and greendb_query tools.
+The general usage is:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity run <span class="se">\</span>
---bind resources_folder:/opt/GREEN_VARAN/resources <span class="se">\</span>
-GREEN-VARAN_green-varan_v1.sif <span class="se">\</span>
+greenvaran.sif <span class="se">\</span>
 tool_name <span class="o">[</span>tool arguments<span class="o">]</span>
 </pre></div>
 </div>
-<p><strong>NB.</strong> tool_name is one of GREEN-VARAN, SV_annotation, GREEN-DB_query.
-The host resources_folder must contain the standard subfolders and files expected by GREEN-VARAN.</p>
-</div>
 <div class="section" id="bind-specific-folders-for-resources-or-data">
 <h3>Bind specific folders for resources or data<a class="headerlink" href="#bind-specific-folders-for-resources-or-data" title="Permalink to this headline">¶</a></h3>
-<p>If you have stored resources in other locations you have to bind them manually into the container and
-then pass the mounted path to the tool with the corresponding argument (see below)
-By default you are expected to read/write from the present working directory. This means that</p>
-<ul class="simple">
-<li><p>all input files, including eventual configuration file, must be present in the working directory</p></li>
-<li><p>output files and eventual tmp folder are created in the present working directory</p></li>
-</ul>
-<p>Example if you have input/output/resources in other folders</p>
+<p>The tool need access to input VCF file, required GREEN-DB bed file and config files so remember to bind the corresponding locations in the container</p>
+<p>See the following example where we use the current working directory for input/output, while other files are located
+in the default config / resources folder within greenvaran folder. In the example we use GRCh38 genome build</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity run <span class="se">\</span>
---bind resources_folder:/opt/GREEN_VARAN/resources <span class="se">\</span>
---bind input_folder:/input <span class="se">\</span>
---bind output_fodler:/output <span class="se">\</span>
---bind bed_files:/bed_files <span class="se">\</span>
-GREEN-VARAN_green-varan_v1.sif <span class="se">\</span>
-GREEN-VARAN -i /input/input.vcf <span class="se">\</span>
--o /output/output.vcf <span class="se">\</span>
---bed_dir /bed_files <span class="se">\</span>
-<span class="o">[</span>tool arguments<span class="o">]</span>
+--bind /greenvaran_path/resources/GRCh38:/db_files <span class="se">\</span>
+--bind /greenvaran_path/config:/config_files <span class="se">\</span>
+--bind <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/data <span class="se">\</span>
+greenvaran.sif <span class="se">\</span>
+greenvaran -i /data/input.vcf.gz <span class="se">\</span>
+-o /data/output.vcf.gz <span class="se">\</span>
+--db /db_files/GRCh38_GREEN-DB.bed.gz <span class="se">\</span>
+--dbschema /config_files/greendb_schema_v2.5.json
+--config /config_files/prioritize_smallvars.json
+<span class="o">[</span>additional tool arguments<span class="o">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="single-tools-usage">
 <h2>Single tools usage<a class="headerlink" href="#single-tools-usage" title="Permalink to this headline">¶</a></h2>
-<p>The GREEN-VARAN tool set includes 3 tools to annotate variants and interact with GREEN-DB.</p>
+<p>The GREEN-VARAN tool set includes 2 main tools to annotate variants and interact with GREEN-DB.</p>
 <ol class="arabic simple">
-<li><dl class="simple">
-<dt>GREEN_VARAN.py</dt><dd><p>Perform annotation on small variants VCF. Provides also abiliy to filter for genes of interest,
-select variants on genes already affected by a coding variants and a prioritization function for
-regulatory variants</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>SV_annotation.py</dt><dd><p>Allows annotation of SV VCF based on overlap with known regions in external bed files.
-Overlap threshold is configurable and the provided resources allow annotation of population AF
-from gnomAD and 1000G, genes overlap and GREEN-DB</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>GREEN-DB_query.py</dt><dd><p>Assists in quering the GREEN-DB. Given a list of region IDs or a VCF annotated by GREEN-VARAN
-the tool generates a set of tables containing detailed information on the regions of interest</p>
-</dd>
-</dl>
-</li>
+<li><p>greenvaran
+Perform annotation on small variants or structural variants VCF.
+Provides prioritization of regulatory variants summing up evidences of impact from GREENDB, population AF, functional regions and prediction scores.
+Variants can also be tagged based on a list of genes of interest.
+Finally, the tool can update standard gene consequence in ANN or BCQS fields to reflect regulated genes.</p></li>
+<li><p>greendb_query
+Assists in quering the GREEN-DB. Given a list of region IDs, a list of variants or a table of variants and relevant GREENDB regions
+the tool generates a set of tables containing detailed information on the regions of interest, region-gene connections, functional regions and tissues.</p></li>
 </ol>
 <p>For detailed instruction on the single tools usage please refer to the corresponding page</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="GREEN-VARAN_usage.html">GREEN-VARAN tool usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#basic-usage">Basic usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#prioritization">Prioritization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#gene-mode">Gene mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#activate-additional-annotations">Activate additional annotations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#fields-added-to-info">Fields added to INFO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#arguments-list">Arguments list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#command-line-options">Command line options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#annotations-added-by-green-varan">Annotations added by GREEN-VARAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#prioritization-of-small-variants">Prioritization of small variants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#structural-variants-annotations">structural variants annotations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#singularity">Singularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN-VARAN_usage.html#example-usage">Example usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="SV_annotation_usage.html">SV_annotation tool usage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="SV_annotation_usage.html#how-it-works">How it works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SV_annotation_usage.html#the-configuration-file">The configuration file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SV_annotation_usage.html#arguments-list">Arguments list</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="GREEN-DB_query_usage.html">GREEN-DB_query tool usage</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="GREEN-DB_query_usage.html">greendb_query tool usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="GREEN-DB_query_usage.html#possible-inputs">Possible inputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GREEN-DB_query_usage.html#output-tables">Output tables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GREEN-DB_query_usage.html#arguments-list">Arguments list</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nextflow_workflow.html">GREEN-VARAN workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nextflow_workflow.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nextflow_workflow.html#resources">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nextflow_workflow.html#automated-download">Automated download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nextflow_workflow.html#workflow-configuration">Workflow configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nextflow_workflow.html#available-parameters">Available parameters</a></li>
 </ul>
 </li>
 </ul>

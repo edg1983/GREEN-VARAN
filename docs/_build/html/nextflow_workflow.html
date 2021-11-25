@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GREEN-VARAN workflow &mdash; GREEN-DB and GREEN-VARAN  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Download resources" href="Download.html" />
+    <link rel="prev" title="greendb_query tool usage" href="GREEN-DB_query_usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> GREEN-DB and GREEN-VARAN
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="GREEN_DB.html">The GREEN-DB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GREEN_VARAN.html">GREEN-VARAN tool set</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GREEN-VARAN workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#add-additional-custom-annotations">Add additional custom annotations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#automated-download">Automated download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#workflow-configuration">Workflow configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#editing-the-profile-configuration">Editing the profile configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#editing-the-annotation-file-schema">Editing the annotation file schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#available-parameters">Available parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_cite.html">How to cite</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GREEN-DB and GREEN-VARAN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="GREEN_VARAN.html">GREEN-VARAN tool set</a> &raquo;</li>
+        
+      <li>GREEN-VARAN workflow</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/nextflow_workflow.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="green-varan-workflow">
+<h1>GREEN-VARAN workflow<a class="headerlink" href="#green-varan-workflow" title="Permalink to this headline">¶</a></h1>
+<p>To perform small variants prioritization as described in the GREEN-DB manuscript, GREEN-VARAN need some annotations to be already
+present in your input VCF (see <a class="reference external" href="GREEN-VARAN_usage.rst#Prioritizationofsmallvariants">Prioritization of small variants</a>)</p>
+<p>This Nextflow workflow automate the whole process annotating additional information and then performing greenevaran annotation.
+The workflow is tested on Nextflow &gt;=v20.10</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The typical usage scenario start with a VCF file already containing gene consequences annotations from SnpEff or bcftools.
+Then from the GREEN-VARAN tool main folder you can perform all annotations using the following command.
+This will add a minimum set of information to you VCF including:
+- population allele AF from gnomAD genomes v3.1.1 (GRCh38) or v2.1.1 (GRCh37)
+- functional regions overlaps for TFBS, DNase peaks and UCNE
+- prediction score values for ncER, FATHMM, ReMM
+- GREEN-DB information on regulatory variants with prioritization levels</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nextflow</span> <span class="n">workflow</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">nf</span> \
+    <span class="o">-</span><span class="n">profile</span> <span class="n">local</span> \
+    <span class="o">--</span><span class="nb">input</span> <span class="n">input_file</span><span class="o">.</span><span class="n">vcf</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">--</span><span class="n">build</span> <span class="n">GRCh38</span> \
+    <span class="o">--</span><span class="n">out</span> <span class="n">results</span> \
+    <span class="o">--</span><span class="n">scores</span> <span class="n">best</span> \
+    <span class="o">--</span><span class="n">regions</span> <span class="n">best</span> \
+    <span class="o">--</span><span class="n">AF</span> \
+    <span class="o">--</span><span class="n">greenvaran_config</span> <span class="n">config</span><span class="o">/</span><span class="n">prioritize_smallvars</span><span class="o">.</span><span class="n">json</span> \
+    <span class="o">--</span><span class="n">greenvaran_dbschema</span> <span class="n">config</span><span class="o">/</span><span class="n">greendb_schema_v2</span><span class="o">.</span><span class="mf">5.</span><span class="n">json</span> \
+</pre></div>
+</div>
+<p>If requested annotation files are missing, they will be automatically downloaded in the default location (<code class="docutils literal notranslate"><span class="pre">resources</span></code> folder within the main GREEN-VARAN folder)</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">--input</span></code> can accept multiple vcf.gz files using a pattern like <code class="docutils literal notranslate"><span class="pre">inputdir/*.vcf.gz</span></code></p>
+<div class="section" id="add-additional-custom-annotations">
+<h3>Add additional custom annotations<a class="headerlink" href="#add-additional-custom-annotations" title="Permalink to this headline">¶</a></h3>
+<p>If you have additional custom annotation you want to add to your VCF before greenvaran processing they can be configured in a .toml
+and then you can pass this file to the workflow using <code class="docutils literal notranslate"><span class="pre">--anno_toml</span></code>.</p>
+<p>A toml file is a annotation configuration file used by the vcfanno tool and is described in <a href="#id1"><span class="problematic" id="id2">`vcfanno repository&lt;https://github.com/brentp/vcfanno&gt;`_</span></a></p>
+<p>A minimal example is reported below</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">annotation</span><span class="p">]]</span>
+<span class="n">file</span><span class="o">=</span><span class="s2">&quot;ExAC.vcf&quot;</span> <span class="c1">#source file</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;AF&quot;</span><span class="p">,</span> <span class="s2">&quot;AF_nfe&quot;</span><span class="p">]</span> <span class="c1">#INFO fields to be extracted from source</span>
+<span class="n">ops</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;self&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">]</span> <span class="c1">#How to treat source values</span>
+<span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;exac_af&quot;</span><span class="p">,</span> <span class="s2">&quot;exac_af_nfe_max&quot;</span><span class="p">]</span> <span class="c1">#names used in the annotated file</span>
+
+<span class="p">[[</span><span class="n">annotation</span><span class="p">]]</span>
+<span class="n">file</span><span class="o">=</span><span class="s2">&quot;regions_score.bed.gz&quot;</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="c1">#When using a BED or TSV files you can refer to values by col index</span>
+<span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;regions_ids&quot;</span><span class="p">,</span> <span class="s2">&quot;score_max&quot;</span><span class="p">]</span>
+<span class="n">ops</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;uniq&quot;</span><span class="p">,</span><span class="s2">&quot;max&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>To perform annotations GREEN-VARAN Nextflow workflow requires a series of supporting files.
+By default, various resources are expected in the <code class="docutils literal notranslate"><span class="pre">resources</span></code> folder within the main tool folder.
+You pass an alternative resource folder using <code class="docutils literal notranslate"><span class="pre">--resource_folder</span></code> option, bug the same structure is expected in this folder</p>
+<p>The expected folder structure is as follows</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+|-- SQlite
+|   `-- GREEN-DB_v2.5.db
+|-- GRCh37
+|   `-- BED / TSV files used for GRCh37 genome build
+`-- GRCh38
+    `-- BED / TSV files used for GRCh38 genome build
+</pre></div>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">--list_data</span></code> option to see the full list of available resources and the expected path for each one.</p>
+</div>
+<div class="section" id="automated-download">
+<h2>Automated download<a class="headerlink" href="#automated-download" title="Permalink to this headline">¶</a></h2>
+<p>A supporting workflow is provided to automate data download for all resources included in the GREEN-DB collection.
+You can list the available resources and their resulting download location using</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nextflow</span> <span class="n">workflow</span><span class="o">/</span><span class="n">download</span><span class="o">.</span><span class="n">nf</span> <span class="o">--</span><span class="n">list_data</span>
+</pre></div>
+</div>
+<p>The reccomended set of annotations can be downloaded to the default location using the following command or
+you can set an alternative resource folder using <code class="docutils literal notranslate"><span class="pre">--resource_folder</span></code> option</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nextflow</span> <span class="n">workflow</span><span class="o">/</span><span class="n">download</span><span class="o">.</span><span class="n">nf</span> \
+<span class="o">-</span><span class="n">profile</span> <span class="n">local</span> \
+<span class="o">--</span><span class="n">scores</span> <span class="n">best</span> \
+<span class="o">--</span><span class="n">regions</span> <span class="n">best</span> \
+<span class="o">--</span><span class="n">AF</span> \
+<span class="o">--</span><span class="n">db</span>
+</pre></div>
+</div>
+<p>Otherwise, single files are available for download from Zenodo repository and all file locations are listed in
+the <code class="docutils literal notranslate"><span class="pre">GREENDB_collection.txt</span></code> file under resources folder.</p>
+</div>
+<div class="section" id="workflow-configuration">
+<h2>Workflow configuration<a class="headerlink" href="#workflow-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The workflow has pre-configured profiles for most popular schedulers (sge, lsf, slurm) and also a local profile (local).
+These profiles determine how many download jobs can be submitted concurrently and the number of threads used for annotation.</p>
+<p>You can activate the desired profile using <code class="docutils literal notranslate"><span class="pre">-profile</span></code> argument when launching the workflow</p>
+<p><strong>NB.</strong> You need to update the queue name parameter to reflect your local settings, see how to edit the config below</p>
+<p>The default settings for each profile are reported below:</p>
+<div class="section" id="editing-the-profile-configuration">
+<h3>Editing the profile configuration<a class="headerlink" href="#editing-the-profile-configuration" title="Permalink to this headline">¶</a></h3>
+<p>To adjust the configuration you need to edit the <code class="docutils literal notranslate"><span class="pre">nextflow.config</span></code> file in the workflow folder</p>
+<p>The main parameters you may need to adjust are
+- <code class="docutils literal notranslate"><span class="pre">ncpus</span></code>: this controls the number of threads request for annotation
+- <code class="docutils literal notranslate"><span class="pre">max_local_jobs</span></code>: this controls the max number of concurrent jobs submitted in local profile (when not submitting job to a scheduler)
+- <code class="docutils literal notranslate"><span class="pre">queue</span></code>: this is the name of the queue to be used when submitting jobs</p>
+</div>
+<div class="section" id="editing-the-annotation-file-schema">
+<h3>Editing the annotation file schema<a class="headerlink" href="#editing-the-annotation-file-schema" title="Permalink to this headline">¶</a></h3>
+<p>The annotation file schema contain the expected files names, repositories and annotation sources.
+In case you need to adjust this you can modify the <code class="docutils literal notranslate"><span class="pre">resources.conf</span></code> file located in workflow/config in the GREEN-VARAN folder.</p>
+</div>
+</div>
+<div class="section" id="available-parameters">
+<h2>Available parameters<a class="headerlink" href="#available-parameters" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt>–input in.vcf.gz</dt><dd><div class="line-block">
+<div class="line">Input VCF file(s), compressed and indexed</div>
+<div class="line">You can input multiple files from a folder using quotes like <code class="docutils literal notranslate"><span class="pre">--input</span> <span class="pre">mypath/*.vcf.gz</span></code></div>
+</div>
+</dd>
+<dt>–build (GRCh37, GRCh38)</dt><dd><div class="line-block">
+<div class="line">Genome build</div>
+</div>
+</dd>
+</dl>
+<dl class="option-list">
+<dt><kbd><span class="option">--out <var>output_dir</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Output directory</div>
+</div>
+</dd>
+</dl>
+<dl>
+<dt>–scores (best, all, name)</dt><dd><div class="line-block">
+<div class="line">Annotate prediction scores</div>
+<div class="line">best annotate ncER, FATHMM-MKL, ReMM</div>
+<div class="line">all annotate all scores</div>
+<div class="line">name annotate only the specified score (can be comma-separated list)</div>
+</div>
+</dd>
+<dt>–regions best/all/name<span class="classifier">Annotate functional regions</span></dt><dd><p>best annotate TFBS, DNase, UCNE
+all annotate all regions
+name annotate only the specified regions (can be comma-separated list)</p>
+</dd>
+</dl>
+<dl class="option-list">
+<dt><kbd><span class="option">--AF</span></kbd></dt>
+<dd><p>:   Annotate global AF from gnomAD genome v3</p>
+</dd>
+<dt><kbd><span class="option">--greenvaran_config</span></kbd></dt>
+<dd><p>:   A json config file for GREEN-VARAN tool</p>
+</dd>
+<dt><kbd><span class="option">--greenvaran_dbschema</span></kbd></dt>
+<dd><p>:   A json db schema file for GREEN-VARAN tool</p>
+</dd>
+<dt><kbd><span class="option">--resource_folder</span></kbd></dt>
+<dd><p>:   Specify a custom folder for the annotation files</p>
+</dd>
+<dt><kbd><span class="option">--anno_toml</span></kbd></dt>
+<dd><p>:   A custom annotation config file.
+This file is a toml file as specified for vcfanno.
+This will be added to other annotations defined with
+scores and regions.</p>
+</dd>
+<dt><kbd><span class="option">--list_data</span></kbd></dt>
+<dd><p>:   output the list of available scores / regions</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Download.html" class="btn btn-neutral float-right" title="Download resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="GREEN-DB_query_usage.html" class="btn btn-neutral float-left" title="greendb_query tool usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Edoardo Giacopuzzi
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

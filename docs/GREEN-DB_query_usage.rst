@@ -1,15 +1,15 @@
-GREEN-DB_query tool usage
-=========================
+greendb_query tool usage
+========================
 
-GREEN-DB_query.py assists in quering the GREEN-DB.
-Given a list of region IDs or a VCF annotated by GREEN-VARAN the tool generates a set of tables
-containing detailed information on the regions of interest, including overlap with additional supporting regions
-(TFBS, DNase HS peaks, UCNE, dbSuper)
+greendb_query assists in quering the GREEN-DB database.
+Given a list of region IDs, variant IDs or a table or variant and relevant regions, the tool generates a set of tables
+containing detailed information on the regions of interest, overlap with additional supporting regions
+(TFBS, DNase HS peaks, UCNE, dbSuper), gene-region connections, tissue of activity and associated phenotypes.
 
 .. code-block::
 
-    GREEN-DB_query.py [-h] (-v VCF | -r REGIDS | -t TABLE) -o OUTPREFIX -b
-                         {GRCh37,GRCh38} [--regDB REGDB] [--logfile LOGFILE]
+    greendb_query [-h] (-v VARIDS | -r REGIDS | -t TABLE) -o OUTPREFIX -g
+                         {GRCh37,GRCh38} --db GREENDB [--logfile LOGFILE]
 
 Possible inputs
 ~~~~~~~~~~~~~~~
@@ -23,8 +23,9 @@ This argument accepts a comma-separated list of regions (like ``ID1,ID2``) or a 
 
 2. VCF file (-v)
 ################
-If you have a VCF files previously annotated using GREEN-VARAN, the tool can extract region IDs directly from this file
-One of NC_ANNO or NC_RegionID fields are expected in the INFO column.
+If you have a small list of variants for which you want to extract overalpping regulatory regions, you can 
+input a them as a comma-separated list of variant IDs (like ``var1,var2``) or a text file with one variant ID per line
+A variant ID has the format ``chrom_pos_ref_alt``
 
 3. Variant-regions table (-t)
 #############################
@@ -32,11 +33,14 @@ If you have a list of variants of interest for which you know the relevant GREEN
 you can query the DB directly providing a tab separated text file with **no header** and 2 columns:
 
 - column 1: variant ID in the format chrom_pos_ref_alt
-- column 2: comma-separated list of region IDs overlapping the variant  
+- column 2: comma-separated list of region IDs overlapping the variant
+
+This table can be generated automatically from a VCF annotated with greenvaran by using ``greenvaran querytab``
+
 
 Output tables
 ~~~~~~~~~~~~~
-The tool will generate up to 6 tables with the provided prefix. Only tables containing elements will be created. 
+The tool will generate 6 tables with the provided prefix. Some table may be empty if the corresponding information is missing. 
 Output tables structure is described below
 
 regions
@@ -66,16 +70,17 @@ Details on the controlled genes, reporting the tissue where the gene-region inte
 | **6. controlled_gene**: gene symbol for controlled gene
 | **7. detection method**: method supporting this interaction
 | **8. tissue_of_interaction**: comma-separated list of cell types and tissues where this region-gene interaction is detected
+| **9. same_TAD**: 0/1 value indicating if the reported interaction occurs in the same TAD according to TADKB
 
 pheno_details
-############
+#############
 Details on the phenotypes potentially associated with the regions of interest
 
 | **1. regionID**: GREEN-DB region ID
 | **2-4. chrom, start, stop**: genomic location of the region
 | **5. std_type**: one of the 5 main region types (enhancer, promoter, silencer, bivalent, insulator)
 | **6. phenotype**: phenotype eventually associated to this region
-| **7. detection method**: method supporting this association
+| **7. detection method**: method supporting this association. Note that when the method is GENE2HPO this means that the phenotype is inferred from HPOs associated to the controlled gene(s)
 | **8. DB source**: source supporting this association
 
 
@@ -98,13 +103,8 @@ A region or element is reported in the output only if it overlaps with one of th
 
 Arguments list
 ~~~~~~~~~~~~~~
-Mandatory Arguments
-###################
--h, --help
-    | show help message and exit
--v VCF, --vcf VCF
-    | Input vcf[.gz] file. 
-    | Must be annotated with GREEN-VARAN
+-v VARID, --vcf VARID
+    | Comma separated list of variant IDs or file with a list of variant IDs
 -r REGIDS, --regIDs REGIDS
     | Comma separated list of region IDs or file with a list of region IDs
 -t TABLE, --table TABLE
@@ -113,14 +113,10 @@ Mandatory Arguments
     | col2 comma-separated list of region IDs
 -o OUTPREFIX, --outprefix OUTPREFIX
     Prefix for output files
--b BUILD, --build BUILD
+-g BUILD, --genome BUILD
     | Possible values: ``{GRCh37,GRCh38}``
-    | Genome build of the input file
-
-Customize files locations
-#########################
---regDB REGDB
-    | DEFAULT: resources/SQlite/RegulatoryRegions.db
-    | Location of the GREEN-DB database file (.db)
+    | Genome build for the query
+--db GREENDB
+    | Location of the GREEN-DB SQLite database file (.db)
 --logfile LOGFILE
     | Custom location for the log file

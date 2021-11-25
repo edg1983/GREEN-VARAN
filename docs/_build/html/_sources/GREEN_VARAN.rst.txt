@@ -3,124 +3,105 @@ GREEN-VARAN tool set
 
 **Genomic Regulatory Elements ENcyclopedia VARiant ANnotation**
 
-Annotate non-coding regulatory variants in a VCF with a combination of
-
-- our GREEN-DB collection of regulatory regions
-- non-coding variant prediction scores (NCBoost, FIRE, LinSight, ReMM, CADD, DANN, ExPecto)
-- AF from gnomAD genomes
-- conservation with PhyloP100
+Annotate variants in a VCF using GREEN-DB to provide information on non-coding regualtory variants and the controlled genes.
+Additionally perform prioritization summing up evidences of regulatory impact from GREENDB, population AF, functional regions and prediction scores
 
 Installation
 ~~~~~~~~~~~~
 
-1. Get the tools from the repository
-####################################
+1. Get the tool binary from the repository
+##########################################
 
+The easiest way to run GREEN-VARAN is to download the pre-compiled binaries from the latest release at https://github.com/edg1983/GREEN-VARAN
+
+2. Compile the tool
+###################
+
+Alternatively, you can clone the repository 
 ``git clone https://github.com/edg1983/GREEN-VARAN.git``
 
-2. Download the supporting files
-################################
+And then compile the greenvaran using Nim compiler (https://nim-lang.org/). 
+GREEN-VARAN requires
+- nim >= 0.10
+- hts-nim >= 0.3.4
+- argparse 0.10.1 
 
-GREEN-DB files and a set of additional files are needed for annotation (see Downloads)
-Supporting files are supposed to be in resources folder, but location can be configured in Configuration file 
-or changed providing options on the command line. 
-Supporting files can be obtained from Zenodo (see Download):
+If you have Singularity installed, you can use the script ``nim_compile.sh`` to create a static binary with no dependencies 
+This uses musl-hts-nim as described in hts-nim repository (see https://github.com/brentp/hts-nim#static-binary-with-singularity)
 
-- GREEN-DB bed files and sqlite db file
-- processed VCF from gnomAD genomes
-- processed tables of prediction scores and phyloP100
-- bed files for SV annotations
+Get GREEN-DB files
+~~~~~~~~~~~~~~~~~~
 
-Requirements
-~~~~~~~~~~~~
-All tools are tested with Python >=3.4
+To perform annotations with GREEN-VARAN you will need the GREEN-DB bed files for your genome build.
+You can download the GREEN-DB BED file for GRCh37 or GRCh38 from https://zenodo.org/record/5636209
 
-**Python libraries**
+The complete SQLite database is also available from the same repository
 
-+----------------+-------------------+----------------+
-| GREEN-VARAN    | GREEN-DB_query    | SV_annotation  |
-+================+===================+================+
-| cyvcf2 >= 0.20 | cyvcf2 >= 0.20    | cyvcf2 >= 0.20 |
-+----------------+-------------------+----------------+
-| pandas >= 0.25 | pandas >= 0.25    |                |
-+----------------+-------------------+----------------+
-|                | sqlite3 >= 2.6.0  |                |
-+----------------+-------------------+----------------+
+GREEN-VARAN Nextflow workflow
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+We also provide a Nextflow workflow that can be used to automate VCF annotation and resource download.
+Given a small variants VCF annotated for gene consequences using snpEff or bcftools the workflow can be used to
+- automatically add functional regions annotations and non-coding prediction scores
+- perform greenvaran prioritization
 
-**External software and libs**
+Missing datasets will be downloaded automatically during the process.
+See the dedicated page for more usage information
 
-- bedtools >= 2.27
-- htslib >= 1.10
-- vcfanno >= 0.3.0 (pre-compiled binary is included in GREEN-VARAN release)
 
 Singularity
 ~~~~~~~~~~~
-GREEN-VARAN tool set is also provided as Singularity image (tested on singularity >= 3.2). 
-A Singularity recipe is included in the repository or you can pull an image from Singularity Hub using
+The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as Singularity image (tested on singularity >= 3.2). 
+A Singularity recipe is included in the repository or you can pull the image from Singularity Library using
 
-``singularity pull shub://edg1983/GREEN-VARAN:green-varan_v1``
+``singularity pull library://edg1983/greenvaran/greenvaran:latest``
 
+See GREEN-VARAN usage for more details
 Usage
 #####
 
-The image contains all 3 GREEN-VARAN tools:
-
-- GREEN-VARAN: annotation of small variants VCF
-- SV_annotation: annotation of SV VCF
-- GREEN-DB_query: query the GREEN-DB for detailed information
-
-To run one of the tool use:
+The image contains both greenvaran and greendb_query tools.
+The general usage is:
 
 .. code-block:: bash
 
     singularity run \
-    --bind resources_folder:/opt/GREEN_VARAN/resources \
-    GREEN-VARAN_green-varan_v1.sif \
+    greenvaran.sif \
     tool_name [tool arguments]
-
-
-**NB.** tool_name is one of GREEN-VARAN, SV_annotation, GREEN-DB_query.
-The host resources_folder must contain the standard subfolders and files expected by GREEN-VARAN.
 
 Bind specific folders for resources or data
 ###########################################
-If you have stored resources in other locations you have to bind them manually into the container and 
-then pass the mounted path to the tool with the corresponding argument (see below)
-By default you are expected to read/write from the present working directory. This means that
 
-- all input files, including eventual configuration file, must be present in the working directory
-- output files and eventual tmp folder are created in the present working directory
+The tool need access to input VCF file, required GREEN-DB bed file and config files so remember to bind the corresponding locations in the container 
 
-Example if you have input/output/resources in other folders
+See the following example where we use the current working directory for input/output, while other files are located
+in the default config / resources folder within greenvaran folder. In the example we use GRCh38 genome build
 
 .. code-block:: bash
 
     singularity run \
-    --bind resources_folder:/opt/GREEN_VARAN/resources \
-    --bind input_folder:/input \
-    --bind output_fodler:/output \
-    --bind bed_files:/bed_files \
-    GREEN-VARAN_green-varan_v1.sif \
-    GREEN-VARAN -i /input/input.vcf \
-    -o /output/output.vcf \
-    --bed_dir /bed_files \ 
-    [tool arguments]
+    --bind /greenvaran_path/resources/GRCh38:/db_files \
+    --bind /greenvaran_path/config:/config_files \
+    --bind ${PWD}:/data \
+    greenvaran.sif \
+    greenvaran -i /data/input.vcf.gz \
+    -o /data/output.vcf.gz \
+    --db /db_files/GRCh38_GREEN-DB.bed.gz \
+    --dbschema /config_files/greendb_schema_v2.5.json
+    --config /config_files/prioritize_smallvars.json
+    [additional tool arguments]
 
 Single tools usage
 ~~~~~~~~~~~~~~~~~~
-The GREEN-VARAN tool set includes 3 tools to annotate variants and interact with GREEN-DB.
+The GREEN-VARAN tool set includes 2 main tools to annotate variants and interact with GREEN-DB.
 
-1. GREEN_VARAN.py
-    Perform annotation on small variants VCF. Provides also abiliy to filter for genes of interest,
-    select variants on genes already affected by a coding variants and a prioritization function for
-    regulatory variants
-2. SV_annotation.py
-    Allows annotation of SV VCF based on overlap with known regions in external bed files.
-    Overlap threshold is configurable and the provided resources allow annotation of population AF
-    from gnomAD and 1000G, genes overlap and GREEN-DB
-3. GREEN-DB_query.py
-    Assists in quering the GREEN-DB. Given a list of region IDs or a VCF annotated by GREEN-VARAN
-    the tool generates a set of tables containing detailed information on the regions of interest
+1. greenvaran
+   Perform annotation on small variants or structural variants VCF. 
+   Provides prioritization of regulatory variants summing up evidences of impact from GREENDB, population AF, functional regions and prediction scores.
+   Variants can also be tagged based on a list of genes of interest.
+   Finally, the tool can update standard gene consequence in ANN or BCQS fields to reflect regulated genes.
+2. greendb_query
+   Assists in quering the GREEN-DB. Given a list of region IDs, a list of variants or a table of variants and relevant GREENDB regions
+   the tool generates a set of tables containing detailed information on the regions of interest, region-gene connections, functional regions and tissues.
 
 For detailed instruction on the single tools usage please refer to the corresponding page
 
@@ -128,6 +109,6 @@ For detailed instruction on the single tools usage please refer to the correspon
    :maxdepth: 2
    
    GREEN-VARAN_usage
-   SV_annotation_usage
-   GREEN-DB_query_usage 
+   GREEN-DB_query_usage
+   nextflow_workflow
 

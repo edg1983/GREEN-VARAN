@@ -28,10 +28,10 @@ def print_dataset_items(dataset, main_folder, sources) {
     println "${exists_string}${dataset}: ${dataset_path}"
 }
 
-def define_selected_values(x, best, allowed_values) {
+def define_selected_values(x, best, known_values) {
     switch(x) {
         case 'all':
-            selected_values = params.known_scores
+            selected_values = known_values
             break
         case 'best':
             selected_values = best
@@ -39,7 +39,7 @@ def define_selected_values(x, best, allowed_values) {
         default:
             selected_values = x.split(",")
         }
-        check_allowed_options(selected_values, allowed_values)
+        check_allowed_options(selected_values, known_values)
     return selected_values
 }
 
@@ -147,7 +147,7 @@ checkPathParamList = [
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 if (params.anno_toml) {
-    file(params.anno_config, checkIfExists: true)
+    file(params.anno_toml, checkIfExists: true)
 }
 
 //Make output dir and set prefix
@@ -186,8 +186,7 @@ workflow {
     //Check is annotations files exist, download them eventually and prepare toml files
     toml_files = Channel.empty()
     if (params.scores) {
-        selected_scores = define_selected_values(params.scores, ['ncER','FATHMM_MKLNC','ReMM'], allowed_scores_values)
-        //log.info "Selected scores: $selected_scores"
+        selected_scores = define_selected_values(params.scores, ['ncER','FATHMM_MKLNC','ReMM'], known_scores)
         for (s in selected_scores) {
             if (check_annotation_file(s, params.annotations[params.build].scores, resource_folder)) {
                 existing_data.scores = existing_data.scores.plus(s)
@@ -209,13 +208,12 @@ workflow {
     }
     
     if (params.regions) {
-        selected_regions = define_selected_values(params.regions, ['TFSB','DNase','UCNE'], allowed_regions_values)
-        //log.info "Selected regions: $selected_regions"
-        for (s in selected_regions) {
-            if (check_annotation_file(s, params.annotations[params.build].regions, resource_folder)) {
-                existing_data.regions = existing_data.regions.plus(s)
+        selected_regions = define_selected_values(params.regions, ['TFBS','DNase','UCNE'], known_regions)
+        for (r in selected_regions) {
+            if (check_annotation_file(r, params.annotations[params.build].regions, resource_folder)) {
+                existing_data.regions = existing_data.regions.plus(r)
             } else {
-                missing_data.regions = missing_data.regions.plus(s)
+                missing_data.regions = missing_data.regions.plus(r)
             }
         }
 
@@ -229,11 +227,10 @@ workflow {
         }
         WRITE_REGION_TOML(regions_channel, "flag")
         toml_files = toml_files.concat(WRITE_REGION_TOML.out)
-        //concat_regions_toml(WRITE_REGION_TOML.out.collect(), "regions")
     }
 
     if (params.AF) {
-       if (check_annotation_file('gnomAD', params.annotations[params.build].AF, resource_folder)) {
+        if (check_annotation_file('gnomAD', params.annotations[params.build].AF, resource_folder)) {
             existing_data.AF = existing_data.AF.plus('gnomAD')
         } else {
             missing_data.AF = missing_data.AF.plus('gnomAD')
@@ -249,7 +246,6 @@ workflow {
         }
         WRITE_AF_TOML(af_channel, "max")
         toml_files = toml_files.concat(WRITE_AF_TOML.out)
-        //concat_regions_toml(WRITE_REGION_TOML.out.collect(), "regions")
     }
 
     if (params.anno_toml) {
@@ -259,7 +255,6 @@ workflow {
 
     //When regions or scores are active perform vcfanno annotation
     if (params.regions || params.scores || params.AF) {
-        //toml_files = Channel.fromPath("$outputdir/*.toml")
         concat_toml(toml_files.collect(), "annotations")
         ANNOTATE(input_vcf, concat_toml.out)
         annotated_vcf = ANNOTATE.out

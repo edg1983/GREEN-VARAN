@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>GREEN-DB_query tool usage &mdash; GREEN-DB and GREEN-VARAN  documentation</title>
+  <title>greendb_query tool usage &mdash; GREEN-DB and GREEN-VARAN  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Download resources" href="Download.html" />
-    <link rel="prev" title="SV_annotation tool usage" href="SV_annotation_usage.html" /> 
+    <link rel="next" title="GREEN-VARAN workflow" href="nextflow_workflow.html" />
+    <link rel="prev" title="GREEN-VARAN tool usage" href="GREEN-VARAN_usage.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,22 +87,25 @@
 <li class="toctree-l1"><a class="reference internal" href="GREEN_DB.html">The GREEN-DB</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="GREEN_VARAN.html">GREEN-VARAN tool set</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#get-green-db-files">Get GREEN-DB files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#green-varan-nextflow-workflow">GREEN-VARAN Nextflow workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#singularity">Singularity</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="GREEN_VARAN.html#single-tools-usage">Single tools usage</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="GREEN-VARAN_usage.html">GREEN-VARAN tool usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="SV_annotation_usage.html">SV_annotation tool usage</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">GREEN-DB_query tool usage</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">greendb_query tool usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#possible-inputs">Possible inputs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#output-tables">Output tables</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#arguments-list">Arguments list</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="nextflow_workflow.html">GREEN-VARAN workflow</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="nextflow_workflow.html">GREEN-VARAN workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_cite.html">How to cite</a></li>
 </ul>
 
             
@@ -151,7 +154,7 @@
         
           <li><a href="GREEN_VARAN.html">GREEN-VARAN tool set</a> &raquo;</li>
         
-      <li>GREEN-DB_query tool usage</li>
+      <li>greendb_query tool usage</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -170,14 +173,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="green-db-query-tool-usage">
-<h1>GREEN-DB_query tool usage<a class="headerlink" href="#green-db-query-tool-usage" title="Permalink to this headline">¶</a></h1>
-<p>GREEN-DB_query.py assists in quering the GREEN-DB.
-Given a list of region IDs or a VCF annotated by GREEN-VARAN the tool generates a set of tables
-containing detailed information on the regions of interest, including overlap with additional supporting regions
-(TFBS, DNase HS peaks, UCNE, dbSuper)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GREEN</span><span class="o">-</span><span class="n">DB_query</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">(</span><span class="o">-</span><span class="n">v</span> <span class="n">VCF</span> <span class="o">|</span> <span class="o">-</span><span class="n">r</span> <span class="n">REGIDS</span> <span class="o">|</span> <span class="o">-</span><span class="n">t</span> <span class="n">TABLE</span><span class="p">)</span> <span class="o">-</span><span class="n">o</span> <span class="n">OUTPREFIX</span> <span class="o">-</span><span class="n">b</span>
-                     <span class="p">{</span><span class="n">GRCh37</span><span class="p">,</span><span class="n">GRCh38</span><span class="p">}</span> <span class="p">[</span><span class="o">--</span><span class="n">regDB</span> <span class="n">REGDB</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">logfile</span> <span class="n">LOGFILE</span><span class="p">]</span>
+  <div class="section" id="greendb-query-tool-usage">
+<h1>greendb_query tool usage<a class="headerlink" href="#greendb-query-tool-usage" title="Permalink to this headline">¶</a></h1>
+<p>greendb_query assists in quering the GREEN-DB database.
+Given a list of region IDs, variant IDs or a table or variant and relevant regions, the tool generates a set of tables
+containing detailed information on the regions of interest, overlap with additional supporting regions
+(TFBS, DNase HS peaks, UCNE, dbSuper), gene-region connections, tissue of activity and associated phenotypes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">greendb_query</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">(</span><span class="o">-</span><span class="n">v</span> <span class="n">VARIDS</span> <span class="o">|</span> <span class="o">-</span><span class="n">r</span> <span class="n">REGIDS</span> <span class="o">|</span> <span class="o">-</span><span class="n">t</span> <span class="n">TABLE</span><span class="p">)</span> <span class="o">-</span><span class="n">o</span> <span class="n">OUTPREFIX</span> <span class="o">-</span><span class="n">g</span>
+                     <span class="p">{</span><span class="n">GRCh37</span><span class="p">,</span><span class="n">GRCh38</span><span class="p">}</span> <span class="o">--</span><span class="n">db</span> <span class="n">GREENDB</span> <span class="p">[</span><span class="o">--</span><span class="n">logfile</span> <span class="n">LOGFILE</span><span class="p">]</span>
 </pre></div>
 </div>
 <div class="section" id="possible-inputs">
@@ -191,8 +194,9 @@ This argument accepts a comma-separated list of regions (like <code class="docut
 </div>
 <div class="section" id="vcf-file-v">
 <h3>2. VCF file (-v)<a class="headerlink" href="#vcf-file-v" title="Permalink to this headline">¶</a></h3>
-<p>If you have a VCF files previously annotated using GREEN-VARAN, the tool can extract region IDs directly from this file
-One of NC_ANNO or NC_RegionID fields are expected in the INFO column.</p>
+<p>If you have a small list of variants for which you want to extract overalpping regulatory regions, you can
+input a them as a comma-separated list of variant IDs (like <code class="docutils literal notranslate"><span class="pre">var1,var2</span></code>) or a text file with one variant ID per line
+A variant ID has the format <code class="docutils literal notranslate"><span class="pre">chrom_pos_ref_alt</span></code></p>
 </div>
 <div class="section" id="variant-regions-table-t">
 <h3>3. Variant-regions table (-t)<a class="headerlink" href="#variant-regions-table-t" title="Permalink to this headline">¶</a></h3>
@@ -202,11 +206,12 @@ you can query the DB directly providing a tab separated text file with <strong>n
 <li><p>column 1: variant ID in the format chrom_pos_ref_alt</p></li>
 <li><p>column 2: comma-separated list of region IDs overlapping the variant</p></li>
 </ul>
+<p>This table can be generated automatically from a VCF annotated with greenvaran by using <code class="docutils literal notranslate"><span class="pre">greenvaran</span> <span class="pre">querytab</span></code></p>
 </div>
 </div>
 <div class="section" id="output-tables">
 <h2>Output tables<a class="headerlink" href="#output-tables" title="Permalink to this headline">¶</a></h2>
-<p>The tool will generate up to 6 tables with the provided prefix. Only tables containing elements will be created.
+<p>The tool will generate 6 tables with the provided prefix. Some table may be empty if the corresponding information is missing.
 Output tables structure is described below</p>
 <div class="section" id="regions">
 <h3>regions<a class="headerlink" href="#regions" title="Permalink to this headline">¶</a></h3>
@@ -234,7 +239,21 @@ Output tables structure is described below</p>
 <div class="line"><strong>2-4. chrom, start, stop</strong>: genomic location of the region</div>
 <div class="line"><strong>5. std_type</strong>: one of the 5 main region types (enhancer, promoter, silencer, bivalent, insulator)</div>
 <div class="line"><strong>6. controlled_gene</strong>: gene symbol for controlled gene</div>
-<div class="line"><strong>7. tissue_of_interaction</strong>: comma-separated list of cell types and tissues where this region-gene interaction is detected</div>
+<div class="line"><strong>7. detection method</strong>: method supporting this interaction</div>
+<div class="line"><strong>8. tissue_of_interaction</strong>: comma-separated list of cell types and tissues where this region-gene interaction is detected</div>
+<div class="line"><strong>9. same_TAD</strong>: 0/1 value indicating if the reported interaction occurs in the same TAD according to TADKB</div>
+</div>
+</div>
+<div class="section" id="pheno-details">
+<h3>pheno_details<a class="headerlink" href="#pheno-details" title="Permalink to this headline">¶</a></h3>
+<p>Details on the phenotypes potentially associated with the regions of interest</p>
+<div class="line-block">
+<div class="line"><strong>1. regionID</strong>: GREEN-DB region ID</div>
+<div class="line"><strong>2-4. chrom, start, stop</strong>: genomic location of the region</div>
+<div class="line"><strong>5. std_type</strong>: one of the 5 main region types (enhancer, promoter, silencer, bivalent, insulator)</div>
+<div class="line"><strong>6. phenotype</strong>: phenotype eventually associated to this region</div>
+<div class="line"><strong>7. detection method</strong>: method supporting this association. Note that when the method is GENE2HPO this means that the phenotype is inferred from HPOs associated to the controlled gene(s)</div>
+<div class="line"><strong>8. DB source</strong>: source supporting this association</div>
 </div>
 </div>
 <div class="section" id="dnase-dbsuper-tfbs-ucne">
@@ -261,18 +280,10 @@ A region or element is reported in the output only if it overlaps with one of th
 </div>
 <div class="section" id="arguments-list">
 <h2>Arguments list<a class="headerlink" href="#arguments-list" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="mandatory-arguments">
-<h3>Mandatory Arguments<a class="headerlink" href="#mandatory-arguments" title="Permalink to this headline">¶</a></h3>
 <dl class="option-list">
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dt><kbd><span class="option">-v <var>VARID</var></span>, <span class="option">--vcf <var>VARID</var></span></kbd></dt>
 <dd><div class="line-block">
-<div class="line">show help message and exit</div>
-</div>
-</dd>
-<dt><kbd><span class="option">-v <var>VCF</var></span>, <span class="option">--vcf <var>VCF</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Input vcf[.gz] file.</div>
-<div class="line">Must be annotated with GREEN-VARAN</div>
+<div class="line">Comma separated list of variant IDs or file with a list of variant IDs</div>
 </div>
 </dd>
 <dt><kbd><span class="option">-r <var>REGIDS</var></span>, <span class="option">--regIDs <var>REGIDS</var></span></kbd></dt>
@@ -290,21 +301,15 @@ A region or element is reported in the output only if it overlaps with one of th
 <dt><kbd><span class="option">-o <var>OUTPREFIX</var></span>, <span class="option">--outprefix <var>OUTPREFIX</var></span></kbd></dt>
 <dd><p>Prefix for output files</p>
 </dd>
-<dt><kbd><span class="option">-b <var>BUILD</var></span>, <span class="option">--build <var>BUILD</var></span></kbd></dt>
+<dt><kbd><span class="option">-g <var>BUILD</var></span>, <span class="option">--genome <var>BUILD</var></span></kbd></dt>
 <dd><div class="line-block">
 <div class="line">Possible values: <code class="docutils literal notranslate"><span class="pre">{GRCh37,GRCh38}</span></code></div>
-<div class="line">Genome build of the input file</div>
+<div class="line">Genome build for the query</div>
 </div>
 </dd>
-</dl>
-</div>
-<div class="section" id="customize-files-locations">
-<h3>Customize files locations<a class="headerlink" href="#customize-files-locations" title="Permalink to this headline">¶</a></h3>
-<dl class="option-list">
-<dt><kbd><span class="option">--regDB <var>REGDB</var></span></kbd></dt>
+<dt><kbd><span class="option">--db <var>GREENDB</var></span></kbd></dt>
 <dd><div class="line-block">
-<div class="line">DEFAULT: resources/SQlite/RegulatoryRegions.db</div>
-<div class="line">Location of the GREEN-DB database file (.db)</div>
+<div class="line">Location of the GREEN-DB SQLite database file (.db)</div>
 </div>
 </dd>
 <dt><kbd><span class="option">--logfile <var>LOGFILE</var></span></kbd></dt>
@@ -313,7 +318,6 @@ A region or element is reported in the output only if it overlaps with one of th
 </div>
 </dd>
 </dl>
-</div>
 </div>
 </div>
 
@@ -325,10 +329,10 @@ A region or element is reported in the output only if it overlaps with one of th
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Download.html" class="btn btn-neutral float-right" title="Download resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="nextflow_workflow.html" class="btn btn-neutral float-right" title="GREEN-VARAN workflow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="SV_annotation_usage.html" class="btn btn-neutral float-left" title="SV_annotation tool usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="GREEN-VARAN_usage.html" class="btn btn-neutral float-left" title="GREEN-VARAN tool usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SV_annotation tool usage" href="SV_annotation_usage.html" />
+    <link rel="next" title="greendb_query tool usage" href="GREEN-DB_query_usage.html" />
     <link rel="prev" title="GREEN-VARAN tool set" href="GREEN_VARAN.html" /> 
 </head>
 
@@ -87,24 +87,27 @@
 <li class="toctree-l1"><a class="reference internal" href="GREEN_DB.html">The GREEN-DB</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="GREEN_VARAN.html">GREEN-VARAN tool set</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#get-green-db-files">Get GREEN-DB files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#green-varan-nextflow-workflow">GREEN-VARAN Nextflow workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GREEN_VARAN.html#singularity">Singularity</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="GREEN_VARAN.html#single-tools-usage">Single tools usage</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">GREEN-VARAN tool usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#basic-usage">Basic usage</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#prioritization">Prioritization</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gene-mode">Gene mode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#activate-additional-annotations">Activate additional annotations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#fields-added-to-info">Fields added to INFO</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#arguments-list">Arguments list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#command-line-options">Command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#annotations-added-by-green-varan">Annotations added by GREEN-VARAN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prioritization-of-small-variants">Prioritization of small variants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structural-variants-annotations">structural variants annotations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#singularity">Singularity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-usage">Example usage</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="SV_annotation_usage.html">SV_annotation tool usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="GREEN-DB_query_usage.html">GREEN-DB_query tool usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN-DB_query_usage.html">greendb_query tool usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nextflow_workflow.html">GREEN-VARAN workflow</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="nextflow_workflow.html">GREEN-VARAN workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how_to_cite.html">How to cite</a></li>
 </ul>
@@ -176,507 +179,356 @@
             
   <div class="section" id="green-varan-tool-usage">
 <h1>GREEN-VARAN tool usage<a class="headerlink" href="#green-varan-tool-usage" title="Permalink to this headline">¶</a></h1>
-<p>GREEN-VARAN.py performs annotation of small variants VCF.
-It provides also abiliy to filter for genes of interest, select variants on genes already affected by coding variants
-and a prioritization function for regulatory variants</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GREEN-VARAN.py  <span class="o">[</span>-h<span class="o">]</span> -i VCF -o OUTPUT -b <span class="o">{</span>GRCh37,GRCh38<span class="o">}</span> -m
-                <span class="o">{</span>annotate,filter_regdb,filter_any<span class="o">}</span> <span class="o">[</span>-p<span class="o">]</span>
-                <span class="o">[</span>--vcfanno VCFANNO<span class="o">]</span> <span class="o">[</span>--bed_dir BED_DIR<span class="o">]</span>
-                <span class="o">[</span>--AF_file AF_FILE<span class="o">]</span> <span class="o">[</span>--scores_dir SCORES_DIR<span class="o">]</span>
-                <span class="o">[</span>-g <span class="o">{</span>annotate,filter<span class="o">}]</span> <span class="o">[</span>-t <span class="o">{</span>controlled,closest,both<span class="o">}]</span>
-                <span class="o">[</span>-l GENES_LIST<span class="o">]</span> <span class="o">[</span>--impact <span class="o">{</span>HIGH,MODERATE,LOW,MODIFIER<span class="o">}]</span>
-                <span class="o">[</span>--allelefreq <span class="o">{</span>global,afr,amr,eas,fin,nfe,sas,oth<span class="o">}]</span>
-                <span class="o">[</span>-s <span class="o">{</span>ReMM,FIRE,LinSight,ExPECTO,NCBoost,DANN,CADD,PhyloP100<span class="o">}]</span> <span class="o">[</span>-a<span class="o">]</span>
-                <span class="o">[</span>--separate_fields<span class="o">]</span> <span class="o">[</span>--logfile LOGFILE<span class="o">]</span>
-                <span class="o">[</span>--threads THREADS<span class="o">]</span> <span class="o">[</span>-w<span class="o">]</span>
-</pre></div>
-</div>
+<p>GREEN-VARAN performs annotation of small variants or structural variants VCF adding information on potential regulatory variants from GREEN-DB.
+Especially it can annotate possible controlled genes and a prioritization level (this latter need the presence of some additional annotations, see below)
+It provides also abiliy to tag variants linked to genes of interest and update existing gene-level annotations from SnpEff or bcftools.</p>
 <div class="section" id="basic-usage">
 <h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GREEN-VARAN.py  <span class="o">[</span>-h<span class="o">]</span> -i VCF -o OUTPUT -b <span class="o">{</span>GRCh37,GRCh38<span class="o">}</span> -m
-                <span class="o">{</span>annotate,filter_regdb,filter_any<span class="o">}</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>greenvaran <span class="o">[</span>run mode<span class="o">]</span> <span class="o">[</span>options<span class="o">]</span>
 </pre></div>
 </div>
-<p>The basic mode of run is to annotate variants with information from the GREEN-DB
-and then output all variants or just annotated ones based on the selected running mode.</p>
-<p>The running mode (-m, –mode) can be set to:</p>
+<p>The running mode can be one of:</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt>annotate</dt><dd><p>In this mode the tool will perform a standard annotation.
-It will annotate variants with required information and
-then output all variants form the original VCF</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>filter_regdb</dt><dd><p>In this mode the tool will annotate variants with required information
-but only variants that overlap one of the GREEN-DB regions will be outputted</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>filter_any</dt><dd><p>This mode acts similar to filter_regdb, but a variant is present in the output
-if it overlaps a GREEN-DB region or any of the additional functional regions (TFBS, DNase, UCNE, dbSuper)</p>
-</dd>
-</dl>
-</li>
+<li><p>smallvars
+In this mode the tool will perform annotation for a small variants VCF.
+It will annotate variants with information on the possible regulatory role based on GREENDB and eventually provide prioritization levels</p></li>
+<li><p>sv
+In this mode the tool will perform annotation for a structural variants VCF.
+Capability in this case is limited to annotation of overlapping GREENDB regions and controlled genes. No prioritization is provided</p></li>
+<li><p>querytab
+This mode is a convenient way to automatically prepare input table to be used with the query tool to exctract detailed information from GREENDB database.</p></li>
+<li><p>version
+Print the tool version</p></li>
 </ul>
-<p><strong>NB.</strong> Annotations requires GREEN-DB and accessory BED files to be present in the resources folder.
-The default location is <code class="docutils literal notranslate"><span class="pre">resources/bed_files</span></code> within the tool folder, but you can provide a different location using <code class="docutils literal notranslate"><span class="pre">--bed_dir</span></code></p>
+<p><strong>NB.</strong> To perform prioritization of small variants some additional annotation fields are expected in the input VCF, see the prioritization section below.
+By default, when these information are not present the prioritization level will be set to zero for all annotated variants.
+We also provide pre-processed datasets and Nextflow workflow to automate the whole process (see #TODO nextflow workflow page).</p>
 </div>
-<div class="section" id="prioritization">
-<h2>Prioritization<a class="headerlink" href="#prioritization" title="Permalink to this headline">¶</a></h2>
-<p>If prioritization is active (-p, –prioritize), an additional NC_VARCLASS field will be added.
-This fields is an integer from 0 to 13 wich summarize evidences supporting a regulatory impact for the variant.
+<div class="section" id="command-line-options">
+<h2>Command line options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="smallvars-and-sv-shared-options">
+<h3>smallvars and sv shared options<a class="headerlink" href="#smallvars-and-sv-shared-options" title="Permalink to this headline">¶</a></h3>
+<dl class="option-list">
+<dt><kbd><span class="option">-i</span>, <span class="option">--invcf <var>INVCF</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">path to indexed input vcf.gz/bcf.</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-o</span>, <span class="option">--outvcf <var>OUTVCF</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">output vcf / vcf.gz file</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-d</span>, <span class="option">--db <var>DB</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">GREEN-DB bed.gz file for your build (see download section)</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-s</span>, <span class="option">--dbschema <var>DBSCHEMA</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">json file containig greendb column mapping</div>
+<div class="line">A default configuration for GREENDB v2.5 is available in config folder</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-u</span>, <span class="option">--noupdate</span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">do not update ANN / BCSQ field in the input VCF</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-f</span>, <span class="option">--filter</span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">filter instead of annotate. Only variants with greendb overlap will be written.</div>
+<div class="line">If –genes is active, the output will contain only variants connected to the input genes of interest</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-m</span>, <span class="option">--impact <var>IMPACT</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Which impact to assign when updating snpEff field</div>
+<div class="line">Possible values: [HIGH, MODERATE, LOW, MODIFIER] (default: MODIFIER)</div>
+</div>
+</dd>
+<dt><kbd><span class="option">--chrom <var>CHROM</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Annotate only for a specific chromosome</div>
+<div class="line">Useful to parallelize across chromosomes</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-g</span>, <span class="option">--genes <var>GENES</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Gene symbols for genes of interest, variants connected to those will be flagged with greendb_VOI tag</div>
+<div class="line">This can be a comma-separated list or a text file listing genes one per line</div>
+</div>
+</dd>
+<dt><kbd><span class="option">--connection <var>CONNECTION</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Region-gene connections accepted for annotation</div>
+<div class="line">Possible values: [all, closest, annotated] (default: all)</div>
+</div>
+</dd>
+<dt><kbd><span class="option">--log <var>LOG</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Log file. Default is greenvaran_[now].log</div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="sv-specific-options">
+<h3>sv specific options<a class="headerlink" href="#sv-specific-options" title="Permalink to this headline">¶</a></h3>
+<dl class="option-list">
+<dt><kbd><span class="option">-p</span>, <span class="option">--padding <var>PADDING</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Value to add on each side of BND/INS, this override the CIPOS when set</div>
+</div>
+</dd>
+<dt><kbd><span class="option">--cipos <var>CIPOS</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">INFO field listing the confidence interval around breakpoints</div>
+<div class="line">It is expected to have 2 comma-separated values (default: CIPOS)</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-t</span>, <span class="option">--minoverlap <var>MINOVERLAP</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Min fraction of GREENDB region to be overlapped by a SV (default: 0.000001)</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-b</span>, <span class="option">--minbp <var>MINBP</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Min number of bases of GREENDB region to be overlapped by a SV (default: 1)</div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="smallvars-specific-options">
+<h3>smallvars specific options<a class="headerlink" href="#smallvars-specific-options" title="Permalink to this headline">¶</a></h3>
+<dl class="option-list">
+<dt><kbd><span class="option">-c</span>, <span class="option">--config <var>CONFIG</var></span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">json config file for prioritization</div>
+<div class="line">A default configuration for the four level described in the paper is provided in config folder</div>
+</div>
+</dd>
+<dt><kbd><span class="option">-p</span>, <span class="option">--permissive</span></kbd></dt>
+<dd><div class="line-block">
+<div class="line">Perform prioritization even if one of the INFO fields required by prioritization config is missing</div>
+<div class="line">By default, when one of the expeced fields is not defined in the header, the prioritization is disabled and all variants will get level zero</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="annotations-added-by-green-varan">
+<h2>Annotations added by GREEN-VARAN<a class="headerlink" href="#annotations-added-by-green-varan" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="info-fields">
+<h3>INFO fields<a class="headerlink" href="#info-fields" title="Permalink to this headline">¶</a></h3>
+<p>Fields in the following table are added to INFO fields by GREEN-VARAN. greendb_level will be added only for small variants</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Annotation tag</p></th>
+<th class="head"><p>Data type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>greendb_id</p></td>
+<td><p>String</p></td>
+<td><p>Comma-separated list of GREEN-DB IDs identifying the regions that overlap this variant</p></td>
+</tr>
+<tr class="row-odd"><td><p>greendb_stdtype</p></td>
+<td><p>String</p></td>
+<td><p>Comma-separated list of standard region types as annotated in GREEN-DB for regions overlapping the variant</p></td>
+</tr>
+<tr class="row-even"><td><p>greendb_dbsource</p></td>
+<td><p>String</p></td>
+<td><p>Comma-separated list of data sources as annotated in GREEN-DB for regions overlapping the variant</p></td>
+</tr>
+<tr class="row-odd"><td><p>greendb_level</p></td>
+<td><p>Integer</p></td>
+<td><p>Variant prioritization level computed by GREEN-VARAN. See Prioritization section below</p></td>
+</tr>
+<tr class="row-even"><td><p>greendb_constraint</p></td>
+<td><p>Float</p></td>
+<td><p>The maximum constraint value across GREEN-DB regions overlapping the variant</p></td>
+</tr>
+<tr class="row-odd"><td><p>greendb_genes</p></td>
+<td><p>String</p></td>
+<td><p>Possibly controlled genes for regulatory regions overlapping this variant</p></td>
+</tr>
+<tr class="row-even"><td><p>greendb_VOI</p></td>
+<td><p>Flag</p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">--genes</span></code> option is active this flag is set when any of the input genes is among the possibly controlled genes for overlapping regulatory regions.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="updated-gene-consequences">
+<h3>Updated gene consequences<a class="headerlink" href="#updated-gene-consequences" title="Permalink to this headline">¶</a></h3>
+<p>By default, GREEN-VARAN update gene consequences in the SnpEff ANN field or the bcftools BCSQ if one is present in the input VCF file.
+In this way the annotation can be processed by most downstream tools evaluating segregation.
+If none is found, GREEN-VARAN will create a new ANN field. To switch off gene consequence update use the <code class="docutils literal notranslate"><span class="pre">--noupdate</span></code> option.</p>
+<p>Here the tool will add one a new consequence for each possibly controlled genes, limited by the <code class="docutils literal notranslate"><span class="pre">--connection</span></code> option.
+The new consequence will follow standard format according to SnpEff or bcftools and have MODIFIER impact by default.
+This can be adjusted using the <code class="docutils literal notranslate"><span class="pre">--impact</span></code> option.
+The gene effect will be set according to the GREEN-DB region type, adding 5 new terms: <cite>bivalent, enhancer, insulator, promoter, silencer</cite>.</p>
+<p>Example ANN / BCSQ field added by GREEN-VARAN.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ANN</span><span class="o">=</span>C<span class="p">|</span>enhancer<span class="p">|</span>MODIFIER<span class="p">|</span>GeneA<span class="o">||||||||||||</span>
+<span class="nv">BCQS</span><span class="o">=</span>enhancer<span class="p">|</span>GeneA<span class="o">||</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="prioritization-of-small-variants">
+<h2>Prioritization of small variants<a class="headerlink" href="#prioritization-of-small-variants" title="Permalink to this headline">¶</a></h2>
+<p>GREEN-VARAN will consider GREEN-DB annotations, additional functional regions and non-coding impact prediction scores to provide a prioritization level for each annotated variant.
+This level is annotated under greenvara_level tag in the INFO field.
+This fields is an integer from 0 to N wich summarize evidences supporting a regulatory impact for the variant.
 Higher values are associated to a higher probability of regulatory impact.</p>
-<p><strong>NB.</strong> You need ReMM, FATHMM-MKL and NCBoost scores available to run priotization mode.
-These scores will be automatically addedd to annotations when prioritization mode is activated.</p>
-<p>Levels are based on GREEN-DB annotation and 3 prediction scores (ReMM, FATHMM-MKL, NCBoost).
-The FDR50 and TPR90 thresholds are defined in the GREEN-VARAN paper.</p>
+<p><strong>NB.</strong> You need teh following INFO fields in your input VCF to run priotization mode as described in the GREEN-DB manuscript
+using the default config provided.</p>
+<ol class="arabic simple">
+<li><p>gnomAD_AF, gnomAD_AF_nfe float values describing global and NFE population AF from gnomAD</p></li>
+<li><p>ncER, FATHMM-MKL and ReMM float values providing scores predictions</p></li>
+<li><p>TFBS, DNase and UCNE flags describing overlap with additional functional regions</p></li>
+</ol>
+<p>This configuration resembles the four levels prioritization described in the GREEN-DB manuscript.
+Note that the exact names of these annotations and the score thresholds are defined in the json file passed to –config options.</p>
+<p>The following table summarizes the four prioritization levels defined in the manuscript and in the default config file.</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 8%" />
-<col style="width: 25%" />
-<col style="width: 23%" />
-<col style="width: 18%" />
-<col style="width: 26%" />
+<col style="width: 4%" />
+<col style="width: 96%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Level</p></th>
-<th class="head"><p>1 score above threshold
-(ReMM,FATHMM-MKL,NCBoost)</p></th>
-<th class="head"><p>Overlap GREEN-DB region</p></th>
-<th class="head"><p>GREEN-DB
-constraint &gt;= 0.9</p></th>
-<th class="head"><p>Overlap any of
-TFBS, DNase, UCNE, dbSuper</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>13</p></td>
-<td><p>FDR50</p></td>
-<td><p>X</p></td>
-<td><p>X</p></td>
-<td><p>X</p></td>
-</tr>
-<tr class="row-odd"><td><p>12</p></td>
-<td><p>FDR50</p></td>
-<td><p>X</p></td>
-<td><p>X</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>11</p></td>
-<td><p>FDR50</p></td>
-<td><p>X</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>10</p></td>
-<td><p>TPR90</p></td>
-<td><p>X</p></td>
-<td><p>X</p></td>
-<td><p>X</p></td>
-</tr>
-<tr class="row-even"><td><p>9</p></td>
-<td><p>TPR90</p></td>
-<td><p>X</p></td>
-<td><p>X</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>8</p></td>
-<td><p>TPR90</p></td>
-<td><p>X</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>7</p></td>
-<td><p>FDR50</p></td>
-<td></td>
-<td></td>
-<td><p>X</p></td>
-</tr>
-<tr class="row-odd"><td><p>6</p></td>
-<td><p>TPR90</p></td>
-<td></td>
-<td></td>
-<td><p>X</p></td>
-</tr>
-<tr class="row-even"><td><p>5</p></td>
-<td></td>
-<td><p>X</p></td>
-<td><p>X</p></td>
-<td><p>X</p></td>
-</tr>
-<tr class="row-odd"><td><p>4</p></td>
-<td></td>
-<td><p>X</p></td>
-<td><p>X</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>3</p></td>
-<td></td>
-<td><p>X</p></td>
-<td></td>
-<td></td>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Rare variant (population AF &lt; 1%) overlapping one of GREEN-DB regions</p></td>
 </tr>
 <tr class="row-odd"><td><p>2</p></td>
-<td><p>FDR50</p></td>
-<td></td>
-<td></td>
-<td></td>
+<td><p>Level 1 criteria and overlap at least one functional element among transcription factors binding sites (TFBS), DNase peaks, ultra conserved elements (UCNE)</p></td>
 </tr>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>TPR90</p></td>
-<td></td>
-<td></td>
-<td></td>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Level 2 criteria and prediction score value above the suggested FDR50 threshold for at least one among ncER, FATHMM MKL, ReMM</p></td>
 </tr>
-<tr class="row-odd"><td><p>0</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Level 3 critera and region constraint value greater or equal 0.7</p></td>
 </tr>
 </tbody>
 </table>
+<div class="section" id="personalize-the-prioritization-schema">
+<h3>Personalize the prioritization schema<a class="headerlink" href="#personalize-the-prioritization-schema" title="Permalink to this headline">¶</a></h3>
+<p>The prioritization schema is defined in a config json file. The default is provided in the config folder.
+An example of expected file structure is reported below</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;af&quot;</span>: <span class="o">[</span><span class="s2">&quot;gnomAD_AF&quot;</span>,<span class="s2">&quot;gnomAD_AF_nfe&quot;</span><span class="o">]</span>,
+    <span class="s2">&quot;maxaf&quot;</span>: <span class="m">0</span>.01,
+    <span class="s2">&quot;regions&quot;</span>: <span class="o">[</span><span class="s2">&quot;TFBS&quot;</span>, <span class="s2">&quot;DNase&quot;</span>, <span class="s2">&quot;UCNE&quot;</span><span class="o">]</span>,
+    <span class="s2">&quot;scores&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;FATHMM_MKLNC&quot;</span>: <span class="m">0</span>.908,
+        <span class="s2">&quot;ncER&quot;</span>: <span class="m">98</span>.6,
+        <span class="s2">&quot;ReMM&quot;</span>: <span class="m">0</span>.963
+    <span class="o">}</span>,
+    <span class="s2">&quot;constraint&quot;</span>: <span class="m">0</span>.7,
+    <span class="s2">&quot;more_regions&quot;</span>: <span class="o">[]</span>,
+    <span class="s2">&quot;more_values&quot;</span>: <span class="o">{}</span>
+<span class="o">}</span>
+</pre></div>
 </div>
-<div class="section" id="gene-mode">
-<h2>Gene mode<a class="headerlink" href="#gene-mode" title="Permalink to this headline">¶</a></h2>
-<p>The gene mode allows to annotate / filter regulatory variants if they potentially affect a gene of interest.
-Using the information on controlled / closest genes from GREEN-DB the tool will select only variants affecting a region
-that is associated to gene(s) of interest.</p>
-<p><strong>1. Activate the gene mode</strong></p>
-<p>Gene mode is activated using the <code class="docutils literal notranslate"><span class="pre">-g,</span> <span class="pre">--gene_mode</span></code> option which can be set to:</p>
+<p>Sections definitions:</p>
+<ol class="arabic simple">
+<li><p>af: INFO fields containing AF annotations. The tool will consider the max value across all these</p></li>
+<li><p>maxaf: if the max value across af fields is below this, the variant get +1 point</p></li>
+<li><p>regions: INFO fields for overlapping regions. If any of these is set, the variant get +1 point</p></li>
+<li><p>scores: series of key, value pairs. If any of key value is above the configured value, the variant get +1 point</p></li>
+<li><p>constraint: if the max constraint value across overlapping GREEN-DB regions is above this value, the variant get +1 point</p></li>
+<li><p>more_regions: any additional INFO fields representing overlap with custom regions. The variant get +1 point for each positive overlap</p></li>
+<li><p>more_values: series of key, value pairs. The variant get +1 point fro each key value above the configured value</p></li>
+</ol>
+<p><strong>NB.</strong> more_regions and more_values must always been present. Leave them empty like in the example above if you don’t want to configure any custom value.</p>
+<p><strong>NB2.</strong> INFO fields specified by af, scores and more_values are expected to be float, while those specified by regions and more_regions are expected as flags.</p>
+</div>
+</div>
+<div class="section" id="structural-variants-annotations">
+<h2>structural variants annotations<a class="headerlink" href="#structural-variants-annotations" title="Permalink to this headline">¶</a></h2>
+<p>The annotation of structural variants is based on overlap with the regulatory regions defined in GREEN-DB.
+This is treated differently according to the SV type:</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt>annotate</dt><dd><p>NC_VOI=1 annotation will be added to variants potentially affecting the gene(s) of interest</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>filter</dt><dd><p>Only variants potentially affecting the gene(s) of interest will be present in the output</p>
-</dd>
-</dl>
-</li>
+<li><p>For <strong>DEL, DUP, INV</strong> an interval is constructed based on position field and the END info field from INFO.
+When END is missing, the tool will try to use SVLEN instead. If none is not found the variant is not annotated
+The user can then set a minimum level of overlap as either overlap fraction (<code class="docutils literal notranslate"><span class="pre">--minoverlap</span></code>) or N bp overlap (<code class="docutils literal notranslate"><span class="pre">--minbp</span></code>).
+A GREEN-DB region is added to annotation only if its overlapping porting is larger or equal to both threshold</p></li>
+<li><p>For <strong>INS and BND</strong>, an interval is constructed using the position and the coordinates in the CIPOS field (an alternative field can be set using <code class="docutils literal notranslate"><span class="pre">--cipos</span></code>).
+This is done since INS and BND are often represented as single positions in structural variants VCF.
+Alternatively, the user can provide a padding values using <code class="docutils literal notranslate"><span class="pre">--padding</span></code> and this value will be added aroud position
+For these kind of variants any overlapping GREEN-DB region will be reported, diregarding the overlap threasholds</p></li>
 </ul>
-<p>Using <code class="docutils literal notranslate"><span class="pre">-t,</span> <span class="pre">--gene_type</span></code> user can select which region-genes association should be considered to determine the affected genes.
-Accepted values are:</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>controlled</dt><dd><p>For each region, only gene(s) controlled according to experimental data in GREEN-DB will be considered</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>closest</dt><dd><p>For each region, only the closest gene(s) will be considered</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>both</dt><dd><p>For each region, both controlled and closest gene(s) are considered</p>
-</dd>
-</dl>
-</li>
-</ul>
-<p><strong>2. Set gene of interest or impact</strong></p>
-<p>When gene mode is active you can provide a list of genes of interest using <code class="docutils literal notranslate"><span class="pre">-l,</span> <span class="pre">--gene_list</span></code>.</p>
-<p>The argument accepts a comma-separated list of gene symbols (like CFTR,BRCA1,BRCA2) or a text file containing genes one per line.
-Regulatory variants associated to one of the gene in your list will be annotated / filtered as “variants of interest”</p>
-<p>Using the <code class="docutils literal notranslate"><span class="pre">--impact</span></code> option, you can annotate / filter variants with a potential effect on a gene already affected
-by a coding variants with a minimum impact.
-The option accept the minimum impact level according to SnpEFF: HIGH,MODERATE,LOW,MODIFIER.
-Note that when this option is active the tool will first scan your input VCF and collect the list of genes with at least 1 variant of the
-given impact. This can slow down the whole process, since VCF need to be read twice.</p>
-<p><strong>NB.</strong> Gene list and impact settings act together so if both are activated only variants passing both
-will be considered as “variant of interest” and annotated / filtered</p>
 </div>
-<div class="section" id="activate-additional-annotations">
-<h2>Activate additional annotations<a class="headerlink" href="#activate-additional-annotations" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="prediction-scores">
-<h3>Prediction scores<a class="headerlink" href="#prediction-scores" title="Permalink to this headline">¶</a></h3>
-<p>You can annotate variants using 13 different prediction scores and PhyloP100 conservartion score. To activate one ore more of these annotations use the
-<code class="docutils literal notranslate"><span class="pre">-s,</span> <span class="pre">--scores</span></code> option providing a single score name. The option can be repeated multiple time to add more scores.
-Alternatively, you can set <code class="docutils literal notranslate"><span class="pre">--allscores</span></code> to activate all scores. Note that annotating with all scores can slow down the annotation
-considerably. Our suggestion for rare variants is to use ReMM, NCBoost and LinSight.</p>
-<p><strong>NB.</strong> Score annotations requires the corresponding tables from GREEN-VARAN release to be present in the resources folder.
-Default location is <code class="docutils literal notranslate"><span class="pre">resources\scores</span></code> within the tool folder, but you can set a different one using <code class="docutils literal notranslate"><span class="pre">--scores_dir</span></code></p>
-<p>Available scores included with the GREEN-VARAN releass</p>
-</div>
-<div class="section" id="population-allele-frequency">
-<h3>Population allele frequency<a class="headerlink" href="#population-allele-frequency" title="Permalink to this headline">¶</a></h3>
-<p>You can annotate population allele frequency from gnomAD genomes using <code class="docutils literal notranslate"><span class="pre">--allelefreq</span></code> to set the desired population.
-The option accept standard population codes (afr,amr,eas,fin,nfe,sas,oth) or global for global AF.</p>
-<p><strong>NB.</strong> This option requires gnomAD VCF file. A simplified version is provided with GREEN-VARAN release or you can specify
-a different location using <code class="docutils literal notranslate"><span class="pre">--AF_file</span></code></p>
+<div class="section" id="singularity">
+<h2>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h2>
+<p>The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as Singularity image (tested on singularity &gt;= 3.2).
+A Singularity recipe is included in the repository or you can pull the image from Singularity Library using</p>
+<p><code class="docutils literal notranslate"><span class="pre">singularity</span> <span class="pre">pull</span> <span class="pre">library://edg1983/greenvaran/greenvaran:latest</span></code></p>
+<div class="section" id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<p>The image contains both greenvaran and greendb_query tools.
+The general usage is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity <span class="nb">exec</span> <span class="se">\</span>
+greenvaran.sif <span class="se">\</span>
+tool_name <span class="o">[</span>tool arguments<span class="o">]</span>
+</pre></div>
 </div>
 </div>
-<div class="section" id="fields-added-to-info">
-<h2>Fields added to INFO<a class="headerlink" href="#fields-added-to-info" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="green-db-related-fields">
-<h3>GREEN-DB related fields<a class="headerlink" href="#green-db-related-fields" title="Permalink to this headline">¶</a></h3>
-<p>Fields in the following table are added to INFO fields when <code class="docutils literal notranslate"><span class="pre">--separate_fields</span></code> option is active.
-Otherwise, they are collpsed in a single NC_ANNO field, separated by pipe symbol <code class="docutils literal notranslate"><span class="pre">NC_ANNO=NC_support|NC_regionID|...</span></code></p>
-<table class="colwidths-given docutils align-default">
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Annotation tag</p></th>
-<th class="head"><p>Data type</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>NC_support</p></td>
-<td><p>Float</p></td>
-<td><p>Sum of max NC_constraint; NC_methods; NC_median_PhyloP100 positive values and binary values for presence/absence of NC_genes; NC_TFname; NC_DNase; NC_UCNE; NC_dbSUPER</p></td>
-</tr>
-<tr class="row-odd"><td><p>NC_regionID</p></td>
-<td><p>String</p></td>
-<td><p>Comma separated list of GREEN-DB region IDs for regions overlapping the variants</p></td>
-</tr>
-<tr class="row-even"><td><p>NC_region_type</p></td>
-<td><p>String</p></td>
-<td><p>Comma separated list of region types for regions overlapping the variants</p></td>
-</tr>
-<tr class="row-odd"><td><p>NC_constraint</p></td>
-<td><p>Float</p></td>
-<td><p>The maximum constraint value for GREEN-DB regions overlapping the variant</p></td>
-</tr>
-<tr class="row-even"><td><p>NC_methods</p></td>
-<td><p>Integer</p></td>
-<td><p>Number of methods supporting this location as regulatory regions; calculated as the number of distinct methods supporting the GREEN-DB regions overlapping the variant</p></td>
-</tr>
-<tr class="row-odd"><td><p>NC_genes</p></td>
-<td><p>String</p></td>
-<td><p>Comma separated list of controlled genes from GREEN-DB</p></td>
-</tr>
-<tr class="row-even"><td><p>NC_closestGene</p></td>
-<td><p>String</p></td>
-<td><p>Comma separated list of the closest genes from GREEN-DB</p></td>
-</tr>
-<tr class="row-odd"><td><p>NC_closestGene_dist</p></td>
-<td><p>Integer</p></td>
-<td><p>Comma separated list of the distance of the closest genes from GREEN-DB</p></td>
-</tr>
-<tr class="row-even"><td><p>NC_closestProt</p></td>
-<td><p>String</p></td>
-<td><p>Comma separated list of the closest protein-coding genes from GREEN-DB</p></td>
-</tr>
-<tr class="row-odd"><td><p>NC_closestProt_dist</p></td>
-<td><p>Integer</p></td>
-<td><p>Comma separated list of the distance of the closest protein-coding genes from GREEN-DB</p></td>
-</tr>
-<tr class="row-even"><td><p>NC_tolerant_P</p></td>
-<td><p>Float</p></td>
-<td><p>Maximum value of variant tolerant P across regions overlapping the variant</p></td>
-</tr>
-<tr class="row-odd"><td><p>NC_tolerant_label</p></td>
-<td><p>String</p></td>
-<td><p>Comma separated list of TOLERANT/INTOLERANT labels based on LoF tolerance probability across regions overlapping the variant</p></td>
-</tr>
-<tr class="row-even"><td><p>NC_median_PhyloP100</p></td>
-<td><p>Float</p></td>
-<td><p>Maximum value of median PhyloP100 across GREEN-DB regions overlapping the variant</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="additional-fields">
-<h3>Additional fields<a class="headerlink" href="#additional-fields" title="Permalink to this headline">¶</a></h3>
-<p>The following fields are always added as separated fields in the INFO column</p>
-<table class="colwidths-given docutils align-default">
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Annotation tag</p></th>
-<th class="head"><p>Data type</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>NC_TFname</p></td>
-<td><p>String</p></td>
-<td><p>Comma separated list of transcription factors binding at the variant location</p></td>
-</tr>
-<tr class="row-odd"><td><p>NC_DNase</p></td>
-<td><p>Integer</p></td>
-<td><p>Binary value representing the presence of a DNase HS site at the variant location</p></td>
-</tr>
-<tr class="row-even"><td><p>NC_UCNE</p></td>
-<td><p>Integer</p></td>
-<td><p>Binary value representing the presence of a UCNE at the variant location</p></td>
-</tr>
-<tr class="row-odd"><td><p>NC_dbSUPER</p></td>
-<td><p>Integer</p></td>
-<td><p>Binary value representing the presence of a dbSuper cluster at the variant location</p></td>
-</tr>
-<tr class="row-even"><td><p>NC_VOI</p></td>
-<td><p>Integer</p></td>
-<td><p>When gene mode is active this is set to one for variants overlapping a GREEN-DB region controlling a gene of interest</p></td>
-</tr>
-<tr class="row-odd"><td><p>NC_VARCLASS</p></td>
-<td><p>Integer</p></td>
-<td><p>When prioritize mode is active this value is set to the prioritization level (0-13)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="scores-fields">
-<h3>Scores fields<a class="headerlink" href="#scores-fields" title="Permalink to this headline">¶</a></h3>
-<p>When you activate annotation for a prediction/conservation scores the correponding field is added to INFO column.
-Each field is in the for <code class="docutils literal notranslate"><span class="pre">NC_scorename=value</span></code></p>
+<div class="section" id="bind-specific-folders-for-resources-or-data">
+<h3>Bind specific folders for resources or data<a class="headerlink" href="#bind-specific-folders-for-resources-or-data" title="Permalink to this headline">¶</a></h3>
+<p>The tool needs access to input VCF file, required GREEN-DB bed file and config files so remember to bind the corresponding locations in the container</p>
+<p>See the following example where we use the current working directory for input/output, while other files are located
+in the default config / resources folder within greenvaran folder. In the example we use GRCh38 genome build</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity <span class="nb">exec</span> <span class="se">\</span>
+--bind /greenvaran_path/resources/GRCh38:/db_files <span class="se">\</span>
+--bind /greenvaran_path/config:/config_files <span class="se">\</span>
+--bind <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/data <span class="se">\</span>
+greenvaran.sif <span class="se">\</span>
+greenvaran -i /data/input.vcf.gz <span class="se">\</span>
+-o /data/output.vcf.gz <span class="se">\</span>
+--db /db_files/GRCh38_GREEN-DB.bed.gz <span class="se">\</span>
+--dbschema /config_files/greendb_schema_v2.5.json <span class="se">\</span>
+--config /config_files/prioritize_smallvars.json
+<span class="o">[</span>additional tool arguments<span class="o">]</span>
+</pre></div>
 </div>
 </div>
-<div class="section" id="arguments-list">
-<h2>Arguments list<a class="headerlink" href="#arguments-list" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="mandatory-arguments">
-<h3>Mandatory Arguments<a class="headerlink" href="#mandatory-arguments" title="Permalink to this headline">¶</a></h3>
-<dl class="option-list">
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Shows help message and exit</div>
 </div>
-</dd>
-<dt><kbd><span class="option">-i <var>VCF</var></span>, <span class="option">--vcf <var>VCF</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Input vcf[.gz] file</div>
+<div class="section" id="example-usage">
+<h2>Example usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="small-variants-test">
+<h3>small variants test<a class="headerlink" href="#small-variants-test" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>greenvaran smallvars <span class="se">\</span>
+--invcf test/VCF/GRCh38.test.smallvars.vcf.gz <span class="se">\</span>
+--outvcf test/out/smallvars.annotated.vcf.gz <span class="se">\</span>
+--config config/prioritize_smallvars.json <span class="se">\</span>
+--dbschema config/greendb_schema_v2.5.json <span class="se">\</span>
+--db resources/GRCh38/GRCh38_GREEN-DB.bed.gz <span class="se">\</span>
+--genes test/VCF/genes_list_example.txt
+</pre></div>
 </div>
-</dd>
-<dt><kbd><span class="option">-o <var>OUTPUT</var></span>, <span class="option">--output <var>OUTPUT</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">VCF output file (at the moment only support plain VCF output)</div>
 </div>
-</dd>
-<dt><kbd><span class="option">-b <var>BUILD</var></span>, <span class="option">--build <var>BUILD</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Possible values: <code class="docutils literal notranslate"><span class="pre">{GRCh37,GRCh38}</span></code></div>
-<div class="line">Specify the genome build of input VCF</div>
+<div class="section" id="structural-variants-test">
+<h3>structural variants test<a class="headerlink" href="#structural-variants-test" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>greenvaran sv <span class="se">\</span>
+--invcf test/VCF/GRCh38.test.SV.vcf.gz <span class="se">\</span>
+--outvcf test/out/SV.annotated.vcf.gz <span class="se">\</span>
+--dbschema config/greendb_schema_v2.5.json <span class="se">\</span>
+--db resources/GRCh38/GRCh38_GREEN-DB.bed.gz <span class="se">\</span>
+--minbp <span class="m">10</span>
+</pre></div>
 </div>
-</dd>
-<dt><kbd><span class="option">-m <var>MODE</var></span>, <span class="option">--mode <var>MODE</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Possible values: <code class="docutils literal notranslate"><span class="pre">{annotate,filter_regdb,filter_any}</span></code></div>
-<div class="line">Set the running mode</div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="section" id="additional-annotations-scores-af">
-<h3>Additional annotations (scores, AF)<a class="headerlink" href="#additional-annotations-scores-af" title="Permalink to this headline">¶</a></h3>
-<dl class="option-list">
-<dt><kbd><span class="option">--allelefreq <var>POP_CODE</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Possible values: <code class="docutils literal notranslate"><span class="pre">{global,afr,amr,eas,fin,nfe,sas,oth}</span></code></div>
-<div class="line">Add gnomAD AF annotations based on global AF or specific population</div>
-</div>
-</dd>
-<dt><kbd><span class="option">-s <var>SCORE_NAME</var></span>, <span class="option">--scores <var>SCORE_NAME</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Possible values: <code class="docutils literal notranslate"><span class="pre">{ReMM,FIRE,LinSight,ExPECTO,NCBoost,DANN,CADD}</span></code></div>
-<div class="line">Add selected prediction score for non-coding vars. Repeat to add multiple scores</div>
-</div>
-</dd>
-<dt><kbd><span class="option">-a</span>, <span class="option">--allscores</span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Add all prediction score for non-coding vars (ReMM,FIRE,LinSight,ExPECTO,NCBoost)</div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="section" id="prioritize">
-<h3>Prioritize<a class="headerlink" href="#prioritize" title="Permalink to this headline">¶</a></h3>
-<dl class="option-list">
-<dt><kbd><span class="option">-p</span>, <span class="option">--prioritize</span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Turn on prioritization for non-coding variants</div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="section" id="gene-based-annotations">
-<h3>Gene based annotations<a class="headerlink" href="#gene-based-annotations" title="Permalink to this headline">¶</a></h3>
-<dl class="option-list">
-<dt><kbd><span class="option">-g <var>GENE_MODE</var></span>, <span class="option">--gene_mode <var>GENE_MODE</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Possible values: <code class="docutils literal notranslate"><span class="pre">{annotate,filter}</span></code></div>
-<div class="line">Activate gene based annotation/filter</div>
-</div>
-</dd>
-<dt><kbd><span class="option">-t <var>GENE_TYPE</var></span>, <span class="option">--gene_type <var>GENE_TYPE</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Possible values: {controlled,closest,both}</div>
-<div class="line">DEFAULT: <code class="docutils literal notranslate"><span class="pre">controlled</span></code></div>
-<div class="line">Which genes to consider for NC regions</div>
-</div>
-</dd>
-<dt><kbd><span class="option">-l <var>GENES_LIST</var></span>, <span class="option">--genes_list <var>GENES_LIST</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">List of genes of interest, can be comma-separated list or file with one gene per line</div>
-</div>
-</dd>
-<dt><kbd><span class="option">--impact <var>MIN_IMPACT</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Possible values: <code class="docutils literal notranslate"><span class="pre">{HIGH,MODERATE,LOW,MODIFIER}</span></code></div>
-<div class="line">Only report NC vars if the controlled at least this impact</div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="section" id="customize-files-locations">
-<h3>Customize files locations<a class="headerlink" href="#customize-files-locations" title="Permalink to this headline">¶</a></h3>
-<dl class="option-list">
-<dt><kbd><span class="option">--vcfanno <var>VCFANNO</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Full path to vcfanno executable</div>
-</div>
-</dd>
-<dt><kbd><span class="option">--bed_dir <var>BED_DIR</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Directory containing RegDB bed files</div>
-</div>
-</dd>
-<dt><kbd><span class="option">--AF_file <var>AF_FILE</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Full path to gnomAD VCF for AF annotation</div>
-</div>
-</dd>
-<dt><kbd><span class="option">--scores_dir <var>SCORES_DIR</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Directory containing prediction scores tables</div>
-</div>
-</dd>
-<dt><kbd><span class="option">--logfile <var>LOGFILE</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Log file</div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="section" id="additional-arguments">
-<h3>Additional Arguments<a class="headerlink" href="#additional-arguments" title="Permalink to this headline">¶</a></h3>
-<dl class="option-list">
-<dt><kbd><span class="option">--separate_fields</span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Make multiple fields instead of a single NC_ANNO annotation</div>
-</div>
-</dd>
-<dt><kbd><span class="option">--threads <var>THREADS</var></span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">Number of threads for vcfanno annotation</div>
-</div>
-</dd>
-<dt><kbd><span class="option">-w</span>, <span class="option">--overwrite</span></kbd></dt>
-<dd><div class="line-block">
-<div class="line">If set, overwrite output file if already exists</div>
-</div>
-</dd>
-</dl>
 </div>
 </div>
 </div>
@@ -689,7 +541,7 @@ Each field is in the for <code class="docutils literal notranslate"><span class=
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="SV_annotation_usage.html" class="btn btn-neutral float-right" title="SV_annotation tool usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="GREEN-DB_query_usage.html" class="btn btn-neutral float-right" title="greendb_query tool usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="GREEN_VARAN.html" class="btn btn-neutral float-left" title="GREEN-VARAN tool set" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

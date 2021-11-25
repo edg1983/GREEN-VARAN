@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="How to cite" href="how_to_cite.html" />
-    <link rel="prev" title="GREEN-DB_query tool usage" href="GREEN-DB_query_usage.html" /> 
+    <link rel="prev" title="GREEN-VARAN workflow" href="nextflow_workflow.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,7 +86,13 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="GREEN_DB.html">The GREEN-DB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="GREEN_VARAN.html">GREEN-VARAN tool set</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Download resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nextflow_workflow.html">GREEN-VARAN workflow</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Download resources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#greenvaran-tool">greenvaran tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#greendb-query-tool">greendb_query tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#green-varan-workflow">GREEN-VARAN workflow</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="how_to_cite.html">How to cite</a></li>
 </ul>
 
@@ -155,24 +161,33 @@
             
   <div class="section" id="download-resources">
 <h1>Download resources<a class="headerlink" href="#download-resources" title="Permalink to this headline">¶</a></h1>
-<p>To perform annotations GREEN-VARAN tools require a series of supporting files.
-By default, various resources are expected in the <code class="docutils literal notranslate"><span class="pre">resources</span></code> folder within the tool folder.
-The expected folder structure in resources is as follow</p>
+<div class="section" id="greenvaran-tool">
+<h2>greenvaran tool<a class="headerlink" href="#greenvaran-tool" title="Permalink to this headline">¶</a></h2>
+<p>The greenvaran annotation tool only need the GREEN-DB BED file and index for your genome build available from
+<a class="reference external" href="https://zenodo.org/record/5636209">https://zenodo.org/record/5636209</a></p>
+</div>
+<div class="section" id="greendb-query-tool">
+<h2>greendb_query tool<a class="headerlink" href="#greendb-query-tool" title="Permalink to this headline">¶</a></h2>
+<p>The greendb query tool only need the GREEN-DB SQlite file (.db.gz) available from <a class="reference external" href="https://zenodo.org/record/5636209">https://zenodo.org/record/5636209</a>
+Remember to decompress this before use</p>
+</div>
+<div class="section" id="green-varan-workflow">
+<h2>GREEN-VARAN workflow<a class="headerlink" href="#green-varan-workflow" title="Permalink to this headline">¶</a></h2>
+<p>To perform annotations GREEN-VARAN Nextflow workflow requires a series of supporting files.
+By default, various resources are expected in the <code class="docutils literal notranslate"><span class="pre">resources</span></code> folder within the main tool folder.
+If you pass an alternative resource folder using <code class="docutils literal notranslate"><span class="pre">--resource_folder</span></code> option, the same structure is expected in this folder
+The expected folder structure is as follows and the expected file names are those listed in the Zenodo repository table below</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
 |-- SQlite
-|   `-- RegulatoryRegions.db
-|-- SV_annotations
-|   `-- BED files used for SV annotations
-|-- bed_files
-|   `-- GREEN-DB BED files
-|-- scores
-|   `--scores annotations
-`-- AF
-    `-- population AF annotations
+|   `-- GREEN-DB_v2.5.db
+|-- GRCh37
+|   `-- BED / TSV files used for GRCh37 genome build
+`-- GRCh38
+    `-- BED / TSV files used for GRCh38 genome build
 </pre></div>
 </div>
-<p>When you clone the GREEN-VARAN repository a prepare_resources.sh script is provided in resources folder
-to automatically download supporting files and setup the resources folder.</p>
+<p>When you clone the GREEN-VARAN repository you can use the Nextflow workflow <code class="docutils literal notranslate"><span class="pre">workflow/download.nf</span></code> to download files and prepare the resource folder.
+Use the <code class="docutils literal notranslate"><span class="pre">--list_data</span></code> option to see the full list of available resource and the expected path for each one.</p>
 <p>Otherwise, single files are available for download from Zenodo repository</p>
 <table class="colwidths-given docutils align-default">
 <colgroup>
@@ -182,8 +197,8 @@ to automatically download supporting files and setup the resources folder.</p>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Annotation</p></th>
-<th class="head"><p>Sub-folder</p></th>
-<th class="head"><p>Link</p></th>
+<th class="head"><p>Category</p></th>
+<th class="head"><p>File</p></th>
 </tr>
 </thead>
 <tbody>
@@ -273,7 +288,7 @@ to automatically download supporting files and setup the resources folder.</p>
 </tr>
 <tr class="row-odd"><td><p>GRCh37_FATHMM_MKL</p></td>
 <td><p>scores</p></td>
-<td><p><a class="reference external" href="https://zenodo.org/record/3981113/files/GRCh37_FATHMM-MKL_NC.tsv.gz">https://zenodo.org/record/3981113/files/GRCh37_FATHMM-MKL_NC.tsv.gz</a></p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3981113/files/GRCh37_FATHMM-MKL_NC.tsv.gz.csi">https://zenodo.org/record/3981113/files/GRCh37_FATHMM-MKL_NC.tsv.gz.csi</a></p></td>
 </tr>
 <tr class="row-even"><td><p>GRCh37_GWAVA</p></td>
 <td><p>scores</p></td>
@@ -290,6 +305,14 @@ to automatically download supporting files and setup the resources folder.</p>
 <tr class="row-odd"><td><p>GRCh37_gnomAD</p></td>
 <td><p>AF</p></td>
 <td><p><a class="reference external" href="https://zenodo.org/record/3957637/files/GRCh37_gnomad.genomes.vcf.gz.csi">https://zenodo.org/record/3957637/files/GRCh37_gnomad.genomes.vcf.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_ncER</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5636163/files/GRCh37_ncER_perc.bed.gz">https://zenodo.org/record/5636163/files/GRCh37_ncER_perc.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_ncER</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5636163/files/GRCh37_ncER_perc.bed.gz.csi">https://zenodo.org/record/5636163/files/GRCh37_ncER_perc.bed.gz.csi</a></p></td>
 </tr>
 <tr class="row-even"><td><p>GRCh38_CADD</p></td>
 <td><p>scores</p></td>
@@ -377,15 +400,103 @@ to automatically download supporting files and setup the resources folder.</p>
 </tr>
 <tr class="row-odd"><td><p>GRCh38_FATHMM_MKL</p></td>
 <td><p>scores</p></td>
-<td><p><a class="reference external" href="https://zenodo.org/record/3981121/files/GRCh38_FATHMM-MKL_NC.tsv.gz">https://zenodo.org/record/3981121/files/GRCh38_FATHMM-MKL_NC.tsv.gz</a></p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3981121/files/GRCh38_FATHMM-MKL_NC.tsv.gz.csi">https://zenodo.org/record/3981121/files/GRCh38_FATHMM-MKL_NC.tsv.gz.csi</a></p></td>
 </tr>
 <tr class="row-even"><td><p>GRCh38_GWAVA</p></td>
 <td><p>scores</p></td>
-<td><p><a class="reference external" href="https://zenodo.org/record/3956168/files/GRCh38_gwava.bed.gz">https://zenodo.org/record/3956168/files/GRCh38_gwava.bed.gz</a></p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3955933/files/GRCh38_gwava.bed.gz">https://zenodo.org/record/3955933/files/GRCh38_gwava.bed.gz</a></p></td>
 </tr>
 <tr class="row-odd"><td><p>GRCh38_GWAVA</p></td>
 <td><p>scores</p></td>
-<td><p><a class="reference external" href="https://zenodo.org/record/3956168/files/GRCh38_gwava.bed.gz.csi">https://zenodo.org/record/3956168/files/GRCh38_gwava.bed.gz.csi</a></p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/3955933/files/GRCh38_gwava.bed.gz.csi">https://zenodo.org/record/3955933/files/GRCh38_gwava.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_ncER</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5636163/files/GRCh38_ncER_perc.bed.gz">https://zenodo.org/record/5636163/files/GRCh38_ncER_perc.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_ncER</p></td>
+<td><p>scores</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5636163/files/GRCh38_ncER_perc.bed.gz.csi">https://zenodo.org/record/5636163/files/GRCh38_ncER_perc.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_TFBS</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh37_TFBS.merged.bed.gz">https://zenodo.org/record/5705936/files/GRCh37_TFBS.merged.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_TFBS</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh37_TFBS.merged.bed.gz.csi">https://zenodo.org/record/5705936/files/GRCh37_TFBS.merged.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_DNase</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh37_DNase.merged.bed.gz">https://zenodo.org/record/5705936/files/GRCh37_DNase.merged.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_DNase</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh37_DNase.merged.bed.gz.csi">https://zenodo.org/record/5705936/files/GRCh37_DNase.merged.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_UCNE</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh37_UCNE.bed.gz">https://zenodo.org/record/5705936/files/GRCh37_UCNE.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_UCNE</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh37_UCNE.bed.gz.csi">https://zenodo.org/record/5705936/files/GRCh37_UCNE.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_dbSuper</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh37_dbSuper.bed.gz">https://zenodo.org/record/5705936/files/GRCh37_dbSuper.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_dbSuper</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GGRCh37_dbSuper.bed.gz.csi">https://zenodo.org/record/5705936/files/GGRCh37_dbSuper.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh37_TAD</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh37_TAD.bed.gz">https://zenodo.org/record/5705936/files/GRCh37_TAD.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh37_TAD</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh37_TAD.bed.gz.csi">https://zenodo.org/record/5705936/files/GRCh37_TAD.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_TFBS</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh38_TFBS.merged.bed.gz">https://zenodo.org/record/5705936/files/GRCh38_TFBS.merged.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_TFBS</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh38_TFBS.merged.bed.gz.csi">https://zenodo.org/record/5705936/files/GRCh38_TFBS.merged.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_DNase</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh38_DNase.merged.bed.gz">https://zenodo.org/record/5705936/files/GRCh38_DNase.merged.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_DNase</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh38_DNase.merged.bed.gz.csi">https://zenodo.org/record/5705936/files/GRCh38_DNase.merged.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_UCNE</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh38_UCNE.bed.gz">https://zenodo.org/record/5705936/files/GRCh38_UCNE.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_UCNE</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh38_UCNE.bed.gz.csi">https://zenodo.org/record/5705936/files/GRCh38_UCNE.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_dbSuper</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh38_dbSuper.bed.gz">https://zenodo.org/record/5705936/files/GRCh38_dbSuper.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_dbSuper</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh38_dbSuper.bed.gz.csi">https://zenodo.org/record/5705936/files/GRCh38_dbSuper.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_TAD</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh38_TAD.bed.gz">https://zenodo.org/record/5705936/files/GRCh38_TAD.bed.gz</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_TAD</p></td>
+<td><p>regions</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5705936/files/GRCh38_TAD.bed.gz.csi">https://zenodo.org/record/5705936/files/GRCh38_TAD.bed.gz.csi</a></p></td>
 </tr>
 <tr class="row-even"><td><p>GRCh38_gnomAD</p></td>
 <td><p>AF</p></td>
@@ -399,16 +510,29 @@ to automatically download supporting files and setup the resources folder.</p>
 <td><p>SV_annotations</p></td>
 <td><p><a class="reference external" href="https://zenodo.org/record/3970785/files/SV_annotations.tar.gz">https://zenodo.org/record/3970785/files/SV_annotations.tar.gz</a></p></td>
 </tr>
-<tr class="row-odd"><td><p>GREEN_DB_bed</p></td>
-<td><p>bed_files</p></td>
-<td><p><a class="reference external" href="https://zenodo.org/record/3981033/files/GREEN-DB_v2_bedfiles.tar.gz">https://zenodo.org/record/3981033/files/GREEN-DB_v2_bedfiles.tar.gz</a></p></td>
+<tr class="row-odd"><td><p>GRCh37_GREENDB_bed</p></td>
+<td><p>GREENDB_bed</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5636209/files/GRCh37_GREEN-DB.bed.gz">https://zenodo.org/record/5636209/files/GRCh37_GREEN-DB.bed.gz</a></p></td>
 </tr>
-<tr class="row-even"><td><p>GREEN_DB_sqlite</p></td>
-<td><p>SQlite</p></td>
-<td><p><a class="reference external" href="https://zenodo.org/record/3981033/files/GREEN-DB_v2_SQLite.tar.gz">https://zenodo.org/record/3981033/files/GREEN-DB_v2_SQLite.tar.gz</a></p></td>
+<tr class="row-even"><td><p>GRCh37_GREENDB_bed</p></td>
+<td><p>GREENDB_bed</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5636209/files/GRCh37_GREEN-DB.bed.gz.csi">https://zenodo.org/record/5636209/files/GRCh37_GREEN-DB.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRCh38_GREENDB_bed</p></td>
+<td><p>GREENDB_bed</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5636209/files/GRCh38_GREEN-DB.bed.gz">https://zenodo.org/record/5636209/files/GRCh38_GREEN-DB.bed.gz</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GRCh38_GREENDB_bed</p></td>
+<td><p>GREENDB_bed</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5636209/files/GRCh38_GREEN-DB.bed.gz.csi">https://zenodo.org/record/5636209/files/GRCh38_GREEN-DB.bed.gz.csi</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GREENDB_sqlite</p></td>
+<td><p>GREENDB_sqlite</p></td>
+<td><p><a class="reference external" href="https://zenodo.org/record/5636209/files/GREEN-DB_v2.5.db.gz">https://zenodo.org/record/5636209/files/GREEN-DB_v2.5.db.gz</a></p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 
 
@@ -422,7 +546,7 @@ to automatically download supporting files and setup the resources folder.</p>
         <a href="how_to_cite.html" class="btn btn-neutral float-right" title="How to cite" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="GREEN-DB_query_usage.html" class="btn btn-neutral float-left" title="GREEN-DB_query tool usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="nextflow_workflow.html" class="btn btn-neutral float-left" title="GREEN-VARAN workflow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

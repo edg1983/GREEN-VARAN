@@ -32,7 +32,7 @@ process annotate_vcf {
     prefix=\${prefix%%.vcf}
 
     GOGC=2000 IRELATE_MAX_CHUNK=10000 IRELATE_MAX_GAP=1000 \
-    vcfanno $toml $vcf_file | bgzip -c > \${prefix}.tmp.vcf.gz
+    vcfanno -p${params.ncpus} $toml $vcf_file | bgzip -c > \${prefix}.tmp.vcf.gz
     """
 }
 

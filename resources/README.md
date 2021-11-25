@@ -1,53 +1,52 @@
 # Resources folder
 
-This folder store resources needed for annotation using GREEN-VARAN tools. By default GREEN-VARAN tool search for files in "resources" folder within the tool folder. The expected folder structure is reported below.
-If you prefer to save the resource files in another location, a custom location can eventually be defined in the configuration file (RES_DIR) or through command-line options when running each tool.
+This folder store resources needed for annotation using GREEN-VARAN tools. By default GREEN-VARAN Nextflow workflow searches for files in "resources" folder within the main tool folder. The expected folder structure is reported below.
+If you prefer to save the resource files in another location, a custom location can eventually be defined using `--resource_folder` option. Note that even when a custom resource folder is specified, the workflow expect the same sub-folders structure.
 
-## Default folder structure
+## Default sub-folder structure
+These are the sub-folders expected in the main resources folder
 
 ```
 .
 |-- SQlite
-|   `-- RegulatoryRegions.db
-|-- SV_annotations
-|   `-- BED files used for SV annotations
-|-- bed_files
-|   `-- GREEN-DB BED files
-|-- scores
-|   `-- scores annotations
-`-- AF
-    `-- population AF annotations
+|   `-- GREEN-DB_v2.5.db
+|-- GRCh37
+|   `-- BED / TSV files used for GRCh37 genome build
+`-- GRCh38
+    `-- BED / TSV files used for GRCh38 genome build
+
 ```
+
+## Minimum set needed for prioritization
+
+The minimum set of annotations needed to reproduce the four level prioritization described in our paper are:
+- population AF (from gnomAD)
+- flags marking the overlap with TFBS, DNase peaks, UCNE
+- prediction scores from ncER, FATHMM-MKL, ReMM
 
 ## Prepare the resources folder
 
-If you are fine with the default location just run
+If you are fine with the default location and you have Nextflow >= v20.10 installed you can downloaded the essential datasets for GRCh38 or GRCh37 using the following command (adjust `--build` as needed) from the GREEN-VARAN main folder:
 
 ```
-bash prepare_resources.sh
+nextflow workflow/download.nf -profile local \
+    --scores best \
+    --regions best \
+    --db \
+    --AF \
+    --build GRCh38
 ```
 
-The script will automatically read resources from GREEN-VARAN_resources.txt and download the latest version of resource files. Required sub-folders will be created in the current folder.
+The script will automatically download the latest version of resource files and required sub-folders will be created in the resources folder.
 
-Additional arguments are available to customize resources file name and output dir.
+You can specify a different resources main folder using `--resource_folder`.
+
+To see the complete list of datasets available for download use 
 
 ```
-prepare_resources.sh
-    [-r,--resource RESOURCES_FILE]  GREEN-VARAN_resources.txt (default)
-    [-n,--name RESOURCE_NAME]       all = download all (default)
-                                    scores = download all scores
-                                    bed_files = download all bed_files
-                                    AF = download AF files
-                                    SV_annotation = download all SV annotations
-                                    specific_name (see --list)
-    [-o,--out OUTPUT_DIR]           current directory (default)
-                                    folder where to store downloaded files
-                                    expected sub-folders will be created within this folder
-    [-l,--list]                     list available resources
-    [-h,--help]                     get help message
+nextflow workflow/download.nf --list_data
 ```
 
+## Manually download the resource files
 
-## Download the resource files
-
-RegDB and pre-assembled archives containing these resources are available for download from Zenodo (see GREEN-VARAN_resources.txt)
+GREEN-DB BED / SQlite files and pre-processed files for additional regions and scores are available for download from Zenodo (see GREENDB_collection.txt).

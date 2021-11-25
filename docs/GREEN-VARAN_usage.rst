@@ -1,294 +1,272 @@
 GREEN-VARAN tool usage
 ======================
 
-GREEN-VARAN.py performs annotation of small variants VCF. 
-It provides also abiliy to filter for genes of interest, select variants on genes already affected by coding variants
-and a prioritization function for regulatory variants
-
-.. code-block:: bash
-
-    GREEN-VARAN.py  [-h] -i VCF -o OUTPUT -b {GRCh37,GRCh38} -m
-                    {annotate,filter_regdb,filter_any} [-p]
-                    [--vcfanno VCFANNO] [--bed_dir BED_DIR]
-                    [--AF_file AF_FILE] [--scores_dir SCORES_DIR]
-                    [-g {annotate,filter}] [-t {controlled,closest,both}]
-                    [-l GENES_LIST] [--impact {HIGH,MODERATE,LOW,MODIFIER}]
-                    [--allelefreq {global,afr,amr,eas,fin,nfe,sas,oth}]
-                    [-s {ReMM,FIRE,LinSight,ExPECTO,NCBoost,DANN,CADD,PhyloP100}] [-a]
-                    [--separate_fields] [--logfile LOGFILE]
-                    [--threads THREADS] [-w]
+GREEN-VARAN performs annotation of small variants or structural variants VCF adding information on potential regulatory variants from GREEN-DB. 
+Especially it can annotate possible controlled genes and a prioritization level (this latter need the presence of some additional annotations, see below) 
+It provides also abiliy to tag variants linked to genes of interest and update existing gene-level annotations from SnpEff or bcftools.
 
 Basic usage
 ~~~~~~~~~~~
 .. code-block:: bash
 
-    GREEN-VARAN.py  [-h] -i VCF -o OUTPUT -b {GRCh37,GRCh38} -m
-                    {annotate,filter_regdb,filter_any}
+  greenvaran [run mode] [options] 
 
-The basic mode of run is to annotate variants with information from the GREEN-DB
-and then output all variants or just annotated ones based on the selected running mode.
+The running mode can be one of:
 
-The running mode (-m, --mode) can be set to:
+- smallvars
+  In this mode the tool will perform annotation for a small variants VCF.
+  It will annotate variants with information on the possible regulatory role based on GREENDB and eventually provide prioritization levels
+- sv
+  In this mode the tool will perform annotation for a structural variants VCF.
+  Capability in this case is limited to annotation of overlapping GREENDB regions and controlled genes. No prioritization is provided 
+- querytab
+  This mode is a convenient way to automatically prepare input table to be used with the query tool to exctract detailed information from GREENDB database.
+- version
+  Print the tool version
 
-- annotate
-    In this mode the tool will perform a standard annotation.
-    It will annotate variants with required information and
-    then output all variants form the original VCF
-- filter_regdb
-    In this mode the tool will annotate variants with required information
-    but only variants that overlap one of the GREEN-DB regions will be outputted
-- filter_any
-    This mode acts similar to filter_regdb, but a variant is present in the output
-    if it overlaps a GREEN-DB region or any of the additional functional regions (TFBS, DNase, UCNE, dbSuper)
+**NB.** To perform prioritization of small variants some additional annotation fields are expected in the input VCF, see the prioritization section below.
+By default, when these information are not present the prioritization level will be set to zero for all annotated variants.
+We also provide pre-processed datasets and Nextflow workflow to automate the whole process (see #TODO nextflow workflow page).
 
-**NB.** Annotations requires GREEN-DB and accessory BED files to be present in the resources folder. 
-The default location is ``resources/bed_files`` within the tool folder, but you can provide a different location using ``--bed_dir`` 
+Command line options
+~~~~~~~~~~~~~~~~~~~~
+smallvars and sv shared options
+###############################
 
-Prioritization
-~~~~~~~~~~~~~~
-If prioritization is active (-p, --prioritize), an additional NC_VARCLASS field will be added.
-This fields is an integer from 0 to 13 wich summarize evidences supporting a regulatory impact for the variant.
+-i, --invcf INVCF
+    | path to indexed input vcf.gz/bcf.
+-o, --outvcf OUTVCF
+    | output vcf / vcf.gz file
+-d, --db DB
+    | GREEN-DB bed.gz file for your build (see download section)
+-s, --dbschema DBSCHEMA
+    | json file containig greendb column mapping
+    | A default configuration for GREENDB v2.5 is available in config folder
+-u, --noupdate             
+    | do not update ANN / BCSQ field in the input VCF
+-f, --filter
+    | filter instead of annotate. Only variants with greendb overlap will be written.
+    | If --genes is active, the output will contain only variants connected to the input genes of interest
+-m, --impact IMPACT
+    | Which impact to assign when updating snpEff field
+    | Possible values: [HIGH, MODERATE, LOW, MODIFIER] (default: MODIFIER)
+--chrom CHROM
+    | Annotate only for a specific chromosome
+    | Useful to parallelize across chromosomes
+-g, --genes GENES
+    | Gene symbols for genes of interest, variants connected to those will be flagged with greendb_VOI tag
+    | This can be a comma-separated list or a text file listing genes one per line
+--connection CONNECTION
+    | Region-gene connections accepted for annotation
+    | Possible values: [all, closest, annotated] (default: all)
+--log LOG
+    | Log file. Default is greenvaran_[now].log
+
+sv specific options
+###################
+-p, --padding PADDING
+    | Value to add on each side of BND/INS, this override the CIPOS when set
+--cipos CIPOS
+    | INFO field listing the confidence interval around breakpoints
+    | It is expected to have 2 comma-separated values (default: CIPOS)
+-t, --minoverlap MINOVERLAP
+    | Min fraction of GREENDB region to be overlapped by a SV (default: 0.000001)
+-b, --minbp MINBP
+    | Min number of bases of GREENDB region to be overlapped by a SV (default: 1)
+
+
+smallvars specific options
+##########################
+-c, --config CONFIG
+    | json config file for prioritization
+    | A default configuration for the four level described in the paper is provided in config folder
+-p, --permissive
+    | Perform prioritization even if one of the INFO fields required by prioritization config is missing
+    | By default, when one of the expeced fields is not defined in the header, the prioritization is disabled and all variants will get level zero
+
+
+Annotations added by GREEN-VARAN
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INFO fields
+###########
+Fields in the following table are added to INFO fields by GREEN-VARAN. greendb_level will be added only for small variants
+
+.. csv-table::
+    :header: "Annotation tag","Data type","Description"
+    :widths: 20,20,60
+
+    greendb_id,String,Comma-separated list of GREEN-DB IDs identifying the regions that overlap this variant
+    greendb_stdtype,String,Comma-separated list of standard region types as annotated in GREEN-DB for regions overlapping the variant
+    greendb_dbsource,String,Comma-separated list of data sources as annotated in GREEN-DB for regions overlapping the variant
+    greendb_level,Integer,Variant prioritization level computed by GREEN-VARAN. See Prioritization section below
+    greendb_constraint,Float,The maximum constraint value across GREEN-DB regions overlapping the variant
+    greendb_genes,String,Possibly controlled genes for regulatory regions overlapping this variant
+    greendb_VOI,Flag,When ``--genes`` option is active this flag is set when any of the input genes is among the possibly controlled genes for overlapping regulatory regions.
+
+Updated gene consequences
+#########################
+By default, GREEN-VARAN update gene consequences in the SnpEff ANN field or the bcftools BCSQ if one is present in the input VCF file.
+In this way the annotation can be processed by most downstream tools evaluating segregation.
+If none is found, GREEN-VARAN will create a new ANN field. To switch off gene consequence update use the ``--noupdate`` option.
+
+Here the tool will add one a new consequence for each possibly controlled genes, limited by the ``--connection`` option.
+The new consequence will follow standard format according to SnpEff or bcftools and have MODIFIER impact by default.
+This can be adjusted using the ``--impact`` option.
+The gene effect will be set according to the GREEN-DB region type, adding 5 new terms: `bivalent, enhancer, insulator, promoter, silencer`.
+
+Example ANN / BCSQ field added by GREEN-VARAN.
+
+.. code-block:: bash
+
+    ANN=C|enhancer|MODIFIER|GeneA||||||||||||
+    BCQS=enhancer|GeneA||
+
+
+Prioritization of small variants
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+GREEN-VARAN will consider GREEN-DB annotations, additional functional regions and non-coding impact prediction scores to provide a prioritization level for each annotated variant.
+This level is annotated under greenvara_level tag in the INFO field.
+This fields is an integer from 0 to N wich summarize evidences supporting a regulatory impact for the variant.
 Higher values are associated to a higher probability of regulatory impact.
 
-**NB.** You need ReMM, FATHMM-MKL and NCBoost scores available to run priotization mode.
-These scores will be automatically addedd to annotations when prioritization mode is activated.
+**NB.** You need teh following INFO fields in your input VCF to run priotization mode as described in the GREEN-DB manuscript 
+using the default config provided. 
 
-Levels are based on GREEN-DB annotation and 3 prediction scores (ReMM, FATHMM-MKL, NCBoost).
-The FDR50 and TPR90 thresholds are defined in the GREEN-VARAN paper.
+1. gnomAD_AF, gnomAD_AF_nfe float values describing global and NFE population AF from gnomAD 
+2. ncER, FATHMM-MKL and ReMM float values providing scores predictions
+3. TFBS, DNase and UCNE flags describing overlap with additional functional regions 
 
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| Level   | 1 score above threshold   | Overlap GREEN-DB region | GREEN-DB          | Overlap any of             |
-|         | (ReMM,FATHMM-MKL,NCBoost) |                         | constraint >= 0.9 | TFBS, DNase, UCNE, dbSuper |
-+=========+===========================+=========================+===================+============================+
-| 13      |           FDR50           |            X            |         X         |                 X          |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 12      |           FDR50           |            X            |         X         |                            |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 11      |           FDR50           |            X            |                   |                            |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 10      |           TPR90           |            X            |         X         |                 X          |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 9       |           TPR90           |            X            |         X         |                            |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 8       |           TPR90           |            X            |                   |                            |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 7       |           FDR50           |                         |                   |                 X          |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 6       |           TPR90           |                         |                   |                 X          |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 5       |                           |            X            |         X         |                 X          |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 4       |                           |            X            |         X         |                            |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 3       |                           |            X            |                   |                            |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 2       |           FDR50           |                         |                   |                            |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 1       |           TPR90           |                         |                   |                            |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
-| 0       |                           |                         |                   |                            |
-+---------+---------------------------+-------------------------+-------------------+----------------------------+
+This configuration resembles the four levels prioritization described in the GREEN-DB manuscript. 
+Note that the exact names of these annotations and the score thresholds are defined in the json file passed to --config options.
 
-Gene mode
-~~~~~~~~~
-The gene mode allows to annotate / filter regulatory variants if they potentially affect a gene of interest. 
-Using the information on controlled / closest genes from GREEN-DB the tool will select only variants affecting a region
-that is associated to gene(s) of interest.
+The following table summarizes the four prioritization levels defined in the manuscript and in the default config file.
 
-**1. Activate the gene mode**
++-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level | Description                                                                                                                                                 |
++=======+=============================================================================================================================================================+
+| 1     | Rare variant (population AF < 1%) overlapping one of GREEN-DB regions                                                                                       |
++-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2     | Level 1 criteria and overlap at least one functional element among transcription factors binding sites (TFBS), DNase peaks, ultra conserved elements (UCNE) |
++-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 3     | Level 2 criteria and prediction score value above the suggested FDR50 threshold for at least one among ncER, FATHMM MKL, ReMM                               |  
++-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 4     | Level 3 critera and region constraint value greater or equal 0.7                                                                                            |
++-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Gene mode is activated using the ``-g, --gene_mode`` option which can be set to:
+Personalize the prioritization schema
+#####################################
 
-- annotate
-    NC_VOI=1 annotation will be added to variants potentially affecting the gene(s) of interest
-- filter
-    Only variants potentially affecting the gene(s) of interest will be present in the output
+The prioritization schema is defined in a config json file. The default is provided in the config folder. 
+An example of expected file structure is reported below
 
-Using ``-t, --gene_type`` user can select which region-genes association should be considered to determine the affected genes.
-Accepted values are:
+.. code-block:: bash
 
-- controlled
-    For each region, only gene(s) controlled according to experimental data in GREEN-DB will be considered
-- closest
-    For each region, only the closest gene(s) will be considered 
-- both
-    For each region, both controlled and closest gene(s) are considered
+   {
+       "af": ["gnomAD_AF","gnomAD_AF_nfe"],
+       "maxaf": 0.01,
+       "regions": ["TFBS", "DNase", "UCNE"],
+       "scores": {
+           "FATHMM_MKLNC": 0.908,
+           "ncER": 98.6,
+           "ReMM": 0.963
+       },
+       "constraint": 0.7,
+       "more_regions": [],
+       "more_values": {}
+   }
 
-**2. Set gene of interest or impact**
+Sections definitions:
 
-When gene mode is active you can provide a list of genes of interest using ``-l, --gene_list``.
+1. af: INFO fields containing AF annotations. The tool will consider the max value across all these
+2. maxaf: if the max value across af fields is below this, the variant get +1 point
+3. regions: INFO fields for overlapping regions. If any of these is set, the variant get +1 point
+4. scores: series of key, value pairs. If any of key value is above the configured value, the variant get +1 point
+5. constraint: if the max constraint value across overlapping GREEN-DB regions is above this value, the variant get +1 point  
+6. more_regions: any additional INFO fields representing overlap with custom regions. The variant get +1 point for each positive overlap
+7. more_values: series of key, value pairs. The variant get +1 point fro each key value above the configured value
 
-The argument accepts a comma-separated list of gene symbols (like CFTR,BRCA1,BRCA2) or a text file containing genes one per line.
-Regulatory variants associated to one of the gene in your list will be annotated / filtered as "variants of interest"
+**NB.** more_regions and more_values must always been present. Leave them empty like in the example above if you don't want to configure any custom value.
 
-Using the ``--impact`` option, you can annotate / filter variants with a potential effect on a gene already affected 
-by a coding variants with a minimum impact.
-The option accept the minimum impact level according to SnpEFF: HIGH,MODERATE,LOW,MODIFIER.
-Note that when this option is active the tool will first scan your input VCF and collect the list of genes with at least 1 variant of the 
-given impact. This can slow down the whole process, since VCF need to be read twice.  
+**NB2.** INFO fields specified by af, scores and more_values are expected to be float, while those specified by regions and more_regions are expected as flags.
 
-**NB.** Gene list and impact settings act together so if both are activated only variants passing both 
-will be considered as "variant of interest" and annotated / filtered
-
-Activate additional annotations
+structural variants annotations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Prediction scores
-#################
-You can annotate variants using 12 different prediction scores and PhyloP100 conservartion score. To activate one ore more of these annotations use the
-``-s, --scores`` option providing a single score name. The option can be repeated multiple time to add more scores.
-Alternatively, you can set ``--allscores`` to activate all scores. Note that annotating with all scores can slow down the annotation
-considerably. Our suggestion for rare variants is to use ReMM, NCBoost and LinSight. 
+The annotation of structural variants is based on overlap with the regulatory regions defined in GREEN-DB.
+This is treated differently according to the SV type:
 
-**NB.** Score annotations requires the corresponding tables from GREEN-VARAN release to be present in the resources folder.
-Default location is ``resources\scores`` within the tool folder, but you can set a different one using ``--scores_dir``
+- For **DEL, DUP, INV** an interval is constructed based on position field and the END info field from INFO.
+  When END is missing, the tool will try to use SVLEN instead. If none is not found the variant is not annotated 
+  The user can then set a minimum level of overlap as either overlap fraction (``--minoverlap``) or N bp overlap (``--minbp``).
+  A GREEN-DB region is added to annotation only if its overlapping porting is larger or equal to both threshold
+- For **INS and BND**, an interval is constructed using the position and the coordinates in the CIPOS field (an alternative field can be set using ``--cipos``).
+  This is done since INS and BND are often represented as single positions in structural variants VCF.
+  Alternatively, the user can provide a padding values using ``--padding`` and this value will be added aroud position 
+  For these kind of variants any overlapping GREEN-DB region will be reported, diregarding the overlap threasholds
 
-Available scores included with the GREEN-VARAN release
+Singularity
+~~~~~~~~~~~
+The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as Singularity image (tested on singularity >= 3.2). 
+A Singularity recipe is included in the repository or you can pull the image from Singularity Library using
 
-- CADD v1.5
-    `CADD: predicting the deleteriousness of variants throughout the human genome <https://academic.oup.com/nar/article/47/D1/D886/5146191>`_
-- DANN
-    `DANN: a deep learning approach for annotating the pathogenicity of genetic variants <https://academic.oup.com/bioinformatics/article/31/5/761/2748191>`_
-- EIGEN / EIGEN-PC
-    `A spectral approach integrating functional genomic annotations for coding and noncoding variants <https://www.nature.com/articles/ng.3477>`_
-- ExPECTO
-    `Deep learning sequence-based ab initio prediction of variant effects on expression and disease risk <https://www.nature.com/articles/s41588-018-0160-6>`_
-- FATHMM_MKL
-    `An integrative approach to predicting the functional effects of non-coding and coding sequence variation <https://academic.oup.com/bioinformatics/article/31/10/1536/177080>`_
-- FATHMM_XF
-    `FATHMM-XF: accurate prediction of pathogenic point mutations via extended features <https://academic.oup.com/bioinformatics/article/34/3/511/4104409>`_
-- FIRE
-    `FIRE: functional inference of genetic variants that regulate gene expression <https://academic.oup.com/bioinformatics/article/33/24/3895/4093216>`_
-- GWAVA
-    `Functional annotation of noncoding sequence variants <https://www.nature.com/articles/nmeth.2832>`_
-- LinSight
-    `Fast, scalable prediction of deleterious noncoding variants from functional and population genomic data <https://www.nature.com/articles/ng.3810>`_
-- NCBoost
-    `NCBoost classifies pathogenic non-coding variants in Mendelian diseases through supervised learning on purifying selection signals in humans <https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1634-2>`_
-- ReMM v0.3.1 
-    `A Whole-Genome Analysis Framework for Effective Identification of Pathogenic Regulatory Variants in Mendelian Disease <https://www.sciencedirect.com/science/article/pii/S0002929716302786>`_
-- PhyloP100
-    Conservation values calculated from multiple-alignment of 100 vertebrates
+``singularity pull library://edg1983/greenvaran/greenvaran:latest``
+
+Usage
+#####
+
+The image contains both greenvaran and greendb_query tools.
+The general usage is:
+
+.. code-block:: bash
+
+    singularity exec \
+    greenvaran.sif \
+    tool_name [tool arguments]
+
+Bind specific folders for resources or data
+###########################################
+
+The tool needs access to input VCF file, required GREEN-DB bed file and config files so remember to bind the corresponding locations in the container 
+
+See the following example where we use the current working directory for input/output, while other files are located
+in the default config / resources folder within greenvaran folder. In the example we use GRCh38 genome build
+
+.. code-block:: bash
+
+    singularity exec \
+    --bind /greenvaran_path/resources/GRCh38:/db_files \
+    --bind /greenvaran_path/config:/config_files \
+    --bind ${PWD}:/data \
+    greenvaran.sif \
+    greenvaran -i /data/input.vcf.gz \
+    -o /data/output.vcf.gz \
+    --db /db_files/GRCh38_GREEN-DB.bed.gz \
+    --dbschema /config_files/greendb_schema_v2.5.json \
+    --config /config_files/prioritize_smallvars.json
+    [additional tool arguments]
 
 
-Population allele frequency
-###########################
-You can annotate population allele frequency from gnomAD genomes using ``--allelefreq`` to set the desired population.
-The option accept standard population codes (afr,amr,eas,fin,nfe,sas,oth) or global for global AF.
-
-**NB.** This option requires gnomAD VCF file. A simplified version is provided with GREEN-VARAN release or you can specify 
-a different location using ``--AF_file``
-
-Fields added to INFO
-~~~~~~~~~~~~~~~~~~~~
-GREEN-DB related fields
-#######################
-Fields in the following table are added to INFO fields when ``--separate_fields`` option is active.
-Otherwise, they are collpsed in a single NC_ANNO field, separated by pipe symbol ``NC_ANNO=NC_support|NC_regionID|...``
-
-.. csv-table::
-    :header: "Annotation tag","Data type","Description"
-    :widths: 20,20,60
-
-    NC_support,Float,Sum of max NC_constraint; NC_methods; NC_median_PhyloP100 positive values and binary values for presence/absence of NC_genes; NC_TFname; NC_DNase; NC_UCNE; NC_dbSUPER
-    NC_regionID,String,Comma separated list of GREEN-DB region IDs for regions overlapping the variants
-    NC_region_type,String,Comma separated list of region types for regions overlapping the variants
-    NC_constraint,Float,The maximum constraint value for GREEN-DB regions overlapping the variant
-    NC_methods,Integer,Number of methods supporting this location as regulatory regions; calculated as the number of distinct methods supporting the GREEN-DB regions overlapping the variant
-    NC_genes,String,Comma separated list of controlled genes from GREEN-DB
-    NC_closestGene,String,Comma separated list of the closest genes from GREEN-DB
-    NC_closestGene_dist,Integer,Comma separated list of the distance of the closest genes from GREEN-DB
-    NC_closestProt,String,Comma separated list of the closest protein-coding genes from GREEN-DB
-    NC_closestProt_dist,Integer,Comma separated list of the distance of the closest protein-coding genes from GREEN-DB
-    NC_tolerant_P,Float,Maximum value of variant tolerant P across regions overlapping the variant
-    NC_tolerant_label,String,Comma separated list of TOLERANT/INTOLERANT labels based on LoF tolerance probability across regions overlapping the variant
-    NC_median_PhyloP100,Float,Maximum value of median PhyloP100 across GREEN-DB regions overlapping the variant
-
-Additional fields
-#################
-The following fields are always added as separated fields in the INFO column
-
-.. csv-table::
-    :header: "Annotation tag","Data type","Description"
-    :widths: 20,20,60
-
-    NC_TFname,String,Comma separated list of transcription factors binding at the variant location
-    NC_DNase,Integer,Binary value representing the presence of a DNase HS site at the variant location
-    NC_UCNE,Integer,Binary value representing the presence of a UCNE at the variant location
-    NC_dbSUPER,Integer,Binary value representing the presence of a dbSuper cluster at the variant location
-    NC_VOI,Integer,When gene mode is active this is set to one for variants overlapping a GREEN-DB region controlling a gene of interest
-    NC_VARCLASS,Integer,When prioritize mode is active this value is set to the prioritization level (0-13)
-
-Scores fields
-#############
-When you activate annotation for a prediction/conservation scores the correponding field is added to INFO column.
-Each field is in the for ``NC_scorename=value``
-
-Arguments list
-~~~~~~~~~~~~~~
-Mandatory Arguments
+Example usage
+~~~~~~~~~~~~~
+small variants test
 ###################
--h, --help
-    | Shows help message and exit
--i VCF, --vcf VCF
-    | Input vcf[.gz] file
--o OUTPUT, --output OUTPUT
-    | VCF output file (at the moment only support plain VCF output)
--b BUILD, --build BUILD 
-    | Possible values: ``{GRCh37,GRCh38}``
-    | Specify the genome build of input VCF
--m MODE, --mode MODE
-    | Possible values: ``{annotate,filter_regdb,filter_any}``
-    | Set the running mode
+.. code-block:: bash
 
-Additional annotations (scores, AF)
-###################################
---allelefreq POP_CODE
-    | Possible values: ``{global,afr,amr,eas,fin,nfe,sas,oth}``
-    | Add gnomAD AF annotations based on global AF or specific population
--s SCORE_NAME, --scores SCORE_NAME
-    | Possible values: ``{ReMM,FIRE,LinSight,ExPECTO,NCBoost,DANN,CADD}``
-    | Add selected prediction score for non-coding vars. Repeat to add multiple scores
--a, --allscores
-    | Add all prediction score for non-coding vars (ReMM,FIRE,LinSight,ExPECTO,NCBoost)
+    greenvaran smallvars \
+    --invcf test/VCF/GRCh38.test.smallvars.vcf.gz \
+    --outvcf test/out/smallvars.annotated.vcf.gz \
+    --config config/prioritize_smallvars.json \
+    --dbschema config/greendb_schema_v2.5.json \
+    --db resources/GRCh38/GRCh38_GREEN-DB.bed.gz \
+    --genes test/VCF/genes_list_example.txt
 
-Prioritize
-##########
--p, --prioritize      
-    | Turn on prioritization for non-coding variants
+structural variants test
+########################
+.. code-block:: bash
 
-Gene based annotations
-######################
--g GENE_MODE, --gene_mode GENE_MODE
-    | Possible values: ``{annotate,filter}``
-    | Activate gene based annotation/filter
--t GENE_TYPE, --gene_type GENE_TYPE
-    | Possible values: {controlled,closest,both}
-    | DEFAULT: ``controlled``
-    | Which genes to consider for NC regions
--l GENES_LIST, --genes_list GENES_LIST
-    | List of genes of interest, can be comma-separated list or file with one gene per line
---impact MIN_IMPACT
-    | Possible values: ``{HIGH,MODERATE,LOW,MODIFIER}``
-    | Only report NC vars if the controlled at least this impact
-
-Customize files locations
-#########################
---vcfanno VCFANNO
-    | Full path to vcfanno executable
---bed_dir BED_DIR
-    | Directory containing RegDB bed files
---AF_file AF_FILE
-    | Full path to gnomAD VCF for AF annotation
---scores_dir SCORES_DIR
-    | Directory containing prediction scores tables
---logfile LOGFILE
-    | Log file
-
-Additional Arguments
-####################
---separate_fields
-    | Make multiple fields instead of a single NC_ANNO annotation
---threads THREADS
-    | Number of threads for vcfanno annotation
--w, --overwrite
-    | If set, overwrite output file if already exists
+    greenvaran sv \
+    --invcf test/VCF/GRCh38.test.SV.vcf.gz \
+    --outvcf test/out/SV.annotated.vcf.gz \
+    --dbschema config/greendb_schema_v2.5.json \
+    --db resources/GRCh38/GRCh38_GREEN-DB.bed.gz \
+    --minbp 10

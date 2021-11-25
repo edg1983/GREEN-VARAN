@@ -25,8 +25,8 @@ GRCh37_GWAVA scores https://zenodo.org/record/3956168/files/GRCh37_gwava.bed.gz
 GRCh37_GWAVA scores https://zenodo.org/record/3956168/files/GRCh37_gwava.bed.gz.csi
 GRCh37_gnomAD AF https://zenodo.org/record/3957637/files/GRCh37_gnomad.genomes.vcf.gz
 GRCh37_gnomAD AF https://zenodo.org/record/3957637/files/GRCh37_gnomad.genomes.vcf.gz.csi
-GRCh37_ncER scores https://zenodo.org/record/5636163/files/GRCh37_ncER_perc.tsv.gz
-GRCh37_ncER scores https://zenodo.org/record/5636163/files/GRCh37_ncER_perc.tsv.gz.csi
+GRCh37_ncER scores https://zenodo.org/record/5636163/files/GRCh37_ncER_perc.bed.gz
+GRCh37_ncER scores https://zenodo.org/record/5636163/files/GRCh37_ncER_perc.bed.gz.csi
 GRCh38_CADD scores https://zenodo.org/record/3956227/files/GRCh38_CADD.tsv.gz
 GRCh38_CADD scores https://zenodo.org/record/3956227/files/GRCh38_CADD.tsv.gz.csi
 GRCh38_DANN scores https://zenodo.org/record/3957428/files/GRCh38_DANN.tsv.gz
@@ -51,8 +51,8 @@ GRCh38_FATHMM_MKL scores https://zenodo.org/record/3981121/files/GRCh38_FATHMM-M
 GRCh38_FATHMM_MKL scores https://zenodo.org/record/3981121/files/GRCh38_FATHMM-MKL_NC.tsv.gz.csi
 GRCh38_GWAVA scores https://zenodo.org/record/3955933/files/GRCh38_gwava.bed.gz
 GRCh38_GWAVA scores https://zenodo.org/record/3955933/files/GRCh38_gwava.bed.gz.csi
-GRCh38_ncER scores https://zenodo.org/record/5636163/files/GRCh38_ncER_perc.tsv.gz
-GRCh38_ncER scores https://zenodo.org/record/5636163/files/GRCh38_ncER_perc.tsv.gz.csi
+GRCh38_ncER scores https://zenodo.org/record/5636163/files/GRCh38_ncER_perc.bed.gz
+GRCh38_ncER scores https://zenodo.org/record/5636163/files/GRCh38_ncER_perc.bed.gz.csi
 GRCh37_TFBS regions https://zenodo.org/record/5705936/files/GRCh37_TFBS.merged.bed.gz
 GRCh37_TFBS regions https://zenodo.org/record/5705936/files/GRCh37_TFBS.merged.bed.gz.csi
 GRCh37_DNase regions https://zenodo.org/record/5705936/files/GRCh37_DNase.merged.bed.gz

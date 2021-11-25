@@ -3,46 +3,70 @@ The GREEN-DB
 
 GREEN-DB is a comprehensive collection of potential regulatory regions in the human genome
 including ~2.4M regions from 16 data sources and covering ~1.5Gb evenly distributed across chromosomes.
-The regulatory regions are grouped in 5 categories: 
+The regulatory regions are grouped in 5 categories: enhancer, promoter, silencer, bivalent, insulator.
 
+Each region is described by its genomic location, region type, method(s) of detection, data source and closest gene; 
+~35% of regions are annotated with controlled genes, ~40% with tissue(s) of activity, and ~14% have associated phenotype(s).
+GREEN-DB is available as an SQLite database and regions information with controlled genes are also provided as 
+extended BED files for easy integration into existing analysis pipelines. 
+
+For details on how the database was compiled please refer to the original publication
+https://doi.org/10.1101/2020.09.17.301960
+
+The GREEN-DB database is available for free for **academic use** and available for download 
+in a `Zenodo repository <https://zenodo.org/record/5636209>`_.
+The full database is available as SQLite and a summary of region-based information is provided in BED files. 
+
+Database region content
+~~~~~~~~~~~~~~~~~~~~~~~
+GRCh38
+######
 +------------+------------+---------------+
-| GREEN-DB   | Value      | Bases covered |
+| GREEN-DB   | N          | Bases covered |
 +============+============+===============+
 | N Enhancer | 1832830    | 1449153178    |
 +------------+------------+---------------+
 | N Promoter | 565323     | 234315553     |
 +------------+------------+---------------+
-| N Silencer | 4302       | 11210309      |
+| N Silencer | 4302       | 894792        |
 +------------+------------+---------------+
-| N Bivalent |  8409      |894792         |
+| N Bivalent | 8409       | 11210309      |
 +------------+------------+---------------+
 | N Insulator| 23         | 17504         |
 +------------+------------+---------------+
 |All regions | 2410887    | 1502180018    |
 +------------+------------+---------------+
 
-Each region is described by its genomic location, region type, method(s) of detection, data source and closest gene; 
-~35% of regions are annotated with controlled genes, ~40% with tissue(s) of activity, and ~14% have associated phenotype(s).
-GREEN-DB is available as an SQLite database and regions information with controlled genes are also provided as 
-extended bed files for easy integration into existing analysis pipelines. 
+GRCh37
+######
++------------+------------+---------------+
+| GREEN-DB   | N          | Bases covered |
++============+============+===============+
+| N Enhancer | 1834183    | 1450755698    |
++------------+------------+---------------+
+| N Promoter | 566102     | 234890654     |
++------------+------------+---------------+
+| N Silencer | 4306       | 895868        |
++------------+------------+---------------+
+| N Bivalent | 8413       | 11215000      |
++------------+------------+---------------+
+| N Insulator| 23         | 17504         |
++------------+------------+---------------+
+|All regions | 2413027    | 1504116499    |
++------------+------------+---------------+
 
-For details on how the database was compiled please refer to the original publication
-##OURPAPER##
-
-The GREEN-DB database is available for free for **academic use** and available for download 
-in a `Zenodo repository <https://zenodo.org/record/3981033>`_
 
 Summary statistics on the database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: images/Figure_1_color.png
+.. figure:: images/Figure1.png
     :width: 600
     :align: center
     :alt: Summary of the database
 
     **Main information in the database**
 
-.. figure:: images/Figure_2_color.png
+.. figure:: images/Figure2.png
     :width: 600
     :alt: Gene-region connections
     :align: center
@@ -74,6 +98,8 @@ The SQLite database contains 16 tables (expected columns are listed in the image
     the probability of LoF tolerance for enhancers
 - GRCh37 / GRCh38 UCNE
     ultraconserved noncoding elements
+- GRCh37 / GRCh38 TAD
+    TAD domains from TADKB
 
 Main tables (regions, tissues, genes and methods) are linked by the unique region ID.
 Additionally, a unique interaction ID identifies each gene-region pair in the gene table and it’s linked to methods and tissues tables.
@@ -92,9 +118,9 @@ The constraint metric
 For each region we calculated a contraint metric representing the tolerance to genetic variations.
 Constraint ranges 0-1 with higher values associated to higher level of variation constraint.
 Regions with high constraint values (especially > 0.9) are more likely to control essential genes and genes involved in human diseases.
+The constraint value is also higher for genes intolerant to LoF variants according to the gnomAD oe_lof metric
 
-
-.. figure:: images/Figure_4_color.png
+.. figure:: images/Figure3.png
     :width: 400
     :alt: Constraint metric distribution
     :align: center
@@ -104,9 +130,9 @@ Regions with high constraint values (especially > 0.9) are more likely to contro
 
 Summary of the building process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In GREEN-DB we collected and aggregated information from 16 different sources, including
+In GREEN-DB we collected and aggregated information from 17 different sources, including
 
-- 7 previously published curated databases
+- 8 previously published curated databases
 - 6 experimental datasets from recently published articles
 - predicted regulatory regions from 3 different algorithms
 

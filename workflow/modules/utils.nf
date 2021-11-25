@@ -37,8 +37,6 @@ process write_toml {
 
     script:
     id = "$dataset"
-    println "$id"
-    println "${params.annotations[id]}"
     dataset_file = params.annotations[id].file
     file = "${params.resource_folder}/${dataset_file}"
     

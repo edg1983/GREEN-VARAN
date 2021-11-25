@@ -35,7 +35,8 @@
 
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Download resources" href="Download.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -81,10 +82,17 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="GREEN_DB.html">The GREEN-DB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="GREEN_VARAN.html">GREEN-VARAN tool set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nextflow_workflow.html">GREEN-VARAN workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to cite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#green-db">GREEN-DB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#green-varan">GREEN-VARAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#population-af">Population AF</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -155,32 +163,88 @@
 <div class="section" id="green-db">
 <h2>GREEN-DB<a class="headerlink" href="#green-db" title="Permalink to this headline">¶</a></h2>
 <p>If you use any information from GREEN-DB please cite:
-##OURPAPER##</p>
+<a class="reference external" href="https://www.biorxiv.org/content/10.1101/2020.09.17.301960v1">GREEN-DB: a framework for the annotation and prioritization of non-coding regulatory variants in whole-genome sequencing</a>
+Giacopuzzi E., Popitsch N., Taylor JC. BiorXiv (2020)</p>
 </div>
 <div class="section" id="green-varan">
 <h2>GREEN-VARAN<a class="headerlink" href="#green-varan" title="Permalink to this headline">¶</a></h2>
-<p>When you use GREEN-VARAN.py for annotation please cite</p>
+<p>When you use greenvaran for annotation please cite</p>
 <div class="line-block">
-<div class="line">1. ##OURPAPER##</div>
-<div class="line">2. <a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0973-5">Vcfanno: fast, flexible annotation of genetic variants</a></div>
+<div class="line"><a class="reference external" href="https://www.biorxiv.org/content/10.1101/2020.09.17.301960v1">GREEN-DB: a framework for the annotation and prioritization of non-coding regulatory variants in whole-genome sequencing</a></div>
+<div class="line-block">
+<div class="line">Giacopuzzi E., Popitsch N., Taylor JC. BiorXiv (2021)</div>
+</div>
+</div>
+<p>If you use the GREEN-VARAN Nextflow workflow for additional annotations also cite</p>
+<div class="line-block">
+<div class="line"><a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0973-5">Vcfanno: fast, flexible annotation of genetic variants</a></div>
 <div class="line-block">
 <div class="line">Brent S. Pedersen, Ryan M. Layer &amp; Aaron R. Quinlan. Genome Biology volume 17, Article number: 118 (2016)</div>
 </div>
 </div>
 <p>If you include annotation with a prediction score please also cite the corresponding paper</p>
-<div class="line-block">
-<div class="line"><strong>CADD</strong>: <a class="reference external" href="https://academic.oup.com/nar/article/47/D1/D886/5146191">CADD: predicting the deleteriousness of variants throughout the human genome</a></div>
-<div class="line"><strong>DANN</strong>: <a class="reference external" href="https://academic.oup.com/bioinformatics/article/31/5/761/2748191">DANN: a deep learning approach for annotating the pathogenicity of genetic variants</a></div>
-<div class="line"><strong>ExPECTO</strong>: <a class="reference external" href="https://www.nature.com/articles/s41588-018-0160-6">Deep learning sequence-based ab initio prediction of variant effects on expression and disease risk</a></div>
-<div class="line"><strong>FIRE</strong>: <a class="reference external" href="https://academic.oup.com/bioinformatics/article/33/24/3895/4093216">FIRE: functional inference of genetic variants that regulate gene expression</a></div>
-<div class="line"><strong>LinSight</strong>: <a class="reference external" href="https://www.nature.com/articles/ng.3810">Fast, scalable prediction of deleterious noncoding variants from functional and population genomic data</a></div>
-<div class="line"><strong>NCBoost</strong>: <a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1634-2">NCBoost classifies pathogenic non-coding variants in Mendelian diseases through supervised learning on purifying selection signals in humans</a></div>
-<div class="line"><strong>ReMM</strong>: <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0002929716302786">A Whole-Genome Analysis Framework for Effective Identification of Pathogenic Regulatory Variants in Mendelian Disease</a></div>
-</div>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Score</p></th>
+<th class="head"><p>PUBMED ID</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CADD</p></td>
+<td><p>30371827</p></td>
+</tr>
+<tr class="row-odd"><td><p>DANN</p></td>
+<td><p>25338716</p></td>
+</tr>
+<tr class="row-even"><td><p>EIGEN</p></td>
+<td><p>26727659</p></td>
+</tr>
+<tr class="row-odd"><td><p>ExPecto</p></td>
+<td><p>30013180</p></td>
+</tr>
+<tr class="row-even"><td><p>FATHMM-MKL</p></td>
+<td><p>25583119</p></td>
+</tr>
+<tr class="row-odd"><td><p>FATHMM-XF</p></td>
+<td><p>28968714</p></td>
+</tr>
+<tr class="row-even"><td><p>FINSURF</p></td>
+<td><p>doi.org/10.1101/2021.05.03.442347</p></td>
+</tr>
+<tr class="row-odd"><td><p>FIRE</p></td>
+<td><p>28961785</p></td>
+</tr>
+<tr class="row-even"><td><p>GenoCanyon</p></td>
+<td><p>26015273</p></td>
+</tr>
+<tr class="row-odd"><td><p>GenoSkyline-plus</p></td>
+<td><p>27058395</p></td>
+</tr>
+<tr class="row-even"><td><p>GWAVA</p></td>
+<td><p>24487584</p></td>
+</tr>
+<tr class="row-odd"><td><p>LinSight</p></td>
+<td><p>28288115</p></td>
+</tr>
+<tr class="row-even"><td><p>NCBoost</p></td>
+<td><p>30744685</p></td>
+</tr>
+<tr class="row-odd"><td><p>ncER</p></td>
+<td><p>31748530</p></td>
+</tr>
+<tr class="row-even"><td><p>ReMM</p></td>
+<td><p>27569544</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="population-af">
 <h2>Population AF<a class="headerlink" href="#population-af" title="Permalink to this headline">¶</a></h2>
-<p>If you use SV_annotation or population AF annotation in GREEN-VARAN also cite the gnomAD paper:
+<p>If you use population AF annotation with GREEN-VARAN workflow also cite the gnomAD paper:
 <a class="reference external" href="https://www.nature.com/articles/s41586-020-2308-7">The mutational constraint spectrum quantified from variation in 141,456 humans</a></p>
 </div>
 </div>
@@ -190,6 +254,13 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="Download.html" class="btn btn-neutral float-left" title="Download resources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

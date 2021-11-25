@@ -29,10 +29,10 @@ def print_dataset_items(dataset, main_folder, sources) {
     println "${exists_string}${dataset}: ${dataset_path}"
 }
 
-def define_selected_values(x, best, allowed_values) {
+def define_selected_values(x, best, known_values) {
     switch(x) {
         case 'all':
-            selected_values = params.known_scores
+            selected_values = known_values
             break
         case 'best':
             selected_values = best
@@ -40,7 +40,7 @@ def define_selected_values(x, best, allowed_values) {
         default:
             selected_values = x.split(",")
         }
-        check_allowed_options(selected_values, allowed_values)
+        check_allowed_options(selected_values, known_values)
     return selected_values
 }
 
@@ -90,10 +90,9 @@ params.list_data = false
 if (params.list_data) {
     println "Available datasets. Star indicate corresponding file is available locally"
     println "=== GREENDB ==="
-    for (x in known_scores) {
-        print_dataset_items(x, resource_folder, params.annotations[params.build].database) 
-    }
-    
+    print_dataset_items('greendb_bed', resource_folder, params.annotations[params.build].database) 
+    print_dataset_items('greendb', sql_folder, params.annotations.sqlite) 
+
     println "=== SCORES ==="
     for (x in known_scores) {
         print_dataset_items(x, resource_folder, params.annotations[params.build].scores) 
@@ -105,7 +104,7 @@ if (params.list_data) {
     }
 
     println "=== GNOMAD AF ==="
-    print_dataset_items('gnomAD', resource_folder, params.annotations[params.build].regions) 
+    print_dataset_items('gnomAD', resource_folder, params.annotations[params.build].AF) 
 
     exit 0
 }
@@ -137,45 +136,53 @@ if (!params.scores && !params.regions && !params.db) {
 
 // inclusion statements
 include { download_dataset as DOWNLOAD_DB } from './modules/utils' addParams( annotations : params.annotations[params.build].database, resource_folder : resource_folder)
-include { download_dataset as DOWNLOAD_SQL } from './modules/utils' addParams( annotations : params.annotations[params.build].database, resource_folder : sql_folder)
+include { download_dataset as DOWNLOAD_SQL } from './modules/utils' addParams( annotations : params.annotations.sqlite, resource_folder : sql_folder)
 include { download_dataset as DOWNLOAD_SCORE } from './modules/utils' addParams( annotations : params.annotations[params.build].scores, resource_folder : resource_folder)
 include { download_dataset as DOWNLOAD_REGION } from './modules/utils' addParams( annotations : params.annotations[params.build].regions, resource_folder : resource_folder)
+include { download_dataset as DOWNLOAD_AF } from './modules/utils' addParams( annotations : params.annotations[params.build].AF, resource_folder : resource_folder)
 
 //WORKFLOW
 workflow {    
     //Download DB file if missing
     if (params.db) {
         if (!check_annotation_file('greendb_bed', params.annotations[params.build].database, resource_folder)) {
-            DOWNLOAD_DB('greendb')
+            DOWNLOAD_DB('greendb_bed')
         }
-        if (!check_annotation_file('greendb_sql', params.annotations[params.build].database, sql_folder)) {
-            DOWNLOAD_SQL('greendb_sql')
+        if (!check_annotation_file('greendb', params.annotations.sqlite, sql_folder)) {
+            DOWNLOAD_SQL('greendb')
         }
     }
     
     if (params.scores) {
         missing_scores = []
-        selected_scores = define_selected_values(params.scores, ['ncER','FATHMM_MKLNC','ReMM'], allowed_scores_values)
+        selected_scores = define_selected_values(params.scores, ['ncER','FATHMM_MKLNC','ReMM'], known_scores)
         for (s in selected_scores) {
             if (!check_annotation_file(s, params.annotations[params.build].scores, resource_folder)) {
-                missing_scores = missing_data.scores.plus(s)
+                missing_scores = missing_scores.plus(s)
             }
         }
-        missing_scores_channel = Channel.fromList(missing_data.scores)
+        missing_scores_channel = Channel.fromList(missing_scores)
         DOWNLOAD_SCORE(missing_scores_channel)
     }
     
     if (params.regions) {
         missing_regions = []
-        selected_regions = define_selected_values(params.regions, ['TFSB','DNase','UCNE'], allowed_regions_values)
+        selected_regions = define_selected_values(params.regions, ['TFBS','DNase','UCNE'], known_regions)
         //log.info "Selected regions: $selected_regions"
-        for (s in selected_regions) {
-            if (!check_annotation_file(s, params.annotations[params.build].regions, resource_folder)) {
-                missing_regions.regions = missing_data.regions.plus(s)
+        for (r in selected_regions) {
+            if (!check_annotation_file(r, params.annotations[params.build].regions, resource_folder)) {
+                missing_regions = missing_regions.plus(r)
             }
         }
-        missing_regions_channel = Channel.fromList(missing_data.regions)
+        missing_regions_channel = Channel.fromList(missing_regions)
         DOWNLOAD_REGION(missing_regions_channel)
+    }
+
+    if (params.AF) {
+        if (!check_annotation_file('gnomAD', params.annotations[params.build].AF, resource_folder)) {
+            missing_AF_channel = Channel.of('gnomAD')
+            DOWNLOAD_AF(missing_AF_channel)
+        } 
     }
 }
 
@@ -184,6 +191,6 @@ workflow.onComplete {
     
     PIPELINE COMPLETED!    
     ============================================
-    Annotated files download to ${resource_folder}
+    Annotated files downloaded to ${resource_folder}
     """.stripIndent() : "Oops .. something went wrong" )
 }

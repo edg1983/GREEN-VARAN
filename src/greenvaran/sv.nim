@@ -193,8 +193,7 @@ proc main* (dropfirst:bool=false) =
                     debug(fmt"Unable to parse an interval for this GREENDB region")
                     debug(r)
                     continue
-                let (overlap_pct, overlap_n) = rinterval.overlap(vinterval)    
-                if overlap_pct >= minoverlap and overlap_n >= minbp:
+                if rinterval.overlap(vinterval, minoverlap, minbp):   
                     gdbinfo.update(r, dbschema, ann, gene_connection)
             
             if gdbinfo.id.len > 0:

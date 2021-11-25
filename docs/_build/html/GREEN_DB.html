@@ -85,6 +85,11 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">The GREEN-DB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#database-region-content">Database region content</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#grch38">GRCh38</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#grch37">GRCh37</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#summary-statistics-on-the-database">Summary statistics on the database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sqlite-database-structure">SQLite database structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-constraint-metric">The constraint metric</a></li>
@@ -97,6 +102,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="GREEN_VARAN.html">GREEN-VARAN tool set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nextflow_workflow.html">GREEN-VARAN workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Download.html">Download resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how_to_cite.html">How to cite</a></li>
 </ul>
@@ -168,7 +174,20 @@
 <h1>The GREEN-DB<a class="headerlink" href="#the-green-db" title="Permalink to this headline">¶</a></h1>
 <p>GREEN-DB is a comprehensive collection of potential regulatory regions in the human genome
 including ~2.4M regions from 16 data sources and covering ~1.5Gb evenly distributed across chromosomes.
-The regulatory regions are grouped in 5 categories:</p>
+The regulatory regions are grouped in 5 categories: enhancer, promoter, silencer, bivalent, insulator.</p>
+<p>Each region is described by its genomic location, region type, method(s) of detection, data source and closest gene;
+~35% of regions are annotated with controlled genes, ~40% with tissue(s) of activity, and ~14% have associated phenotype(s).
+GREEN-DB is available as an SQLite database and regions information with controlled genes are also provided as
+extended BED files for easy integration into existing analysis pipelines.</p>
+<p>For details on how the database was compiled please refer to the original publication
+<a class="reference external" href="https://doi.org/10.1101/2020.09.17.301960">https://doi.org/10.1101/2020.09.17.301960</a></p>
+<p>The GREEN-DB database is available for free for <strong>academic use</strong> and available for download
+in a <a class="reference external" href="https://zenodo.org/record/5636209">Zenodo repository</a>.
+The full database is available as SQLite and a summary of region-based information is provided in BED files.</p>
+<div class="section" id="database-region-content">
+<h2>Database region content<a class="headerlink" href="#database-region-content" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="grch38">
+<h3>GRCh38<a class="headerlink" href="#grch38" title="Permalink to this headline">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 31%" />
@@ -177,7 +196,7 @@ The regulatory regions are grouped in 5 categories:</p>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>GREEN-DB</p></th>
-<th class="head"><p>Value</p></th>
+<th class="head"><p>N</p></th>
 <th class="head"><p>Bases covered</p></th>
 </tr>
 </thead>
@@ -192,11 +211,11 @@ The regulatory regions are grouped in 5 categories:</p>
 </tr>
 <tr class="row-even"><td><p>N Silencer</p></td>
 <td><p>4302</p></td>
-<td><p>11210309</p></td>
+<td><p>894792</p></td>
 </tr>
 <tr class="row-odd"><td><p>N Bivalent</p></td>
 <td><p>8409</p></td>
-<td><p>894792</p></td>
+<td><p>11210309</p></td>
 </tr>
 <tr class="row-even"><td><p>N Insulator</p></td>
 <td><p>23</p></td>
@@ -208,22 +227,58 @@ The regulatory regions are grouped in 5 categories:</p>
 </tr>
 </tbody>
 </table>
-<p>Each region is described by its genomic location, region type, method(s) of detection, data source and closest gene;
-~35% of regions are annotated with controlled genes, ~40% with tissue(s) of activity, and ~14% have associated phenotype(s).
-GREEN-DB is available as an SQLite database and regions information with controlled genes are also provided as
-extended bed files for easy integration into existing analysis pipelines.</p>
-<p>For details on how the database was compiled please refer to the original publication
-##OURPAPER##</p>
-<p>The GREEN-DB database is available for free for <strong>academic use</strong> and available for download
-in a <a class="reference external" href="https://zenodo.org/record/3981033">Zenodo repository</a></p>
+</div>
+<div class="section" id="grch37">
+<h3>GRCh37<a class="headerlink" href="#grch37" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 31%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>GREEN-DB</p></th>
+<th class="head"><p>N</p></th>
+<th class="head"><p>Bases covered</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>N Enhancer</p></td>
+<td><p>1834183</p></td>
+<td><p>1450755698</p></td>
+</tr>
+<tr class="row-odd"><td><p>N Promoter</p></td>
+<td><p>566102</p></td>
+<td><p>234890654</p></td>
+</tr>
+<tr class="row-even"><td><p>N Silencer</p></td>
+<td><p>4306</p></td>
+<td><p>895868</p></td>
+</tr>
+<tr class="row-odd"><td><p>N Bivalent</p></td>
+<td><p>8413</p></td>
+<td><p>11215000</p></td>
+</tr>
+<tr class="row-even"><td><p>N Insulator</p></td>
+<td><p>23</p></td>
+<td><p>17504</p></td>
+</tr>
+<tr class="row-odd"><td><p>All regions</p></td>
+<td><p>2413027</p></td>
+<td><p>1504116499</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <div class="section" id="summary-statistics-on-the-database">
 <h2>Summary statistics on the database<a class="headerlink" href="#summary-statistics-on-the-database" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-center" id="id1">
-<a class="reference internal image-reference" href="_images/Figure_1_color.png"><img alt="Summary of the database" src="_images/Figure_1_color.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/Figure1.png"><img alt="Summary of the database" src="_images/Figure1.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><strong>Main information in the database</strong></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-center" id="id2">
-<a class="reference internal image-reference" href="_images/Figure_2_color.png"><img alt="Gene-region connections" src="_images/Figure_2_color.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/Figure2.png"><img alt="Gene-region connections" src="_images/Figure2.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><strong>Summary information on gene-region connections</strong></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
@@ -281,6 +336,11 @@ in a <a class="reference external" href="https://zenodo.org/record/3981033">Zeno
 </dd>
 </dl>
 </li>
+<li><dl class="simple">
+<dt>GRCh37 / GRCh38 TAD</dt><dd><p>TAD domains from TADKB</p>
+</dd>
+</dl>
+</li>
 </ul>
 <p>Main tables (regions, tissues, genes and methods) are linked by the unique region ID.
 Additionally, a unique interaction ID identifies each gene-region pair in the gene table and it’s linked to methods and tissues tables.
@@ -294,17 +354,18 @@ Linking tables are included that map the overlap between GREEN-DB region IDs and
 <h2>The constraint metric<a class="headerlink" href="#the-constraint-metric" title="Permalink to this headline">¶</a></h2>
 <p>For each region we calculated a contraint metric representing the tolerance to genetic variations.
 Constraint ranges 0-1 with higher values associated to higher level of variation constraint.
-Regions with high constraint values (especially &gt; 0.9) are more likely to control essential genes and genes involved in human diseases.</p>
+Regions with high constraint values (especially &gt; 0.9) are more likely to control essential genes and genes involved in human diseases.
+The constraint value is also higher for genes intolerant to LoF variants according to the gnomAD oe_lof metric</p>
 <div class="figure align-center" id="id4">
-<a class="reference internal image-reference" href="_images/Figure_4_color.png"><img alt="Constraint metric distribution" src="_images/Figure_4_color.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/Figure3.png"><img alt="Constraint metric distribution" src="_images/Figure3.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><strong>Constraint values for regions associated to essential/pathogenic genes</strong></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="summary-of-the-building-process">
 <h2>Summary of the building process<a class="headerlink" href="#summary-of-the-building-process" title="Permalink to this headline">¶</a></h2>
-<p>In GREEN-DB we collected and aggregated information from 16 different sources, including</p>
+<p>In GREEN-DB we collected and aggregated information from 17 different sources, including</p>
 <ul class="simple">
-<li><p>7 previously published curated databases</p></li>
+<li><p>8 previously published curated databases</p></li>
 <li><p>6 experimental datasets from recently published articles</p></li>
 <li><p>predicted regulatory regions from 3 different algorithms</p></li>
 </ul>
