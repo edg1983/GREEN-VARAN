@@ -1,0 +1,477 @@
+HP:0001419	X-linked recessive inheritance	OMIM:300751
+HP:0001972	Macrocytic anemia	OMIM:300751
+HP:0004840	Hypochromic microcytic anemia	OMIM:300751
+HP:0003828	Variable expressivity	OMIM:300751
+HP:0001924	Sideroblastic anemia	OMIM:300751
+HP:0000006	Autosomal dominant inheritance	OMIM:175100
+HP:0004394	Multiple gastric polyps	OMIM:175100
+HP:0006744	Adrenocortical carcinoma	OMIM:175100
+HP:0007649	Congenital hypertrophy of retinal pigment epithelium	OMIM:175100
+HP:0002884	Hepatoblastoma	OMIM:175100
+HP:0002885	Medulloblastoma	OMIM:175100
+HP:0009592	Astrocytoma	OMIM:175100
+HP:0005227	Adenomatous colonic polyposis	OMIM:175100
+HP:0100246	Osteoma	OMIM:175100
+HP:0100245	Desmoid tumors	OMIM:175100
+HP:0000706	Eruption failure	OMIM:175100
+HP:0011069	Supernumerary tooth	OMIM:175100
+HP:0002895	Papillary thyroid carcinoma	OMIM:175100
+HP:0200040	Epidermoid cyst	OMIM:175100
+HP:0008256	Adrenocortical adenoma	OMIM:175100
+HP:0000670	Carious teeth	OMIM:175100
+HP:0010619	Fibroadenoma of the breast	OMIM:175100
+HP:0030731	Carcinoma	OMIM:175100
+HP:0010562	Keloids	OMIM:175100
+HP:0001012	Multiple lipomas	OMIM:175100
+HP:0003003	Colon cancer	OMIM:175100
+HP:0006771	Duodenal adenocarcinoma	OMIM:175100
+HP:0000953	Hyperpigmentation of the skin	OMIM:175100
+HP:0011068	Odontoma	OMIM:175100
+HP:0006722	Small intestine carcinoid	OMIM:175100
+HP:0004783	Duodenal polyposis	OMIM:175100
+HP:0000006	Autosomal dominant inheritance	OMIM:175100
+HP:0004394	Multiple gastric polyps	OMIM:175100
+HP:0006744	Adrenocortical carcinoma	OMIM:175100
+HP:0007649	Congenital hypertrophy of retinal pigment epithelium	OMIM:175100
+HP:0002884	Hepatoblastoma	OMIM:175100
+HP:0002885	Medulloblastoma	OMIM:175100
+HP:0009592	Astrocytoma	OMIM:175100
+HP:0005227	Adenomatous colonic polyposis	OMIM:175100
+HP:0100246	Osteoma	OMIM:175100
+HP:0100245	Desmoid tumors	OMIM:175100
+HP:0000706	Eruption failure	OMIM:175100
+HP:0011069	Supernumerary tooth	OMIM:175100
+HP:0002895	Papillary thyroid carcinoma	OMIM:175100
+HP:0200040	Epidermoid cyst	OMIM:175100
+HP:0008256	Adrenocortical adenoma	OMIM:175100
+HP:0000670	Carious teeth	OMIM:175100
+HP:0010619	Fibroadenoma of the breast	OMIM:175100
+HP:0030731	Carcinoma	OMIM:175100
+HP:0010562	Keloids	OMIM:175100
+HP:0001012	Multiple lipomas	OMIM:175100
+HP:0003003	Colon cancer	OMIM:175100
+HP:0006771	Duodenal adenocarcinoma	OMIM:175100
+HP:0000953	Hyperpigmentation of the skin	OMIM:175100
+HP:0011068	Odontoma	OMIM:175100
+HP:0006722	Small intestine carcinoid	OMIM:175100
+HP:0004783	Duodenal polyposis	OMIM:175100
+HP:0001875	Neutropenia	OMIM:308240
+HP:0002205	Recurrent respiratory infections	OMIM:308240
+HP:0004315	Decreased circulating IgG level	OMIM:308240
+HP:0100827	Lymphocytosis	OMIM:308240
+HP:0001873	Thrombocytopenia	OMIM:308240
+HP:0001419	X-linked recessive inheritance	OMIM:308240
+HP:0002961	Dysgammaglobulinemia	OMIM:308240
+HP:0100776	Recurrent pharyngitis	OMIM:308240
+HP:0002480	Hepatic encephalopathy	OMIM:308240
+HP:0004787	Fulminant hepatitis	OMIM:308240
+HP:0002721	Immunodeficiency	OMIM:308240
+HP:0002240	Hepatomegaly	OMIM:308240
+HP:0002716	Lymphadenopathy	OMIM:308240
+HP:0001287	Meningitis	OMIM:308240
+HP:0001915	Aplastic anemia	OMIM:308240
+HP:0002633	Vasculitis	OMIM:308240
+HP:0001744	Splenomegaly	OMIM:308240
+HP:0030080	Burkitt lymphoma	OMIM:308240
+HP:0012156	Hemophagocytosis	OMIM:308240
+HP:0031693	Severe Epstein Barr virus infection	OMIM:308240
+HP:0001876	Pancytopenia	OMIM:308240
+HP:0003496	Increased circulating IgM level	OMIM:308240
+HP:0012178	Reduced natural killer cell activity	OMIM:308240
+HP:0002383	Encephalitis	OMIM:308240
+HP:0001013	Eruptive xanthomas	OMIM:207750
+HP:0001733	Pancreatitis	OMIM:207750
+HP:0002155	Hypertriglyceridemia	OMIM:207750
+HP:0002240	Hepatomegaly	OMIM:207750
+HP:0001744	Splenomegaly	OMIM:207750
+HP:0000007	Autosomal recessive inheritance	OMIM:207750
+HP:0000660	Lipemia retinalis	OMIM:207750
+HP:0004938	Tortuous cerebral arteries	OMIM:605714
+HP:0001297	Stroke	OMIM:605714
+HP:0000006	Autosomal dominant inheritance	OMIM:605714
+HP:0011695	Cerebellar hemorrhage	OMIM:605714
+HP:0004968	Recurrent cerebral hemorrhage	OMIM:605714
+HP:0000726	Dementia	OMIM:605714
+HP:0002637	Cerebral ischemia	OMIM:605714
+HP:0011970	Cerebral amyloid angiopathy	OMIM:605714
+HP:0000518	Cataract	OMIM:124000
+HP:0001427	Mitochondrial inheritance	OMIM:124000
+HP:0003593	Infantile onset	OMIM:124000
+HP:0001257	Spasticity	OMIM:124000
+HP:0030151	Cholangitis	OMIM:124000
+HP:0006789	Mitochondrial encephalopathy	OMIM:124000
+HP:0000007	Autosomal recessive inheritance	OMIM:124000
+HP:0001414	Microvesicular hepatic steatosis	OMIM:124000
+HP:0001508	Failure to thrive	OMIM:124000
+HP:0001943	Hypoglycemia	OMIM:124000
+HP:0004298	Abnormality of the abdominal wall	OMIM:124000
+HP:0001324	Muscle weakness	OMIM:124000
+HP:0002151	Increased serum lactate	OMIM:124000
+HP:0006558	Decreased mitochondrial complex III activity in liver tissue	OMIM:124000
+HP:0001396	Cholestasis	OMIM:124000
+HP:0001250	Seizure	OMIM:124000
+HP:0001263	Global developmental delay	OMIM:124000
+HP:0008872	Feeding difficulties in infancy	OMIM:124000
+HP:0001410	Decreased liver function	OMIM:124000
+HP:0003201	Rhabdomyolysis	OMIM:124000
+HP:0003256	Abnormality of the coagulation cascade	OMIM:124000
+HP:0003355	Aminoaciduria	OMIM:124000
+HP:0001249	Intellectual disability	OMIM:124000
+HP:0000716	Depression	OMIM:124000
+HP:0001252	Hypotonia	OMIM:124000
+HP:0002910	Elevated hepatic transaminase	OMIM:124000
+HP:0000365	Hearing impairment	OMIM:124000
+HP:0003128	Lactic acidosis	OMIM:124000
+HP:0002059	Cerebral atrophy	OMIM:124000
+HP:0003546	Exercise intolerance	OMIM:124000
+HP:0000738	Hallucinations	OMIM:124000
+HP:0001290	Generalized hypotonia	OMIM:124000
+HP:0003200	Ragged-red muscle fibers	OMIM:124000
+HP:0001970	Tubulointerstitial nephritis	OMIM:124000
+HP:0002353	EEG abnormality	OMIM:124000
+HP:0001272	Cerebellar atrophy	OMIM:124000
+HP:0001347	Hyperreflexia	OMIM:124000
+HP:0000712	Emotional lability	OMIM:124000
+HP:0000510	Rod-cone dystrophy	OMIM:124000
+HP:0001251	Ataxia	OMIM:124000
+HP:0002299	Brittle hair	OMIM:124000
+HP:0001639	Hypertrophic cardiomyopathy	OMIM:124000
+HP:0001942	Metabolic acidosis	OMIM:124000
+HP:0000819	Diabetes mellitus	OMIM:613375
+HP:0025502	Overweight	OMIM:613375
+HP:0004904	Maturity-onset diabetes of the young	OMIM:613375
+HP:0001513	Obesity	OMIM:613375
+HP:0000006	Autosomal dominant inheritance	OMIM:613375
+HP:0000280	Coarse facial features	OMIM:102200
+HP:0006767	Pituitary prolactin cell adenoma	OMIM:102200
+HP:0000006	Autosomal dominant inheritance	OMIM:102200
+HP:0001638	Cardiomyopathy	OMIM:102200
+HP:0000845	Elevated circulating growth hormone concentration	OMIM:102200
+HP:0001712	Left ventricular hypertrophy	OMIM:102200
+HP:0000858	Irregular menstruation	OMIM:102200
+HP:0001428	Somatic mutation	OMIM:102200
+HP:0100829	Galactorrhea	OMIM:102200
+HP:0011760	Pituitary growth hormone cell adenoma	OMIM:102200
+HP:0000870	Increased circulating prolactin concentration	OMIM:102200
+HP:0000822	Hypertension	OMIM:102200
+HP:0030269	Increased serum insulin-like growth factor 1	OMIM:102200
+HP:0040278	Prolactinoma	OMIM:102200
+HP:0002893	Pituitary adenoma	OMIM:102200
+HP:0000006	Autosomal dominant inheritance	OMIM:615922
+HP:0000980	Pallor	OMIM:615922
+HP:0000662	Nyctalopia	OMIM:615922
+HP:0000543	Optic disc pallor	OMIM:615922
+HP:0000510	Rod-cone dystrophy	OMIM:615922
+HP:0000546	Retinal degeneration	OMIM:615922
+HP:0030812	Enlarged tonsils	OMIM:308230
+HP:0003496	Increased circulating IgM level	OMIM:308230
+HP:0002721	Immunodeficiency	OMIM:308230
+HP:0002847	Impaired memory B cell generation	OMIM:308230
+HP:0002849	Absence of lymph node germinal center	OMIM:308230
+HP:0005419	Decreased T cell activation	OMIM:308230
+HP:0001878	Hemolytic anemia	OMIM:308230
+HP:0002783	Recurrent lower respiratory tract infections	OMIM:308230
+HP:0005479	Decreased circulating IgE	OMIM:308230
+HP:0001508	Failure to thrive	OMIM:308230
+HP:0002961	Dysgammaglobulinemia	OMIM:308230
+HP:0000230	Gingivitis	OMIM:308230
+HP:0010280	Stomatitis	OMIM:308230
+HP:0001508	Failure to thrive	OMIM:308230
+HP:0002014	Diarrhea	OMIM:308230
+HP:0001287	Meningitis	OMIM:308230
+HP:0030991	Sclerosing cholangitis	OMIM:308230
+HP:0001873	Thrombocytopenia	OMIM:308230
+HP:0002720	Decreased circulating IgA level	OMIM:308230
+HP:0002959	Impaired Ig class switch recombination	OMIM:308230
+HP:0002240	Hepatomegaly	OMIM:308230
+HP:0002718	Recurrent bacterial infections	OMIM:308230
+HP:0200123	Chronic hepatitis	OMIM:308230
+HP:0001419	X-linked recessive inheritance	OMIM:308230
+HP:0001875	Neutropenia	OMIM:308230
+HP:0012115	Hepatitis	OMIM:308230
+HP:0001394	Cirrhosis	OMIM:308230
+HP:0000155	Oral ulcer	OMIM:308230
+HP:0004315	Decreased circulating IgG level	OMIM:308230
+HP:0100806	Sepsis	OMIM:308230
+HP:0001744	Splenomegaly	OMIM:308230
+HP:0002753	Thin bony cortex	OMIM:300009
+HP:0012622	Chronic kidney disease	OMIM:300009
+HP:0001419	X-linked recessive inheritance	OMIM:300009
+HP:0002979	Bowing of the legs	OMIM:300009
+HP:0003013	Bulging epiphyses	OMIM:300009
+HP:0004322	Short stature	OMIM:300009
+HP:0003020	Enlargement of the wrists	OMIM:300009
+HP:0002980	Femoral bowing	OMIM:300009
+HP:0000114	Proximal tubulopathy	OMIM:300009
+HP:0002150	Hypercalciuria	OMIM:300009
+HP:0002148	Hypophosphatemia	OMIM:300009
+HP:0000121	Nephrocalcinosis	OMIM:300009
+HP:0002748	Rickets	OMIM:300009
+HP:0002757	Recurrent fractures	OMIM:300009
+HP:0002982	Tibial bowing	OMIM:300009
+HP:0003029	Enlargement of the ankles	OMIM:300009
+HP:0000117	Renal phosphate wasting	OMIM:300009
+HP:0003109	Hyperphosphaturia	OMIM:300009
+HP:0003126	Low-molecular-weight proteinuria	OMIM:300009
+HP:0003076	Glycosuria	OMIM:300009
+HP:0002907	Microscopic hematuria	OMIM:300009
+HP:0010502	Fibular bowing	OMIM:300009
+HP:0031415	High serum calcitriol	OMIM:300009
+HP:0000787	Nephrolithiasis	OMIM:300009
+HP:0002749	Osteomalacia	OMIM:300009
+HP:0002663	Delayed epiphyseal ossification	OMIM:300009
+HP:0003355	Aminoaciduria	OMIM:300009
+HP:0002752	Sparse bone trabeculae	OMIM:300009
+HP:0002653	Bone pain	OMIM:300009
+HP:0003025	Metaphyseal irregularity	OMIM:300009
+HP:0000007	Autosomal recessive inheritance	OMIM:260000
+HP:0003828	Variable expressivity	OMIM:260000
+HP:0003355	Aminoaciduria	OMIM:260000
+HP:0000790	Hematuria	OMIM:260000
+HP:0000121	Nephrocalcinosis	OMIM:260000
+HP:0003159	Hyperoxaluria	OMIM:260000
+HP:0000083	Renal insufficiency	OMIM:260000
+HP:0008672	Calcium oxalate nephrolithiasis	OMIM:260000
+HP:0007479	Congenital nonbullous ichthyosiform erythroderma	OMIM:601952
+HP:0009775	Amniotic constriction ring	OMIM:601952
+HP:0001795	Hyperconvex nail	OMIM:601952
+HP:0008064	Ichthyosis	OMIM:601952
+HP:0008404	Nail dystrophy	OMIM:601952
+HP:0001036	Parakeratosis	OMIM:601952
+HP:0000007	Autosomal recessive inheritance	OMIM:601952
+HP:0007490	Linear arrays of macular hyperkeratoses in flexural areas	OMIM:601952
+HP:0001795	Hyperconvex nail	OMIM:601952
+HP:0007465	Honeycomb palmoplantar hyperkeratosis	OMIM:601952
+HP:0000006	Autosomal dominant inheritance	OMIM:614167
+HP:0011003	High myopia	OMIM:614167
+HP:0000597	Ophthalmoparesis	OMIM:610542
+HP:0003621	Juvenile onset	OMIM:610542
+HP:0008180	Mildly elevated creatine kinase	OMIM:610542
+HP:0000467	Neck muscle weakness	OMIM:610542
+HP:0003388	Easy fatigability	OMIM:610542
+HP:0003473	Fatigable weakness	OMIM:610542
+HP:0010628	Facial palsy	OMIM:610542
+HP:0003403	EMG: decremental response of compound muscle action potential to repetitive nerve stimulation	OMIM:610542
+HP:0000508	Ptosis	OMIM:610542
+HP:0002515	Waddling gait	OMIM:610542
+HP:0007126	Proximal amyotrophy	OMIM:610542
+HP:0003391	Gowers sign	OMIM:610542
+HP:0003394	Muscle spasm	OMIM:610542
+HP:0000007	Autosomal recessive inheritance	OMIM:610542
+HP:0001270	Motor delay	OMIM:610542
+HP:0001030	Fragile skin	OMIM:176100
+HP:0002219	Facial hypertrichosis	OMIM:176100
+HP:0000006	Autosomal dominant inheritance	OMIM:176100
+HP:0000992	Cutaneous photosensitivity	OMIM:176100
+HP:0001596	Alopecia	OMIM:176100
+HP:0000007	Autosomal recessive inheritance	OMIM:176100
+HP:0001402	Hepatocellular carcinoma	OMIM:176100
+HP:0001806	Onycholysis	OMIM:176100
+HP:0005586	Hyperpigmentation in sun-exposed areas	OMIM:176100
+HP:0100324	Scleroderma	OMIM:176100
+HP:0001394	Cirrhosis	OMIM:176100
+HP:0000007	Autosomal recessive inheritance	OMIM:608265
+HP:0000399	Prelingual sensorineural hearing impairment	OMIM:608265
+HP:0002650	Scoliosis	OMIM:605285
+HP:0000007	Autosomal recessive inheritance	OMIM:605285
+HP:0001265	Hyporeflexia	OMIM:605285
+HP:0003387	Decreased number of large peripheral myelinated nerve fibers	OMIM:605285
+HP:0002355	Difficulty walking	OMIM:605285
+HP:0003431	Decreased motor nerve conduction velocity	OMIM:605285
+HP:0003676	Progressive	OMIM:605285
+HP:0007182	Peripheral hypomyelination	OMIM:605285
+HP:0003450	Axonal regeneration	OMIM:605285
+HP:0001760	Abnormal foot morphology	OMIM:605285
+HP:0002460	Distal muscle weakness	OMIM:605285
+HP:0001155	Abnormality of the hand	OMIM:605285
+HP:0003470	Paralysis	OMIM:605285
+HP:0009830	Peripheral neuropathy	OMIM:605285
+HP:0002076	Migraine	OMIM:614674
+HP:0003118	Increased circulating cortisol level	OMIM:614674
+HP:0001945	Fever	OMIM:614674
+HP:0200067	Recurrent spontaneous abortion	OMIM:614674
+HP:0000006	Autosomal dominant inheritance	OMIM:614674
+HP:0000193	Bifid uvula	OMIM:119300
+HP:0000204	Cleft upper lip	OMIM:119300
+HP:0000668	Hypodontia	OMIM:119300
+HP:0000006	Autosomal dominant inheritance	OMIM:119300
+HP:0000196	Lower lip pit	OMIM:119300
+HP:0001875	Neutropenia	OMIM:308240
+HP:0002205	Recurrent respiratory infections	OMIM:308240
+HP:0004315	Decreased circulating IgG level	OMIM:308240
+HP:0100827	Lymphocytosis	OMIM:308240
+HP:0001873	Thrombocytopenia	OMIM:308240
+HP:0001419	X-linked recessive inheritance	OMIM:308240
+HP:0002961	Dysgammaglobulinemia	OMIM:308240
+HP:0100776	Recurrent pharyngitis	OMIM:308240
+HP:0002480	Hepatic encephalopathy	OMIM:308240
+HP:0004787	Fulminant hepatitis	OMIM:308240
+HP:0002721	Immunodeficiency	OMIM:308240
+HP:0002240	Hepatomegaly	OMIM:308240
+HP:0002716	Lymphadenopathy	OMIM:308240
+HP:0001287	Meningitis	OMIM:308240
+HP:0001915	Aplastic anemia	OMIM:308240
+HP:0002633	Vasculitis	OMIM:308240
+HP:0001744	Splenomegaly	OMIM:308240
+HP:0030080	Burkitt lymphoma	OMIM:308240
+HP:0012156	Hemophagocytosis	OMIM:308240
+HP:0031693	Severe Epstein Barr virus infection	OMIM:308240
+HP:0001876	Pancytopenia	OMIM:308240
+HP:0003496	Increased circulating IgM level	OMIM:308240
+HP:0012178	Reduced natural killer cell activity	OMIM:308240
+HP:0002383	Encephalitis	OMIM:308240
+HP:0012189	Hodgkin lymphoma	OMIM:236000
+HP:0000007	Autosomal recessive inheritance	OMIM:236000
+HP:0003459	Polyclonal elevation of IgM	OMIM:236000
+HP:0003347	Impaired lymphocyte transformation with phytohemagglutinin	OMIM:236000
+HP:0001635	Congestive heart failure	OMIM:611126
+HP:0000007	Autosomal recessive inheritance	OMIM:611126
+HP:0001644	Dilated cardiomyopathy	OMIM:611126
+HP:0003215	Dicarboxylic aciduria	OMIM:611126
+HP:0001297	Stroke	OMIM:611126
+HP:0001943	Hypoglycemia	OMIM:611126
+HP:0003128	Lactic acidosis	OMIM:611126
+HP:0003546	Exercise intolerance	OMIM:611126
+HP:0001298	Encephalopathy	OMIM:611126
+HP:0002910	Elevated hepatic transaminase	OMIM:611126
+HP:0001399	Hepatic failure	OMIM:611126
+HP:0001414	Microvesicular hepatic steatosis	OMIM:611126
+HP:0001324	Muscle weakness	OMIM:611126
+HP:0001290	Generalized hypotonia	OMIM:611126
+HP:0002181	Cerebral edema	OMIM:611126
+HP:0001873	Thrombocytopenia	OMIM:611126
+HP:0001639	Hypertrophic cardiomyopathy	OMIM:611126
+HP:0007905	Abnormal iris vasculature	OMIM:137750
+HP:0000501	Glaucoma	OMIM:137750
+HP:0000545	Myopia	OMIM:137750
+HP:0000006	Autosomal dominant inheritance	OMIM:137750
+HP:0007641	Dyschromatopsia	OMIM:610024
+HP:0000613	Photophobia	OMIM:610024
+HP:0000007	Autosomal recessive inheritance	OMIM:610024
+HP:0000006	Autosomal dominant inheritance	OMIM:610024
+HP:0007663	Reduced visual acuity	OMIM:610024
+HP:0008020	Cone dystrophy	OMIM:610024
+HP:0000639	Nystagmus	OMIM:610024
+HP:0000662	Nyctalopia	OMIM:610024
+HP:0000548	Cone/cone-rod dystrophy	OMIM:610024
+HP:0001419	X-linked recessive inheritance	OMIM:312080
+HP:0000639	Nystagmus	OMIM:312080
+HP:0001508	Failure to thrive	OMIM:312080
+HP:0100709	Reduction of oligodendroglia	OMIM:312080
+HP:0002599	Head titubation	OMIM:312080
+HP:0003593	Infantile onset	OMIM:312080
+HP:0004886	Congenital laryngeal stridor	OMIM:312080
+HP:0001290	Generalized hypotonia	OMIM:312080
+HP:0007256	Abnormal pyramidal sign	OMIM:312080
+HP:0001260	Dysarthria	OMIM:312080
+HP:0000750	Delayed speech and language development	OMIM:312080
+HP:0007266	Cerebral dysmyelination	OMIM:312080
+HP:0001251	Ataxia	OMIM:312080
+HP:0003269	Sudanophilic leukodystrophy	OMIM:312080
+HP:0001265	Hyporeflexia	OMIM:312080
+HP:0000252	Microcephaly	OMIM:312080
+HP:0002168	Scanning speech	OMIM:312080
+HP:0000648	Optic atrophy	OMIM:312080
+HP:0001332	Dystonia	OMIM:312080
+HP:0002478	Progressive spastic quadriplegia	OMIM:312080
+HP:0002361	Psychomotor deterioration	OMIM:312080
+HP:0001337	Tremor	OMIM:312080
+HP:0000365	Hearing impairment	OMIM:312080
+HP:0001263	Global developmental delay	OMIM:312080
+HP:0001252	Hypotonia	OMIM:312080
+HP:0004322	Short stature	OMIM:312080
+HP:0001266	Choreoathetosis	OMIM:312080
+HP:0001583	Rotary nystagmus	OMIM:312080
+HP:0001250	Seizure	OMIM:312080
+HP:0002015	Dysphagia	OMIM:312080
+HP:0001249	Intellectual disability	OMIM:312080
+HP:0003677	Slowly progressive	OMIM:312080
+HP:0000007	Autosomal recessive inheritance	OMIM:606785
+HP:0000952	Jaundice	OMIM:606785
+HP:0008282	Unconjugated hyperbilirubinemia	OMIM:606785
+HP:0002231	Sparse body hair	OMIM:146550
+HP:0000535	Sparse and thin eyebrow	OMIM:146550
+HP:0000006	Autosomal dominant inheritance	OMIM:146550
+HP:0008070	Sparse hair	OMIM:146550
+HP:0000653	Sparse eyelashes	OMIM:146550
+HP:0001596	Alopecia	OMIM:146550
+HP:0003777	Pili torti	OMIM:146550
+HP:0000369	Low-set ears	OMIM:117650
+HP:0000086	Ectopic kidney	OMIM:117650
+HP:0001643	Patent ductus arteriosus	OMIM:117650
+HP:0000358	Posteriorly rotated ears	OMIM:117650
+HP:0002987	Elbow flexion contracture	OMIM:117650
+HP:0010290	Short hard palate	OMIM:117650
+HP:0000347	Micrognathia	OMIM:117650
+HP:0000343	Long philtrum	OMIM:117650
+HP:0002132	Porencephalic cyst	OMIM:117650
+HP:0001374	Congenital hip dislocation	OMIM:117650
+HP:0002020	Gastroesophageal reflux	OMIM:117650
+HP:0005257	Thoracic hypoplasia	OMIM:117650
+HP:0000107	Renal cyst	OMIM:117650
+HP:0000185	Cleft soft palate	OMIM:117650
+HP:0000218	High palate	OMIM:117650
+HP:0001249	Intellectual disability	OMIM:117650
+HP:0001629	Ventricular septal defect	OMIM:117650
+HP:0002025	Anal stenosis	OMIM:117650
+HP:0000006	Autosomal dominant inheritance	OMIM:117650
+HP:0000465	Webbed neck	OMIM:117650
+HP:0000878	11 pairs of ribs	OMIM:117650
+HP:0001561	Polyhydramnios	OMIM:117650
+HP:0000164	Abnormality of the dentition	OMIM:117650
+HP:0004209	Clinodactyly of the 5th finger	OMIM:117650
+HP:0001591	Bell-shaped thorax	OMIM:117650
+HP:0000162	Glossoptosis	OMIM:117650
+HP:0001611	Nasal speech	OMIM:117650
+HP:0002650	Scoliosis	OMIM:117650
+HP:0000272	Malar flattening	OMIM:117650
+HP:0006593	Anomalous rib insertion to vertebrae	OMIM:117650
+HP:0000286	Epicanthus	OMIM:117650
+HP:0004695	Calcaneal epiphyseal stippling	OMIM:117650
+HP:0002643	Neonatal respiratory distress	OMIM:117650
+HP:0000405	Conductive hearing impairment	OMIM:117650
+HP:0000085	Horseshoe kidney	OMIM:117650
+HP:0000252	Microcephaly	OMIM:117650
+HP:0001631	Atrial septal defect	OMIM:117650
+HP:0001545	Anteriorly placed anus	OMIM:117650
+HP:0004468	Anomalous tracheal cartilage	OMIM:117650
+HP:0030280	Rib gap	OMIM:117650
+HP:0005792	Short humerus	OMIM:117650
+HP:0008897	Postnatal growth retardation	OMIM:117650
+HP:0001030	Fragile skin	OMIM:176100
+HP:0002219	Facial hypertrichosis	OMIM:176100
+HP:0000006	Autosomal dominant inheritance	OMIM:176100
+HP:0000992	Cutaneous photosensitivity	OMIM:176100
+HP:0001596	Alopecia	OMIM:176100
+HP:0000007	Autosomal recessive inheritance	OMIM:176100
+HP:0001402	Hepatocellular carcinoma	OMIM:176100
+HP:0001806	Onycholysis	OMIM:176100
+HP:0005586	Hyperpigmentation in sun-exposed areas	OMIM:176100
+HP:0100324	Scleroderma	OMIM:176100
+HP:0001394	Cirrhosis	OMIM:176100
+HP:0000243	Trigonocephaly	OMIM:609637
+HP:0001250	Seizure	OMIM:609637
+HP:0000863	Central diabetes insipidus	OMIM:609637
+HP:0002002	Deep philtrum	OMIM:609637
+HP:0001263	Global developmental delay	OMIM:609637
+HP:0000218	High palate	OMIM:609637
+HP:0000341	Narrow forehead	OMIM:609637
+HP:0005280	Depressed nasal bridge	OMIM:609637
+HP:0000664	Synophrys	OMIM:609637
+HP:0002507	Semilobar holoprosencephaly	OMIM:609637
+HP:0000337	Broad forehead	OMIM:609637
+HP:0000601	Hypotelorism	OMIM:609637
+HP:0000340	Sloping forehead	OMIM:609637
+HP:0000316	Hypertelorism	OMIM:609637
+HP:0006988	Alobar holoprosencephaly	OMIM:609637
+HP:0000400	Macrotia	OMIM:609637
+HP:0006870	Lobar holoprosencephaly	OMIM:609637
+HP:0000006	Autosomal dominant inheritance	OMIM:609637
+HP:0001999	Abnormal facial shape	OMIM:609637
+HP:0001249	Intellectual disability	OMIM:609637
+HP:0000582	Upslanted palpebral fissure	OMIM:609637
+HP:0000202	Oral cleft	OMIM:609637
+HP:0000238	Hydrocephalus	OMIM:609637
+HP:0000252	Microcephaly	OMIM:609637
+HP:0000463	Anteverted nares	OMIM:609637
+HP:0000348	High forehead	OMIM:609637

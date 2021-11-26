@@ -1,0 +1,1485 @@
+pid	group	gene_group	n_var	n_gene
+004Int002	level1	all genes	135583	10523
+004Int002	level1	GADO selected	21162	1182
+004Int002	level1	ClinVar pathogenic	38650	2370
+004Int002	level1	PanelApp green	25607	1632
+004Int002	level3	all genes	318	85
+004Int002	level3	GADO selected	36	13
+004Int002	level3	ClinVar pathogenic	91	30
+004Int002	level3	PanelApp green	77	24
+004Int002	protein-changing	all genes	9	6
+004Int002	protein-changing	GADO selected	1	1
+004Int002	protein-changing	ClinVar pathogenic	5	3
+004Int002	protein-changing	PanelApp green	1	1
+004Int002	coding deleterious	all genes	0	0
+004Int002	coding deleterious	GADO selected	0	0
+004Int002	coding deleterious	ClinVar pathogenic	0	0
+004Int002	coding deleterious	PanelApp green	0	0
+004Int002	level1 + prot-changing	all genes	1028	304
+004Int002	level1 + prot-changing	GADO selected	176	51
+004Int002	level1 + prot-changing	ClinVar pathogenic	373	98
+004Int002	level1 + prot-changing	PanelApp green	235	62
+004Int002	level3 + prot-changing	all genes	43	20
+004Int002	level3 + prot-changing	GADO selected	3	3
+004Int002	level3 + prot-changing	ClinVar pathogenic	6	3
+004Int002	level3 + prot-changing	PanelApp green	6	3
+004Int002	level3 + deleterious	all genes	23	8
+004Int002	level3 + deleterious	GADO selected	2	2
+004Int002	level3 + deleterious	ClinVar pathogenic	4	1
+004Int002	level3 + deleterious	PanelApp green	4	1
+005Kli001	level1	all genes	145131	10969
+005Kli001	level1	GADO selected	20334	1251
+005Kli001	level1	ClinVar pathogenic	39704	2442
+005Kli001	level1	PanelApp green	25521	1671
+005Kli001	level3	all genes	125	49
+005Kli001	level3	GADO selected	14	7
+005Kli001	level3	ClinVar pathogenic	37	13
+005Kli001	level3	PanelApp green	23	10
+005Kli001	protein-changing	all genes	3	3
+005Kli001	protein-changing	GADO selected	0	0
+005Kli001	protein-changing	ClinVar pathogenic	1	1
+005Kli001	protein-changing	PanelApp green	1	1
+005Kli001	coding deleterious	all genes	1	1
+005Kli001	coding deleterious	GADO selected	0	0
+005Kli001	coding deleterious	ClinVar pathogenic	1	1
+005Kli001	coding deleterious	PanelApp green	1	1
+005Kli001	level1 + prot-changing	all genes	1089	296
+005Kli001	level1 + prot-changing	GADO selected	236	49
+005Kli001	level1 + prot-changing	ClinVar pathogenic	404	94
+005Kli001	level1 + prot-changing	PanelApp green	287	70
+005Kli001	level3 + prot-changing	all genes	13	8
+005Kli001	level3 + prot-changing	GADO selected	5	2
+005Kli001	level3 + prot-changing	ClinVar pathogenic	1	1
+005Kli001	level3 + prot-changing	PanelApp green	1	1
+005Kli001	level3 + deleterious	all genes	10	6
+005Kli001	level3 + deleterious	GADO selected	4	2
+005Kli001	level3 + deleterious	ClinVar pathogenic	0	0
+005Kli001	level3 + deleterious	PanelApp green	0	0
+006Bra001	level1	all genes	145549	10909
+006Bra001	level1	GADO selected	20465	1139
+006Bra001	level1	ClinVar pathogenic	41119	2376
+006Bra001	level1	PanelApp green	27023	1640
+006Bra001	level3	all genes	137	52
+006Bra001	level3	GADO selected	33	8
+006Bra001	level3	ClinVar pathogenic	43	15
+006Bra001	level3	PanelApp green	36	10
+006Bra001	protein-changing	all genes	9	9
+006Bra001	protein-changing	GADO selected	3	3
+006Bra001	protein-changing	ClinVar pathogenic	4	4
+006Bra001	protein-changing	PanelApp green	2	2
+006Bra001	coding deleterious	all genes	2	2
+006Bra001	coding deleterious	GADO selected	1	1
+006Bra001	coding deleterious	ClinVar pathogenic	1	1
+006Bra001	coding deleterious	PanelApp green	0	0
+006Bra001	level1 + prot-changing	all genes	1012	292
+006Bra001	level1 + prot-changing	GADO selected	196	47
+006Bra001	level1 + prot-changing	ClinVar pathogenic	421	102
+006Bra001	level1 + prot-changing	PanelApp green	290	73
+006Bra001	level3 + prot-changing	all genes	32	19
+006Bra001	level3 + prot-changing	GADO selected	9	6
+006Bra001	level3 + prot-changing	ClinVar pathogenic	19	10
+006Bra001	level3 + prot-changing	PanelApp green	17	8
+006Bra001	level3 + deleterious	all genes	26	15
+006Bra001	level3 + deleterious	GADO selected	7	5
+006Bra001	level3 + deleterious	ClinVar pathogenic	15	7
+006Bra001	level3 + deleterious	PanelApp green	13	5
+007SYN001	level1	all genes	139416	10666
+007SYN001	level1	GADO selected	18200	1140
+007SYN001	level1	ClinVar pathogenic	38391	2343
+007SYN001	level1	PanelApp green	25349	1624
+007SYN001	level3	all genes	254	58
+007SYN001	level3	GADO selected	14	5
+007SYN001	level3	ClinVar pathogenic	105	17
+007SYN001	level3	PanelApp green	88	14
+007SYN001	protein-changing	all genes	6	5
+007SYN001	protein-changing	GADO selected	0	0
+007SYN001	protein-changing	ClinVar pathogenic	4	3
+007SYN001	protein-changing	PanelApp green	3	2
+007SYN001	coding deleterious	all genes	2	2
+007SYN001	coding deleterious	GADO selected	0	0
+007SYN001	coding deleterious	ClinVar pathogenic	2	2
+007SYN001	coding deleterious	PanelApp green	1	1
+007SYN001	level1 + prot-changing	all genes	986	261
+007SYN001	level1 + prot-changing	GADO selected	162	34
+007SYN001	level1 + prot-changing	ClinVar pathogenic	385	80
+007SYN001	level1 + prot-changing	PanelApp green	303	65
+007SYN001	level3 + prot-changing	all genes	53	21
+007SYN001	level3 + prot-changing	GADO selected	7	2
+007SYN001	level3 + prot-changing	ClinVar pathogenic	26	8
+007SYN001	level3 + prot-changing	PanelApp green	26	8
+007SYN001	level3 + deleterious	all genes	22	9
+007SYN001	level3 + deleterious	GADO selected	4	1
+007SYN001	level3 + deleterious	ClinVar pathogenic	9	3
+007SYN001	level3 + deleterious	PanelApp green	9	3
+007SYN002	level1	all genes	148851	10963
+007SYN002	level1	GADO selected	19706	1187
+007SYN002	level1	ClinVar pathogenic	41283	2409
+007SYN002	level1	PanelApp green	27071	1634
+007SYN002	level3	all genes	125	42
+007SYN002	level3	GADO selected	3	3
+007SYN002	level3	ClinVar pathogenic	61	11
+007SYN002	level3	PanelApp green	14	7
+007SYN002	protein-changing	all genes	6	5
+007SYN002	protein-changing	GADO selected	0	0
+007SYN002	protein-changing	ClinVar pathogenic	0	0
+007SYN002	protein-changing	PanelApp green	2	1
+007SYN002	coding deleterious	all genes	4	3
+007SYN002	coding deleterious	GADO selected	0	0
+007SYN002	coding deleterious	ClinVar pathogenic	0	0
+007SYN002	coding deleterious	PanelApp green	2	1
+007SYN002	level1 + prot-changing	all genes	987	273
+007SYN002	level1 + prot-changing	GADO selected	115	35
+007SYN002	level1 + prot-changing	ClinVar pathogenic	373	83
+007SYN002	level1 + prot-changing	PanelApp green	306	60
+007SYN002	level3 + prot-changing	all genes	47	22
+007SYN002	level3 + prot-changing	GADO selected	4	4
+007SYN002	level3 + prot-changing	ClinVar pathogenic	26	11
+007SYN002	level3 + prot-changing	PanelApp green	19	9
+007SYN002	level3 + deleterious	all genes	38	13
+007SYN002	level3 + deleterious	GADO selected	0	0
+007SYN002	level3 + deleterious	ClinVar pathogenic	22	7
+007SYN002	level3 + deleterious	PanelApp green	15	5
+008Con002	level1	all genes	178327	10375
+008Con002	level1	GADO selected	23579	1055
+008Con002	level1	ClinVar pathogenic	45793	2314
+008Con002	level1	PanelApp green	31562	1593
+008Con002	level3	all genes	233	60
+008Con002	level3	GADO selected	20	9
+008Con002	level3	ClinVar pathogenic	82	22
+008Con002	level3	PanelApp green	21	9
+008Con002	protein-changing	all genes	6	6
+008Con002	protein-changing	GADO selected	0	0
+008Con002	protein-changing	ClinVar pathogenic	3	3
+008Con002	protein-changing	PanelApp green	1	1
+008Con002	coding deleterious	all genes	2	2
+008Con002	coding deleterious	GADO selected	0	0
+008Con002	coding deleterious	ClinVar pathogenic	2	2
+008Con002	coding deleterious	PanelApp green	1	1
+008Con002	level1 + prot-changing	all genes	853	253
+008Con002	level1 + prot-changing	GADO selected	133	37
+008Con002	level1 + prot-changing	ClinVar pathogenic	280	75
+008Con002	level1 + prot-changing	PanelApp green	203	55
+008Con002	level3 + prot-changing	all genes	39	18
+008Con002	level3 + prot-changing	GADO selected	2	2
+008Con002	level3 + prot-changing	ClinVar pathogenic	17	7
+008Con002	level3 + prot-changing	PanelApp green	5	4
+008Con002	level3 + deleterious	all genes	20	11
+008Con002	level3 + deleterious	GADO selected	0	0
+008Con002	level3 + deleterious	ClinVar pathogenic	15	6
+008Con002	level3 + deleterious	PanelApp green	4	3
+008Con004	level1	all genes	162867	11293
+008Con004	level1	GADO selected	21777	1156
+008Con004	level1	ClinVar pathogenic	48037	2459
+008Con004	level1	PanelApp green	30613	1681
+008Con004	level3	all genes	232	69
+008Con004	level3	GADO selected	16	7
+008Con004	level3	ClinVar pathogenic	39	18
+008Con004	level3	PanelApp green	30	11
+008Con004	protein-changing	all genes	13	10
+008Con004	protein-changing	GADO selected	0	0
+008Con004	protein-changing	ClinVar pathogenic	5	4
+008Con004	protein-changing	PanelApp green	3	2
+008Con004	coding deleterious	all genes	4	3
+008Con004	coding deleterious	GADO selected	0	0
+008Con004	coding deleterious	ClinVar pathogenic	3	2
+008Con004	coding deleterious	PanelApp green	2	1
+008Con004	level1 + prot-changing	all genes	1164	318
+008Con004	level1 + prot-changing	GADO selected	150	41
+008Con004	level1 + prot-changing	ClinVar pathogenic	445	104
+008Con004	level1 + prot-changing	PanelApp green	298	72
+008Con004	level3 + prot-changing	all genes	36	22
+008Con004	level3 + prot-changing	GADO selected	6	5
+008Con004	level3 + prot-changing	ClinVar pathogenic	20	10
+008Con004	level3 + prot-changing	PanelApp green	13	7
+008Con004	level3 + deleterious	all genes	21	15
+008Con004	level3 + deleterious	GADO selected	5	4
+008Con004	level3 + deleterious	ClinVar pathogenic	10	6
+008Con004	level3 + deleterious	PanelApp green	6	4
+010Aic001	level1	all genes	185761	11268
+010Aic001	level1	GADO selected	21962	1132
+010Aic001	level1	ClinVar pathogenic	52952	2449
+010Aic001	level1	PanelApp green	33340	1665
+010Aic001	level3	all genes	419	89
+010Aic001	level3	GADO selected	113	12
+010Aic001	level3	ClinVar pathogenic	153	24
+010Aic001	level3	PanelApp green	75	13
+010Aic001	protein-changing	all genes	5	5
+010Aic001	protein-changing	GADO selected	0	0
+010Aic001	protein-changing	ClinVar pathogenic	2	2
+010Aic001	protein-changing	PanelApp green	2	2
+010Aic001	coding deleterious	all genes	2	2
+010Aic001	coding deleterious	GADO selected	0	0
+010Aic001	coding deleterious	ClinVar pathogenic	1	1
+010Aic001	coding deleterious	PanelApp green	1	1
+010Aic001	level1 + prot-changing	all genes	1329	322
+010Aic001	level1 + prot-changing	GADO selected	214	45
+010Aic001	level1 + prot-changing	ClinVar pathogenic	450	90
+010Aic001	level1 + prot-changing	PanelApp green	293	52
+010Aic001	level3 + prot-changing	all genes	46	20
+010Aic001	level3 + prot-changing	GADO selected	2	1
+010Aic001	level3 + prot-changing	ClinVar pathogenic	21	9
+010Aic001	level3 + prot-changing	PanelApp green	14	5
+010Aic001	level3 + deleterious	all genes	30	14
+010Aic001	level3 + deleterious	GADO selected	0	0
+010Aic001	level3 + deleterious	ClinVar pathogenic	14	5
+010Aic001	level3 + deleterious	PanelApp green	11	3
+010Aic002	level1	all genes	191840	12223
+010Aic002	level1	GADO selected	23073	1280
+010Aic002	level1	ClinVar pathogenic	55362	2688
+010Aic002	level1	PanelApp green	36481	1828
+010Aic002	level3	all genes	346	113
+010Aic002	level3	GADO selected	28	9
+010Aic002	level3	ClinVar pathogenic	107	26
+010Aic002	level3	PanelApp green	83	17
+010Aic002	protein-changing	all genes	10	9
+010Aic002	protein-changing	GADO selected	2	2
+010Aic002	protein-changing	ClinVar pathogenic	6	5
+010Aic002	protein-changing	PanelApp green	3	2
+010Aic002	coding deleterious	all genes	4	3
+010Aic002	coding deleterious	GADO selected	1	1
+010Aic002	coding deleterious	ClinVar pathogenic	4	3
+010Aic002	coding deleterious	PanelApp green	3	2
+010Aic002	level1 + prot-changing	all genes	1333	353
+010Aic002	level1 + prot-changing	GADO selected	161	48
+010Aic002	level1 + prot-changing	ClinVar pathogenic	378	105
+010Aic002	level1 + prot-changing	PanelApp green	263	74
+010Aic002	level3 + prot-changing	all genes	59	34
+010Aic002	level3 + prot-changing	GADO selected	4	4
+010Aic002	level3 + prot-changing	ClinVar pathogenic	14	9
+010Aic002	level3 + prot-changing	PanelApp green	20	9
+010Aic002	level3 + deleterious	all genes	45	27
+010Aic002	level3 + deleterious	GADO selected	3	3
+010Aic002	level3 + deleterious	ClinVar pathogenic	10	6
+010Aic002	level3 + deleterious	PanelApp green	14	6
+010Aic003	level1	all genes	274076	13390
+010Aic003	level1	GADO selected	33983	1319
+010Aic003	level1	ClinVar pathogenic	76183	2853
+010Aic003	level1	PanelApp green	49946	1941
+010Aic003	level3	all genes	486	127
+010Aic003	level3	GADO selected	95	16
+010Aic003	level3	ClinVar pathogenic	184	41
+010Aic003	level3	PanelApp green	98	19
+010Aic003	protein-changing	all genes	8	8
+010Aic003	protein-changing	GADO selected	1	1
+010Aic003	protein-changing	ClinVar pathogenic	4	4
+010Aic003	protein-changing	PanelApp green	4	4
+010Aic003	coding deleterious	all genes	4	4
+010Aic003	coding deleterious	GADO selected	1	1
+010Aic003	coding deleterious	ClinVar pathogenic	3	3
+010Aic003	coding deleterious	PanelApp green	3	3
+010Aic003	level1 + prot-changing	all genes	1877	441
+010Aic003	level1 + prot-changing	GADO selected	348	65
+010Aic003	level1 + prot-changing	ClinVar pathogenic	751	141
+010Aic003	level1 + prot-changing	PanelApp green	515	98
+010Aic003	level3 + prot-changing	all genes	74	41
+010Aic003	level3 + prot-changing	GADO selected	11	10
+010Aic003	level3 + prot-changing	ClinVar pathogenic	31	14
+010Aic003	level3 + prot-changing	PanelApp green	23	10
+010Aic003	level3 + deleterious	all genes	45	24
+010Aic003	level3 + deleterious	GADO selected	8	8
+010Aic003	level3 + deleterious	ClinVar pathogenic	23	10
+010Aic003	level3 + deleterious	PanelApp green	15	6
+010Aic004	level1	all genes	371051	13705
+010Aic004	level1	GADO selected	55538	1382
+010Aic004	level1	ClinVar pathogenic	108131	2873
+010Aic004	level1	PanelApp green	68383	1983
+010Aic004	level3	all genes	505	154
+010Aic004	level3	GADO selected	91	17
+010Aic004	level3	ClinVar pathogenic	180	42
+010Aic004	level3	PanelApp green	146	32
+010Aic004	protein-changing	all genes	13	11
+010Aic004	protein-changing	GADO selected	3	2
+010Aic004	protein-changing	ClinVar pathogenic	7	5
+010Aic004	protein-changing	PanelApp green	5	3
+010Aic004	coding deleterious	all genes	6	6
+010Aic004	coding deleterious	GADO selected	1	1
+010Aic004	coding deleterious	ClinVar pathogenic	2	2
+010Aic004	coding deleterious	PanelApp green	1	1
+010Aic004	level1 + prot-changing	all genes	2192	440
+010Aic004	level1 + prot-changing	GADO selected	431	77
+010Aic004	level1 + prot-changing	ClinVar pathogenic	846	145
+010Aic004	level1 + prot-changing	PanelApp green	606	104
+010Aic004	level3 + prot-changing	all genes	79	41
+010Aic004	level3 + prot-changing	GADO selected	13	5
+010Aic004	level3 + prot-changing	ClinVar pathogenic	29	14
+010Aic004	level3 + prot-changing	PanelApp green	21	9
+010Aic004	level3 + deleterious	all genes	30	17
+010Aic004	level3 + deleterious	GADO selected	1	1
+010Aic004	level3 + deleterious	ClinVar pathogenic	10	5
+010Aic004	level3 + deleterious	PanelApp green	8	4
+010Aic006	level1	all genes	266048	13005
+010Aic006	level1	GADO selected	30956	1271
+010Aic006	level1	ClinVar pathogenic	74654	2818
+010Aic006	level1	PanelApp green	47464	1951
+010Aic006	level3	all genes	208	83
+010Aic006	level3	GADO selected	15	7
+010Aic006	level3	ClinVar pathogenic	53	21
+010Aic006	level3	PanelApp green	44	15
+010Aic006	protein-changing	all genes	6	6
+010Aic006	protein-changing	GADO selected	1	1
+010Aic006	protein-changing	ClinVar pathogenic	1	1
+010Aic006	protein-changing	PanelApp green	1	1
+010Aic006	coding deleterious	all genes	2	2
+010Aic006	coding deleterious	GADO selected	0	0
+010Aic006	coding deleterious	ClinVar pathogenic	1	1
+010Aic006	coding deleterious	PanelApp green	1	1
+010Aic006	level1 + prot-changing	all genes	1718	395
+010Aic006	level1 + prot-changing	GADO selected	229	45
+010Aic006	level1 + prot-changing	ClinVar pathogenic	554	123
+010Aic006	level1 + prot-changing	PanelApp green	418	92
+010Aic006	level3 + prot-changing	all genes	47	24
+010Aic006	level3 + prot-changing	GADO selected	4	2
+010Aic006	level3 + prot-changing	ClinVar pathogenic	8	6
+010Aic006	level3 + prot-changing	PanelApp green	7	5
+010Aic006	level3 + deleterious	all genes	26	11
+010Aic006	level3 + deleterious	GADO selected	0	0
+010Aic006	level3 + deleterious	ClinVar pathogenic	2	2
+010Aic006	level3 + deleterious	PanelApp green	2	2
+010Aic007	level1	all genes	542364	14355
+010Aic007	level1	GADO selected	60071	1444
+010Aic007	level1	ClinVar pathogenic	139118	2974
+010Aic007	level1	PanelApp green	90347	2034
+010Aic007	level3	all genes	576	136
+010Aic007	level3	GADO selected	84	21
+010Aic007	level3	ClinVar pathogenic	117	30
+010Aic007	level3	PanelApp green	99	22
+010Aic007	protein-changing	all genes	13	11
+010Aic007	protein-changing	GADO selected	2	2
+010Aic007	protein-changing	ClinVar pathogenic	4	4
+010Aic007	protein-changing	PanelApp green	3	3
+010Aic007	coding deleterious	all genes	6	6
+010Aic007	coding deleterious	GADO selected	0	0
+010Aic007	coding deleterious	ClinVar pathogenic	2	2
+010Aic007	coding deleterious	PanelApp green	1	1
+010Aic007	level1 + prot-changing	all genes	3362	517
+010Aic007	level1 + prot-changing	GADO selected	485	87
+010Aic007	level1 + prot-changing	ClinVar pathogenic	1050	153
+010Aic007	level1 + prot-changing	PanelApp green	798	120
+010Aic007	level3 + prot-changing	all genes	73	40
+010Aic007	level3 + prot-changing	GADO selected	8	7
+010Aic007	level3 + prot-changing	ClinVar pathogenic	17	10
+010Aic007	level3 + prot-changing	PanelApp green	11	8
+010Aic007	level3 + deleterious	all genes	29	19
+010Aic007	level3 + deleterious	GADO selected	5	4
+010Aic007	level3 + deleterious	ClinVar pathogenic	7	5
+010Aic007	level3 + deleterious	PanelApp green	7	5
+010AIC009	level1	all genes	146901	10941
+010AIC009	level1	GADO selected	20117	1144
+010AIC009	level1	ClinVar pathogenic	40886	2426
+010AIC009	level1	PanelApp green	27677	1642
+010AIC009	level3	all genes	295	73
+010AIC009	level3	GADO selected	47	10
+010AIC009	level3	ClinVar pathogenic	80	16
+010AIC009	level3	PanelApp green	48	11
+010AIC009	protein-changing	all genes	5	5
+010AIC009	protein-changing	GADO selected	0	0
+010AIC009	protein-changing	ClinVar pathogenic	1	1
+010AIC009	protein-changing	PanelApp green	1	1
+010AIC009	coding deleterious	all genes	2	2
+010AIC009	coding deleterious	GADO selected	0	0
+010AIC009	coding deleterious	ClinVar pathogenic	0	0
+010AIC009	coding deleterious	PanelApp green	0	0
+010AIC009	level1 + prot-changing	all genes	1014	289
+010AIC009	level1 + prot-changing	GADO selected	169	40
+010AIC009	level1 + prot-changing	ClinVar pathogenic	363	93
+010AIC009	level1 + prot-changing	PanelApp green	271	70
+010AIC009	level3 + prot-changing	all genes	25	15
+010AIC009	level3 + prot-changing	GADO selected	2	2
+010AIC009	level3 + prot-changing	ClinVar pathogenic	5	3
+010AIC009	level3 + prot-changing	PanelApp green	1	1
+010AIC009	level3 + deleterious	all genes	14	9
+010AIC009	level3 + deleterious	GADO selected	0	0
+010AIC009	level3 + deleterious	ClinVar pathogenic	2	2
+010AIC009	level3 + deleterious	PanelApp green	1	1
+010AIC010	level1	all genes	152408	10842
+010AIC010	level1	GADO selected	17143	1076
+010AIC010	level1	ClinVar pathogenic	42537	2401
+010AIC010	level1	PanelApp green	28595	1654
+010AIC010	level3	all genes	221	70
+010AIC010	level3	GADO selected	40	9
+010AIC010	level3	ClinVar pathogenic	48	15
+010AIC010	level3	PanelApp green	36	12
+010AIC010	protein-changing	all genes	2	2
+010AIC010	protein-changing	GADO selected	0	0
+010AIC010	protein-changing	ClinVar pathogenic	0	0
+010AIC010	protein-changing	PanelApp green	0	0
+010AIC010	coding deleterious	all genes	1	1
+010AIC010	coding deleterious	GADO selected	0	0
+010AIC010	coding deleterious	ClinVar pathogenic	0	0
+010AIC010	coding deleterious	PanelApp green	0	0
+010AIC010	level1 + prot-changing	all genes	959	274
+010AIC010	level1 + prot-changing	GADO selected	150	39
+010AIC010	level1 + prot-changing	ClinVar pathogenic	294	73
+010AIC010	level1 + prot-changing	PanelApp green	189	51
+010AIC010	level3 + prot-changing	all genes	32	17
+010AIC010	level3 + prot-changing	GADO selected	6	4
+010AIC010	level3 + prot-changing	ClinVar pathogenic	7	6
+010AIC010	level3 + prot-changing	PanelApp green	6	5
+010AIC010	level3 + deleterious	all genes	17	11
+010AIC010	level3 + deleterious	GADO selected	3	2
+010AIC010	level3 + deleterious	ClinVar pathogenic	4	4
+010AIC010	level3 + deleterious	PanelApp green	3	3
+010AIC013	level1	all genes	170026	11368
+010AIC013	level1	GADO selected	23471	1162
+010AIC013	level1	ClinVar pathogenic	46416	2507
+010AIC013	level1	PanelApp green	30518	1717
+010AIC013	level3	all genes	182	61
+010AIC013	level3	GADO selected	31	10
+010AIC013	level3	ClinVar pathogenic	57	16
+010AIC013	level3	PanelApp green	42	11
+010AIC013	protein-changing	all genes	3	3
+010AIC013	protein-changing	GADO selected	1	1
+010AIC013	protein-changing	ClinVar pathogenic	2	2
+010AIC013	protein-changing	PanelApp green	2	2
+010AIC013	coding deleterious	all genes	0	0
+010AIC013	coding deleterious	GADO selected	0	0
+010AIC013	coding deleterious	ClinVar pathogenic	0	0
+010AIC013	coding deleterious	PanelApp green	0	0
+010AIC013	level1 + prot-changing	all genes	1081	293
+010AIC013	level1 + prot-changing	GADO selected	197	44
+010AIC013	level1 + prot-changing	ClinVar pathogenic	351	84
+010AIC013	level1 + prot-changing	PanelApp green	254	64
+010AIC013	level3 + prot-changing	all genes	32	24
+010AIC013	level3 + prot-changing	GADO selected	3	3
+010AIC013	level3 + prot-changing	ClinVar pathogenic	14	8
+010AIC013	level3 + prot-changing	PanelApp green	14	8
+010AIC013	level3 + deleterious	all genes	22	14
+010AIC013	level3 + deleterious	GADO selected	1	1
+010AIC013	level3 + deleterious	ClinVar pathogenic	12	6
+010AIC013	level3 + deleterious	PanelApp green	12	6
+010CCA001	level1	all genes	142115	10763
+010CCA001	level1	GADO selected	16897	1173
+010CCA001	level1	ClinVar pathogenic	38771	2401
+010CCA001	level1	PanelApp green	25822	1643
+010CCA001	level3	all genes	153	67
+010CCA001	level3	GADO selected	26	9
+010CCA001	level3	ClinVar pathogenic	62	23
+010CCA001	level3	PanelApp green	50	16
+010CCA001	protein-changing	all genes	2	2
+010CCA001	protein-changing	GADO selected	0	0
+010CCA001	protein-changing	ClinVar pathogenic	1	1
+010CCA001	protein-changing	PanelApp green	1	1
+010CCA001	coding deleterious	all genes	0	0
+010CCA001	coding deleterious	GADO selected	0	0
+010CCA001	coding deleterious	ClinVar pathogenic	0	0
+010CCA001	coding deleterious	PanelApp green	0	0
+010CCA001	level1 + prot-changing	all genes	998	288
+010CCA001	level1 + prot-changing	GADO selected	146	47
+010CCA001	level1 + prot-changing	ClinVar pathogenic	419	99
+010CCA001	level1 + prot-changing	PanelApp green	298	71
+010CCA001	level3 + prot-changing	all genes	22	13
+010CCA001	level3 + prot-changing	GADO selected	3	2
+010CCA001	level3 + prot-changing	ClinVar pathogenic	16	8
+010CCA001	level3 + prot-changing	PanelApp green	8	5
+010CCA001	level3 + deleterious	all genes	8	7
+010CCA001	level3 + deleterious	GADO selected	1	1
+010CCA001	level3 + deleterious	ClinVar pathogenic	4	3
+010CCA001	level3 + deleterious	PanelApp green	4	3
+010Kap001	level1	all genes	144839	10677
+010Kap001	level1	GADO selected	22208	1196
+010Kap001	level1	ClinVar pathogenic	40505	2389
+010Kap001	level1	PanelApp green	26989	1630
+010Kap001	level3	all genes	228	75
+010Kap001	level3	GADO selected	61	7
+010Kap001	level3	ClinVar pathogenic	91	20
+010Kap001	level3	PanelApp green	73	14
+010Kap001	protein-changing	all genes	5	5
+010Kap001	protein-changing	GADO selected	0	0
+010Kap001	protein-changing	ClinVar pathogenic	0	0
+010Kap001	protein-changing	PanelApp green	0	0
+010Kap001	coding deleterious	all genes	4	4
+010Kap001	coding deleterious	GADO selected	0	0
+010Kap001	coding deleterious	ClinVar pathogenic	0	0
+010Kap001	coding deleterious	PanelApp green	0	0
+010Kap001	level1 + prot-changing	all genes	1021	280
+010Kap001	level1 + prot-changing	GADO selected	153	43
+010Kap001	level1 + prot-changing	ClinVar pathogenic	340	79
+010Kap001	level1 + prot-changing	PanelApp green	216	54
+010Kap001	level3 + prot-changing	all genes	21	17
+010Kap001	level3 + prot-changing	GADO selected	0	0
+010Kap001	level3 + prot-changing	ClinVar pathogenic	6	5
+010Kap001	level3 + prot-changing	PanelApp green	5	4
+010Kap001	level3 + deleterious	all genes	12	10
+010Kap001	level3 + deleterious	GADO selected	0	0
+010Kap001	level3 + deleterious	ClinVar pathogenic	3	3
+010Kap001	level3 + deleterious	PanelApp green	3	3
+010PI4K001	level1	all genes	156753	11602
+010PI4K001	level1	GADO selected	17408	1125
+010PI4K001	level1	ClinVar pathogenic	43004	2528
+010PI4K001	level1	PanelApp green	28202	1731
+010PI4K001	level3	all genes	195	67
+010PI4K001	level3	GADO selected	13	7
+010PI4K001	level3	ClinVar pathogenic	47	24
+010PI4K001	level3	PanelApp green	37	16
+010PI4K001	protein-changing	all genes	1	1
+010PI4K001	protein-changing	GADO selected	0	0
+010PI4K001	protein-changing	ClinVar pathogenic	1	1
+010PI4K001	protein-changing	PanelApp green	1	1
+010PI4K001	coding deleterious	all genes	0	0
+010PI4K001	coding deleterious	GADO selected	0	0
+010PI4K001	coding deleterious	ClinVar pathogenic	0	0
+010PI4K001	coding deleterious	PanelApp green	0	0
+010PI4K001	level1 + prot-changing	all genes	1167	349
+010PI4K001	level1 + prot-changing	GADO selected	190	56
+010PI4K001	level1 + prot-changing	ClinVar pathogenic	394	109
+010PI4K001	level1 + prot-changing	PanelApp green	268	81
+010PI4K001	level3 + prot-changing	all genes	43	24
+010PI4K001	level3 + prot-changing	GADO selected	5	4
+010PI4K001	level3 + prot-changing	ClinVar pathogenic	13	9
+010PI4K001	level3 + prot-changing	PanelApp green	4	4
+010PI4K001	level3 + deleterious	all genes	17	12
+010PI4K001	level3 + deleterious	GADO selected	3	2
+010PI4K001	level3 + deleterious	ClinVar pathogenic	4	4
+010PI4K001	level3 + deleterious	PanelApp green	2	2
+010PMG001	level1	all genes	151291	10889
+010PMG001	level1	GADO selected	13273	1033
+010PMG001	level1	ClinVar pathogenic	41995	2451
+010PMG001	level1	PanelApp green	27568	1663
+010PMG001	level3	all genes	335	72
+010PMG001	level3	GADO selected	18	6
+010PMG001	level3	ClinVar pathogenic	46	17
+010PMG001	level3	PanelApp green	36	11
+010PMG001	protein-changing	all genes	1	1
+010PMG001	protein-changing	GADO selected	0	0
+010PMG001	protein-changing	ClinVar pathogenic	0	0
+010PMG001	protein-changing	PanelApp green	0	0
+010PMG001	coding deleterious	all genes	0	0
+010PMG001	coding deleterious	GADO selected	0	0
+010PMG001	coding deleterious	ClinVar pathogenic	0	0
+010PMG001	coding deleterious	PanelApp green	0	0
+010PMG001	level1 + prot-changing	all genes	863	265
+010PMG001	level1 + prot-changing	GADO selected	100	29
+010PMG001	level1 + prot-changing	ClinVar pathogenic	266	81
+010PMG001	level1 + prot-changing	PanelApp green	164	53
+010PMG001	level3 + prot-changing	all genes	19	11
+010PMG001	level3 + prot-changing	GADO selected	1	1
+010PMG001	level3 + prot-changing	ClinVar pathogenic	3	3
+010PMG001	level3 + prot-changing	PanelApp green	2	2
+010PMG001	level3 + deleterious	all genes	8	8
+010PMG001	level3 + deleterious	GADO selected	1	1
+010PMG001	level3 + deleterious	ClinVar pathogenic	3	3
+010PMG001	level3 + deleterious	PanelApp green	2	2
+010PVN001	level1	all genes	144457	10710
+010PVN001	level1	GADO selected	15353	1104
+010PVN001	level1	ClinVar pathogenic	40246	2382
+010PVN001	level1	PanelApp green	27108	1590
+010PVN001	level3	all genes	213	75
+010PVN001	level3	GADO selected	10	4
+010PVN001	level3	ClinVar pathogenic	81	22
+010PVN001	level3	PanelApp green	73	18
+010PVN001	protein-changing	all genes	2	2
+010PVN001	protein-changing	GADO selected	0	0
+010PVN001	protein-changing	ClinVar pathogenic	0	0
+010PVN001	protein-changing	PanelApp green	0	0
+010PVN001	coding deleterious	all genes	1	1
+010PVN001	coding deleterious	GADO selected	0	0
+010PVN001	coding deleterious	ClinVar pathogenic	0	0
+010PVN001	coding deleterious	PanelApp green	0	0
+010PVN001	level1 + prot-changing	all genes	1026	294
+010PVN001	level1 + prot-changing	GADO selected	169	43
+010PVN001	level1 + prot-changing	ClinVar pathogenic	386	92
+010PVN001	level1 + prot-changing	PanelApp green	281	65
+010PVN001	level3 + prot-changing	all genes	47	27
+010PVN001	level3 + prot-changing	GADO selected	6	4
+010PVN001	level3 + prot-changing	ClinVar pathogenic	24	13
+010PVN001	level3 + prot-changing	PanelApp green	11	7
+010PVN001	level3 + deleterious	all genes	37	18
+010PVN001	level3 + deleterious	GADO selected	5	3
+010PVN001	level3 + deleterious	ClinVar pathogenic	18	7
+010PVN001	level3 + deleterious	PanelApp green	7	3
+010SCH001	level1	all genes	151215	10724
+010SCH001	level1	GADO selected	20894	1166
+010SCH001	level1	ClinVar pathogenic	43899	2452
+010SCH001	level1	PanelApp green	28138	1677
+010SCH001	level3	all genes	269	68
+010SCH001	level3	GADO selected	16	7
+010SCH001	level3	ClinVar pathogenic	68	15
+010SCH001	level3	PanelApp green	49	9
+010SCH001	protein-changing	all genes	9	7
+010SCH001	protein-changing	GADO selected	1	1
+010SCH001	protein-changing	ClinVar pathogenic	5	3
+010SCH001	protein-changing	PanelApp green	2	1
+010SCH001	coding deleterious	all genes	6	4
+010SCH001	coding deleterious	GADO selected	1	1
+010SCH001	coding deleterious	ClinVar pathogenic	4	2
+010SCH001	coding deleterious	PanelApp green	2	1
+010SCH001	level1 + prot-changing	all genes	970	272
+010SCH001	level1 + prot-changing	GADO selected	217	59
+010SCH001	level1 + prot-changing	ClinVar pathogenic	350	80
+010SCH001	level1 + prot-changing	PanelApp green	217	60
+010SCH001	level3 + prot-changing	all genes	37	16
+010SCH001	level3 + prot-changing	GADO selected	4	2
+010SCH001	level3 + prot-changing	ClinVar pathogenic	14	6
+010SCH001	level3 + prot-changing	PanelApp green	6	3
+010SCH001	level3 + deleterious	all genes	32	13
+010SCH001	level3 + deleterious	GADO selected	4	2
+010SCH001	level3 + deleterious	ClinVar pathogenic	14	6
+010SCH001	level3 + deleterious	PanelApp green	6	3
+010VMA001	level1	all genes	160700	11152
+010VMA001	level1	GADO selected	23244	1235
+010VMA001	level1	ClinVar pathogenic	45718	2479
+010VMA001	level1	PanelApp green	30249	1688
+010VMA001	level3	all genes	184	59
+010VMA001	level3	GADO selected	19	8
+010VMA001	level3	ClinVar pathogenic	56	18
+010VMA001	level3	PanelApp green	32	11
+010VMA001	protein-changing	all genes	7	7
+010VMA001	protein-changing	GADO selected	3	3
+010VMA001	protein-changing	ClinVar pathogenic	3	3
+010VMA001	protein-changing	PanelApp green	2	2
+010VMA001	coding deleterious	all genes	0	0
+010VMA001	coding deleterious	GADO selected	0	0
+010VMA001	coding deleterious	ClinVar pathogenic	0	0
+010VMA001	coding deleterious	PanelApp green	0	0
+010VMA001	level1 + prot-changing	all genes	1121	309
+010VMA001	level1 + prot-changing	GADO selected	216	52
+010VMA001	level1 + prot-changing	ClinVar pathogenic	421	103
+010VMA001	level1 + prot-changing	PanelApp green	263	64
+010VMA001	level3 + prot-changing	all genes	39	25
+010VMA001	level3 + prot-changing	GADO selected	6	2
+010VMA001	level3 + prot-changing	ClinVar pathogenic	9	8
+010VMA001	level3 + prot-changing	PanelApp green	4	3
+010VMA001	level3 + deleterious	all genes	26	16
+010VMA001	level3 + deleterious	GADO selected	5	1
+010VMA001	level3 + deleterious	ClinVar pathogenic	6	5
+010VMA001	level3 + deleterious	PanelApp green	3	2
+012Con001	level1	all genes	464506	15422
+012Con001	level1	GADO selected	53226	1480
+012Con001	level1	ClinVar pathogenic	131466	3115
+012Con001	level1	PanelApp green	90986	2158
+012Con001	level3	all genes	481	154
+012Con001	level3	GADO selected	55	21
+012Con001	level3	ClinVar pathogenic	179	51
+012Con001	level3	PanelApp green	126	34
+012Con001	protein-changing	all genes	17	17
+012Con001	protein-changing	GADO selected	3	3
+012Con001	protein-changing	ClinVar pathogenic	4	4
+012Con001	protein-changing	PanelApp green	4	4
+012Con001	coding deleterious	all genes	8	8
+012Con001	coding deleterious	GADO selected	1	1
+012Con001	coding deleterious	ClinVar pathogenic	2	2
+012Con001	coding deleterious	PanelApp green	2	2
+012Con001	level1 + prot-changing	all genes	3053	517
+012Con001	level1 + prot-changing	GADO selected	379	72
+012Con001	level1 + prot-changing	ClinVar pathogenic	965	147
+012Con001	level1 + prot-changing	PanelApp green	710	101
+012Con001	level3 + prot-changing	all genes	112	57
+012Con001	level3 + prot-changing	GADO selected	26	10
+012Con001	level3 + prot-changing	ClinVar pathogenic	42	17
+012Con001	level3 + prot-changing	PanelApp green	33	12
+012Con001	level3 + deleterious	all genes	61	36
+012Con001	level3 + deleterious	GADO selected	8	3
+012Con001	level3 + deleterious	ClinVar pathogenic	25	13
+012Con001	level3 + deleterious	PanelApp green	17	9
+012IBD001	level1	all genes	132727	10584
+012IBD001	level1	GADO selected	17152	1069
+012IBD001	level1	ClinVar pathogenic	36835	2325
+012IBD001	level1	PanelApp green	25253	1568
+012IBD001	level3	all genes	414	84
+012IBD001	level3	GADO selected	78	8
+012IBD001	level3	ClinVar pathogenic	139	30
+012IBD001	level3	PanelApp green	109	23
+012IBD001	protein-changing	all genes	10	6
+012IBD001	protein-changing	GADO selected	0	0
+012IBD001	protein-changing	ClinVar pathogenic	7	3
+012IBD001	protein-changing	PanelApp green	7	3
+012IBD001	coding deleterious	all genes	6	2
+012IBD001	coding deleterious	GADO selected	0	0
+012IBD001	coding deleterious	ClinVar pathogenic	5	1
+012IBD001	coding deleterious	PanelApp green	5	1
+012IBD001	level1 + prot-changing	all genes	939	269
+012IBD001	level1 + prot-changing	GADO selected	105	27
+012IBD001	level1 + prot-changing	ClinVar pathogenic	303	76
+012IBD001	level1 + prot-changing	PanelApp green	230	57
+012IBD001	level3 + prot-changing	all genes	30	15
+012IBD001	level3 + prot-changing	GADO selected	3	2
+012IBD001	level3 + prot-changing	ClinVar pathogenic	15	7
+012IBD001	level3 + prot-changing	PanelApp green	14	6
+012IBD001	level3 + deleterious	all genes	17	7
+012IBD001	level3 + deleterious	GADO selected	0	0
+012IBD001	level3 + deleterious	ClinVar pathogenic	6	3
+012IBD001	level3 + deleterious	PanelApp green	5	2
+013Chi001	level1	all genes	151797	10821
+013Chi001	level1	GADO selected	17864	1098
+013Chi001	level1	ClinVar pathogenic	42116	2352
+013Chi001	level1	PanelApp green	26568	1604
+013Chi001	level3	all genes	292	73
+013Chi001	level3	GADO selected	19	5
+013Chi001	level3	ClinVar pathogenic	65	21
+013Chi001	level3	PanelApp green	58	17
+013Chi001	protein-changing	all genes	3	3
+013Chi001	protein-changing	GADO selected	0	0
+013Chi001	protein-changing	ClinVar pathogenic	1	1
+013Chi001	protein-changing	PanelApp green	1	1
+013Chi001	coding deleterious	all genes	0	0
+013Chi001	coding deleterious	GADO selected	0	0
+013Chi001	coding deleterious	ClinVar pathogenic	0	0
+013Chi001	coding deleterious	PanelApp green	0	0
+013Chi001	level1 + prot-changing	all genes	1015	294
+013Chi001	level1 + prot-changing	GADO selected	119	38
+013Chi001	level1 + prot-changing	ClinVar pathogenic	392	98
+013Chi001	level1 + prot-changing	PanelApp green	257	64
+013Chi001	level3 + prot-changing	all genes	40	17
+013Chi001	level3 + prot-changing	GADO selected	7	2
+013Chi001	level3 + prot-changing	ClinVar pathogenic	14	8
+013Chi001	level3 + prot-changing	PanelApp green	13	7
+013Chi001	level3 + deleterious	all genes	22	8
+013Chi001	level3 + deleterious	GADO selected	6	1
+013Chi001	level3 + deleterious	ClinVar pathogenic	11	5
+013Chi001	level3 + deleterious	PanelApp green	9	4
+015ILD001	level1	all genes	424715	14671
+015ILD001	level1	GADO selected	55595	1468
+015ILD001	level1	ClinVar pathogenic	109624	3053
+015ILD001	level1	PanelApp green	74547	2106
+015ILD001	level3	all genes	351	108
+015ILD001	level3	GADO selected	20	7
+015ILD001	level3	ClinVar pathogenic	143	42
+015ILD001	level3	PanelApp green	86	26
+015ILD001	protein-changing	all genes	13	11
+015ILD001	protein-changing	GADO selected	2	2
+015ILD001	protein-changing	ClinVar pathogenic	3	3
+015ILD001	protein-changing	PanelApp green	3	3
+015ILD001	coding deleterious	all genes	2	2
+015ILD001	coding deleterious	GADO selected	1	1
+015ILD001	coding deleterious	ClinVar pathogenic	0	0
+015ILD001	coding deleterious	PanelApp green	1	1
+015ILD001	level1 + prot-changing	all genes	2501	501
+015ILD001	level1 + prot-changing	GADO selected	387	79
+015ILD001	level1 + prot-changing	ClinVar pathogenic	794	157
+015ILD001	level1 + prot-changing	PanelApp green	564	101
+015ILD001	level3 + prot-changing	all genes	69	39
+015ILD001	level3 + prot-changing	GADO selected	9	8
+015ILD001	level3 + prot-changing	ClinVar pathogenic	14	11
+015ILD001	level3 + prot-changing	PanelApp green	10	8
+015ILD001	level3 + deleterious	all genes	33	22
+015ILD001	level3 + deleterious	GADO selected	5	5
+015ILD001	level3 + deleterious	ClinVar pathogenic	11	9
+015ILD001	level3 + deleterious	PanelApp green	9	7
+015ILD002	level1	all genes	162355	11417
+015ILD002	level1	GADO selected	20514	1259
+015ILD002	level1	ClinVar pathogenic	43272	2530
+015ILD002	level1	PanelApp green	29470	1740
+015ILD002	level3	all genes	282	72
+015ILD002	level3	GADO selected	102	13
+015ILD002	level3	ClinVar pathogenic	111	24
+015ILD002	level3	PanelApp green	45	17
+015ILD002	protein-changing	all genes	2	2
+015ILD002	protein-changing	GADO selected	2	2
+015ILD002	protein-changing	ClinVar pathogenic	0	0
+015ILD002	protein-changing	PanelApp green	0	0
+015ILD002	coding deleterious	all genes	1	1
+015ILD002	coding deleterious	GADO selected	1	1
+015ILD002	coding deleterious	ClinVar pathogenic	0	0
+015ILD002	coding deleterious	PanelApp green	0	0
+015ILD002	level1 + prot-changing	all genes	1037	300
+015ILD002	level1 + prot-changing	GADO selected	176	55
+015ILD002	level1 + prot-changing	ClinVar pathogenic	361	101
+015ILD002	level1 + prot-changing	PanelApp green	246	68
+015ILD002	level3 + prot-changing	all genes	27	18
+015ILD002	level3 + prot-changing	GADO selected	11	6
+015ILD002	level3 + prot-changing	ClinVar pathogenic	14	10
+015ILD002	level3 + prot-changing	PanelApp green	12	8
+015ILD002	level3 + deleterious	all genes	18	11
+015ILD002	level3 + deleterious	GADO selected	8	4
+015ILD002	level3 + deleterious	ClinVar pathogenic	12	8
+015ILD002	level3 + deleterious	PanelApp green	10	6
+017Fin001	level1	all genes	134572	10543
+017Fin001	level1	GADO selected	20359	1189
+017Fin001	level1	ClinVar pathogenic	37437	2350
+017Fin001	level1	PanelApp green	24505	1602
+017Fin001	level3	all genes	336	80
+017Fin001	level3	GADO selected	64	17
+017Fin001	level3	ClinVar pathogenic	120	28
+017Fin001	level3	PanelApp green	92	20
+017Fin001	protein-changing	all genes	1	1
+017Fin001	protein-changing	GADO selected	0	0
+017Fin001	protein-changing	ClinVar pathogenic	1	1
+017Fin001	protein-changing	PanelApp green	1	1
+017Fin001	coding deleterious	all genes	0	0
+017Fin001	coding deleterious	GADO selected	0	0
+017Fin001	coding deleterious	ClinVar pathogenic	0	0
+017Fin001	coding deleterious	PanelApp green	0	0
+017Fin001	level1 + prot-changing	all genes	993	281
+017Fin001	level1 + prot-changing	GADO selected	192	50
+017Fin001	level1 + prot-changing	ClinVar pathogenic	344	96
+017Fin001	level1 + prot-changing	PanelApp green	245	66
+017Fin001	level3 + prot-changing	all genes	36	19
+017Fin001	level3 + prot-changing	GADO selected	6	5
+017Fin001	level3 + prot-changing	ClinVar pathogenic	12	7
+017Fin001	level3 + prot-changing	PanelApp green	6	4
+017Fin001	level3 + deleterious	all genes	23	13
+017Fin001	level3 + deleterious	GADO selected	4	4
+017Fin001	level3 + deleterious	ClinVar pathogenic	12	7
+017Fin001	level3 + deleterious	PanelApp green	6	4
+018EBV001	level1	all genes	139021	10645
+018EBV001	level1	GADO selected	15443	1038
+018EBV001	level1	ClinVar pathogenic	39877	2342
+018EBV001	level1	PanelApp green	25813	1613
+018EBV001	level3	all genes	187	67
+018EBV001	level3	GADO selected	5	3
+018EBV001	level3	ClinVar pathogenic	77	27
+018EBV001	level3	PanelApp green	23	13
+018EBV001	protein-changing	all genes	2	2
+018EBV001	protein-changing	GADO selected	1	1
+018EBV001	protein-changing	ClinVar pathogenic	0	0
+018EBV001	protein-changing	PanelApp green	0	0
+018EBV001	coding deleterious	all genes	0	0
+018EBV001	coding deleterious	GADO selected	0	0
+018EBV001	coding deleterious	ClinVar pathogenic	0	0
+018EBV001	coding deleterious	PanelApp green	0	0
+018EBV001	level1 + prot-changing	all genes	1081	299
+018EBV001	level1 + prot-changing	GADO selected	157	45
+018EBV001	level1 + prot-changing	ClinVar pathogenic	491	115
+018EBV001	level1 + prot-changing	PanelApp green	358	84
+018EBV001	level3 + prot-changing	all genes	33	20
+018EBV001	level3 + prot-changing	GADO selected	7	2
+018EBV001	level3 + prot-changing	ClinVar pathogenic	19	12
+018EBV001	level3 + prot-changing	PanelApp green	13	8
+018EBV001	level3 + deleterious	all genes	19	13
+018EBV001	level3 + deleterious	GADO selected	5	1
+018EBV001	level3 + deleterious	ClinVar pathogenic	13	8
+018EBV001	level3 + deleterious	PanelApp green	12	7
+020Cha001	level1	all genes	134440	10654
+020Cha001	level1	GADO selected	15034	1110
+020Cha001	level1	ClinVar pathogenic	37895	2357
+020Cha001	level1	PanelApp green	25071	1595
+020Cha001	level3	all genes	284	74
+020Cha001	level3	GADO selected	12	6
+020Cha001	level3	ClinVar pathogenic	103	20
+020Cha001	level3	PanelApp green	71	13
+020Cha001	protein-changing	all genes	7	7
+020Cha001	protein-changing	GADO selected	1	1
+020Cha001	protein-changing	ClinVar pathogenic	2	2
+020Cha001	protein-changing	PanelApp green	2	2
+020Cha001	coding deleterious	all genes	2	2
+020Cha001	coding deleterious	GADO selected	0	0
+020Cha001	coding deleterious	ClinVar pathogenic	0	0
+020Cha001	coding deleterious	PanelApp green	0	0
+020Cha001	level1 + prot-changing	all genes	1217	311
+020Cha001	level1 + prot-changing	GADO selected	154	43
+020Cha001	level1 + prot-changing	ClinVar pathogenic	439	90
+020Cha001	level1 + prot-changing	PanelApp green	268	58
+020Cha001	level3 + prot-changing	all genes	39	18
+020Cha001	level3 + prot-changing	GADO selected	7	2
+020Cha001	level3 + prot-changing	ClinVar pathogenic	21	7
+020Cha001	level3 + prot-changing	PanelApp green	13	5
+020Cha001	level3 + deleterious	all genes	25	10
+020Cha001	level3 + deleterious	GADO selected	0	0
+020Cha001	level3 + deleterious	ClinVar pathogenic	18	4
+020Cha001	level3 + deleterious	PanelApp green	10	2
+021Bil002	level1	all genes	170062	11491
+021Bil002	level1	GADO selected	24002	1235
+021Bil002	level1	ClinVar pathogenic	45580	2535
+021Bil002	level1	PanelApp green	29630	1729
+021Bil002	level3	all genes	167	54
+021Bil002	level3	GADO selected	16	7
+021Bil002	level3	ClinVar pathogenic	52	15
+021Bil002	level3	PanelApp green	46	13
+021Bil002	protein-changing	all genes	4	4
+021Bil002	protein-changing	GADO selected	1	1
+021Bil002	protein-changing	ClinVar pathogenic	4	4
+021Bil002	protein-changing	PanelApp green	3	3
+021Bil002	coding deleterious	all genes	3	3
+021Bil002	coding deleterious	GADO selected	1	1
+021Bil002	coding deleterious	ClinVar pathogenic	3	3
+021Bil002	coding deleterious	PanelApp green	2	2
+021Bil002	level1 + prot-changing	all genes	1068	303
+021Bil002	level1 + prot-changing	GADO selected	165	44
+021Bil002	level1 + prot-changing	ClinVar pathogenic	396	101
+021Bil002	level1 + prot-changing	PanelApp green	225	60
+021Bil002	level3 + prot-changing	all genes	43	25
+021Bil002	level3 + prot-changing	GADO selected	3	3
+021Bil002	level3 + prot-changing	ClinVar pathogenic	15	9
+021Bil002	level3 + prot-changing	PanelApp green	11	5
+021Bil002	level3 + deleterious	all genes	29	18
+021Bil002	level3 + deleterious	GADO selected	3	3
+021Bil002	level3 + deleterious	ClinVar pathogenic	11	6
+021Bil002	level3 + deleterious	PanelApp green	8	3
+021Bil003	level1	all genes	147521	10898
+021Bil003	level1	GADO selected	18415	1144
+021Bil003	level1	ClinVar pathogenic	40416	2455
+021Bil003	level1	PanelApp green	27416	1689
+021Bil003	level3	all genes	249	70
+021Bil003	level3	GADO selected	11	5
+021Bil003	level3	ClinVar pathogenic	74	22
+021Bil003	level3	PanelApp green	44	14
+021Bil003	protein-changing	all genes	5	4
+021Bil003	protein-changing	GADO selected	0	0
+021Bil003	protein-changing	ClinVar pathogenic	3	2
+021Bil003	protein-changing	PanelApp green	2	1
+021Bil003	coding deleterious	all genes	3	2
+021Bil003	coding deleterious	GADO selected	0	0
+021Bil003	coding deleterious	ClinVar pathogenic	2	1
+021Bil003	coding deleterious	PanelApp green	2	1
+021Bil003	level1 + prot-changing	all genes	1171	327
+021Bil003	level1 + prot-changing	GADO selected	146	42
+021Bil003	level1 + prot-changing	ClinVar pathogenic	360	93
+021Bil003	level1 + prot-changing	PanelApp green	246	69
+021Bil003	level3 + prot-changing	all genes	30	21
+021Bil003	level3 + prot-changing	GADO selected	4	4
+021Bil003	level3 + prot-changing	ClinVar pathogenic	9	6
+021Bil003	level3 + prot-changing	PanelApp green	7	4
+021Bil003	level3 + deleterious	all genes	23	14
+021Bil003	level3 + deleterious	GADO selected	4	4
+021Bil003	level3 + deleterious	ClinVar pathogenic	7	4
+021Bil003	level3 + deleterious	PanelApp green	6	3
+021NOR001	level1	all genes	140185	10603
+021NOR001	level1	GADO selected	19601	1146
+021NOR001	level1	ClinVar pathogenic	41331	2413
+021NOR001	level1	PanelApp green	27438	1669
+021NOR001	level3	all genes	344	78
+021NOR001	level3	GADO selected	25	11
+021NOR001	level3	ClinVar pathogenic	91	20
+021NOR001	level3	PanelApp green	51	16
+021NOR001	protein-changing	all genes	5	5
+021NOR001	protein-changing	GADO selected	0	0
+021NOR001	protein-changing	ClinVar pathogenic	3	3
+021NOR001	protein-changing	PanelApp green	3	3
+021NOR001	coding deleterious	all genes	2	2
+021NOR001	coding deleterious	GADO selected	0	0
+021NOR001	coding deleterious	ClinVar pathogenic	1	1
+021NOR001	coding deleterious	PanelApp green	1	1
+021NOR001	level1 + prot-changing	all genes	945	287
+021NOR001	level1 + prot-changing	GADO selected	124	29
+021NOR001	level1 + prot-changing	ClinVar pathogenic	340	95
+021NOR001	level1 + prot-changing	PanelApp green	255	68
+021NOR001	level3 + prot-changing	all genes	51	23
+021NOR001	level3 + prot-changing	GADO selected	9	2
+021NOR001	level3 + prot-changing	ClinVar pathogenic	22	10
+021NOR001	level3 + prot-changing	PanelApp green	14	6
+021NOR001	level3 + deleterious	all genes	33	14
+021NOR001	level3 + deleterious	GADO selected	8	1
+021NOR001	level3 + deleterious	ClinVar pathogenic	16	5
+021NOR001	level3 + deleterious	PanelApp green	12	4
+021NOR002	level1	all genes	244370	12631
+021NOR002	level1	GADO selected	28012	1302
+021NOR002	level1	ClinVar pathogenic	67728	2689
+021NOR002	level1	PanelApp green	43123	1845
+021NOR002	level3	all genes	291	108
+021NOR002	level3	GADO selected	39	17
+021NOR002	level3	ClinVar pathogenic	77	28
+021NOR002	level3	PanelApp green	50	17
+021NOR002	protein-changing	all genes	10	9
+021NOR002	protein-changing	GADO selected	1	1
+021NOR002	protein-changing	ClinVar pathogenic	5	4
+021NOR002	protein-changing	PanelApp green	3	2
+021NOR002	coding deleterious	all genes	4	3
+021NOR002	coding deleterious	GADO selected	0	0
+021NOR002	coding deleterious	ClinVar pathogenic	4	3
+021NOR002	coding deleterious	PanelApp green	2	1
+021NOR002	level1 + prot-changing	all genes	1544	360
+021NOR002	level1 + prot-changing	GADO selected	219	56
+021NOR002	level1 + prot-changing	ClinVar pathogenic	500	111
+021NOR002	level1 + prot-changing	PanelApp green	315	73
+021NOR002	level3 + prot-changing	all genes	36	26
+021NOR002	level3 + prot-changing	GADO selected	11	8
+021NOR002	level3 + prot-changing	ClinVar pathogenic	14	9
+021NOR002	level3 + prot-changing	PanelApp green	8	5
+021NOR002	level3 + deleterious	all genes	27	20
+021NOR002	level3 + deleterious	GADO selected	9	6
+021NOR002	level3 + deleterious	ClinVar pathogenic	9	6
+021NOR002	level3 + deleterious	PanelApp green	3	2
+021Pos001	level1	all genes	141699	10863
+021Pos001	level1	GADO selected	17542	1113
+021Pos001	level1	ClinVar pathogenic	38415	2406
+021Pos001	level1	PanelApp green	25678	1636
+021Pos001	level3	all genes	259	73
+021Pos001	level3	GADO selected	21	8
+021Pos001	level3	ClinVar pathogenic	88	19
+021Pos001	level3	PanelApp green	33	13
+021Pos001	protein-changing	all genes	2	2
+021Pos001	protein-changing	GADO selected	0	0
+021Pos001	protein-changing	ClinVar pathogenic	2	2
+021Pos001	protein-changing	PanelApp green	2	2
+021Pos001	coding deleterious	all genes	2	2
+021Pos001	coding deleterious	GADO selected	0	0
+021Pos001	coding deleterious	ClinVar pathogenic	2	2
+021Pos001	coding deleterious	PanelApp green	2	2
+021Pos001	level1 + prot-changing	all genes	963	265
+021Pos001	level1 + prot-changing	GADO selected	129	37
+021Pos001	level1 + prot-changing	ClinVar pathogenic	289	75
+021Pos001	level1 + prot-changing	PanelApp green	173	52
+021Pos001	level3 + prot-changing	all genes	32	17
+021Pos001	level3 + prot-changing	GADO selected	5	5
+021Pos001	level3 + prot-changing	ClinVar pathogenic	15	6
+021Pos001	level3 + prot-changing	PanelApp green	5	4
+021Pos001	level3 + deleterious	all genes	23	12
+021Pos001	level3 + deleterious	GADO selected	3	3
+021Pos001	level3 + deleterious	ClinVar pathogenic	8	3
+021Pos001	level3 + deleterious	PanelApp green	3	2
+021Ref001	level1	all genes	150716	10946
+021Ref001	level1	GADO selected	18816	1148
+021Ref001	level1	ClinVar pathogenic	41274	2392
+021Ref001	level1	PanelApp green	27395	1627
+021Ref001	level3	all genes	349	86
+021Ref001	level3	GADO selected	17	10
+021Ref001	level3	ClinVar pathogenic	114	26
+021Ref001	level3	PanelApp green	91	20
+021Ref001	protein-changing	all genes	4	4
+021Ref001	protein-changing	GADO selected	2	2
+021Ref001	protein-changing	ClinVar pathogenic	1	1
+021Ref001	protein-changing	PanelApp green	1	1
+021Ref001	coding deleterious	all genes	3	3
+021Ref001	coding deleterious	GADO selected	2	2
+021Ref001	coding deleterious	ClinVar pathogenic	1	1
+021Ref001	coding deleterious	PanelApp green	1	1
+021Ref001	level1 + prot-changing	all genes	1181	319
+021Ref001	level1 + prot-changing	GADO selected	178	43
+021Ref001	level1 + prot-changing	ClinVar pathogenic	376	94
+021Ref001	level1 + prot-changing	PanelApp green	230	68
+021Ref001	level3 + prot-changing	all genes	32	20
+021Ref001	level3 + prot-changing	GADO selected	7	5
+021Ref001	level3 + prot-changing	ClinVar pathogenic	4	3
+021Ref001	level3 + prot-changing	PanelApp green	2	1
+021Ref001	level3 + deleterious	all genes	24	13
+021Ref001	level3 + deleterious	GADO selected	6	4
+021Ref001	level3 + deleterious	ClinVar pathogenic	3	2
+021Ref001	level3 + deleterious	PanelApp green	2	1
+023Con001	level1	all genes	143618	11071
+023Con001	level1	GADO selected	13544	1105
+023Con001	level1	ClinVar pathogenic	39333	2464
+023Con001	level1	PanelApp green	25698	1700
+023Con001	level3	all genes	194	67
+023Con001	level3	GADO selected	4	4
+023Con001	level3	ClinVar pathogenic	43	17
+023Con001	level3	PanelApp green	32	10
+023Con001	protein-changing	all genes	1	1
+023Con001	protein-changing	GADO selected	0	0
+023Con001	protein-changing	ClinVar pathogenic	1	1
+023Con001	protein-changing	PanelApp green	1	1
+023Con001	coding deleterious	all genes	1	1
+023Con001	coding deleterious	GADO selected	0	0
+023Con001	coding deleterious	ClinVar pathogenic	1	1
+023Con001	coding deleterious	PanelApp green	1	1
+023Con001	level1 + prot-changing	all genes	998	295
+023Con001	level1 + prot-changing	GADO selected	143	39
+023Con001	level1 + prot-changing	ClinVar pathogenic	341	92
+023Con001	level1 + prot-changing	PanelApp green	257	68
+023Con001	level3 + prot-changing	all genes	52	23
+023Con001	level3 + prot-changing	GADO selected	6	4
+023Con001	level3 + prot-changing	ClinVar pathogenic	14	8
+023Con001	level3 + prot-changing	PanelApp green	12	7
+023Con001	level3 + deleterious	all genes	25	13
+023Con001	level3 + deleterious	GADO selected	1	1
+023Con001	level3 + deleterious	ClinVar pathogenic	11	6
+023Con001	level3 + deleterious	PanelApp green	11	6
+023Her002	level1	all genes	130875	10445
+023Her002	level1	GADO selected	12167	987
+023Her002	level1	ClinVar pathogenic	37344	2333
+023Her002	level1	PanelApp green	24600	1580
+023Her002	level3	all genes	135	57
+023Her002	level3	GADO selected	9	6
+023Her002	level3	ClinVar pathogenic	38	15
+023Her002	level3	PanelApp green	35	13
+023Her002	protein-changing	all genes	6	6
+023Her002	protein-changing	GADO selected	1	1
+023Her002	protein-changing	ClinVar pathogenic	1	1
+023Her002	protein-changing	PanelApp green	1	1
+023Her002	coding deleterious	all genes	0	0
+023Her002	coding deleterious	GADO selected	0	0
+023Her002	coding deleterious	ClinVar pathogenic	0	0
+023Her002	coding deleterious	PanelApp green	0	0
+023Her002	level1 + prot-changing	all genes	977	292
+023Her002	level1 + prot-changing	GADO selected	114	35
+023Her002	level1 + prot-changing	ClinVar pathogenic	251	93
+023Her002	level1 + prot-changing	PanelApp green	158	66
+023Her002	level3 + prot-changing	all genes	26	16
+023Her002	level3 + prot-changing	GADO selected	8	3
+023Her002	level3 + prot-changing	ClinVar pathogenic	8	4
+023Her002	level3 + prot-changing	PanelApp green	8	4
+023Her002	level3 + deleterious	all genes	13	9
+023Her002	level3 + deleterious	GADO selected	2	1
+023Her002	level3 + deleterious	ClinVar pathogenic	2	2
+023Her002	level3 + deleterious	PanelApp green	2	2
+023Une001	level1	all genes	171401	11067
+023Une001	level1	GADO selected	16509	1119
+023Une001	level1	ClinVar pathogenic	44600	2407
+023Une001	level1	PanelApp green	28178	1665
+023Une001	level3	all genes	284	67
+023Une001	level3	GADO selected	43	12
+023Une001	level3	ClinVar pathogenic	82	16
+023Une001	level3	PanelApp green	70	17
+023Une001	protein-changing	all genes	5	5
+023Une001	protein-changing	GADO selected	2	2
+023Une001	protein-changing	ClinVar pathogenic	4	4
+023Une001	protein-changing	PanelApp green	3	3
+023Une001	coding deleterious	all genes	3	3
+023Une001	coding deleterious	GADO selected	2	2
+023Une001	coding deleterious	ClinVar pathogenic	2	2
+023Une001	coding deleterious	PanelApp green	2	2
+023Une001	level1 + prot-changing	all genes	1041	272
+023Une001	level1 + prot-changing	GADO selected	105	33
+023Une001	level1 + prot-changing	ClinVar pathogenic	380	98
+023Une001	level1 + prot-changing	PanelApp green	198	59
+023Une001	level3 + prot-changing	all genes	33	17
+023Une001	level3 + prot-changing	GADO selected	3	3
+023Une001	level3 + prot-changing	ClinVar pathogenic	15	6
+023Une001	level3 + prot-changing	PanelApp green	7	5
+023Une001	level3 + deleterious	all genes	18	12
+023Une001	level3 + deleterious	GADO selected	2	2
+023Une001	level3 + deleterious	ClinVar pathogenic	3	3
+023Une001	level3 + deleterious	PanelApp green	3	3
+027Dia001	level1	all genes	139570	10705
+027Dia001	level1	GADO selected	12204	1043
+027Dia001	level1	ClinVar pathogenic	39764	2403
+027Dia001	level1	PanelApp green	26026	1611
+027Dia001	level3	all genes	177	46
+027Dia001	level3	GADO selected	22	6
+027Dia001	level3	ClinVar pathogenic	92	18
+027Dia001	level3	PanelApp green	37	9
+027Dia001	protein-changing	all genes	4	4
+027Dia001	protein-changing	GADO selected	1	1
+027Dia001	protein-changing	ClinVar pathogenic	2	2
+027Dia001	protein-changing	PanelApp green	1	1
+027Dia001	coding deleterious	all genes	1	1
+027Dia001	coding deleterious	GADO selected	0	0
+027Dia001	coding deleterious	ClinVar pathogenic	0	0
+027Dia001	coding deleterious	PanelApp green	0	0
+027Dia001	level1 + prot-changing	all genes	1087	295
+027Dia001	level1 + prot-changing	GADO selected	88	26
+027Dia001	level1 + prot-changing	ClinVar pathogenic	394	95
+027Dia001	level1 + prot-changing	PanelApp green	257	63
+027Dia001	level3 + prot-changing	all genes	18	11
+027Dia001	level3 + prot-changing	GADO selected	2	2
+027Dia001	level3 + prot-changing	ClinVar pathogenic	9	5
+027Dia001	level3 + prot-changing	PanelApp green	3	2
+027Dia001	level3 + deleterious	all genes	9	5
+027Dia001	level3 + deleterious	GADO selected	1	1
+027Dia001	level3 + deleterious	ClinVar pathogenic	2	1
+027Dia001	level3 + deleterious	PanelApp green	2	1
+027Maj001	level1	all genes	130818	10401
+027Maj001	level1	GADO selected	17561	1054
+027Maj001	level1	ClinVar pathogenic	38336	2300
+027Maj001	level1	PanelApp green	23584	1563
+027Maj001	level3	all genes	114	38
+027Maj001	level3	GADO selected	11	5
+027Maj001	level3	ClinVar pathogenic	20	8
+027Maj001	level3	PanelApp green	17	7
+027Maj001	protein-changing	all genes	3	3
+027Maj001	protein-changing	GADO selected	0	0
+027Maj001	protein-changing	ClinVar pathogenic	1	1
+027Maj001	protein-changing	PanelApp green	1	1
+027Maj001	coding deleterious	all genes	1	1
+027Maj001	coding deleterious	GADO selected	0	0
+027Maj001	coding deleterious	ClinVar pathogenic	0	0
+027Maj001	coding deleterious	PanelApp green	0	0
+027Maj001	level1 + prot-changing	all genes	887	287
+027Maj001	level1 + prot-changing	GADO selected	109	45
+027Maj001	level1 + prot-changing	ClinVar pathogenic	240	80
+027Maj001	level1 + prot-changing	PanelApp green	108	49
+027Maj001	level3 + prot-changing	all genes	15	10
+027Maj001	level3 + prot-changing	GADO selected	1	1
+027Maj001	level3 + prot-changing	ClinVar pathogenic	7	4
+027Maj001	level3 + prot-changing	PanelApp green	3	2
+027Maj001	level3 + deleterious	all genes	14	9
+027Maj001	level3 + deleterious	GADO selected	1	1
+027Maj001	level3 + deleterious	ClinVar pathogenic	6	3
+027Maj001	level3 + deleterious	PanelApp green	3	2
+032Con001	level1	all genes	215872	11593
+032Con001	level1	GADO selected	21635	1137
+032Con001	level1	ClinVar pathogenic	63110	2556
+032Con001	level1	PanelApp green	41733	1764
+032Con001	level3	all genes	209	61
+032Con001	level3	GADO selected	9	4
+032Con001	level3	ClinVar pathogenic	41	15
+032Con001	level3	PanelApp green	39	14
+032Con001	protein-changing	all genes	7	4
+032Con001	protein-changing	GADO selected	0	0
+032Con001	protein-changing	ClinVar pathogenic	5	2
+032Con001	protein-changing	PanelApp green	4	1
+032Con001	coding deleterious	all genes	5	2
+032Con001	coding deleterious	GADO selected	0	0
+032Con001	coding deleterious	ClinVar pathogenic	4	1
+032Con001	coding deleterious	PanelApp green	4	1
+032Con001	level1 + prot-changing	all genes	1218	316
+032Con001	level1 + prot-changing	GADO selected	168	41
+032Con001	level1 + prot-changing	ClinVar pathogenic	415	91
+032Con001	level1 + prot-changing	PanelApp green	303	74
+032Con001	level3 + prot-changing	all genes	25	14
+032Con001	level3 + prot-changing	GADO selected	5	2
+032Con001	level3 + prot-changing	ClinVar pathogenic	7	4
+032Con001	level3 + prot-changing	PanelApp green	6	3
+032Con001	level3 + deleterious	all genes	17	8
+032Con001	level3 + deleterious	GADO selected	2	1
+032Con001	level3 + deleterious	ClinVar pathogenic	5	2
+032Con001	level3 + deleterious	PanelApp green	5	2
+032Con002	level1	all genes	237685	12419
+032Con002	level1	GADO selected	23906	1202
+032Con002	level1	ClinVar pathogenic	65630	2658
+032Con002	level1	PanelApp green	43455	1830
+032Con002	level3	all genes	2065	107
+032Con002	level3	GADO selected	483	16
+032Con002	level3	ClinVar pathogenic	713	32
+032Con002	level3	PanelApp green	502	22
+032Con002	protein-changing	all genes	9	9
+032Con002	protein-changing	GADO selected	4	4
+032Con002	protein-changing	ClinVar pathogenic	6	6
+032Con002	protein-changing	PanelApp green	3	3
+032Con002	coding deleterious	all genes	1	1
+032Con002	coding deleterious	GADO selected	0	0
+032Con002	coding deleterious	ClinVar pathogenic	1	1
+032Con002	coding deleterious	PanelApp green	0	0
+032Con002	level1 + prot-changing	all genes	1657	357
+032Con002	level1 + prot-changing	GADO selected	272	47
+032Con002	level1 + prot-changing	ClinVar pathogenic	620	119
+032Con002	level1 + prot-changing	PanelApp green	437	81
+032Con002	level3 + prot-changing	all genes	68	23
+032Con002	level3 + prot-changing	GADO selected	3	2
+032Con002	level3 + prot-changing	ClinVar pathogenic	31	10
+032Con002	level3 + prot-changing	PanelApp green	22	8
+032Con002	level3 + deleterious	all genes	43	14
+032Con002	level3 + deleterious	GADO selected	0	0
+032Con002	level3 + deleterious	ClinVar pathogenic	25	6
+032Con002	level3 + deleterious	PanelApp green	16	4
+032Hem001	level1	all genes	233651	11982
+032Hem001	level1	GADO selected	23106	1137
+032Hem001	level1	ClinVar pathogenic	64269	2602
+032Hem001	level1	PanelApp green	41482	1798
+032Hem001	level3	all genes	258	86
+032Hem001	level3	GADO selected	32	11
+032Hem001	level3	ClinVar pathogenic	83	21
+032Hem001	level3	PanelApp green	77	15
+032Hem001	protein-changing	all genes	6	6
+032Hem001	protein-changing	GADO selected	0	0
+032Hem001	protein-changing	ClinVar pathogenic	3	3
+032Hem001	protein-changing	PanelApp green	1	1
+032Hem001	coding deleterious	all genes	0	0
+032Hem001	coding deleterious	GADO selected	0	0
+032Hem001	coding deleterious	ClinVar pathogenic	0	0
+032Hem001	coding deleterious	PanelApp green	0	0
+032Hem001	level1 + prot-changing	all genes	1303	322
+032Hem001	level1 + prot-changing	GADO selected	233	44
+032Hem001	level1 + prot-changing	ClinVar pathogenic	523	106
+032Hem001	level1 + prot-changing	PanelApp green	318	75
+032Hem001	level3 + prot-changing	all genes	31	20
+032Hem001	level3 + prot-changing	GADO selected	6	3
+032Hem001	level3 + prot-changing	ClinVar pathogenic	18	9
+032Hem001	level3 + prot-changing	PanelApp green	16	7
+032Hem001	level3 + deleterious	all genes	17	12
+032Hem001	level3 + deleterious	GADO selected	6	3
+032Hem001	level3 + deleterious	ClinVar pathogenic	7	4
+032Hem001	level3 + deleterious	PanelApp green	5	2
+036GAT001	level1	all genes	140511	10885
+036GAT001	level1	GADO selected	16515	1104
+036GAT001	level1	ClinVar pathogenic	38308	2371
+036GAT001	level1	PanelApp green	24180	1616
+036GAT001	level3	all genes	320	83
+036GAT001	level3	GADO selected	20	10
+036GAT001	level3	ClinVar pathogenic	95	25
+036GAT001	level3	PanelApp green	87	19
+036GAT001	protein-changing	all genes	3	3
+036GAT001	protein-changing	GADO selected	2	2
+036GAT001	protein-changing	ClinVar pathogenic	2	2
+036GAT001	protein-changing	PanelApp green	2	2
+036GAT001	coding deleterious	all genes	1	1
+036GAT001	coding deleterious	GADO selected	1	1
+036GAT001	coding deleterious	ClinVar pathogenic	1	1
+036GAT001	coding deleterious	PanelApp green	1	1
+036GAT001	level1 + prot-changing	all genes	934	278
+036GAT001	level1 + prot-changing	GADO selected	112	31
+036GAT001	level1 + prot-changing	ClinVar pathogenic	343	82
+036GAT001	level1 + prot-changing	PanelApp green	246	61
+036GAT001	level3 + prot-changing	all genes	61	30
+036GAT001	level3 + prot-changing	GADO selected	7	4
+036GAT001	level3 + prot-changing	ClinVar pathogenic	27	16
+036GAT001	level3 + prot-changing	PanelApp green	23	15
+036GAT001	level3 + deleterious	all genes	28	18
+036GAT001	level3 + deleterious	GADO selected	3	3
+036GAT001	level3 + deleterious	ClinVar pathogenic	15	10
+036GAT001	level3 + deleterious	PanelApp green	11	9
+036HLH001	level1	all genes	143357	11222
+036HLH001	level1	GADO selected	14816	1106
+036HLH001	level1	ClinVar pathogenic	39119	2459
+036HLH001	level1	PanelApp green	26430	1712
+036HLH001	level3	all genes	214	72
+036HLH001	level3	GADO selected	21	8
+036HLH001	level3	ClinVar pathogenic	75	29
+036HLH001	level3	PanelApp green	42	15
+036HLH001	protein-changing	all genes	6	6
+036HLH001	protein-changing	GADO selected	1	1
+036HLH001	protein-changing	ClinVar pathogenic	1	1
+036HLH001	protein-changing	PanelApp green	0	0
+036HLH001	coding deleterious	all genes	2	2
+036HLH001	coding deleterious	GADO selected	0	0
+036HLH001	coding deleterious	ClinVar pathogenic	0	0
+036HLH001	coding deleterious	PanelApp green	0	0
+036HLH001	level1 + prot-changing	all genes	947	284
+036HLH001	level1 + prot-changing	GADO selected	94	29
+036HLH001	level1 + prot-changing	ClinVar pathogenic	276	89
+036HLH001	level1 + prot-changing	PanelApp green	216	69
+036HLH001	level3 + prot-changing	all genes	26	15
+036HLH001	level3 + prot-changing	GADO selected	2	1
+036HLH001	level3 + prot-changing	ClinVar pathogenic	2	2
+036HLH001	level3 + prot-changing	PanelApp green	2	1
+036HLH001	level3 + deleterious	all genes	18	11
+036HLH001	level3 + deleterious	GADO selected	2	1
+036HLH001	level3 + deleterious	ClinVar pathogenic	2	2
+036HLH001	level3 + deleterious	PanelApp green	2	1
+038Con001	level1	all genes	341936	13081
+038Con001	level1	GADO selected	36271	1259
+038Con001	level1	ClinVar pathogenic	92678	2698
+038Con001	level1	PanelApp green	61145	1857
+038Con001	level3	all genes	414	110
+038Con001	level3	GADO selected	15	8
+038Con001	level3	ClinVar pathogenic	132	32
+038Con001	level3	PanelApp green	93	23
+038Con001	protein-changing	all genes	13	11
+038Con001	protein-changing	GADO selected	2	2
+038Con001	protein-changing	ClinVar pathogenic	8	6
+038Con001	protein-changing	PanelApp green	5	4
+038Con001	coding deleterious	all genes	2	2
+038Con001	coding deleterious	GADO selected	1	1
+038Con001	coding deleterious	ClinVar pathogenic	1	1
+038Con001	coding deleterious	PanelApp green	1	1
+038Con001	level1 + prot-changing	all genes	2114	404
+038Con001	level1 + prot-changing	GADO selected	310	48
+038Con001	level1 + prot-changing	ClinVar pathogenic	629	120
+038Con001	level1 + prot-changing	PanelApp green	435	78
+038Con001	level3 + prot-changing	all genes	64	33
+038Con001	level3 + prot-changing	GADO selected	21	9
+038Con001	level3 + prot-changing	ClinVar pathogenic	23	12
+038Con001	level3 + prot-changing	PanelApp green	20	9
+038Con001	level3 + deleterious	all genes	35	17
+038Con001	level3 + deleterious	GADO selected	14	5
+038Con001	level3 + deleterious	ClinVar pathogenic	18	8
+038Con001	level3 + deleterious	PanelApp green	16	6
+058FANC001	level1	all genes	166500	11324
+058FANC001	level1	GADO selected	18346	1086
+058FANC001	level1	ClinVar pathogenic	47510	2521
+058FANC001	level1	PanelApp green	31113	1742
+058FANC001	level3	all genes	183	49
+058FANC001	level3	GADO selected	11	3
+058FANC001	level3	ClinVar pathogenic	45	14
+058FANC001	level3	PanelApp green	40	10
+058FANC001	protein-changing	all genes	11	8
+058FANC001	protein-changing	GADO selected	1	1
+058FANC001	protein-changing	ClinVar pathogenic	3	3
+058FANC001	protein-changing	PanelApp green	3	3
+058FANC001	coding deleterious	all genes	3	3
+058FANC001	coding deleterious	GADO selected	1	1
+058FANC001	coding deleterious	ClinVar pathogenic	1	1
+058FANC001	coding deleterious	PanelApp green	1	1
+058FANC001	level1 + prot-changing	all genes	1053	295
+058FANC001	level1 + prot-changing	GADO selected	153	42
+058FANC001	level1 + prot-changing	ClinVar pathogenic	345	89
+058FANC001	level1 + prot-changing	PanelApp green	275	62
+058FANC001	level3 + prot-changing	all genes	27	13
+058FANC001	level3 + prot-changing	GADO selected	4	1
+058FANC001	level3 + prot-changing	ClinVar pathogenic	12	4
+058FANC001	level3 + prot-changing	PanelApp green	11	3
+058FANC001	level3 + deleterious	all genes	19	10
+058FANC001	level3 + deleterious	GADO selected	4	1
+058FANC001	level3 + deleterious	ClinVar pathogenic	12	4
+058FANC001	level3 + deleterious	PanelApp green	11	3
+066GCD001	level1	all genes	142553	10724
+066GCD001	level1	GADO selected	13280	1033
+066GCD001	level1	ClinVar pathogenic	40376	2449
+066GCD001	level1	PanelApp green	26266	1665
+066GCD001	level3	all genes	157	53
+066GCD001	level3	GADO selected	24	6
+066GCD001	level3	ClinVar pathogenic	95	20
+066GCD001	level3	PanelApp green	87	18
+066GCD001	protein-changing	all genes	4	4
+066GCD001	protein-changing	GADO selected	0	0
+066GCD001	protein-changing	ClinVar pathogenic	1	1
+066GCD001	protein-changing	PanelApp green	1	1
+066GCD001	coding deleterious	all genes	1	1
+066GCD001	coding deleterious	GADO selected	0	0
+066GCD001	coding deleterious	ClinVar pathogenic	1	1
+066GCD001	coding deleterious	PanelApp green	1	1
+066GCD001	level1 + prot-changing	all genes	883	274
+066GCD001	level1 + prot-changing	GADO selected	133	44
+066GCD001	level1 + prot-changing	ClinVar pathogenic	339	95
+066GCD001	level1 + prot-changing	PanelApp green	268	74
+066GCD001	level3 + prot-changing	all genes	39	19
+066GCD001	level3 + prot-changing	GADO selected	5	4
+066GCD001	level3 + prot-changing	ClinVar pathogenic	23	9
+066GCD001	level3 + prot-changing	PanelApp green	22	8
+066GCD001	level3 + deleterious	all genes	24	10
+066GCD001	level3 + deleterious	GADO selected	3	3
+066GCD001	level3 + deleterious	ClinVar pathogenic	21	8
+066GCD001	level3 + deleterious	PanelApp green	20	7
+066NNC001	level1	all genes	164021	11270
+066NNC001	level1	GADO selected	16493	1094
+066NNC001	level1	ClinVar pathogenic	46819	2477
+066NNC001	level1	PanelApp green	30366	1708
+066NNC001	level3	all genes	302	83
+066NNC001	level3	GADO selected	13	7
+066NNC001	level3	ClinVar pathogenic	121	29
+066NNC001	level3	PanelApp green	73	14
+066NNC001	protein-changing	all genes	3	3
+066NNC001	protein-changing	GADO selected	0	0
+066NNC001	protein-changing	ClinVar pathogenic	2	2
+066NNC001	protein-changing	PanelApp green	1	1
+066NNC001	coding deleterious	all genes	1	1
+066NNC001	coding deleterious	GADO selected	0	0
+066NNC001	coding deleterious	ClinVar pathogenic	1	1
+066NNC001	coding deleterious	PanelApp green	0	0
+066NNC001	level1 + prot-changing	all genes	1125	317
+066NNC001	level1 + prot-changing	GADO selected	134	38
+066NNC001	level1 + prot-changing	ClinVar pathogenic	451	113
+066NNC001	level1 + prot-changing	PanelApp green	296	79
+066NNC001	level3 + prot-changing	all genes	54	24
+066NNC001	level3 + prot-changing	GADO selected	5	3
+066NNC001	level3 + prot-changing	ClinVar pathogenic	15	6
+066NNC001	level3 + prot-changing	PanelApp green	6	3
+066NNC001	level3 + deleterious	all genes	22	12
+066NNC001	level3 + deleterious	GADO selected	3	1
+066NNC001	level3 + deleterious	ClinVar pathogenic	9	4
+066NNC001	level3 + deleterious	PanelApp green	5	2
+066NNC002	level1	all genes	135351	10379
+066NNC002	level1	GADO selected	13390	1038
+066NNC002	level1	ClinVar pathogenic	38321	2346
+066NNC002	level1	PanelApp green	26247	1622
+066NNC002	level3	all genes	227	55
+066NNC002	level3	GADO selected	21	3
+066NNC002	level3	ClinVar pathogenic	116	18
+066NNC002	level3	PanelApp green	104	13
+066NNC002	protein-changing	all genes	7	6
+066NNC002	protein-changing	GADO selected	0	0
+066NNC002	protein-changing	ClinVar pathogenic	3	3
+066NNC002	protein-changing	PanelApp green	3	3
+066NNC002	coding deleterious	all genes	1	1
+066NNC002	coding deleterious	GADO selected	0	0
+066NNC002	coding deleterious	ClinVar pathogenic	1	1
+066NNC002	coding deleterious	PanelApp green	1	1
+066NNC002	level1 + prot-changing	all genes	1012	290
+066NNC002	level1 + prot-changing	GADO selected	134	33
+066NNC002	level1 + prot-changing	ClinVar pathogenic	380	94
+066NNC002	level1 + prot-changing	PanelApp green	291	70
+066NNC002	level3 + prot-changing	all genes	25	15
+066NNC002	level3 + prot-changing	GADO selected	0	0
+066NNC002	level3 + prot-changing	ClinVar pathogenic	8	6
+066NNC002	level3 + prot-changing	PanelApp green	6	4
+066NNC002	level3 + deleterious	all genes	12	9
+066NNC002	level3 + deleterious	GADO selected	0	0
+066NNC002	level3 + deleterious	ClinVar pathogenic	7	5
+066NNC002	level3 + deleterious	PanelApp green	6	4
+066NNH001	level1	all genes	146535	10782
+066NNH001	level1	GADO selected	15834	1131
+066NNH001	level1	ClinVar pathogenic	41363	2458
+066NNH001	level1	PanelApp green	28159	1690
+066NNH001	level3	all genes	260	79
+066NNH001	level3	GADO selected	35	14
+066NNH001	level3	ClinVar pathogenic	92	28
+066NNH001	level3	PanelApp green	48	17
+066NNH001	protein-changing	all genes	6	5
+066NNH001	protein-changing	GADO selected	0	0
+066NNH001	protein-changing	ClinVar pathogenic	3	2
+066NNH001	protein-changing	PanelApp green	3	2
+066NNH001	coding deleterious	all genes	1	1
+066NNH001	coding deleterious	GADO selected	0	0
+066NNH001	coding deleterious	ClinVar pathogenic	1	1
+066NNH001	coding deleterious	PanelApp green	1	1
+066NNH001	level1 + prot-changing	all genes	985	271
+066NNH001	level1 + prot-changing	GADO selected	89	33
+066NNH001	level1 + prot-changing	ClinVar pathogenic	395	94
+066NNH001	level1 + prot-changing	PanelApp green	273	60
+066NNH001	level3 + prot-changing	all genes	29	22
+066NNH001	level3 + prot-changing	GADO selected	8	6
+066NNH001	level3 + prot-changing	ClinVar pathogenic	13	9
+066NNH001	level3 + prot-changing	PanelApp green	11	7
+066NNH001	level3 + deleterious	all genes	24	18
+066NNH001	level3 + deleterious	GADO selected	7	5
+066NNH001	level3 + deleterious	ClinVar pathogenic	12	9
+066NNH001	level3 + deleterious	PanelApp green	10	7
