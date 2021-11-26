@@ -1,38 +1,34 @@
 # GREEN-VARAN tools test
 
-If everything is configured properly, you should be able to run the following tests from the tool main folder and see the corresponding results in test/out
+If everything is configured properly and you have annotations files downloaded in the resources folder, you should be able to run the following tests from the tool main folder and see the corresponding results in test/out
 
 ## GREEN-VARAN
 ### Basic annotation
-Annotate with regulatory region information, and 3 prediction scores
+Annotate regulatory regions information and update snpEff ANN field. Also add greenvaran_VOI for some genes of intereset. You will say a warning about prioritization, that's fine
 
 ```
-python GREEN-VARAN.py -i test/VCF/test.snpEff.vcf.gz -o test/out/test_standard.vcf -b GRCh38 -m annotate -s ReMM -s NCBoost -s LinSight --threads 4
+greenvaran smallvars \
+    -i test/VCF/test.snpEff.vcf.gz \
+    -o test/out/test_standard.vcf \
+    --db resources/GRCh38/GRCh38_GREEN-DB.bed.gz \
+    --dbschema config/greendb_schema_v2.5.json \
+    --config config/prioritize_smallvars.json \
+    --genes test/VCF/genes_list_example.txt 
 ```
 
-### Annotate variants of interest based on a gene list
-Annotate with regulatory region information, and 3 prediction scores. Now marks as NC_VOI=1 regulatory vars potentially affecting interesting genes from a list. Only genes experimentally linked to regions are considered (-t controlled)
+### Use the workflow to annotate and prioritize variants
+Using the Nextflow workflow it is possible to automatically add all needed annotations and then prioritize regulatory variatns using greenvaran. Note that this will run on local machine using 10 threads for annotations.
 
 ```
-python GREEN-VARAN.py -i test/VCF/test.snpEff.vcf.gz -o test/out/test_VOI.vcf -b GRCh38 -m annotate -s ReMM -s NCBoost -s LinSight -g annotate -t controlled -l test/VCF/genes_list_example.txt --threads 4
-```
-
-### Prioritize variants
-Run in prioritize mode. This mode uses regulatory regions information and 3 prediction scores to priotize variants with likely impact on regulation
-
-```
-python GREEN-VARAN.py -i test/VCF/test.snpEff.vcf.gz -o test/out/test_prioritize.vcf -b GRCh38 -m annotate -p --threads 4
-```
-
-## SV_annotation
-Using default configuration and supporting files the input VCF is annotated with:
-- population AF from gnomAD and 1000G
-- overlapping genes
-- overlapping CDS
-- overlapping GREEN-DB regions with controlled genes and constraint values
-
-```
-python SV_annotation.py -i test/VCF/GRCh38.test.SV.vcf.gz -o test/out/SV_test.vcf -c SV_annotation.json -b GRCh38
+nextflow workflow/main.nf -prfile local \
+    --input test/VCF/test.snpEff.vcf.gz \
+    --out test/out/workflow \
+    --build GRCh38 \
+    --scores best \
+    --regions best \
+    --AF \
+    --greenvaran_config config/prioritize_smallvars.json \
+    --greenvaran_dbschema config/greendb_schema_v2.5.json
 ```
 
 ## GREEN-DB query
@@ -40,12 +36,12 @@ python SV_annotation.py -i test/VCF/GRCh38.test.SV.vcf.gz -o test/out/SV_test.vc
 We use a file containing a list of region IDs, one per line
 
 ```
-GREEN-DB_query.py -r test/query/regions_IDs.list -o test/out/query_regionIDs -b GRCh38
+greendb_query -r test/query/regions_IDs.list -o test/out/query_regionIDs -b GRCh38
 ```
 
 ### Variants table input 
 We use a table containing some example variants regulating SOX10 gene.
 
 ```
-GREEN-DB_query.py -t test/query/SOX10_example.tsv -o test/out/query_SOX10 -b GRCh37
+greendb_query -t test/query/SOX10_example.tsv -o test/out/query_SOX10 -b GRCh37
 ```
