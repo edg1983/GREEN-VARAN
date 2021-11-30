@@ -4,7 +4,7 @@ If everything is configured properly and you have annotations files downloaded i
 
 ## GREEN-VARAN
 ### Basic annotation
-Annotate regulatory regions information and update snpEff ANN field. Also add greenvaran_VOI for some genes of intereset. You will say a warning about prioritization, that's fine
+Annotate regulatory regions information and update snpEff ANN field. Also add greenvaran_VOI for some genes of intereset. You will see a warning about prioritization, that's fine
 
 ```
 greenvaran smallvars \
@@ -17,10 +17,10 @@ greenvaran smallvars \
 ```
 
 ### Use the workflow to annotate and prioritize variants
-Using the Nextflow workflow it is possible to automatically add all needed annotations and then prioritize regulatory variatns using greenvaran. Note that this will run on local machine using 10 threads for annotations.
+Using the Nextflow workflow it is possible to automatically add all needed annotations and then prioritize regulatory variants using greenvaran. Note that this will run on local machine using 10 threads for annotations.
 
 ```
-nextflow workflow/main.nf -prfile local \
+nextflow workflow/main.nf -profile local \
     --input test/VCF/GRCh38.test.smallvars.vcf.gz \
     --out test/out/workflow \
     --build GRCh38 \
