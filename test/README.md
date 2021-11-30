@@ -8,8 +8,8 @@ Annotate regulatory regions information and update snpEff ANN field. Also add gr
 
 ```
 greenvaran smallvars \
-    -i test/VCF/test.snpEff.vcf.gz \
-    -o test/out/test_standard.vcf \
+    -i test/VCF/GRCh38.test.smallvars.vcf.gz \
+    -o test/out/test_smallvars.vcf \
     --db resources/GRCh38/GRCh38_GREEN-DB.bed.gz \
     --dbschema config/greendb_schema_v2.5.json \
     --config config/prioritize_smallvars.json \
@@ -21,7 +21,7 @@ Using the Nextflow workflow it is possible to automatically add all needed annot
 
 ```
 nextflow workflow/main.nf -prfile local \
-    --input test/VCF/test.snpEff.vcf.gz \
+    --input test/VCF/GRCh38.test.smallvars.vcf.gz \
     --out test/out/workflow \
     --build GRCh38 \
     --scores best \
