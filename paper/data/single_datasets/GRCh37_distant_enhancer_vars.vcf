@@ -1,0 +1,7 @@
+##fileformat=VCFv4.2
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO
+chr22	38412215	.	G	A	99	PASS	.
+chr22	38412323	.	C	T	99	PASS	.
+chr22	38412402	.	C	T	99	PASS	.
+chr22	38412423	.	C	T	99	PASS	.
+chr22	38412781	.	G	C	99	PASS	.

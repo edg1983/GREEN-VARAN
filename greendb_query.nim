@@ -11,7 +11,7 @@ const
     GreendbVersions = @["v2.0", "v2.5"] 
     OUTTABS_HEADERS = {
         "regions" : @["regionID","chrom","start","stop","type","std_type","DB_source","detection_method","PhyloP100_median","constraint_pct","controlled_genes","closestGene_symbol", "closestGene_dist","closestProtGene_symbol","closestProtGene_dist","cell_or_tissues","phenotype"],
-        "gene_details" : @["regionID","chrom","start","stop","std_type","controlled_gene","detection_method","tissue_of_interaction"],
+        "gene_details" : @["regionID","chrom","start","stop","std_type","controlled_gene","same_TAD","detection_method","tissue_of_interaction"],
         "pheno_details" : @["regionID","chrom","start","stop","std_type","phenotype","detection_method","DB_source"],
         "DNase" : @["regionID","DNase_chrom","DNase_start","DNase_stop","DNase_ID","DNase_cell_or_tissue"],
         "dbSuper" : @["regionID","dbSuper_chrom","dbSuper_start","dbSuper_stop","dbSuper_ID","dbSuper_cell_or_tissue"],

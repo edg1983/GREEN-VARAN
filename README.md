@@ -26,13 +26,13 @@ A collection of ~2.4M regulatory regions in the human genome, with information a
 #### GREEN-VARAN
 **Genomic Regulatory Elements ENcyclopedia VARiant ANnotation**
 Annotate non-coding regulatory variants in a VCF with information from GREEN-DB 
-- possibily controlled genes 
+- possibly controlled genes 
 - overlapping regulatory region IDs and data sources
 - overlapping regulatory regions max constraint value
 
 #### GREEN-VARAN workflow
 **A Nextflow workflow for complete VCF processing**
-Given a VCF, ideally annotated for gene consequnce with snpEff or bcftools, the workflow can be used to automate processing:
+Given a VCF, ideally annotated for gene consequences with snpEff or bcftools, the workflow can be used to automate processing:
 - annotate with functional regions (TFBS, DNase, UCNE)
 - annotate with the 3 best non-coding variant prediction scores (ncER, FATHMM-MKL, ReMM)
 - annotate population AF from gnomAD genomes
@@ -88,7 +88,7 @@ The running mode can be one of:
 
 - querytab
   
-  This mode is a convenient way to automatically prepare input table to be used with the query tool to exctract detailed information from GREENDB database.
+  This mode is a convenient way to automatically prepare input table to be used with the query tool to extract detailed information from GREENDB database.
 
 - version
   
@@ -106,7 +106,7 @@ We also provide pre-processed datasets (see [resources](resources/README.md)) an
 |`-i, --invcf INVCF` | path to indexed input vcf.gz / bcf |
 | -o, --outvcf OUTVCF | output vcf / vcf.gz file |
 | -d, --db DB | GREEN-DB bed.gz file for your build (see download section) |
-| -s, --dbschema DBSCHEMA | json file containig greendb column mapping <br> A default configuration for GREENDB v2.5 is available in config folder |
+| -s, --dbschema DBSCHEMA | json file containing greendb column mapping <br> A default configuration for GREENDB v2.5 is available in config folder |
 | -u, --noupdate | do not update ANN / BCSQ field in the input VCF |
 | -f, --filter | filter instead of annotate. Only variants with greendb overlap will be written. <br> If --genes is active, the output will contain only variants connected to the input genes of interest |
 | -m, --impact IMPACT | Which impact to assign when updating snpEff field <br> Possible values: [HIGH, MODERATE, LOWm MODIFIER] (default: MODIFIER) |
@@ -129,7 +129,7 @@ We also provide pre-processed datasets (see [resources](resources/README.md)) an
 | option | description |
 |--------|-------------|
 | -c, --config CONFIG | json config file for prioritization <br> A default configuration for the four level described in the paper is provided in config folder |
-| -p, --permissive | Perform prioritization even if one of the INFO fields required by prioritization config is missing <br> By default, when one of the expeced fields is not defined in the header, the prioritization is disabled and all variants will get level zero |
+| -p, --permissive | Perform prioritization even if one of the INFO fields required by prioritization config is missing <br> By default, when one of the expected fields is not defined in the header, the prioritization is disabled and all variants will get level zero |
 
 ## Annotations added by GREEN-VARAN
 
@@ -168,19 +168,19 @@ BCQS=enhancer|GeneA||
 
 GREEN-VARAN will consider GREEN-DB annotations, additional functional regions and non-coding impact prediction scores to provide a prioritization level for each annotated variant. This level is annotated under `greenvaran_level` tag in the INFO field.
 
-This fields is an integer from 0 to N wich summarize evidences supporting a regulatory impact for the variant. Higher values are associated to a higher support of regulatory impact.
+This fields is an integer from 0 to N which summarize evidences supporting a regulatory impact for the variant. Higher values are associated to a higher support of regulatory impact.
 
-You need 3 set of information in your input VCF to run priotization mode when using the default config provided. 
+You need 3 set of information in your input VCF to run prioritization mode when using the default config provided. 
 
 1. **gnomAD_AF, gnomAD_AF_nfe**: float values describing global and NFE population AF from gnomAD 
 2. **ncER, FATHMM-MKL and ReMM**: float values providing scores predictions
 3. **TFBS, DNase and UCNE**: flags describing overlap with additional functional regions 
 
-The prioritization schema can be adjusted by modyfing the .json file passed to `--config`. A default file is provided in config folder. See documentation for more details [documentation](https://green-varan.readthedocs.io/en/latest).
+The prioritization schema can be adjusted by modifying the .json file passed to `--config`. A default file is provided in config folder. See documentation for more details [documentation](https://green-varan.readthedocs.io/en/latest).
 
 ## Run using singularity
 
-The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as Singularity image (tested on singularity >= 3.2). 
+The tool binaries should work on most linux based system. In case you have any issue, we also provide GREEN-VARAN as Singularity image (tested on singularity >= 3.2). 
 A Singularity recipe is included in the repository or you can pull the image from Singularity Library using
 
 ``singularity pull library://edg1983/greenvaran/greenvaran:latest``
@@ -245,7 +245,7 @@ greenvaran sv \
 ## Citation
 
 When you use GREEN-DB or GREEN-VARAN tools please cite:
-[GREEN-DB: a framework for the annotation and prioritization of non-coding regulatory variants in whole-genome sequencing](https://www.biorxiv.org/content/10.1101/2020.09.17.301960v1) Giacopuzzi E., Popitsch N., Taylor JC. BiorXiv (2021)
+[GREEN-DB: a framework for the annotation and prioritization of non-coding regulatory variants in whole-genome sequencing](https://www.biorxiv.org/content/10.1101/2020.09.17.301960) Giacopuzzi E., Popitsch N., Taylor JC. BiorXiv (2021)
 
 When you use GREEN-VARAN workflow for small variants annotation please also cite:
 
