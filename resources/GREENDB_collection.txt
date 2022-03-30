@@ -60,9 +60,9 @@ GRCh37_DNase regions https://zenodo.org/record/5705936/files/GRCh37_DNase.merged
 GRCh37_UCNE regions https://zenodo.org/record/5705936/files/GRCh37_UCNE.bed.gz
 GRCh37_UCNE regions https://zenodo.org/record/5705936/files/GRCh37_UCNE.bed.gz.csi
 GRCh37_dbSuper regions https://zenodo.org/record/5705936/files/GRCh37_dbSuper.bed.gz
-GRCh37_dbSuper regions https://zenodo.org/record/5705936/files/GGRCh37_dbSuper.bed.gz.csi
-GRCh37_TAD regions https://zenodo.org/record/5705936/files/GRCh37_TAD.bed.gz
-GRCh37_TAD regions https://zenodo.org/record/5705936/files/GRCh37_TAD.bed.gz.csi
+GRCh37_dbSuper regions https://zenodo.org/record/5705936/files/GRCh37_dbSuper.bed.gz.csi
+GRCh37_TAD regions https://zenodo.org/record/5705936/files/GRCh37_TADs.bed.gz
+GRCh37_TAD regions https://zenodo.org/record/5705936/files/GRCh37_TADs.bed.gz.csi
 GRCh38_TFBS regions https://zenodo.org/record/5705936/files/GRCh38_TFBS.merged.bed.gz
 GRCh38_TFBS regions https://zenodo.org/record/5705936/files/GRCh38_TFBS.merged.bed.gz.csi
 GRCh38_DNase regions https://zenodo.org/record/5705936/files/GRCh38_DNase.merged.bed.gz
@@ -71,8 +71,8 @@ GRCh38_UCNE regions https://zenodo.org/record/5705936/files/GRCh38_UCNE.bed.gz
 GRCh38_UCNE regions https://zenodo.org/record/5705936/files/GRCh38_UCNE.bed.gz.csi
 GRCh38_dbSuper regions https://zenodo.org/record/5705936/files/GRCh38_dbSuper.bed.gz
 GRCh38_dbSuper regions https://zenodo.org/record/5705936/files/GRCh38_dbSuper.bed.gz.csi
-GRCh38_TAD regions https://zenodo.org/record/5705936/files/GRCh38_TAD.bed.gz
-GRCh38_TAD regions https://zenodo.org/record/5705936/files/GRCh38_TAD.bed.gz.csi
+GRCh38_TAD regions https://zenodo.org/record/5705936/files/GRCh38_TADs.bed.gz
+GRCh38_TAD regions https://zenodo.org/record/5705936/files/GRCh38_TADs.bed.gz.csi
 GRCh38_gnomAD AF https://zenodo.org/record/3957637/files/GRCh38_gnomad.genomes.vcf.gz
 GRCh38_gnomAD AF https://zenodo.org/record/3957637/files/GRCh38_gnomad.genomes.vcf.gz.csi
 SV_annotations SV_annotations https://zenodo.org/record/3970785/files/SV_annotations.tar.gz
