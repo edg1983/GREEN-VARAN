@@ -25,6 +25,7 @@ proc main* (dropfirst:bool=false) =
         flag("-u", "--noupdate", help="do not update ANN / BCSQ field")
         flag("-f", "--filter", help="Filter instead of annotate. Only vars with greendb overlap and eventually gene of interest will be written")
         flag("-p", "--permissive", help="Perform prioritization even if one of INFO fields required by prioritization config is missing")
+        flag("-n", "--nochr", help="Do not add chr prefix to chromosome names")
         option("--chrom", help="Annotate only for specific chromosome")
         option("-g", "--genes", help="Genes of interest, variants connected to those will be flagged with greendb_VOI")
         option("--connection", help="Region-gene connections accepted for annotation", choices = @["all","closest","annotated"], default="all")
@@ -67,8 +68,8 @@ proc main* (dropfirst:bool=false) =
     let dbschema = readSchema(opts.dbschema)
 
     #Set chromosomes and genes
-    let chromosomes = getItems(opts.chrom, "chromosome")
-    let genes = toHashSet(getItems(opts.genes, "gene"))
+    let chromosomes = getItems(opts.chrom, "chromosome", opts.nochr)
+    let genes = toHashSet(getItems(opts.genes, "gene", opts.nochr))
     info(fmt"N selected chromosomes: {chromosomes.len}")
     info(fmt"N selected genes: {genes.len}")
     debug(fmt"Selected chromosomes: {$chromosomes}")
@@ -156,8 +157,10 @@ proc main* (dropfirst:bool=false) =
             var 
                 gdbinfo: GDBinfo
                 ann: seq[(string, string)]
-
-            for r in greendb.query($v.CHROM, v.POS, v.POS+1):
+                chrom_name = $v.CHROM
+            if opts.nochr: chrom_name = "chr" & chrom_name
+            
+            for r in greendb.query(chrom_name, v.POS, v.POS+1):
                 gdbinfo.update(r, dbschema, ann, gene_connection)
             
             if gdbinfo.id.len > 0:

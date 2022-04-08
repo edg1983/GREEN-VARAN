@@ -90,7 +90,7 @@ proc main* (dropfirst:bool=false) =
     var 
         region_strings: seq[string]
     if opts.regions.len > 0:
-        region_strings = getItems(opts.regions, "regions")
+        region_strings = getItems(opts.regions, "regions", false)
         apply(region_strings, parseRegion)
         info(fmt"{region_strings.len} regions parsed from input")
 

@@ -5,7 +5,7 @@ import times
 import logging
 import os
 import tables
-from sequtils import deduplicate
+from sequtils import deduplicate, apply
 
 const
     STDCHROMS = @["chr1","chr2","chr3","chr4","chr5","chr6","chr7","chr8","chr9", 
@@ -50,7 +50,7 @@ proc initLogger*(cl: var ConsoleLogger, fl: var FileLogger, log: string, outvcf:
     cl = newConsoleLogger(fmtStr="[$datetime] - $levelname: ", levelThreshold=lvlInfo)
     fl = newFileLogger(logfilename, fmtStr="[$datetime] - $levelname: ", levelThreshold=lvlDebug)
 
-proc getItems*(s: string, class: string): seq[string] =
+proc getItems*(s: string, class: string, nochr: bool): seq[string] =
     if s.len > 0:
         try:
             let f = open(s)
@@ -62,7 +62,10 @@ proc getItems*(s: string, class: string): seq[string] =
             result = split(s, ",")
         
     if result.len == 0 and class == "chromosome":
-        result = STDCHROMS
+        if nochr:
+            for c in STDCHROMS: result.add(c.replace("chr", ""))
+        else:
+            result = STDCHROMS 
 
 proc makeAnnField*(alleles: seq[string], genes: seq[(string,string)], impact: string, format: string): string {.raises: [ValueError].} =
     var s: seq[string]

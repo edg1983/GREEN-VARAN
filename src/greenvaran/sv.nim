@@ -22,6 +22,7 @@ proc main* (dropfirst:bool=false) =
         option("-m", "--impact", help="Which impact to assign when updating snpEff field", choices = @["HIGH","MODERATE","LOW","MODIFIER"], default="MODIFIER")
         flag("-u", "--noupdate", help="do not update ANN / BCSQ field")
         flag("-f", "--filter", help="Filter instead of annotate. Only vars with greendb overlap and eventually gene of interest will be written")
+        flag("-n", "--nochr", help="Do not add chr prefix to chromosome names")        
         option("--chrom", help="Annotate only for specific chromosome")
         option("-g", "--genes", help="Genes of interest, variants connected to those will be flagged with greendb_VOI")
         option("--connection", help="Region-gene connections accepted for annotation", choices = @["all","closest","annotated"], default="all")
@@ -60,8 +61,8 @@ proc main* (dropfirst:bool=false) =
     let dbschema = readSchema(opts.dbschema)
 
     #Set chromosomes and genes
-    let chromosomes = getItems(opts.chrom, "chromosome")
-    let genes = toHashSet(getItems(opts.genes, "gene"))
+    let chromosomes = getItems(opts.chrom, "chromosome", opts.nochr)
+    let genes = toHashSet(getItems(opts.genes, "gene", opts.nochr))
     info(fmt"N selected chromosomes: {chromosomes.len}")
     info(fmt"N selected genes: {genes.len}")
     debug(fmt"Selected chromosomes: {$chromosomes}")
@@ -177,7 +178,9 @@ proc main* (dropfirst:bool=false) =
                 gdbinfo: GDBinfo
                 ann: seq[(string, string)]
                 vinterval: Interval
-
+                chrom_name = $v.CHROM
+            if opts.nochr: chrom_name = "chr" & chrom_name
+            
             if not makeinterval(v, cipostag, padvalue, vinterval):
                 warning = true
                 debug(fmt"Unable to parse an interval for variant: {$v}")
@@ -185,7 +188,7 @@ proc main* (dropfirst:bool=false) =
                 nwrittenchrom += 1
                 nwritten += 1
                 continue
-            for r in greendb.query($v.CHROM, v.POS, v.POS+1):
+            for r in greendb.query(chrom_name, v.POS, v.POS+1):
                 #interval evaluation here
                 var rinterval: Interval
                 if not makeinterval(r, rinterval):

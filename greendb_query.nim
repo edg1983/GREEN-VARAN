@@ -48,7 +48,7 @@ proc overlap(x: Interval, y: Interval): (float, int) =
 
 proc makeinterval(s: seq[string], i: var Interval, idx: seq[int] = @[1,2,3]): bool =
     try:
-        i.chrom = s[idx[0]]
+        i.chrom = s[idx[0]].replace("chr", "")
         i.start = parseInt(s[idx[1]])
         i.stop = parseInt(s[idx[2]])
         if i.start > i.stop: 
@@ -268,7 +268,7 @@ proc main* (dropfirst:bool=false) =
     var warning = false
     case runmode:
         of "regions":
-            let regions = getItems(opts.regids,"regions")
+            let regions = getItems(opts.regids,"regions", false)
             info(fmt"Regions in input: {regions.len}")
             makeTables(db, regions, opts.genome, OUTTABS_HEADERS, opts.out)
         of "tab":
@@ -287,7 +287,7 @@ proc main* (dropfirst:bool=false) =
             info(fmt"{n} variants and {nregions} regions processed from input")
         of "variants":
             var nregions = 0
-            let variants = getItems(opts.variants,"variants")
+            let variants = getItems(opts.variants,"variants", false)
             info(fmt"Variants in input: {variants.len}")
             for v in variants:
                 createDir(fmt"{opts.out}/{v}")
