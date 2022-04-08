@@ -111,6 +111,7 @@ We also provide pre-processed datasets (see [resources](resources/README.md)) an
 | -f, --filter | filter instead of annotate. Only variants with greendb overlap will be written. <br> If --genes is active, the output will contain only variants connected to the input genes of interest |
 | -m, --impact IMPACT | Which impact to assign when updating snpEff field <br> Possible values: [HIGH, MODERATE, LOWm MODIFIER] (default: MODIFIER) |
 | --chrom CHROM | Annotate only for a specific chromosome <br> Useful to parallelize across chromosomes |
+| --nochr | Use this when input VCF does not have chr prefix in chromosome names |
 | -g, --genes GENES | Gene symbols for genes of interest, variants connected to those will be flagged with greendb_VOI tag <br> This can be a comma-separated list or a text file listing genes one per line |
 | --connection CONNECTION | Region-gene connections accepted for annotation <br> Possible values: [all, closest, annotated] (default: all) |
 | --log LOG | Log file. Default is greenvaran_[now].log |
