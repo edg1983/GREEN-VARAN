@@ -140,7 +140,8 @@ using the default config provided.
 This configuration resembles the four levels prioritization described in the GREEN-DB manuscript. 
 Note that the exact names of these annotations and the score thresholds are defined in the json file passed to --config options.
 
-The following table summarizes the four prioritization levels defined in the manuscript and in the default config file.
+The following table summarizes the four prioritization levels defined in the manuscript and this is the default behaviour
+you will obtain using the default config file and the default option `--priritization_strategy levels`
 
 +-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Level | Description                                                                                                                                                 |
@@ -153,6 +154,10 @@ The following table summarizes the four prioritization levels defined in the man
 +-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | 4     | Level 3 critera and region constraint value greater or equal 0.7                                                                                            |
 +-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Alternatively, you can chose a "pile-up" approach setting `--priritization_strategy pileup` which simply sum evidences across levels.
+
+This means that the criteria described above are tested independently and the level reported is increased by one for each satisfied criteria.
 
 Personalize the prioritization schema
 #####################################

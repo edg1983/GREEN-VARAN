@@ -109,7 +109,7 @@ The configuration file is a standard json file oragnized as follows:
 
 Header
 ######
-.. code-block::
+.. code-block:: json
 
     {
         "BEDTOOLS": "bedtools",
@@ -124,7 +124,7 @@ is provided in a different location.
 
 Overlap
 #######
-.. code-block::
+.. code-block:: json
 
     "overlap": {
         "AF_datasets": ["0.75", "FALSE"],
@@ -138,7 +138,7 @@ and the second value can be TRUE or FALSE and set if overlap must be reciprocal.
 
 Datasets
 ########
-.. code-block::
+.. code-block:: json
 
     "dataset_type": {
         "genome_build": {

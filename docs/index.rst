@@ -7,7 +7,7 @@ GREEN: Genomic Regulatory Elements ENcyclopedia
 Welcome to the house of GREEN-DB and GREEN-VARAN!
 This documentation describes the resources part of the Genomic Regulatory Elements Encyclopedia
 
-The GREEN project is made by 2 main components:
+The GREEN project is made by 3 main components:
 
 1. The GREEN-DB collection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,7 +20,7 @@ The collection includes information useful for the annotation of non-coding vari
 The GREEN-DB files can be downloaded from Zenodo: https://zenodo.org/record/5636209
 All the additional pre-preprocessed datasets are also available from Zenodo, see the Download section.
 
-1. The GREEN-VARAN tool set
+2. The GREEN-VARAN tool set
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This include tools and workflows that can be used to interact with information in the GREEN-DB and annotate VCF files
 
@@ -33,9 +33,14 @@ Available from GitHub: https://github.com/edg1983/GREEN-VARAN
 
 3. The prioritization workflow
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#TODO
+A Nextflow workflow is available to automate download of the GREEN-DB and supporting resources 
+and run the prioritization workflow on a VCF file. This workflow can be run on one or multiple VCF file(s)
+and will automatically annotated the desired scores and regions and then perform GREEN-VARAN annotation.
 
-GREEN-DB and GREEN-VARAN are described in our preprint (https://doi.org/10.1101/2020.09.17.301960)
+How to cite
+~~~~~~~~~~~
+If you find GREEN-DB and GREEN-VARAN useful for your research please cite our manuscript (https://academic.oup.com/nar/article/50/5/2522/6541021)
+See also the how to cite section
 
 The Download section lists locations to download the GREEN-DB and other resource files for annotation
 

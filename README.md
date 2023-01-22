@@ -175,9 +175,14 @@ You need 3 set of information in your input VCF to run prioritization mode when 
 
 1. **gnomAD_AF, gnomAD_AF_nfe**: float values describing global and NFE population AF from gnomAD 
 2. **ncER, FATHMM-MKL and ReMM**: float values providing scores predictions
-3. **TFBS, DNase and UCNE**: flags describing overlap with additional functional regions 
+3. **TFBS, DNase and UCNE**: flags describing overlap with additional functional regions
 
-The prioritization schema can be adjusted by modifying the .json file passed to `--config`. A default file is provided in config folder. See documentation for more details [documentation](https://green-varan.readthedocs.io/en/latest).
+The prioritization schema can be adjusted by modifying the .json file passed to `--config`. A default file is provided in config folder.
+
+The default behaviour is `--prioritization_strategy levels` which reproduce the 4 levels as described in the paper.
+Alternatively, you can chose a "pile-up" approach setting `--prioritization_strategy pileup` which simply sum evidences across levels. This means that the criteria described above are tested independently and the level reported is increased by one for each satisfied criteria.
+
+See documentation for more details [documentation](https://green-varan.readthedocs.io/en/latest).
 
 ## Run using singularity
 

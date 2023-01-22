@@ -1,4 +1,3 @@
-import argparse
 import hts
 import logging
 import times
@@ -12,34 +11,15 @@ import sets
 from math import floorMod
 import ./utils
 import ./gdbinfo
+import ./arg_parse_small
 
 proc main* (dropfirst:bool=false) =
     # Parse arguments
-    var p = newParser("smallvars"):
-        option("-i", "--invcf", help="path to input VCF/BCF")
-        option("-o", "--outvcf", help="output VCF file")
-        option("-c", "--config", help="json config file for prioritization")
-        option("-d", "--db", help="GREEN-DB bed.gz file")
-        option("-s", "--dbschema", help="json file containig greendb column mapping")
-        option("-m", "--impact", help="Which impact to assign when updating snpEff field", choices = @["HIGH","MODERATE","LOW","MODIFIER"], default="MODIFIER")
-        flag("-u", "--noupdate", help="do not update ANN / BCSQ field")
-        flag("-f", "--filter", help="Filter instead of annotate. Only vars with greendb overlap and eventually gene of interest will be written")
-        flag("-p", "--permissive", help="Perform prioritization even if one of INFO fields required by prioritization config is missing")
-        flag("-n", "--nochr", help="Do not add chr prefix to chromosome names")
-        option("--chrom", help="Annotate only for specific chromosome")
-        option("-g", "--genes", help="Genes of interest, variants connected to those will be flagged with greendb_VOI")
-        option("--connection", help="Region-gene connections accepted for annotation", choices = @["all","closest","annotated"], default="all")
-        option("--log", help="Log file. Default is greenvaran_[now].log")
-
     var argv = commandLineParams()
     if len(argv) > 0 and argv[0] == "smallvars":
         argv = argv[1..argv.high]
     if len(argv) == 0: argv = @["--help"]
-    var opts = p.parse(argv)
-
-    # Quit if help is used
-    if opts.help:
-        quit "END of help message", QuitSuccess
+    var opts = parseCmdLine(argv)
 
     #Set logging
     var
@@ -79,6 +59,10 @@ proc main* (dropfirst:bool=false) =
     let updateann = not opts.noupdate
     info(fmt"Update existing gene annotations: {$updateann}")
     info(fmt"Filter mode active: {opts.filter}")
+
+    #Set prioritization mode
+    var pileup = true
+    if opts.prioritization_strategy == "levels": pileup = false
 
     info("=== Start processing VCF ===")
     #Read VCF
@@ -175,9 +159,10 @@ proc main* (dropfirst:bool=false) =
             
             if gdbinfo.id.len > 0:
                 if prioritize:
-                    gdbinfo.setLevel(v, config)
+                    gdbinfo.setLevel(v, config, pileup)
                 else:
                     gdbinfo.level = 0
+                    gdbinfo.more_support = 0
                 v.updateInfo(gdbinfo)
                 if genes.len > 0 and genes.intersection(gdbinfo.genes).len > 0:
                     nvoi += 1

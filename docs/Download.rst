@@ -21,7 +21,7 @@ By default, various resources are expected in the ``resources`` folder within th
 If you pass an alternative resource folder using ``--resource_folder`` option, the same structure is expected in this folder
 The expected folder structure is as follows and the expected file names are those listed in the Zenodo repository table below
 
-.. code-block::
+.. code-block:: bash
 
     .
     |-- SQlite

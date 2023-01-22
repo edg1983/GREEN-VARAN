@@ -9,6 +9,7 @@ import os
 import re
 from math import floorMod
 import ./utils
+import ./arg_parse_querytab
 
 proc parseRegion(x: string): string =
     if x =~ re"(chr){0,1}[0-9XYMT]+:[0-9]+-[0-9+]":
@@ -60,22 +61,13 @@ proc extractVariant(v: Variant, endfrom: string, minlevel: int, voi: bool, outf:
 
 proc main* (dropfirst:bool=false) =
     # Parse arguments
-    var p = newParser("querytab"):
-        option("-i", "--vcf", help="path to input VCF/BCF")
-        option("-o", "--out", help="output tsv file")
-        option("-l", "--minlevel", help="min accepted greenvaran level")
-        flag("-x", "--voi", help="Extract only variants of interest marked as greendb_VOI")
-        option("-r", "--regions", help="bed file or comma-separated list of regions as chr:start-end")
+    
 
     var argv = commandLineParams()
     if len(argv) > 0 and argv[0] == "querytab":
         argv = argv[1..argv.high]
     if len(argv) == 0: argv = @["--help"]
-    var opts = p.parse(argv)
-
-    # Quit if help is used
-    if opts.help:
-        quit "END of help message", QuitSuccess
+    var opts = parseCmdLine(argv)
 
     #Set logging
     var cl = newConsoleLogger(fmtStr="[$datetime] - $levelname: ", levelThreshold=lvlInfo)

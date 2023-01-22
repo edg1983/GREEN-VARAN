@@ -4,6 +4,7 @@ import sets
 import hts
 import json
 import tables
+from math import sum
 import ./utils
 
 type GDBinfo* = object 
@@ -13,6 +14,7 @@ type GDBinfo* = object
     genes*: HashSet[string]
     constraint*: seq[float]
     level*: int
+    more_support*: int
     #ann: seq[(string, string)]
 
 type
@@ -75,46 +77,54 @@ proc update*(x: var GDBinfo, rec: string, schema: Schema, ann: var seq[(string, 
                     x.genes.incl(i)
                     ann.add((i, fields[schema.stdtype]))
 
-proc setLevel*(x: var GDBinfo, rec: Variant, c: Config) =
+proc setLevel*(x: var GDBinfo, rec: Variant, c: Config, pileup: bool) =
+    x.level = 0
+    x.more_support = 0
+    
     var 
         af_values: seq[float32]
-        level = 0
         overlap_regions = false
         pass_scores = false
+        eval_seq = @[0, 0, 0, 0]
 
     for k in c.af:
         var val: seq[float32]
         if rec.info.get(k, val) == Status.OK: af_values.add(val[0])
 
-    if af_values.len == 0:
-        level += 1
-    elif max(af_values) < c.maxaf:
-        level += 1
+    if af_values.len == 0 or max(af_values) < c.maxaf:
+        eval_seq[0] += 1
     
     for k in c.regions:
         if rec.info.has_flag(k): overlap_regions = true 
-    if overlap_regions: level += 1
+    if overlap_regions: eval_seq[1] += 1
 
     for k, v in c.scores:
         var val: seq[float32]
         if rec.info.get(k, val) == Status.OK:
             if val[0] >= v: pass_scores = true 
-    if pass_scores: level += 1
+    if pass_scores: eval_seq[2] += 1
     
     if x.constraint.len > 0 and max(x.constraint) >= c.constraint:
-        level += 1
+        eval_seq[3] += 1
 
     if c.more_regions.len > 0:
         for k in c.more_regions:
-            if rec.info.has_flag(k): level += 1
+            if rec.info.has_flag(k): x.more_support += 1
 
     if c.more_values.len > 0:
         for k, v in c.more_values:
             var val: seq[float32]
             if rec.info.get(k, val) == Status.OK:
-                if val[0] >= v: level += 1
-
-    x.level = level 
+                if val[0] >= v: x.more_support += 1
+    
+    if pileup: 
+        x.level = sum(eval_seq)
+    else:
+        for val in eval_seq:
+            if val > 0: 
+                x.level += val
+            else: 
+                break
 
 proc updateInfo*(rec: Variant, x: GDBinfo, skiplevel: bool = false) =
     for k, v in x.fieldPairs:

@@ -4,7 +4,7 @@ From: centos:latest
 %labels
     Author Edoardo Giacopuzzi
     Contact edoardo.giacopuzzi@well.ox.ac.uk
-    Version v1.1
+    Version v1.2
 
 %environment
     SHELL=/bin/bash
@@ -57,28 +57,28 @@ From: centos:latest
 
     #Download GREEN-VARAN binaries
     cd /opt
-    wget https://github.com/edg1983/GREEN-VARAN/releases/download/v1.1/greenvaran
-    wget https://github.com/edg1983/GREEN-VARAN/releases/download/v1.1/greendb_query
+    wget https://github.com/edg1983/GREEN-VARAN/releases/download/v1.2/greenvaran
+    wget https://github.com/edg1983/GREEN-VARAN/releases/download/v1.2/greendb_query
     chmod a+x greenvaran
     chmod a+x greendb_query
 
-    wget https://github.com/edg1983/GREEN-VARAN/archive/refs/tags/v1.1.tar.gz
-    tar -zxvf v1.1.tar.gz
+    wget https://github.com/edg1983/GREEN-VARAN/archive/refs/tags/v1.2.tar.gz
+    tar -zxvf v1.2.tar.gz
     rm v1.1.tar.gz
-    cd /opt/GREEN-VARAN-1.1/workflow/bin
+    cd /opt/GREEN-VARAN-1.2/workflow/bin
     chmod a+x *
 
     mkdir /config
     cd /config
-    cp /opt/GREEN-VARAN-1.1/config/* ./
+    cp /opt/GREEN-VARAN-1.2/config/* ./
 
     #Link to path
     cd /usr/bin
     ln -s /opt/greenvaran ./
     ln -s /opt/greendb_query ./
-    ln -s /opt/GREEN-VARAN-1.1/workflow/bin/bgzip ./
-    ln -s /opt/GREEN-VARAN-1.1/workflow/bin/tabix ./
-    ln -s /opt/GREEN-VARAN-1.1/workflow/bin/vcfanno ./
+    ln -s /opt/GREEN-VARAN-1.2/workflow/bin/bgzip ./
+    ln -s /opt/GREEN-VARAN-1.2/workflow/bin/tabix ./
+    ln -s /opt/GREEN-VARAN-1.2/workflow/bin/vcfanno ./
    
 %test
     greenvaran version

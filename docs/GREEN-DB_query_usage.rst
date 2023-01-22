@@ -6,7 +6,7 @@ Given a list of region IDs, variant IDs or a table or variant and relevant regio
 containing detailed information on the regions of interest, overlap with additional supporting regions
 (TFBS, DNase HS peaks, UCNE, dbSuper), gene-region connections, tissue of activity and associated phenotypes.
 
-.. code-block::
+.. code-block:: bash
 
     greendb_query [-h] (-v VARIDS | -r REGIDS | -t TABLE) -o OUTPREFIX -g
                          {GRCh37,GRCh38} --db GREENDB [--logfile LOGFILE]

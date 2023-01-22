@@ -13,12 +13,13 @@ Usage
 The typical usage scenario start with a VCF file already containing gene consequences annotations from SnpEff or bcftools. 
 Then from the GREEN-VARAN tool main folder you can perform all annotations using the following command.
 This will add a minimum set of information to you VCF including:
+
 - population allele AF from gnomAD genomes v3.1.1 (GRCh38) or v2.1.1 (GRCh37)
 - functional regions overlaps for TFBS, DNase peaks and UCNE
 - prediction score values for ncER, FATHMM, ReMM
 - GREEN-DB information on regulatory variants with prioritization levels
 
-.. code-block::
+.. code-block:: bash
 
     nextflow workflow/main.nf \
         -profile local \
@@ -46,19 +47,19 @@ A toml file is a annotation configuration file used by the vcfanno tool and is d
 
 A minimal example is reported below
 
-.. code-block::
+.. code-block:: bash
 
-  [[annotation]]
-  file="ExAC.vcf" #source file
-  fields = ["AF", "AF_nfe"] #INFO fields to be extracted from source
-  ops=["self", "max"] #How to treat source values
-  names=["exac_af", "exac_af_nfe_max"] #names used in the annotated file
+    [[annotation]]
+    file="ExAC.vcf" #source file
+    fields = ["AF", "AF_nfe"] #INFO fields to be extracted from source
+    ops=["self", "max"] #How to treat source values
+    names=["exac_af", "exac_af_nfe_max"] #names used in the annotated file
 
-  [[annotation]]
-  file="regions_score.bed.gz"
-  columns = [4, 5] #When using a BED or TSV files you can refer to values by col index
-  names=["regions_ids", "score_max"]
-  ops=["uniq","max"]
+    [[annotation]]
+    file="regions_score.bed.gz"
+    columns = [4, 5] #When using a BED or TSV files you can refer to values by col index
+    names=["regions_ids", "score_max"]
+    ops=["uniq","max"]
 
 
 Resources
@@ -70,7 +71,7 @@ You pass an alternative resource folder using ``--resource_folder`` option, bug 
 
 The expected folder structure is as follows
 
-.. code-block::
+.. code-block:: bash
 
     .
     |-- SQlite
@@ -88,14 +89,14 @@ Automated download
 A supporting workflow is provided to automate data download for all resources included in the GREEN-DB collection. 
 You can list the available resources and their resulting download location using
 
-.. code-block::
+.. code-block:: bash
 
     nextflow workflow/download.nf --list_data
 
 The reccomended set of annotations can be downloaded to the default location using the following command or
 you can set an alternative resource folder using ``--resource_folder`` option
 
-.. code-block::
+.. code-block:: bash
 
     nextflow workflow/download.nf \
     -profile local \
@@ -174,6 +175,10 @@ Available parameters for main workflow
     | A json config file for GREEN-VARAN tool
 --greenvaran_dbschema JSON_FILE
     | A json db schema file for GREEN-VARAN tool
+--nochr
+    | Chromosome names in the input file do not have chr prefix
+--prioritization_strategy
+    | Set prioritization strategy [levels, pileup]
 --resource_folder
     | Specify a custom folder for the annotation files
     | Default is the resources folder in GREEN-VARAN main folder

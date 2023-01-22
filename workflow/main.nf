@@ -82,6 +82,8 @@ if (params.help) {
         --AF                    :   Annotate global AF from gnomAD genome v3
         --greenvaran_config     :   A json config file for GREEN-VARAN tool
         --greenvaran_dbschema   :   A json db schema file for GREEN-VARAN tool
+        --nochr                 :   Chromosome names in input VCF does not have chr prefix
+        --prioritization_strategy : Set prioritization strategy [levels, pileup]
         --resource_folder       :   Specify a custom folder for the annotation files
         --anno_toml             :   A custom annotation config file.
                                     This file is a toml file as specified for vcfanno.
@@ -126,6 +128,7 @@ log.info """\
     greenvaran config   : ${params.greenvaran_config}
     greenvaran dbschema : ${params.greenvaran_dbschema}
     resource folder     : ${params.resource_folder}
+    prioritization mode : ${params.prioritization_strategy}
 
     ACTIVE ANNOTATIONS:
         Scores          : ${params.scores}
@@ -300,6 +303,8 @@ process green_varan {
         file "*.log"
 
     script:
+    def nochr_opt = params.nochr ? '--nochr' : ''
+    def prioritization_mode_opt = params.prioritization_strategy ? "--prioritization_strategy ${params.prioritization_strategy}" : '' 
     """
     f="$vcf_file"
     prefix=\${f##*/}
@@ -311,6 +316,8 @@ process green_varan {
     -c $config \
     --db $db \
     --dbschema $dbschema \
+    $nochr_opt \
+    $prioritization_mode_opt \
     $options
     """
 }
