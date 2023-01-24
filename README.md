@@ -1,5 +1,7 @@
 # GREEN-VARAN and the GREEN-DB
+
 **Genomic Regulatory Elements ENcyclopedia**
+
 ```
                                               _.-~`  `~-.
                   _.--~~~---,.__          _.,;; .   -=(@'`\
@@ -130,6 +132,7 @@ We also provide pre-processed datasets (see [resources](resources/README.md)) an
 | option | description |
 |--------|-------------|
 | -c, --config CONFIG | json config file for prioritization <br> A default configuration for the four level described in the paper is provided in config folder |
+| --prioritization_strategy | set the strategy used to compute prioritization levels. Possible values are: levels (default) or pileup |
 | -p, --permissive | Perform prioritization even if one of the INFO fields required by prioritization config is missing <br> By default, when one of the expected fields is not defined in the header, the prioritization is disabled and all variants will get level zero |
 
 ## Annotations added by GREEN-VARAN
@@ -144,6 +147,7 @@ Fields in the following table are added to INFO fields by GREEN-VARAN. greendb_l
 | greendb_stdtype | String | Comma-separated list of standard region types as annotated in GREEN-DB for regions overlapping the variant |
 | greendb_dbsource | String | Comma-separated list of data sources as annotated in GREEN-DB for regions overlapping the variant |
 | greendb_level | Integer | Variant prioritization level computed by GREEN-VARAN. See Prioritization section below |
+| greendb_more_support | Integer | Sum up of the additional pieces of evidence that support this variant as configured in the prioritization JSON |
 | greendb_constraint | Float | The maximum constraint value across GREEN-DB regions overlapping the variant |
 | greendb_genes | String | Possibly controlled genes for regulatory regions overlapping this variant |
 | greendb_VOI | Flag | When ``--genes`` option is active this flag is set when any of the input genes is among the possibly controlled genes for overlapping regulatory regions. |

@@ -4,3 +4,4 @@ bin/
 work/
 localcompile.sh
 .nextflow*
+.DS_Store
