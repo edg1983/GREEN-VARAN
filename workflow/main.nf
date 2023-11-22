@@ -114,7 +114,7 @@ if (params.list_data) {
     }
 
     println "=== GNOMAD AF ==="
-    print_dataset_items('gnomAD', resource_folder, params.annotations[params.build].regions) 
+    print_dataset_items('gnomAD', resource_folder, params.annotations[params.build].AF) 
     exit 0
 }
 
