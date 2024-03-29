@@ -167,7 +167,7 @@ proc main* (dropfirst:bool=false) =
                 nwrittenchrom += 1
                 nwritten += 1
                 continue
-            for r in greendb.query(chrom_name, v.POS, v.POS+1):
+            for r in greendb.query(chrom_name, vinterval.start.int64, vinterval.stop.int64):
                 #interval evaluation here
                 var rinterval: Interval
                 if not makeinterval(r, rinterval):
