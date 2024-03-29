@@ -101,15 +101,15 @@ proc main* (dropfirst:bool=false) =
     try:
         discard vcf.header.get("END", BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
     except KeyError:
-        fatal(fmt"No END field defined in VCF header. The END field is mandatory")
-        quit "", QuitFailure
-    
+        warn(fmt"No END field defined in VCF header. SV intervals will be built from SVLEN and padding only")
+
     if opts.padding.len == 0:
-        try:
-            discard vcf.header.get(opts.cipos, BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
-        except KeyError:
-            fatal(fmt"No padding value set and CIPOS field is not in header")
-            quit "", QuitFailure
+        warn(fmt"No padding value set for BND/INS. Intervals will be built based on CIPOS only.")
+     
+    try:
+        discard vcf.header.get(opts.cipos, BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
+    except KeyError:
+        warn(fmt"The configured CIPOS field is not in header. Zero will be used as value")
 
     #See if ANN or BCSQ are defined, otherwise add ANN
     var hasgeneanno = false

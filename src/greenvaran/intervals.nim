@@ -31,7 +31,6 @@ proc makeinterval*(rec: Variant, cipostag: string, pad: string, i: var Interval)
         cipos: seq[int32]
         svendint: int
         svtype: string
-        addpadding = false
     
     i.chrom = rec.CHROM
     i.isinsbnd = false
@@ -45,34 +44,27 @@ proc makeinterval*(rec: Variant, cipostag: string, pad: string, i: var Interval)
             svendint= parseInt($rec.POS) + parseInt($svend[0])
         else:
             return false
+    
+    # Add the interval in CIPOS to the start and end of the variant
+    if rec.info.get(cipostag, cipos) != Status.OK:
+        cipos = @[default,default]
+
+    if cipos[0] < 0: cipos[0] = -cipos[0]
+    i.start = parseInt($rec.POS) - cipos[0]
+    i.stop = svendint + cipos[1]
 
     #Check if variant need padding (INS or BND)
-    if svtype in @["BND","INS"]: 
-        addpadding = true
+    if svtype in @["BND","INS"]:
         i.isinsbnd = true
-    
-    if addpadding:
-        if pad.len == 0:
-            if rec.info.get(cipostag, cipos) != Status.OK:
-                cipos = @[default,default]
-
-            if cipos[0] < 0: cipos[0] = -cipos[0]
-            i.start = parseInt($rec.POS) - cipos[0]
-            i.stop = svendint + cipos[1]
-            if i.start > i.stop:
-                return false
-            return true
-        else:
+        if pad.len > 0:
             let padint = parseInt(pad)
             i.start = parseInt($rec.POS) - padint
             i.stop = svendint + padint
-            if i.start > i.stop: 
-                return false
-            return true
-    else:
-        i.start = parseInt($rec.POS)
-        i.stop = svendint
-        return true
+    
+    if i.start > i.stop:
+        return false
+    
+    return true
 
 proc makeinterval*(s: seq[string], i: var Interval, idx: seq[int] = @[1,2,3]): bool =
     try:
