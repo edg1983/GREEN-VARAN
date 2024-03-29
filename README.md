@@ -190,17 +190,18 @@ See documentation for more details [documentation](https://green-varan.readthedo
 
 ## Run using singularity
 
-The tool binaries should work on most linux based system. In case you have any issue, we also provide GREEN-VARAN as Singularity image (tested on singularity >= 3.2). 
-A Singularity recipe is included in the repository or you can pull the image from Singularity Library using
+The tool binaries should work on most linux based system. In case you have any issue, we also provide GREEN-VARAN as Docker image that you can use with Singularity or Docker. 
+A Dockerfile recipe is included in the repository or you can pull the image from DockerHub:
 
-``singularity pull library://edg1983/greenvaran/greenvaran:latest``
+`singularity pull docker://htgenomeanalysisunit/greenvaran:1.3`
 
 ### Usage
 
 The image contains both greenvaran and greendb_query tools.
+The config files are provided in the container in /opt/green-varan/config
 The general usage is:
 
-```
+```bash
 singularity exec \
   greenvaran.sif \
   tool_name [tool arguments]
