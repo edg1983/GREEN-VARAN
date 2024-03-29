@@ -12,6 +12,7 @@ RUN apt-get update && \
         curl \
         bzip2 \
         libbz2-dev \
+        libsqlite3-dev \
         libcurl4-openssl-dev \
         zlib1g zlib1g-dev \
         liblzma-dev libssl-dev \
