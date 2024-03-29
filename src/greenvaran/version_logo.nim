@@ -1,4 +1,4 @@
-const VERSION* = "1.3"
+const VERSION* = "1.3.1"
 
 const LOGO* = """
  / __)(  _ \(  __)(  __)(  ( \ ___ / )( \ / _\ (  _ \ / _\ (  ( \\
