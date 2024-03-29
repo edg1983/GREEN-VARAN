@@ -1,5 +1,5 @@
 # Package
-version     = "1.0"
+version     = "1.3"
 author      = "Edoardo Giacopuzzi"
 description = "GREEN-VARAN:Annotate variants in regulatory regions from GREEN-DB"
 license     = "MIT"

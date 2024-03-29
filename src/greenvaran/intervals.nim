@@ -3,9 +3,9 @@ import hts
 
 type
     Interval* = object
-        chrom: cstring
-        start: int
-        stop: int
+        chrom*: cstring
+        start*: int
+        stop*: int
         isinsbnd: bool
 
 proc len(x: Interval): int {.inline.} =

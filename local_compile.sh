@@ -6,8 +6,8 @@ pkg_name="greenvaran"
 singularity exec \
 --bind $PWD \
 --bind $PWD:/load/ \
---bind /project/alfredo \
-/project/alfredo/singularity/musl-hts-nim_latest.sif \
+--bind /ssu/gassu \
+/ssu/gassu/singularity/musl-hts-nim_latest.sif \
 /usr/local/bin/nsb \
 -s $PWD/src/${pkg_name}.nim \
 --nimble-file $PWD/${pkg_name}.nimble -- -d:danger -d:release
