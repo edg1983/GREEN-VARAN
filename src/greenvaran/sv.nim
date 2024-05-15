@@ -35,7 +35,7 @@ proc main* (dropfirst:bool=false) =
         quit "", QuitFailure
 
     var starttime = cpuTime()
-    
+
     #Read greendb schema
     let dbschema = readSchema(opts.dbschema)
 
@@ -47,21 +47,26 @@ proc main* (dropfirst:bool=false) =
     debug(fmt"Selected chromosomes: {$chromosomes}")
     debug(fmt"Selected genes: {$genes}")
 
-    #Set overlap threasholds
+    #Set overlap thresholds
     let
         minoverlap = parseFloat(opts.minoverlap)
         minbp =  parseInt(opts.minbp)
     info(fmt"Min overlap - fraction: {minoverlap}; bp: {minbp}" )
+
+    #Set max length for SVs
+    let maxsvlen = parseInt(opts.maxlen)
+    info(fmt"Max length for SVs: {maxsvlen}")
 
     #Set padding variable
     if opts.padding.len > 0:
         info(fmt"Fixed padding for INS/BND: {opts.padding}")
     else:
         info(fmt"Padding for INS/BND based on INFO field: {opts.cipos}")
-    
-    let 
+
+    let
         padvalue = opts.padding
-        cipostag = opts.cipos 
+        cipostag = opts.cipos
+        ciendtag = opts.ciend
 
     #Set update ANN / BSCQ or not
     let updateann = not opts.noupdate
@@ -94,7 +99,7 @@ proc main* (dropfirst:bool=false) =
         annfield: string
 
     doAssert(open(vcf, opts.invcf))
-    doAssert(open(wrt, opts.outvcf, mode="w"))   
+    doAssert(open(wrt, opts.outvcf, mode="w"))
     doAssert(open(greendb, opts.db))
 
     #Check CIPOS and END fields are in header
@@ -105,11 +110,16 @@ proc main* (dropfirst:bool=false) =
 
     if opts.padding.len == 0:
         warn(fmt"No padding value set for BND/INS. Intervals will be built based on CIPOS only.")
-     
+
     try:
-        discard vcf.header.get(opts.cipos, BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
+        discard vcf.header.get(cipostag, BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
     except KeyError:
         warn(fmt"The configured CIPOS field is not in header. Zero will be used as value")
+
+    try:
+        discard vcf.header.get(ciendtag, BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
+    except KeyError:
+        warn(fmt"The configured CIEND field is not in header. Zero will be used as value")
 
     #See if ANN or BCSQ are defined, otherwise add ANN
     var hasgeneanno = false
@@ -130,18 +140,18 @@ proc main* (dropfirst:bool=false) =
     if updateann and not hasgeneanno:
         warn("No ANN or BCSQ field detected in header so ANN will be created")
         annfield = "ANN"
-        doAssert vcf.header.add_info(ID=annfield,Number="1",Type="String",Description=DESCRIPTION[annfield]) == Status.OK 
+        doAssert vcf.header.add_info(ID=annfield,Number="1",Type="String",Description=DESCRIPTION[annfield]) == Status.OK
 
     #Copy original header and then update with new GREENDB values
     wrt.header = vcf.header
     let gdbempty = GDBinfo(level: 0)
     wrt.updateHeader(gdbempty, skiplevel=true)
     if genes.len > 0:
-        doAssert vcf.header.add_info(ID="greendb_VOI",Number="1",Type="Flag",Description="Variant affecting a region connected to a gene of interest in GREENDB") == Status.OK  
+        doAssert vcf.header.add_info(ID="greendb_VOI",Number="1",Type="Flag",Description="Variant affecting a region connected to a gene of interest in GREENDB") == Status.OK
     doAssert(wrt.write_header())
 
     for c in chromosomes:
-        var 
+        var
             nchrom = 0
             nannotchrom = 0
             nvoichrom = 0
@@ -150,23 +160,32 @@ proc main* (dropfirst:bool=false) =
         for v in vcf.query(c):
             nchrom += 1
             n = n + 1
-            if floorMod(n, 5000) == 0: 
+            if floorMod(n, 5000) == 0:
                 info(fmt"{n} vars analyzed, last batch in {timer(t0)}")
-            
-            var 
+
+            var
                 gdbinfo: GDBinfo
                 ann: seq[(string, string)]
                 vinterval: Interval
                 chrom_name = $v.CHROM
             if opts.nochr: chrom_name = "chr" & chrom_name
-            
-            if not makeinterval(v, cipostag, padvalue, vinterval):
+
+            if not makeinterval(v, cipostag, ciendtag, padvalue, vinterval):
                 warning = true
                 debug(fmt"Unable to parse an interval for variant: {$v}")
                 doAssert wrt.write_variant(v)
                 nwrittenchrom += 1
                 nwritten += 1
                 continue
+
+            if vinterval.len > maxsvlen:
+                warning = true
+                debug(fmt"Skipping variant {$v} with interval length > {maxsvlen}")
+                doAssert wrt.write_variant(v)
+                nwrittenchrom += 1
+                nwritten += 1
+                continue
+
             for r in greendb.query(chrom_name, vinterval.start.int64, vinterval.stop.int64):
                 #interval evaluation here
                 var rinterval: Interval
@@ -175,9 +194,9 @@ proc main* (dropfirst:bool=false) =
                     debug(fmt"Unable to parse an interval for this GREENDB region")
                     debug(r)
                     continue
-                if rinterval.overlap(vinterval, minoverlap, minbp):   
+                if rinterval.overlap(vinterval, minoverlap, minbp):
                     gdbinfo.update(r, dbschema, ann, gene_connection)
-            
+
             if gdbinfo.id.len > 0:
                 nannotated += 1
                 nannotchrom += 1
@@ -185,9 +204,9 @@ proc main* (dropfirst:bool=false) =
             if opts.filter:
                 if gdbinfo.id.len == 0:
                     continue
-                if genes.len > 0 and genes.intersection(gdbinfo.genes).len == 0: 
+                if genes.len > 0 and genes.intersection(gdbinfo.genes).len == 0:
                     continue
-            
+
             if gdbinfo.id.len > 0:
                 v.updateInfo(gdbinfo, skiplevel=true)
                 if genes.len > 0 and genes.intersection(gdbinfo.genes).len > 0:
@@ -212,9 +231,9 @@ proc main* (dropfirst:bool=false) =
     close(vcf)
     close(greendb)
     close(wrt)
-    
+
     info(fmt"{nannotated} variants annotated with greendb information")
     info(fmt"{nvoi} vars of interest based on the input gene list if any")
     info(fmt"{nwritten} variants written to output")
-    if warning: logging.error("Failed to parse interval from some variants or regions, these are not annotated. See log")
+    if warning: logging.error("Some variants were not annotated due to failed interval parsing of lenght limit. See log")
     info(fmt"All done - Completed in {timer(starttime)}")

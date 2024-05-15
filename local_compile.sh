@@ -7,7 +7,6 @@ singularity exec \
 --bind $PWD \
 --bind $PWD:/load/ \
 --bind /ssu/gassu \
---bind /localscratch \
 /ssu/gassu/singularity/musl-hts-nim_latest.sif \
 /usr/local/bin/nsb \
 -s $PWD/src/${pkg_name}.nim \

@@ -21,30 +21,37 @@ jgs    `~~~~``
 [![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://cloud.sylabs.io/library/_container/618c1e989b47264715334728)
 
 This is the home of the GREEN-DB and companion tools (GREEN-VARAN)
-#### GREEN-DB 
+
+#### GREEN-DB
+
 **Genomic Regulatory Elements ENcyclopedia Database**
 A collection of ~2.4M regulatory regions in the human genome, with information about controlled genes, tissues of activity and associated phenotypes. GREEN-DB is available for free for academic usage in a [Zenodo repository](https://zenodo.org/record/5636209)
 
 #### GREEN-VARAN
+
 **Genomic Regulatory Elements ENcyclopedia VARiant ANnotation**
-Annotate non-coding regulatory variants in a VCF with information from GREEN-DB 
-- possibly controlled genes 
+Annotate non-coding regulatory variants in a VCF with information from GREEN-DB
+
+- possibly controlled genes
 - overlapping regulatory region IDs and data sources
 - overlapping regulatory regions max constraint value
 
 #### GREEN-VARAN workflow
+
 **A Nextflow workflow for complete VCF processing**
 Given a VCF, ideally annotated for gene consequences with snpEff or bcftools, the workflow can be used to automate processing:
+
 - annotate with functional regions (TFBS, DNase, UCNE)
 - annotate with the 3 best non-coding variant prediction scores (ncER, FATHMM-MKL, ReMM)
 - annotate population AF from gnomAD genomes
 - perform regulatory variant prioritization using GREEN-VARAN
 
-See the [workflow readme](workflow/README.md) for more details or look at the full documentation. 
+See the [workflow readme](workflow/README.md) for more details or look at the full documentation.
 
 [Detailed documentation](https://green-varan.readthedocs.io/en/latest) on GREEN-DB and GREEN-VARAN tool and workflow is provided in ReadTheDocs
 
 ## Installation
+
 GREEN-VARAN tools are written in Nim. GREEN-VARAN relies on [hts-nim](https://github.com/brentp/hts-nim) by Brent Pedersen for fast VCF processing. The GREEN-DB BED files are needed for annotation (see Download the supporting files)
 
 ### Get the tool binaries from the repository
@@ -53,47 +60,48 @@ The easiest way to run GREEN-VARAN is to download the pre-compiled binaries from
 
 ### Compile the tool
 
-Alternatively, you can clone the repository 
-``git clone https://github.com/edg1983/GREEN-VARAN.git``
+Alternatively, you can clone the repository
+`git clone https://github.com/edg1983/GREEN-VARAN.git`
 
-And then compile the greenvaran using [Nim compiler](https://nim-lang.org/). 
+And then compile the greenvaran using [Nim compiler](https://nim-lang.org/).
 GREEN-VARAN requires
+
 - nim >= 0.10
 - hts-nim >= 0.3.4
-- argparse 0.10.1 
+- argparse 0.10.1
 
-If you have Singularity installed, you can use the script `nim_compile.sh` to create a static binary with no dependencies 
+If you have Singularity installed, you can use the script `nim_compile.sh` to create a static binary with no dependencies
 This uses musl-hts-nim as described in hts-nim repository (see https://github.com/brentp/hts-nim#static-binary-with-singularity)
 
 The accessory greendb_query tool can be compiled using `nim compile greendb_query.nim`
 
 ## Usage
 
-GREEN-VARAN performs annotation of small variants or structural variants VCF adding information on potential regulatory variants from GREEN-DB. Especially, it can annotate possible controlled genes and a prioritization level (this latter need the presence of some additional annotations, see below) 
+GREEN-VARAN performs annotation of small variants or structural variants VCF adding information on potential regulatory variants from GREEN-DB. Especially, it can annotate possible controlled genes and a prioritization level (this latter need the presence of some additional annotations, see below)
 It provides also ability to tag variants linked to genes of interest and update existing gene-level annotations from SnpEff or bcftools.
 
 ### Basic usage
 
-`greenvaran [run mode] [options]` 
+`greenvaran [run mode] [options]`
 
 The running mode can be one of:
 
 - smallvars
-  
+
   In this mode the tool will perform annotation for a small variants VCF.
   It will annotate variants with information on the possible regulatory role based on GREENDB and eventually provide prioritization levels
 
 - sv
-  
+
   In this mode the tool will perform annotation for a structural variants VCF.
-  Capability in this case is limited to annotation of overlapping GREENDB regions and controlled genes. No prioritization is provided 
+  Capability in this case is limited to annotation of overlapping GREENDB regions and controlled genes. No prioritization is provided
 
 - querytab
-  
+
   This mode is a convenient way to automatically prepare input table to be used with the query tool to extract detailed information from GREENDB database.
 
 - version
-  
+
   Print the tool version
 
 **NB.** To perform prioritization of small variants some additional annotation fields are expected in the input VCF, see the prioritization section below. By default, when these information are not present the prioritization level will be set to zero for all annotated variants.
@@ -103,37 +111,39 @@ We also provide pre-processed datasets (see [resources](resources/README.md)) an
 
 #### smallvars and sv shared options
 
-| option | description |
-|--------|-------------|
-|`-i, --invcf INVCF` | path to indexed input vcf.gz / bcf |
-| -o, --outvcf OUTVCF | output vcf / vcf.gz file |
-| -d, --db DB | GREEN-DB bed.gz file for your build (see download section) |
-| -s, --dbschema DBSCHEMA | json file containing greendb column mapping <br> A default configuration for GREENDB v2.5 is available in config folder |
-| -u, --noupdate | do not update ANN / BCSQ field in the input VCF |
-| -f, --filter | filter instead of annotate. Only variants with greendb overlap will be written. <br> If --genes is active, the output will contain only variants connected to the input genes of interest |
-| -m, --impact IMPACT | Which impact to assign when updating snpEff field <br> Possible values: [HIGH, MODERATE, LOWm MODIFIER] (default: MODIFIER) |
-| --chrom CHROM | Annotate only for a specific chromosome <br> Useful to parallelize across chromosomes |
-| --nochr | Use this when input VCF does not have chr prefix in chromosome names |
-| -g, --genes GENES | Gene symbols for genes of interest, variants connected to those will be flagged with greendb_VOI tag <br> This can be a comma-separated list or a text file listing genes one per line |
-| --connection CONNECTION | Region-gene connections accepted for annotation <br> Possible values: [all, closest, annotated] (default: all) |
-| --log LOG | Log file. Default is greenvaran_[now].log |
+| option                  | description                                                                                                                                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-i, --invcf INVCF`     | path to indexed input vcf.gz / bcf                                                                                                                                                        |
+| -o, --outvcf OUTVCF     | output vcf / vcf.gz file                                                                                                                                                                  |
+| -d, --db DB             | GREEN-DB bed.gz file for your build (see download section)                                                                                                                                |
+| -s, --dbschema DBSCHEMA | json file containing greendb column mapping <br> A default configuration for GREENDB v2.5 is available in config folder                                                                   |
+| -u, --noupdate          | do not update ANN / BCSQ field in the input VCF                                                                                                                                           |
+| -f, --filter            | filter instead of annotate. Only variants with greendb overlap will be written. <br> If --genes is active, the output will contain only variants connected to the input genes of interest |
+| -m, --impact IMPACT     | Which impact to assign when updating snpEff field <br> Possible values: [HIGH, MODERATE, LOWm MODIFIER] (default: MODIFIER)                                                               |
+| --chrom CHROM           | Annotate only for a specific chromosome <br> Useful to parallelize across chromosomes                                                                                                     |
+| --nochr                 | Use this when input VCF does not have chr prefix in chromosome names                                                                                                                      |
+| -g, --genes GENES       | Gene symbols for genes of interest, variants connected to those will be flagged with greendb_VOI tag <br> This can be a comma-separated list or a text file listing genes one per line    |
+| --connection CONNECTION | Region-gene connections accepted for annotation <br> Possible values: [all, closest, annotated] (default: all)                                                                            |
+| --log LOG               | Log file. Default is greenvaran\_[now].log                                                                                                                                                |
 
 #### sv specific options
 
-| option | description |
-|--------|-------------|
-| -p, --padding PADDING | Value to add on each side of BND/INS, this override the CIPOS when set |
-| --cipos CIPOS | INFO field listing the confidence interval around breakpoints (default: CIPOS) <br> It is expected to have 2 comma-separated values |
-| -t, --minoverlap MINOVERLAP | Min fraction of GREENDB region to be overlapped by a SV (default: 0.000001) |
-| -b, --minbp MINBP | Min number of bases of GREENDB region to be overlapped by a SV (default: 1) |
+| option                      | description                                                                                                                       |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| -p, --padding PADDING       | Value to add on each side of BND/INS, this override the CIPOS when set                                                            |
+| --cipos CIPOS               | INFO field listing the confidence interval around POS (default: CIPOS) <br> It is expected to have 2 comma-separated values       |
+| --ciend CIEND               | INFO field listing the confidence interval around end of SV (default: CIEND) <br> It is expected to have 2 comma-separated values |
+| --maxlen MAXLEN             | Max size of SV to be annotated (default: 2000000)                                                                                 |
+| -t, --minoverlap MINOVERLAP | Min fraction of GREENDB region to be overlapped by a SV (default: 0.000001)                                                       |
+| -b, --minbp MINBP           | Min number of bases of GREENDB region to be overlapped by a SV (default: 1)                                                       |
 
 #### smallvars specific options
 
-| option | description |
-|--------|-------------|
-| -c, --config CONFIG | json config file for prioritization <br> A default configuration for the four level described in the paper is provided in config folder |
-| --prioritization_strategy | set the strategy used to compute prioritization levels. Possible values are: levels (default) or pileup |
-| -p, --permissive | Perform prioritization even if one of the INFO fields required by prioritization config is missing <br> By default, when one of the expected fields is not defined in the header, the prioritization is disabled and all variants will get level zero |
+| option                    | description                                                                                                                                                                                                                                           |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -c, --config CONFIG       | json config file for prioritization <br> A default configuration for the four level described in the paper is provided in config folder                                                                                                               |
+| --prioritization_strategy | set the strategy used to compute prioritization levels. Possible values are: levels (default) or pileup                                                                                                                                               |
+| -p, --permissive          | Perform prioritization even if one of the INFO fields required by prioritization config is missing <br> By default, when one of the expected fields is not defined in the header, the prioritization is disabled and all variants will get level zero |
 
 ## Annotations added by GREEN-VARAN
 
@@ -141,16 +151,16 @@ We also provide pre-processed datasets (see [resources](resources/README.md)) an
 
 Fields in the following table are added to INFO fields by GREEN-VARAN. greendb_level will be added only for small variants
 
-| tag | data type | description |
-|-----|-----------|-------------|
-| greendb_id | String | Comma-separated list of GREEN-DB IDs identifying the regions that overlap this variant |
-| greendb_stdtype | String | Comma-separated list of standard region types as annotated in GREEN-DB for regions overlapping the variant |
-| greendb_dbsource | String | Comma-separated list of data sources as annotated in GREEN-DB for regions overlapping the variant |
-| greendb_level | Integer | Variant prioritization level computed by GREEN-VARAN. See Prioritization section below |
-| greendb_more_support | Integer | Sum up of the additional pieces of evidence that support this variant as configured in the prioritization JSON |
-| greendb_constraint | Float | The maximum constraint value across GREEN-DB regions overlapping the variant |
-| greendb_genes | String | Possibly controlled genes for regulatory regions overlapping this variant |
-| greendb_VOI | Flag | When ``--genes`` option is active this flag is set when any of the input genes is among the possibly controlled genes for overlapping regulatory regions. |
+| tag                  | data type | description                                                                                                                                             |
+| -------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| greendb_id           | String    | Comma-separated list of GREEN-DB IDs identifying the regions that overlap this variant                                                                  |
+| greendb_stdtype      | String    | Comma-separated list of standard region types as annotated in GREEN-DB for regions overlapping the variant                                              |
+| greendb_dbsource     | String    | Comma-separated list of data sources as annotated in GREEN-DB for regions overlapping the variant                                                       |
+| greendb_level        | Integer   | Variant prioritization level computed by GREEN-VARAN. See Prioritization section below                                                                  |
+| greendb_more_support | Integer   | Sum up of the additional pieces of evidence that support this variant as configured in the prioritization JSON                                          |
+| greendb_constraint   | Float     | The maximum constraint value across GREEN-DB regions overlapping the variant                                                                            |
+| greendb_genes        | String    | Possibly controlled genes for regulatory regions overlapping this variant                                                                               |
+| greendb_VOI          | Flag      | When `--genes` option is active this flag is set when any of the input genes is among the possibly controlled genes for overlapping regulatory regions. |
 
 ### Updated gene consequences
 
@@ -175,9 +185,9 @@ GREEN-VARAN will consider GREEN-DB annotations, additional functional regions an
 
 This fields is an integer from 0 to N which summarize evidences supporting a regulatory impact for the variant. Higher values are associated to a higher support of regulatory impact.
 
-You need 3 set of information in your input VCF to run prioritization mode when using the default config provided. 
+You need 3 set of information in your input VCF to run prioritization mode when using the default config provided.
 
-1. **gnomAD_AF, gnomAD_AF_nfe**: float values describing global and NFE population AF from gnomAD 
+1. **gnomAD_AF, gnomAD_AF_nfe**: float values describing global and NFE population AF from gnomAD
 2. **ncER, FATHMM-MKL and ReMM**: float values providing scores predictions
 3. **TFBS, DNase and UCNE**: flags describing overlap with additional functional regions
 
@@ -190,7 +200,7 @@ See documentation for more details [documentation](https://green-varan.readthedo
 
 ## Run using singularity
 
-The tool binaries should work on most linux based system. In case you have any issue, we also provide GREEN-VARAN as Docker image that you can use with Singularity or Docker. 
+The tool binaries should work on most linux based system. In case you have any issue, we also provide GREEN-VARAN as Docker image that you can use with Singularity or Docker.
 A Dockerfile recipe is included in the repository or you can pull the image from DockerHub:
 
 `singularity pull docker://htgenomeanalysisunit/greenvaran:1.3`
@@ -209,7 +219,7 @@ singularity exec \
 
 ### Bind specific folders for resources or data
 
-The tool needs access to input VCF file, the GREEN-DB bed file and the config files so remember to bind the corresponding locations in the container 
+The tool needs access to input VCF file, the GREEN-DB bed file and the config files so remember to bind the corresponding locations in the container
 
 See the following example where we use the current working directory for input/output, while other files are located
 in the default config / resources folder within greenvaran folder (greenvaran_path). In the example we use GRCh38 genome build
@@ -260,7 +270,7 @@ When you use GREEN-DB or GREEN-VARAN tools please cite:
 
 When you use GREEN-VARAN workflow for small variants annotation please also cite:
 
-[Vcfanno: fast, flexible annotation of genetic variants](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0973-5) 
+[Vcfanno: fast, flexible annotation of genetic variants](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0973-5)
 Brent S. Pedersen, Ryan M. Layer & Aaron R. Quinlan. Genome Biology volume 17, Article number: 118 (2016)
 
 Additionally, when you use any prediction score for annotation, please cite the corresponding publication.

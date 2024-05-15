@@ -1,15 +1,15 @@
 GREEN-VARAN tool usage
 ======================
 
-GREEN-VARAN performs annotation of small variants or structural variants VCF adding information on potential regulatory variants from GREEN-DB. 
-Especially it can annotate possible controlled genes and a prioritization level (this latter need the presence of some additional annotations, see below) 
+GREEN-VARAN performs annotation of small variants or structural variants VCF adding information on potential regulatory variants from GREEN-DB.
+Especially it can annotate possible controlled genes and a prioritization level (this latter need the presence of some additional annotations, see below)
 It provides also abiliy to tag variants linked to genes of interest and update existing gene-level annotations from SnpEff or bcftools.
 
 Basic usage
 ~~~~~~~~~~~
 .. code-block:: bash
 
-  greenvaran [run mode] [options] 
+  greenvaran [run mode] [options]
 
 The running mode can be one of:
 
@@ -18,7 +18,7 @@ The running mode can be one of:
   It will annotate variants with information on the possible regulatory role based on GREENDB and eventually provide prioritization levels
 - sv
   In this mode the tool will perform annotation for a structural variants VCF.
-  Capability in this case is limited to annotation of overlapping GREENDB regions and controlled genes. No prioritization is provided 
+  Capability in this case is limited to annotation of overlapping GREENDB regions and controlled genes. No prioritization is provided
 - querytab
   This mode is a convenient way to automatically prepare input table to be used with the query tool to exctract detailed information from GREENDB database.
 - version
@@ -42,7 +42,7 @@ smallvars and sv shared options
 -s, --dbschema DBSCHEMA
     | json file containig greendb column mapping
     | A default configuration for GREENDB v2.5 is available in config folder
--u, --noupdate             
+-u, --noupdate
     | do not update ANN / BCSQ field in the input VCF
 -f, --filter
     | filter instead of annotate. Only variants with greendb overlap will be written.
@@ -67,8 +67,13 @@ sv specific options
 -p, --padding PADDING
     | Value to add on each side of BND/INS, this override the CIPOS when set
 --cipos CIPOS
-    | INFO field listing the confidence interval around breakpoints
+    | INFO field listing the confidence interval around POS
     | It is expected to have 2 comma-separated values (default: CIPOS)
+--ciend CIEND
+    | INFO field listing the confidence interval around end of the SV
+    | It is expected to have 2 comma-separated values (default: CIEND)
+--maxlen MAXLEN
+    | Max length of the SV to be annotated (default: 2000000)
 -t, --minoverlap MINOVERLAP
     | Min fraction of GREENDB region to be overlapped by a SV (default: 0.000001)
 -b, --minbp MINBP
@@ -130,14 +135,14 @@ This level is annotated under greenvara_level tag in the INFO field.
 This fields is an integer from 0 to N wich summarize evidences supporting a regulatory impact for the variant.
 Higher values are associated to a higher probability of regulatory impact.
 
-**NB.** You need teh following INFO fields in your input VCF to run priotization mode as described in the GREEN-DB manuscript 
-using the default config provided. 
+**NB.** You need teh following INFO fields in your input VCF to run priotization mode as described in the GREEN-DB manuscript
+using the default config provided.
 
-1. gnomAD_AF, gnomAD_AF_nfe float values describing global and NFE population AF from gnomAD 
+1. gnomAD_AF, gnomAD_AF_nfe float values describing global and NFE population AF from gnomAD
 2. ncER, FATHMM-MKL and ReMM float values providing scores predictions
-3. TFBS, DNase and UCNE flags describing overlap with additional functional regions 
+3. TFBS, DNase and UCNE flags describing overlap with additional functional regions
 
-This configuration resembles the four levels prioritization described in the GREEN-DB manuscript. 
+This configuration resembles the four levels prioritization described in the GREEN-DB manuscript.
 Note that the exact names of these annotations and the score thresholds are defined in the json file passed to --config options.
 
 The following table summarizes the four prioritization levels defined in the manuscript and this is the default behaviour
@@ -150,7 +155,7 @@ you will obtain using the default config file and the default option `--priritiz
 +-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | 2     | Level 1 criteria and overlap at least one functional element among transcription factors binding sites (TFBS), DNase peaks, ultra conserved elements (UCNE) |
 +-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 3     | Level 2 criteria and prediction score value above the suggested FDR50 threshold for at least one among ncER, FATHMM MKL, ReMM                               |  
+| 3     | Level 2 criteria and prediction score value above the suggested FDR50 threshold for at least one among ncER, FATHMM MKL, ReMM                               |
 +-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | 4     | Level 3 critera and region constraint value greater or equal 0.7                                                                                            |
 +-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -162,7 +167,7 @@ This means that the criteria described above are tested independently and the le
 Personalize the prioritization schema
 #####################################
 
-The prioritization schema is defined in a config json file. The default is provided in the config folder. 
+The prioritization schema is defined in a config json file. The default is provided in the config folder.
 An example of expected file structure is reported below
 
 .. code-block:: bash
@@ -187,7 +192,7 @@ Sections definitions:
 2. maxaf: if the max value across af fields is below this, the variant get +1 point
 3. regions: INFO fields for overlapping regions. If any of these is set, the variant get +1 point
 4. scores: series of key, value pairs. If any of key value is above the configured value, the variant get +1 point
-5. constraint: if the max constraint value across overlapping GREEN-DB regions is above this value, the variant get +1 point  
+5. constraint: if the max constraint value across overlapping GREEN-DB regions is above this value, the variant get +1 point
 6. more_regions: any additional INFO fields representing overlap with custom regions. The variant get +1 point for each positive overlap
 7. more_values: series of key, value pairs. The variant get +1 point fro each key value above the configured value
 
@@ -201,17 +206,17 @@ The annotation of structural variants is based on overlap with the regulatory re
 This is treated differently according to the SV type:
 
 - For **DEL, DUP, INV** an interval is constructed based on position field and the END info field from INFO.
-  When END is missing, the tool will try to use SVLEN instead. If none is not found the variant is not annotated 
+  When END is missing, the tool will try to use SVLEN instead. If none is not found the variant is not annotated
   The user can then set a minimum level of overlap as either overlap fraction (``--minoverlap``) or N bp overlap (``--minbp``).
   A GREEN-DB region is added to annotation only if its overlapping porting is larger or equal to both threshold
 - For **INS and BND**, an interval is constructed using the position and the coordinates in the CIPOS field (an alternative field can be set using ``--cipos``).
   This is done since INS and BND are often represented as single positions in structural variants VCF.
-  Alternatively, the user can provide a padding values using ``--padding`` and this value will be added aroud position 
+  Alternatively, the user can provide a padding values using ``--padding`` and this value will be added aroud position
   For these kind of variants any overlapping GREEN-DB region will be reported, diregarding the overlap threasholds
 
 Singularity
 ~~~~~~~~~~~
-The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as Singularity image (tested on singularity >= 3.2). 
+The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as Singularity image (tested on singularity >= 3.2).
 A Singularity recipe is included in the repository or you can pull the image from Singularity Library using
 
 ``singularity pull library://edg1983/greenvaran/greenvaran:latest``
@@ -231,7 +236,7 @@ The general usage is:
 Bind specific folders for resources or data
 ###########################################
 
-The tool needs access to input VCF file, required GREEN-DB bed file and config files so remember to bind the corresponding locations in the container 
+The tool needs access to input VCF file, required GREEN-DB bed file and config files so remember to bind the corresponding locations in the container
 
 See the following example where we use the current working directory for input/output, while other files are located
 in the default config / resources folder within greenvaran folder. In the example we use GRCh38 genome build

@@ -8,7 +8,7 @@ type
         stop*: int
         isinsbnd: bool
 
-proc len(x: Interval): int {.inline.} =
+proc len*(x: Interval): int {.inline.} =
     result = x.stop - x.start
 
 proc makeinterval*(s: string, i: var Interval, sep: string = "\t"): bool =
@@ -18,20 +18,21 @@ proc makeinterval*(s: string, i: var Interval, sep: string = "\t"): bool =
         i.chrom = fields[0]
         i.start = parseInt(fields[1])
         i.stop = parseInt(fields[2])
-        if i.start > i.stop: 
+        if i.start > i.stop:
             return false
         return true
     except:
         return false
 
-proc makeinterval*(rec: Variant, cipostag: string, pad: string, i: var Interval): bool =
+proc makeinterval*(rec: Variant, cipostag: string, ciendtag: string, pad: string, i: var Interval): bool =
     let default: int32 = 0
-    var 
+    var
         svend: seq[int32]
         cipos: seq[int32]
+        ciend: seq[int32]
         svendint: int
         svtype: string
-    
+
     i.chrom = rec.CHROM
     i.isinsbnd = false
 
@@ -44,14 +45,19 @@ proc makeinterval*(rec: Variant, cipostag: string, pad: string, i: var Interval)
             svendint= parseInt($rec.POS) + parseInt($svend[0])
         else:
             return false
-    
-    # Add the interval in CIPOS to the start and end of the variant
+
+    # Add the interval in CIPOS to the start of the variant
     if rec.info.get(cipostag, cipos) != Status.OK:
         cipos = @[default,default]
 
     if cipos[0] < 0: cipos[0] = -cipos[0]
     i.start = parseInt($rec.POS) - cipos[0]
-    i.stop = svendint + cipos[1]
+
+    # Add the interval in CIEND to the end of the variant
+    if rec.info.get(ciendtag, ciend) != Status.OK:
+        ciend = @[default,default]
+
+    i.stop = svendint + ciend[1]
 
     #Check if variant need padding (INS or BND)
     if svtype in @["BND","INS"]:
@@ -60,10 +66,10 @@ proc makeinterval*(rec: Variant, cipostag: string, pad: string, i: var Interval)
             let padint = parseInt(pad)
             i.start = parseInt($rec.POS) - padint
             i.stop = svendint + padint
-    
+
     if i.start > i.stop:
         return false
-    
+
     return true
 
 proc makeinterval*(s: seq[string], i: var Interval, idx: seq[int] = @[1,2,3]): bool =
@@ -71,7 +77,7 @@ proc makeinterval*(s: seq[string], i: var Interval, idx: seq[int] = @[1,2,3]): b
         i.chrom = s[idx[0]]
         i.start = parseInt(s[idx[1]])
         i.stop = parseInt(s[idx[2]])
-        if i.start > i.stop: 
+        if i.start > i.stop:
             return false
         return true
     except:
@@ -79,7 +85,7 @@ proc makeinterval*(s: seq[string], i: var Interval, idx: seq[int] = @[1,2,3]): b
 
 proc overlap*(x: Interval, y: Interval, min_overlap: float, min_n: int): bool =
 #Given an interval x return the fraction and n bases in x overlapped by y
-    var 
+    var
         overlap_pct: float
         overlap_n: int
     if x.chrom != y.chrom:
@@ -90,7 +96,7 @@ proc overlap*(x: Interval, y: Interval, min_overlap: float, min_n: int): bool =
             overlap_n = x.stop - y.start
         else:
             overlap_n = y.stop - x.start
-        
+
         overlap_pct = overlap_n / x.len
         if overlap_n > 0 and y.isinsbnd:
             return true

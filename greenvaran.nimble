@@ -9,6 +9,6 @@ requires "nim >= 0.10.0", "hts >= 0.3.4"
 requires "argparse 0.10.1"
 
 srcDir = "src"
-bin = @["greenvaran"]
+bin = @["bin/greenvaran"]
 
 skipDirs = @["test"]
