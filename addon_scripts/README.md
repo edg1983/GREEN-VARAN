@@ -16,6 +16,7 @@ SV_annotation.py [-h] -i INPUTVCF
 ```
 
 ### Mandatory arguments
+
 | Argument           | Choices      | Description |
 |:---------          |:-----------: |:------------|
 |-i, --inputvcf      |              | input vcf[.gz] file |

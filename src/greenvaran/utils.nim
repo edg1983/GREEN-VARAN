@@ -14,8 +14,11 @@ const
     BCSQ_schema = "$1|$2||" 
     #"csq|gene_symbol|transcript_id|biotype"
     ANN_schema = "$1|$2|$3|$4||||||||||||"
+    #Allele|Consequence|IMPACT|SYMBOL|Gene
+    CSQ_schema = "$1|$2|$3|$4|"
     DESCRIPTION* = {"ANN": "Functional annotations: 'Allele | Annotation | Annotation_Impact | Gene_Name | Gene_ID | Feature_Type | Feature_ID | Transcript_BioType | Rank | HGVS.c | HGVS.p | cDNA.pos / cDNA.length | CDS.pos / CDS.length | AA.pos / AA.length | Distance | ERRORS / WARNINGS / INFO' ",
         "BCSQ": "Local consequence annotation from BCFtools/csq, Format: Consequence|gene|transcript|biotype|strand|amino_acid_change|dna_change",
+        "CSQ": "Consequence annotations from Ensembl VEP. Format: Allele|Consequence|IMPACT|SYMBOL|Gene|Feature_type|Feature|BIOTYPE|EXON|INTRON|HGVSc|HGVSp|cDNA_position|CDS_position|Protein_position",
         "id": "GREENDB region IDs",
         "stdtype": "Regulatory region type as reported in GREENDB",
         "dbsource": "Sources of this GREENDB annotation",
@@ -78,6 +81,10 @@ proc makeAnnField*(alleles: seq[string], genes: seq[(string,string)], impact: st
             of "BCSQ":
                 for x in genes:
                     s.add(BCSQ_schema % [x[1], x[0]])
+            of "CSQ":
+                for a in alleles:
+                    for x in genes:
+                        s.add(CSQ_schema % [a, x[1], impact, x[0]])
         let reduced = deduplicate(s)
         result = reduced.join(",")
     else:

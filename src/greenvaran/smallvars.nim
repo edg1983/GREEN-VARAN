@@ -96,11 +96,12 @@ proc main* (dropfirst:bool=false) =
       
     if not prioritize: warn("Prioritize is not active and all variants will get level zero")
 
-    #See if ANN or BCSQ are defined, otherwise add ANN
+    #See if ANN, BCSQ or CSQ are defined, otherwise add ANN
     var hasgeneanno = false
+    
     try:
-        discard vcf.header.get("ANN", BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
-        annfield = "ANN"
+        discard vcf.header.get("CSQ", BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
+        annfield = "CSQ"
         hasgeneanno = true
     except KeyError:
         discard
@@ -111,9 +112,16 @@ proc main* (dropfirst:bool=false) =
         hasgeneanno = true
     except KeyError:
         discard
+    
+    try:
+        discard vcf.header.get("ANN", BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
+        annfield = "ANN"
+        hasgeneanno = true
+    except KeyError:
+        discard
 
     if updateann and not hasgeneanno:
-        warn("No ANN or BCSQ field detected in header so ANN will be created")
+        warn("No ANN, BCSQ or CSQ field detected in header so ANN will be created")
         annfield = "ANN"
         doAssert vcf.header.add_info(ID=annfield,Number="1",Type="String",Description=DESCRIPTION[annfield]) == Status.OK 
 
