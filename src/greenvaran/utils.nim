@@ -5,17 +5,18 @@ import times
 import logging
 import os
 import tables
+import hts
 from sequtils import deduplicate, apply
 
 const
     STDCHROMS = @["chr1","chr2","chr3","chr4","chr5","chr6","chr7","chr8","chr9", 
         "chr10","chr11","chr12","chr13","chr14","chr15","chr16","chr17","chr18","chr19",
         "chr20","chr21","chr22","chrX","chrY","chrM"]
-    BCSQ_schema = "$1|$2||" 
+    #BCSQ_schema = "$1|$2||" 
     #"csq|gene_symbol|transcript_id|biotype"
-    ANN_schema = "$1|$2|$3|$4||||||||||||"
+    #ANN_schema = "$1|$2|$3|$4||||||||||||"
     #Allele|Consequence|IMPACT|SYMBOL|Gene
-    CSQ_schema = "$1|$2|$3|$4|"
+    #CSQ_schema = "$1|$2|$3|$4|"
     DESCRIPTION* = {"ANN": "Functional annotations: 'Allele | Annotation | Annotation_Impact | Gene_Name | Gene_ID | Feature_Type | Feature_ID | Transcript_BioType | Rank | HGVS.c | HGVS.p | cDNA.pos / cDNA.length | CDS.pos / CDS.length | AA.pos / AA.length | Distance | ERRORS / WARNINGS / INFO' ",
         "BCSQ": "Local consequence annotation from BCFtools/csq, Format: Consequence|gene|transcript|biotype|strand|amino_acid_change|dna_change",
         "CSQ": "Consequence annotations from Ensembl VEP. Format: Allele|Consequence|IMPACT|SYMBOL|Gene|Feature_type|Feature|BIOTYPE|EXON|INTRON|HGVSc|HGVSp|cDNA_position|CDS_position|Protein_position",
@@ -26,6 +27,16 @@ const
         "constraint": "Maximum constraint value for GREENDB regions overlapping this variant",
         "level": "GREENDB prioritization level. 0:overlap, 1:0+rare, 2:1+TFBS-DNase-UCNE, 3:2+high score,4:3+high constraint"
         }.toTable
+
+#Store indexes for gene annotations in the CSQ field seq
+type CsqSchema* = object
+    allele*: int
+    gene_symbol*: int
+    consequence*: int
+    impact*: int
+    csq_len*: int
+    csq_field_name*: string
+    create_ann*: bool
 
 type
     Config* = object
@@ -70,22 +81,96 @@ proc getItems*(s: string, class: string, nochr: bool): seq[string] =
         else:
             result = STDCHROMS 
 
-proc makeAnnField*(alleles: seq[string], genes: seq[(string,string)], impact: string, format: string): string {.raises: [ValueError].} =
+proc makeAnnField*(alleles: seq[string], genes: seq[(string,string)], impact: string, csq_schema: CsqSchema): string =
     var s: seq[string]
-    if genes.len > 0:
-        case format:
-            of "ANN":
-                for a in alleles:
-                    for x in genes:
-                        s.add(ANN_schema % [a, x[1], impact, x[0]])
-            of "BCSQ":
-                for x in genes:
-                    s.add(BCSQ_schema % [x[1], x[0]])
-            of "CSQ":
-                for a in alleles:
-                    for x in genes:
-                        s.add(CSQ_schema % [a, x[1], impact, x[0]])
-        let reduced = deduplicate(s)
-        result = reduced.join(",")
-    else:
-        raise newException(ValueError, "value is empty")
+    var csq_seq = newSeq[string](csq_schema.csq_len)
+    for gene_consequence in genes:
+        csq_seq[csq_schema.consequence] = gene_consequence[0]
+        csq_seq[csq_schema.gene_symbol] = gene_consequence[1]
+        if csq_schema.impact != -1: csq_seq[csq_schema.gene_symbol] = impact
+        # If there are multiple alleles, we want to generate one consequence for each allele
+        if csq_schema.allele != -1: 
+            for a in alleles:
+                csq_seq[csq_schema.allele] = a
+                s.add(csq_seq.join("|"))
+        else:
+            s.add(csq_seq.join("|"))
+    let reduced = deduplicate(s)
+    result = reduced.join(",")
+
+#Read header and set CSQ indexes for relevant fields
+proc parse_csq_schema*(ivcf:VCF, field:string): CsqSchema {.discardable.} =
+  result.allele = -1
+  result.gene_symbol = -1
+  result.csq_len = 0
+  result.csq_field_name = ""
+  result.consequence = -1
+  result.impact = -1
+  result.create_ann = false
+
+  # try to get the requested field, but iterate through other known csq fields
+  # as a backup. sometimes, snpEff, for example will not add it's ANN or EFF
+  # field to the header given an empty VCF.
+  var desc: string
+  let possible_fields = @[field, "CSQ", "BCSQ", "ANN"]
+  for tryfield in possible_fields:
+    try:
+      desc = ivcf.header.get(tryfield, BCF_HEADER_TYPE.BCF_HL_INFO)["Description"]
+      result.csq_field_name = tryfield
+      break
+    except:
+      if tryfield == field:
+        warn(fmt"Didn't find {field} in header in {ivcf.fname} trying other fields")
+
+  if desc == "":
+    warn(fmt"None of the possible consequence fields {possible_fields} found. Reverting to ANN.")
+    result.csq_field_name = "ANN"
+    result.create_ann = true
+    desc = DESCRIPTION["ANN"]
+  # snpEff ##INFO=<ID=ANN,Number=.,Type=String,Description="Functional annotations: 'Allele | Annotation | Annotation_Impact | Gene_Name | Gene_ID | Feature_Type | Feature_ID | Transcript_BioType | Rank | HGVS.c | HGVS.p | cDNA.pos / cDNA.length | CDS.pos / CDS.length | AA.pos / AA.length | Distance | ERRORS / WARNINGS / INFO' ">
+
+  info(fmt"Using {result.csq_field_name} as consequence field")
+
+  var spl = (if "Format: '" in desc: "Format: '" else: "Format: ")
+  if spl notin desc:
+    spl = ": '"
+  var adesc:seq[string]
+  try:
+    adesc = desc.split(spl)[1].split("'")[0].strip().strip(chars={'"', '\''}).multiReplace(("[", ""), ("]", ""), ("'", ""), ("*", "")).split("|")
+    result.csq_len = len(adesc)
+  except IndexDefect:
+    # format field description not as expected. return emptyr result and don't fill gene fields
+    fatal(fmt"Error parsing annotation structure frm {result.csq_field_name}. Check the format is properly defined in the header")
+    quit QuitFailure
+
+  for v in adesc.mitems: v = v.toUpperAscii.strip()
+ 
+  #ANN: symbol=GENE_NAME, id=GENE_ID, transcript=FEATURE_ID, csq=ANNOTATION
+  #BCSQ: symbol=GENE, id=N/A, transcript=TRANSCRIPT, csq=CONSEQUENCE
+  #CSQ: symbol=SYMBOL, id=GENE, transcript=FEATURE, csq=CONSEQUENCE
+  for check in ["ALLELE"]:
+    result.allele = adesc.find(check)
+    if result.allele != -1: break
+  for check in ["IMPACT"]:
+    result.impact = adesc.find(check)
+    if result.impact != -1: break
+  for check in ["SYMBOL", "GENE", "GENE_NAME"]:
+    result.gene_symbol = adesc.find(check)
+    if result.gene_symbol != -1: break
+  for check in ["CONSEQUENCE", "ANNOTATION"]:
+    result.consequence = adesc.find(check)
+    if result.consequence != -1: break
+
+  if result.csq_field_name in ["ANN", "CSQ"]:
+    if result.allele == -1:
+        fatal(fmt"unable to find expected Allele field in {result.csq_field_name} description")    
+        quit QuitFailure 
+    if result.impact == -1:
+        fatal(fmt"unable to find expected impact field in {result.csq_field_name} description")    
+        quit QuitFailure 
+  if result.consequence == -1:
+    fatal(fmt"unable to find expected consequence field in {result.csq_field_name} description")
+    quit QuitFailure
+  if result.gene_symbol == -1:
+    fatal(fmt"unable to find expected gene symbol field in {result.csq_field_name} description")
+    quit QuitFailure
