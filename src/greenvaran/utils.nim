@@ -12,11 +12,6 @@ const
     STDCHROMS = @["chr1","chr2","chr3","chr4","chr5","chr6","chr7","chr8","chr9", 
         "chr10","chr11","chr12","chr13","chr14","chr15","chr16","chr17","chr18","chr19",
         "chr20","chr21","chr22","chrX","chrY","chrM"]
-    #BCSQ_schema = "$1|$2||" 
-    #"csq|gene_symbol|transcript_id|biotype"
-    #ANN_schema = "$1|$2|$3|$4||||||||||||"
-    #Allele|Consequence|IMPACT|SYMBOL|Gene
-    #CSQ_schema = "$1|$2|$3|$4|"
     DESCRIPTION* = {"ANN": "Functional annotations: 'Allele | Annotation | Annotation_Impact | Gene_Name | Gene_ID | Feature_Type | Feature_ID | Transcript_BioType | Rank | HGVS.c | HGVS.p | cDNA.pos / cDNA.length | CDS.pos / CDS.length | AA.pos / AA.length | Distance | ERRORS / WARNINGS / INFO' ",
         "BCSQ": "Local consequence annotation from BCFtools/csq, Format: Consequence|gene|transcript|biotype|strand|amino_acid_change|dna_change",
         "CSQ": "Consequence annotations from Ensembl VEP. Format: Allele|Consequence|IMPACT|SYMBOL|Gene|Feature_type|Feature|BIOTYPE|EXON|INTRON|HGVSc|HGVSp|cDNA_position|CDS_position|Protein_position",
@@ -81,10 +76,9 @@ proc getItems*(s: string, class: string, nochr: bool): seq[string] =
         else:
             result = STDCHROMS 
 
-proc makeAnnField*(alleles: seq[string], genes: seq[(string,string)], impact: string, csq_schema: CsqSchema): string =
+proc makeAnnField*(csq_seq: var seq[string], alleles: seq[string], genes: seq[(string,string)], impact: string, csq_schema: CsqSchema): string =
     #genes is a seq of (gene, consequence)
     var s: seq[string]
-    var csq_seq = newSeq[string](csq_schema.csq_len)
     for gene_consequence in genes:
         csq_seq[csq_schema.consequence] = gene_consequence[1]
         csq_seq[csq_schema.gene_symbol] = gene_consequence[0]
@@ -120,17 +114,17 @@ proc parse_csq_schema*(ivcf:VCF, field:string): CsqSchema {.discardable.} =
       result.csq_field_name = tryfield
       break
     except:
-      if tryfield == field:
-        warn(fmt"Didn't find {field} in header in {ivcf.fname} trying other fields")
+      if tryfield == field and field != "":
+        warn(fmt"Didn't find requested {field} in header in {ivcf.fname} trying other fields")
 
   if desc == "":
-    warn(fmt"None of the possible consequence fields {possible_fields} found. Reverting to ANN.")
+    warn(fmt"None of the possible consequence fields {possible_fields} found. The ANN field will be added.")
     result.csq_field_name = "ANN"
     result.create_ann = true
     desc = DESCRIPTION["ANN"]
   # snpEff ##INFO=<ID=ANN,Number=.,Type=String,Description="Functional annotations: 'Allele | Annotation | Annotation_Impact | Gene_Name | Gene_ID | Feature_Type | Feature_ID | Transcript_BioType | Rank | HGVS.c | HGVS.p | cDNA.pos / cDNA.length | CDS.pos / CDS.length | AA.pos / AA.length | Distance | ERRORS / WARNINGS / INFO' ">
 
-  info(fmt"Using {result.csq_field_name} as consequence field")
+  info(fmt"Writing/updating consequences to {result.csq_field_name} field")
 
   var spl = (if "Format: '" in desc: "Format: '" else: "Format: ")
   if spl notin desc:

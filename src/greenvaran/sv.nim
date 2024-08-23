@@ -125,8 +125,11 @@ proc main* (dropfirst:bool=false) =
     #search for ANN, BCSQ or CSQ and parse schema.
     #When none is found we use ANN schema
     var csq_schema: CsqSchema
+    var csq_seq: seq[string]
     if updateann:
         csq_schema = parse_csq_schema(vcf, opts.csq_field)
+        annfield = csq_schema.csq_field_name
+        csq_seq = newSeq[string](csq_schema.csq_len)
         if csq_schema.create_ann:
             doAssert vcf.header.add_info(ID=annfield,Number="1",Type="String",Description=DESCRIPTION[annfield]) == Status.OK 
 
@@ -203,7 +206,7 @@ proc main* (dropfirst:bool=false) =
                     doAssert v.info.set("greendb_VOI", true) == Status.OK
                 if updateann:
                     try:
-                        var newannvalue = makeAnnField(v.ALT, ann, impact, csq_schema)
+                        var newannvalue = makeAnnField(csq_seq, v.ALT, ann, impact, csq_schema)
                         var annvalue: string
                         if v.info.get(annfield, annvalue) == Status.OK:
                             annvalue.add("," & newannvalue)

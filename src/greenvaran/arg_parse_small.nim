@@ -8,7 +8,7 @@ var p = newParser("smallvars"):
     option("-d", "--db", help="GREEN-DB bed.gz file")
     option("-s", "--dbschema", help="json file containig greendb column mapping")
     option("-m", "--impact", help="Which impact to assign when updating snpEff field", choices = @["HIGH","MODERATE","LOW","MODIFIER"], default=some("MODIFIER"))
-    option("-q", "--csq_field", help="Consequence field containing gene consequences", default = some("ANN"))
+    option("-q", "--csq_field", help="Consequence field containing gene consequences")
     flag("-u", "--noupdate", help="do not update consequence field")
     flag("-f", "--filter", help="Filter instead of annotate. Only vars with greendb overlap and eventually gene of interest will be written")
     flag("-p", "--permissive", help="Perform prioritization even if one of INFO fields required by prioritization config is missing")
