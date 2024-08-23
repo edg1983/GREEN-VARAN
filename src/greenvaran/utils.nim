@@ -151,7 +151,7 @@ proc parse_csq_schema*(ivcf:VCF, field:string): CsqSchema {.discardable.} =
   for check in ["ALLELE"]:
     result.allele = adesc.find(check)
     if result.allele != -1: break
-  for check in ["IMPACT"]:
+  for check in ["IMPACT", "ANNOTATION_IMPACT"]:
     result.impact = adesc.find(check)
     if result.impact != -1: break
   for check in ["SYMBOL", "GENE", "GENE_NAME"]:
