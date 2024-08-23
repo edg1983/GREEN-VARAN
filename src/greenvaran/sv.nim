@@ -121,26 +121,14 @@ proc main* (dropfirst:bool=false) =
     except KeyError:
         warn(fmt"The configured CIEND field is not in header. Zero will be used as value")
 
-    #See if ANN or BCSQ are defined, otherwise add ANN
-    var hasgeneanno = false
-    try:
-        discard vcf.header.get("ANN", BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
-        annfield = "ANN"
-        hasgeneanno = true
-    except KeyError:
-        discard
-
-    try:
-        discard vcf.header.get("BCSQ", BCF_HEADER_TYPE.BCF_HL_INFO)["Type"]
-        annfield = "BCSQ"
-        hasgeneanno = true
-    except KeyError:
-        discard
-
-    if updateann and not hasgeneanno:
-        warn("No ANN or BCSQ field detected in header so ANN will be created")
-        annfield = "ANN"
-        doAssert vcf.header.add_info(ID=annfield,Number="1",Type="String",Description=DESCRIPTION[annfield]) == Status.OK
+    #When we have to updated the consequences
+    #search for ANN, BCSQ or CSQ and parse schema.
+    #When none is found we use ANN schema
+    var csq_schema: CsqSchema
+    if updateann:
+        csq_schema = parse_csq_schema(vcf, opts.csq_field)
+        if csq_schema.create_ann:
+            doAssert vcf.header.add_info(ID=annfield,Number="1",Type="String",Description=DESCRIPTION[annfield]) == Status.OK 
 
     #Copy original header and then update with new GREENDB values
     wrt.header = vcf.header
@@ -215,13 +203,14 @@ proc main* (dropfirst:bool=false) =
                     doAssert v.info.set("greendb_VOI", true) == Status.OK
                 if updateann:
                     try:
-                        var newannvalue = makeAnnField(v.ALT, ann, impact, annfield)
+                        var newannvalue = makeAnnField(v.ALT, ann, impact, csq_schema)
                         var annvalue: string
                         if v.info.get(annfield, annvalue) == Status.OK:
                             annvalue.add("," & newannvalue)
                         else:
                             annvalue = newannvalue
-                        doAssert v.info.set(annfield, annvalue) == Status.OK
+                        if annvalue != "":
+                            doAssert v.info.set(annfield, annvalue) == Status.OK
                     except ValueError:
                         discard
             nwrittenchrom += 1
