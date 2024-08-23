@@ -82,12 +82,13 @@ proc getItems*(s: string, class: string, nochr: bool): seq[string] =
             result = STDCHROMS 
 
 proc makeAnnField*(alleles: seq[string], genes: seq[(string,string)], impact: string, csq_schema: CsqSchema): string =
+    #genes is a seq of (gene, consequence)
     var s: seq[string]
     var csq_seq = newSeq[string](csq_schema.csq_len)
     for gene_consequence in genes:
-        csq_seq[csq_schema.consequence] = gene_consequence[0]
-        csq_seq[csq_schema.gene_symbol] = gene_consequence[1]
-        if csq_schema.impact != -1: csq_seq[csq_schema.gene_symbol] = impact
+        csq_seq[csq_schema.consequence] = gene_consequence[1]
+        csq_seq[csq_schema.gene_symbol] = gene_consequence[0]
+        if csq_schema.impact != -1: csq_seq[csq_schema.impact] = impact
         # If there are multiple alleles, we want to generate one consequence for each allele
         if csq_schema.allele != -1: 
             for a in alleles:
