@@ -107,7 +107,7 @@ proc parse_csq_schema*(ivcf:VCF, field:string): CsqSchema {.discardable.} =
   # as a backup. sometimes, snpEff, for example will not add it's ANN or EFF
   # field to the header given an empty VCF.
   var desc: string
-  let possible_fields = @[field, "CSQ", "BCSQ", "ANN"]
+  let possible_fields = @[field, "ANN", "CSQ", "BCSQ"]
   for tryfield in possible_fields:
     try:
       desc = ivcf.header.get(tryfield, BCF_HEADER_TYPE.BCF_HL_INFO)["Description"]
