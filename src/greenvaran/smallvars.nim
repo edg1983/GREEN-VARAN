@@ -102,6 +102,7 @@ proc main* (dropfirst:bool=false) =
     var csq_schema: CsqSchema
     if updateann:
         csq_schema = parse_csq_schema(vcf, opts.csq_field)
+        annfield = csq_schema.csq_field_name
         if csq_schema.create_ann:
             doAssert vcf.header.add_info(ID=annfield,Number="1",Type="String",Description=DESCRIPTION[annfield]) == Status.OK 
 
