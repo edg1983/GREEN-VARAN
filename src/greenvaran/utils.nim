@@ -115,7 +115,7 @@ proc parse_csq_schema*(ivcf:VCF, field:string): CsqSchema {.discardable.} =
       break
     except:
       if tryfield == field and field != "":
-        warn(fmt"Didn't find requested {field} in header in {ivcf.fname} trying other fields")
+        warn(fmt"Didn't find requested {field} field in header in {ivcf.fname} trying other fields")
 
   if desc == "":
     warn(fmt"None of the possible consequence fields {possible_fields} found. The ANN field will be added.")
