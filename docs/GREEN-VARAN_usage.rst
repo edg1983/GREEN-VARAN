@@ -44,6 +44,8 @@ smallvars and sv shared options
     | A default configuration for GREENDB v2.5 is available in config folder
 -u, --noupdate
     | do not update ANN / BCSQ field in the input VCF
+-q, --csq_field
+    | set a specific consequence field containing gene consequences   
 -f, --filter
     | filter instead of annotate. Only variants with greendb overlap will be written.
     | If --genes is active, the output will contain only variants connected to the input genes of interest
@@ -110,9 +112,11 @@ Fields in the following table are added to INFO fields by GREEN-VARAN. greendb_l
 
 Updated gene consequences
 #########################
-By default, GREEN-VARAN update gene consequences in the SnpEff ANN field or the bcftools BCSQ if one is present in the input VCF file.
-In this way the annotation can be processed by most downstream tools evaluating segregation.
-If none is found, GREEN-VARAN will create a new ANN field. To switch off gene consequence update use the ``--noupdate`` option.
+By default, GREEN-VARAN search for the standard ANN (SnpEff), CSQ (VEP) or BCSQ (bcftools csq) annotation fields in the input VCF and update gene consequences in the detected field. If multiple compatible fields are found, only ANN is updated.
+You can configure a specific annotation field to update using `-q, --csq_field` option. Note that if the configured field is not found in the header, GREEN-VARAN will still search for the default ones.
+If none is found, GREEN-VARAN will create a new ANN field. To switch off gene consequence update use the `--noupdate` option.
+
+In this way, the annotation can be processed by most downstream tools evaluating segregation.
 
 Here the tool will add one a new consequence for each possibly controlled genes, limited by the ``--connection`` option.
 The new consequence will follow standard format according to SnpEff or bcftools and have MODIFIER impact by default.
