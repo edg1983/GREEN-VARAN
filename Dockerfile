@@ -1,10 +1,10 @@
 FROM ubuntu:22.04
 LABEL author="Edoardo Giacopuzzi"
 LABEL contact="edoardo.giacopuzzi@fht.org"
-LABEL version="1.3.2"
+LABEL version="1.3.3"
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG VERSION="1.3.2"
+ARG VERSION="1.3.3"
 
 # Install software
 RUN apt-get update && \
