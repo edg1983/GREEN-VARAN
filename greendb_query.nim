@@ -1,11 +1,12 @@
 import db_sqlite
+import times
+from math import floor
 import tables
 import logging
 import argparse
 import strformat
 from os import createDir
 from times import cpuTime
-import ./src/greenvaran/utils
 
 const
     GreendbVersions = @["v2.0", "v2.5"] 
@@ -18,12 +19,48 @@ const
         "TFBS" : @["regionID","TFBS_chrom","TFBS_start","TFBS_stop","TF_name","TFBS_cell_or_tissue"],
         "UCNE" : @["regionID","UCNE_chrom","UCNE_start","UCNE_stop","UCNE_ID"]
     }.toTable
+    STDCHROMS = @["chr1","chr2","chr3","chr4","chr5","chr6","chr7","chr8","chr9", 
+        "chr10","chr11","chr12","chr13","chr14","chr15","chr16","chr17","chr18","chr19",
+        "chr20","chr21","chr22","chrX","chrY","chrM"]
 
 type
     Interval = object
         chrom: cstring
         start: int
         stop: int
+
+proc timer(t0: var float): string {.discardable.} =
+    let elapsed_time = cpuTime() - t0
+    let m = floor(elapsed_time / 60)
+    let s = elapsed_time - (m * 60)
+    t0 = cpuTime()
+    return fmt"{m} min {s:1.2f} sec"
+
+proc initLogger(cl: var ConsoleLogger, fl: var FileLogger, log: string, outvcf: string) =
+    var logfilename: string
+    if log.len == 0:
+        logfilename = parentDir(outvcf) & "/greenvaran_" & format(now().toTime, "yyyyMMdd'_'HHmmss", utc()) & ".log"
+    else:
+        logfilename = log
+    cl = newConsoleLogger(fmtStr="[$datetime] - $levelname: ", levelThreshold=lvlInfo)
+    fl = newFileLogger(logfilename, fmtStr="[$datetime] - $levelname: ", levelThreshold=lvlDebug)
+
+proc getItems(s: string, class: string, nochr: bool): seq[string] =
+    if s.len > 0:
+        try:
+            let f = open(s)
+            var line: string
+            defer: close(f)
+            while f.read_line(line):
+                result.add(line)
+        except IOError:
+            result = split(s, ",")
+        
+    if result.len == 0 and class == "chromosome":
+        if nochr:
+            for c in STDCHROMS: result.add(c.replace("chr", ""))
+        else:
+            result = STDCHROMS 
 
 proc len(x: Interval): int {.inline.} =
     result = x.stop - x.start
@@ -215,16 +252,21 @@ proc main* (dropfirst:bool=false) =
         option("-t", "--tab", help="input tab-separated file [col1:varid, col2:regiond_IDs]")
         option("-r", "--regids", help="list of region IDs. either comma-separated list of txt file")
         option("-v", "--variants", help="list of variants (chr_pos_ref_alt). either comma-separated list of txt file")
-        option("-g", "--genome", help="genome build for query", choices = @["GRCh37","GRCh38"], default="GRCh38")
+        option("-g", "--genome", help="genome build for query", choices = @["GRCh37","GRCh38"], default=some("GRCh38"))
         option("--log", help="Log file. Default is greenvaran_[now].log")
 
-    var argv = commandLineParams()
-    if len(argv) == 0: argv = @["--help"]
-    var opts = p.parse(argv)
+    try:
+        let opts = p.parse() 
+    except ShortCircuit as e:
+        if e.flag == "argparse_help":
+            echo p.help
+            quit QuitSuccess
+    except UsageError:
+        stderr.writeLine getCurrentExceptionMsg() 
+        echo "Use --help for usage information"
+        quit QuitSuccess
 
-    # Quit if help is used
-    if opts.help:
-        quit "END of help message", QuitSuccess
+    let opts = p.parse() 
 
     #Set logging
     var
