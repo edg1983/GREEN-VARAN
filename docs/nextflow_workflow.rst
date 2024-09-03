@@ -1,23 +1,23 @@
 GREEN-VARAN workflow
 ====================
 
-To perform small variants prioritization as described in the GREEN-DB manuscript, GREEN-VARAN need some annotations to be already
+To perform small variants prioritization as described in the GREEN-DB manuscript, GREEN-VARAN needs some annotations to be already
 present in your input VCF (see `Prioritization of small variants <GREEN-VARAN_usage.rst#Prioritization of small variants>`__)
 
-This Nextflow workflow automate the whole process annotating additional information and then performing greenevaran annotation. 
+This Nextflow workflow automates the whole process annotating additional information and then performing greenevaran annotation. 
 The workflow is tested on Nextflow >=v20.10
 
 Usage
 ~~~~~
 
-The typical usage scenario start with a VCF file already containing gene consequences annotations from SnpEff or bcftools. 
-Then from the GREEN-VARAN tool main folder you can perform all annotations using the following command.
-This will add a minimum set of information to you VCF including:
+The typical usage scenario starts with a VCF file already containing gene consequences annotations from SnpEff or bcftools. 
+Then from the GREEN-VARAN tool main folder, you can perform all annotations using the following command.
+This will add a minimum set of information to your VCF including:
 
 - population allele AF from gnomAD genomes v3.1.1 (GRCh38) or v2.1.1 (GRCh37)
-- functional regions overlaps for TFBS, DNase peaks and UCNE
+- functional regions overlap for TFBS, DNase peaks and UCNE
 - prediction score values for ncER, FATHMM, ReMM
-- GREEN-DB information on regulatory variants with prioritization levels
+- GREEN-DB information on regulatory variants with prioritization annotation in level mode (see [prioritization modes](https://github.com/edg1983/GREEN-VARAN/tree/master#prioritization-of-small-variants))
 
 .. code-block:: bash
 
@@ -93,7 +93,7 @@ You can list the available resources and their resulting download location using
 
     nextflow workflow/download.nf --list_data
 
-The reccomended set of annotations can be downloaded to the default location using the following command or
+The recommended set of annotations can be downloaded to the default location using the following command or
 you can set an alternative resource folder using ``--resource_folder`` option
 
 .. code-block:: bash
@@ -106,7 +106,7 @@ you can set an alternative resource folder using ``--resource_folder`` option
     --db 
 
 Otherwise, single files are available for download from Zenodo repository and all file locations are listed in 
-the ``GREENDB_collection.txt`` file under resources folder.
+the ``GREENDB_collection.txt`` file under the resources folder.
 
 Workflow configuration
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -135,14 +135,14 @@ Editing the profile configuration
 To adjust the configuration you need to edit the ``nextflow.config`` file in the workflow folder
 
 The main parameters you may need to adjust are
-- ``ncpus``: this controls the number of threads request for annotation
-- ``max_local_jobs``: this controls the max number of concurrent jobs submitted in local profile (when not submitting job to a scheduler)
+- ``ncpus``: this controls the number of threads requests for annotation
+- ``max_local_jobs``: this controls the max number of concurrent jobs submitted in the local profile (when not submitting a job to a scheduler)
 - ``queue``: this is the name of the queue to be used when submitting jobs 
 
 Editing the annotation file schema
 ##################################
 
-The annotation file schema contain the expected files names, repositories and annotation sources. 
+The annotation file schema contains the expected file names, repositories, and annotation sources. 
 In case you need to adjust this you can modify the ``resources.conf`` file located in workflow/config in the GREEN-VARAN folder.
 
 
@@ -182,7 +182,7 @@ Available parameters for main workflow
 --resource_folder
     | Specify a custom folder for the annotation files
     | Default is the resources folder in GREEN-VARAN main folder
---anno_tom TOML_FILE
+--anno_toml TOML_FILE
     | A custom toml annotation config file.
     | This file is a toml file as specified by vcfanno tool
     | This will be added to other annotations defined with scores, regions and AF.
