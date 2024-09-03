@@ -50,12 +50,15 @@ See the dedicated page for more usage information
 
 Singularity
 ~~~~~~~~~~~
-The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as Singularity image (tested on singularity >= 3.2). 
-A Singularity recipe is included in the repository or you can pull the image from Singularity Library using
+The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as docker image. 
+A Dockerfile is included in the repository or you can pull the image from ``htgenomeanalysisunit/greenvaran:<version>``.
 
-``singularity pull library://edg1983/greenvaran/greenvaran:latest``
+For example to get a singularity image from docker hub you can use
+
+``singularity pull docker://htgenomeanalysisunit/greenvaran:1.3.3``
 
 See GREEN-VARAN usage for more details
+
 Usage
 #####
 

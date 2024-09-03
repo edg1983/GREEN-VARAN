@@ -30,6 +30,7 @@ We also provide pre-processed datasets and Nextflow workflow to automate the who
 
 Command line options
 ~~~~~~~~~~~~~~~~~~~~
+
 smallvars and sv shared options
 ###############################
 
@@ -87,6 +88,8 @@ smallvars specific options
 -c, --config CONFIG
     | json config file for prioritization
     | A default configuration for the four level described in the paper is provided in config folder
+--prioritization_strategy
+    | set the strategy used to compute prioritization levels. Possible values are: levels (default) or pileup
 -p, --permissive
     | Perform prioritization even if one of the INFO fields required by prioritization config is missing
     | By default, when one of the expeced fields is not defined in the header, the prioritization is disabled and all variants will get level zero
@@ -94,6 +97,7 @@ smallvars specific options
 
 Annotations added by GREEN-VARAN
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 INFO fields
 ###########
 Fields in the following table are added to INFO fields by GREEN-VARAN. greendb_level will be added only for small variants
@@ -112,6 +116,7 @@ Fields in the following table are added to INFO fields by GREEN-VARAN. greendb_l
 
 Updated gene consequences
 #########################
+
 By default, GREEN-VARAN search for the standard ANN (SnpEff), CSQ (VEP) or BCSQ (bcftools csq) annotation fields in the input VCF and update gene consequences in the detected field. If multiple compatible fields are found, only ANN is updated.
 You can configure a specific annotation field to update using `-q, --csq_field` option. Note that if the configured field is not found in the header, GREEN-VARAN will still search for the default ones.
 If none is found, GREEN-VARAN will create a new ANN field. To switch off gene consequence update use the `--noupdate` option.
@@ -174,7 +179,7 @@ Personalize the prioritization schema
 The prioritization schema is defined in a config json file. The default is provided in the config folder.
 An example of expected file structure is reported below
 
-.. code-block:: bash
+.. code-block:: json
 
    {
        "af": ["gnomAD_AF","gnomAD_AF_nfe"],
@@ -220,10 +225,12 @@ This is treated differently according to the SV type:
 
 Singularity
 ~~~~~~~~~~~
-The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as Singularity image (tested on singularity >= 3.2).
-A Singularity recipe is included in the repository or you can pull the image from Singularity Library using
+The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as docker image. 
+A Dockerfile is included in the repository or you can pull the image from ``htgenomeanalysisunit/greenvaran:<version>``.
 
-``singularity pull library://edg1983/greenvaran/greenvaran:latest``
+For example to get a singularity image from docker hub you can use
+
+``singularity pull docker://htgenomeanalysisunit/greenvaran:1.3.3``
 
 Usage
 #####
