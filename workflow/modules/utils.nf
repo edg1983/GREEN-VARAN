@@ -19,9 +19,10 @@ process download_dataset {
     file(params.resource_folder).mkdirs() //this will create the directory if missing
     dataset_file = params.annotations[dataset].file
     webaddress = "${params.annotations[dataset].repository}/files/${dataset_file}"
+    download_index = "$dataset" != 'greendb' ? "wget ${webaddress}.csi" : ''
     """
     wget $webaddress
-    wget ${webaddress}.csi
+    ${download_index}
     """
 }
 
