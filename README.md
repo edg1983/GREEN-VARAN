@@ -296,3 +296,8 @@ When you use GREEN-VARAN workflow for small variants annotation please also cite
 Brent S. Pedersen, Ryan M. Layer & Aaron R. Quinlan. Genome Biology volume 17, Article number: 118 (2016)
 
 Additionally, when you use any prediction score for annotation, please cite the corresponding publication.
+
+
+## Contributions
+
+Developed by Edoardo Giacopuzzi, rust re-implementation by Gemini Neon.
