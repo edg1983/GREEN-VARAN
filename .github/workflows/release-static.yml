@@ -69,8 +69,8 @@ jobs:
           BIN_DIR="target/x86_64-unknown-linux-musl/release"
           file "${BIN_DIR}/greenvaran"
           file "${BIN_DIR}/greendb_query"
-          file "${BIN_DIR}/greenvaran" | grep -q "statically linked"
-          file "${BIN_DIR}/greendb_query" | grep -q "statically linked"
+          file "${BIN_DIR}/greenvaran" | grep -Eq "statically linked|static-pie linked"
+          file "${BIN_DIR}/greendb_query" | grep -Eq "statically linked|static-pie linked"
           "./${BIN_DIR}/greenvaran" version
           "./${BIN_DIR}/greendb_query" --help > /dev/null
 

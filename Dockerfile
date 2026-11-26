@@ -40,8 +40,8 @@ RUN touch src/lib.rs src/bin/greenvaran.rs src/bin/greendb_query.rs && \
     cargo build --release --target x86_64-unknown-linux-musl --features static && \
     file /build/target/x86_64-unknown-linux-musl/release/greenvaran && \
     file /build/target/x86_64-unknown-linux-musl/release/greendb_query && \
-    file /build/target/x86_64-unknown-linux-musl/release/greenvaran | grep -q "statically linked" && \
-    file /build/target/x86_64-unknown-linux-musl/release/greendb_query | grep -q "statically linked"
+    file /build/target/x86_64-unknown-linux-musl/release/greenvaran | grep -Eq "statically linked|static-pie linked" && \
+    file /build/target/x86_64-unknown-linux-musl/release/greendb_query | grep -Eq "statically linked|static-pie linked"
 
 # Stage 2: Minimal runtime image (glibc-compatible for workflow/bin helper tools)
 FROM ubuntu:22.04
