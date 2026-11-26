@@ -74,9 +74,12 @@ Build requirements:
 
 The compiled executables are produced at `target/release/greenvaran` and `target/release/greendb_query`.
 
-To build completely static musl executables (with zero runtime shared-library dependencies), build inside `rust:1-alpine` (as automated in `.github/workflows/release-static.yml` and `Dockerfile`):
+To build completely static musl executables (with zero runtime shared-library dependencies) on Debian/Ubuntu with `musl-tools` and `libclang-dev` (as automated in `.github/workflows/release-static.yml` and `Dockerfile`):
 
 ```bash
+rustup target add x86_64-unknown-linux-musl
+CC_x86_64_unknown_linux_musl=musl-gcc \
+BINDGEN_EXTRA_CLANG_ARGS="-isystem /usr/include/x86_64-linux-musl" \
 RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 \
   cargo build --release --target x86_64-unknown-linux-musl --features static
 ```

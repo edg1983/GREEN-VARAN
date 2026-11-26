@@ -1,19 +1,30 @@
-# Stage 1: Build completely static musl executables for greenvaran and greendb_query
-FROM rust:1-alpine AS builder
+# Stage 1: Cross-compile completely static musl executables on glibc host
+# (glibc host allows bindgen/hts-sys to dlopen libclang.so while targeting static musl)
+FROM rust:1-bookworm AS builder
 
-RUN apk add --no-cache \
-    build-base \
-    musl-dev \
-    clang-dev \
-    clang-libclang \
-    llvm-dev \
-    cmake \
-    make \
-    perl \
-    linux-headers \
-    file
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        musl-tools \
+        musl-dev \
+        clang \
+        libclang-dev \
+        cmake \
+        make \
+        perl \
+        pkg-config \
+        file \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -sf /usr/include/linux /usr/include/x86_64-linux-musl/linux \
+    && ln -sf /usr/include/asm-generic /usr/include/x86_64-linux-musl/asm-generic \
+    && ln -sf /usr/include/x86_64-linux-gnu/asm /usr/include/x86_64-linux-musl/asm \
+    && rustup target add x86_64-unknown-linux-musl
 
 WORKDIR /build
+
+ENV CC_x86_64_unknown_linux_musl=musl-gcc \
+    HTS_STATIC=1 \
+    RUSTFLAGS="-C target-feature=+crt-static" \
+    BINDGEN_EXTRA_CLANG_ARGS="-isystem /usr/include/x86_64-linux-musl"
 
 # Cache dependencies before copying source files
 COPY Cargo.toml Cargo.lock ./
@@ -21,16 +32,14 @@ RUN mkdir -p src/bin && \
     echo "pub fn _dummy() {}" > src/lib.rs && \
     echo "fn main() {}" > src/bin/greenvaran.rs && \
     echo "fn main() {}" > src/bin/greendb_query.rs && \
-    LIBCLANG_PATH=$(dirname "$(find /usr/lib -name 'libclang.so*' | head -n 1)") \
-    RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 \
-    cargo build --release --target x86_64-unknown-linux-musl --features static || true
+    cargo build --release --target x86_64-unknown-linux-musl --features static
 
 # Build actual binaries
 COPY src ./src
 RUN touch src/lib.rs src/bin/greenvaran.rs src/bin/greendb_query.rs && \
-    LIBCLANG_PATH=$(dirname "$(find /usr/lib -name 'libclang.so*' | head -n 1)") \
-    RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 \
     cargo build --release --target x86_64-unknown-linux-musl --features static && \
+    file /build/target/x86_64-unknown-linux-musl/release/greenvaran && \
+    file /build/target/x86_64-unknown-linux-musl/release/greendb_query && \
     file /build/target/x86_64-unknown-linux-musl/release/greenvaran | grep -q "statically linked" && \
     file /build/target/x86_64-unknown-linux-musl/release/greendb_query | grep -q "statically linked"
 

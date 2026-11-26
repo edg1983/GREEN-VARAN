@@ -31,10 +31,13 @@ Build requirements:
 - C compiler (``gcc`` or ``clang``), ``cmake``, ``make``, and ``libclang`` (``htslib``, ``zlib-ng``, ``bzip2``, ``lzma``, and ``sqlite3`` are compiled from bundled sources)
 
 Compiled executables are placed at ``target/release/greenvaran`` and ``target/release/greendb_query``.
-To produce completely static Linux musl binaries, build on Alpine Linux (``rust:1-alpine``) with:
+To produce completely static Linux musl binaries on Debian/Ubuntu with ``musl-tools`` and ``libclang-dev``:
 
 .. code-block:: bash
 
+    rustup target add x86_64-unknown-linux-musl
+    CC_x86_64_unknown_linux_musl=musl-gcc \
+    BINDGEN_EXTRA_CLANG_ARGS="-isystem /usr/include/x86_64-linux-musl" \
     RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 \
       cargo build --release --target x86_64-unknown-linux-musl --features static
 

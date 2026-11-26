@@ -8,31 +8,34 @@ on:
 jobs:
   build-static:
     runs-on: ubuntu-latest
-    container:
-      image: rust:1-alpine
     permissions:
       contents: write
 
     steps:
-      - name: Install Alpine musl build dependencies
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install musl cross-compilation toolchain and libclang
         run: |
-          apk add --no-cache \
-            build-base \
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            musl-tools \
             musl-dev \
-            clang-dev \
-            clang-libclang \
-            llvm-dev \
+            clang \
+            libclang-dev \
             cmake \
             make \
             perl \
-            linux-headers \
-            file \
-            tar \
-            gzip \
-            git
+            pkg-config \
+            file
+          sudo ln -sf /usr/include/linux /usr/include/x86_64-linux-musl/linux
+          sudo ln -sf /usr/include/asm-generic /usr/include/x86_64-linux-musl/asm-generic
+          sudo ln -sf /usr/include/x86_64-linux-gnu/asm /usr/include/x86_64-linux-musl/asm
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Set up Rust toolchain with musl target
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-unknown-linux-musl
 
       - name: Cache Cargo registry and build artifacts
         uses: actions/cache@v4
@@ -45,21 +48,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-musl-cargo-
 
-      - name: Run unit tests
+      - name: Run unit tests (static musl target)
         env:
-          RUSTFLAGS: "-C target-feature=+crt-static"
+          CC_x86_64_unknown_linux_musl: musl-gcc
           HTS_STATIC: "1"
-        run: |
-          export LIBCLANG_PATH=$(dirname "$(find /usr/lib -name 'libclang.so*' | head -n 1)")
-          cargo test --target x86_64-unknown-linux-musl --features static
+          RUSTFLAGS: "-C target-feature=+crt-static"
+          BINDGEN_EXTRA_CLANG_ARGS: "-isystem /usr/include/x86_64-linux-musl"
+        run: cargo test --target x86_64-unknown-linux-musl --features static
 
       - name: Build static self-contained release binaries
         env:
-          RUSTFLAGS: "-C target-feature=+crt-static"
+          CC_x86_64_unknown_linux_musl: musl-gcc
           HTS_STATIC: "1"
-        run: |
-          export LIBCLANG_PATH=$(dirname "$(find /usr/lib -name 'libclang.so*' | head -n 1)")
-          cargo build --release --target x86_64-unknown-linux-musl --features static
+          RUSTFLAGS: "-C target-feature=+crt-static"
+          BINDGEN_EXTRA_CLANG_ARGS: "-isystem /usr/include/x86_64-linux-musl"
+        run: cargo build --release --target x86_64-unknown-linux-musl --features static
 
       - name: Verify static linking and smoke-test binaries
         run: |
