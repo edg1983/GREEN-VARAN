@@ -52,28 +52,33 @@ See the [workflow readme](workflow/README.md) for more details or look at the fu
 
 ## Installation
 
-GREEN-VARAN tools are written in Nim. GREEN-VARAN relies on [hts-nim](https://github.com/brentp/hts-nim) by Brent Pedersen for fast VCF processing. The GREEN-DB BED files are needed for annotation (see Download the supporting files)
+Starting from v1.4, GREEN-VARAN (`greenvaran` and `greendb_query`) is written in Rust using [rust-htslib](https://github.com/rust-bio/rust-htslib) (bundled htslib) and [rusqlite](https://github.com/rusqlite/rusqlite) (bundled SQLite 3) for ultra-fast, low-memory VCF/BCF annotation and querying. The GREEN-DB BED files are needed for annotation (see Download the supporting files).
 
-### Get the tool binaries from the repository
+### Get the tool binaries from GitHub Releases
 
-The easiest way to run GREEN-VARAN is to download the pre-compiled binaries from the latest release at https://github.com/edg1983/GREEN-VARAN
+The easiest way to run GREEN-VARAN on Linux is to download the pre-compiled, completely static self-contained binaries (`greenvaran` and `greendb_query`) from the latest release at https://github.com/edg1983/GREEN-VARAN/releases.
 
-### Compile the tool
+### Compile from source
 
-Alternatively, you can clone the repository
-`git clone https://github.com/edg1983/GREEN-VARAN.git`
+Alternatively, clone the repository and build with Cargo:
 
-And then compile the greenvaran using [Nim compiler](https://nim-lang.org/).
-GREEN-VARAN requires
+```bash
+git clone https://github.com/edg1983/GREEN-VARAN.git
+cd GREEN-VARAN
+cargo build --release
+```
 
-- nim >= 0.10
-- hts-nim >= 0.3.4
-- argparse 0.10.1
+Build requirements:
+- Rust toolchain (`rustc` / `cargo`, edition 2021)
+- C compiler (`gcc` or `clang`), `cmake`, `make`, and `libclang` (for `hts-sys` bindings; `htslib`, `zlib-ng`, `bzip2`, `lzma`, and `sqlite3` are all compiled from bundled sources)
 
-If you have Singularity installed, you can use the script `nim_compile.sh` to create a static binary with no dependencies
-This uses musl-hts-nim as described in hts-nim repository (see https://github.com/brentp/hts-nim#static-binary-with-singularity)
+The compiled executables are produced at `target/release/greenvaran` and `target/release/greendb_query`.
 
-The accessory greendb_query tool can be compiled using `nim compile greendb_query.nim`
+To build completely static musl executables (with zero runtime shared-library dependencies), build inside `rust:1-alpine` (as automated in `.github/workflows/release-static.yml` and `Dockerfile`):
+
+```bash
+RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 cargo build --release --features static
+```
 
 ## Usage
 
@@ -126,6 +131,7 @@ We also provide pre-processed datasets (see [resources](resources/README.md)) an
 | -g, --genes GENES       | Gene symbols for genes of interest, variants connected to those will be flagged with greendb_VOI tag <br> This can be a comma-separated list or a text file listing genes one per line    |
 | --connection CONNECTION | Region-gene connections accepted for annotation <br> Possible values: [all, closest, annotated] (default: all)                                                                            |
 | --log LOG               | Log file. Default is greenvaran\_[now].log                                                                                                                                                |
+| --threads THREADS       | Number of threads for BGZF decompression/compression and BED loading (default: 1; set `0` to auto-detect available CPU cores)                                                             |
 
 #### sv specific options
 
@@ -201,12 +207,25 @@ Alternatively, you can chose a "pile-up" approach setting `--prioritization_stra
 
 See documentation for more details [documentation](https://green-varan.readthedocs.io/en/latest).
 
-## Run using singularity
+## Run using Docker or Singularity / Apptainer
 
-The tool binaries should work on most linux based system. In case you have any issue, we also provide GREEN-VARAN as Docker image that you can use with Singularity or Docker.
-A Dockerfile recipe is included in the repository or you can pull the image from DockerHub:
+The static release binaries run directly on most Linux systems without external dependencies. Container images are also built and published automatically to the GitHub Container Registry (GHCR) on every release:
 
-`singularity pull docker://htgenomeanalysisunit/greenvaran:1.3`
+```bash
+# Docker
+docker pull ghcr.io/edg1983/green-varan:1.4
+# or latest release
+docker pull ghcr.io/edg1983/green-varan:latest
+
+# Singularity / Apptainer
+singularity pull docker://ghcr.io/edg1983/green-varan:1.4
+```
+
+You can also build the image locally from the multi-stage `Dockerfile`:
+
+```bash
+docker build -t greenvaran:1.4 .
+```
 
 ### Usage
 

@@ -64,6 +64,8 @@ smallvars and sv shared options
     | Possible values: [all, closest, annotated] (default: all)
 --log LOG
     | Log file. Default is greenvaran_[now].log
+--threads THREADS
+    | Number of threads for BGZF decompression/compression and BED loading (default: 1; set ``0`` to auto-detect available CPU cores)
 
 sv specific options
 ###################
@@ -223,14 +225,13 @@ This is treated differently according to the SV type:
   Alternatively, the user can provide a padding values using ``--padding`` and this value will be added aroud position
   For these kind of variants any overlapping GREEN-DB region will be reported, diregarding the overlap threasholds
 
-Singularity
-~~~~~~~~~~~
-The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as docker image. 
-A Dockerfile is included in the repository or you can pull the image from ``htgenomeanalysisunit/greenvaran:<version>``.
+Docker and Singularity / Apptainer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The static release binaries run on most Linux systems. Container images are also published to the GitHub Container Registry (GHCR) at ``ghcr.io/edg1983/green-varan:<version>`` (and ``:latest`` for the latest release).
 
-For example to get a singularity image from docker hub you can use
+For example, to pull a Singularity / Apptainer image from GHCR:
 
-``singularity pull docker://htgenomeanalysisunit/greenvaran:1.3.3``
+``singularity pull docker://ghcr.io/edg1983/green-varan:1.4``
 
 Usage
 #####

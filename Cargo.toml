@@ -1,0 +1,38 @@
+[package]
+name = "greenvaran"
+version = "1.4.0"
+edition = "2021"
+authors = ["Edoardo Giacopuzzi"]
+description = "GREEN-VARAN: Annotate variants in regulatory regions from GREEN-DB"
+license = "MIT"
+
+[[bin]]
+name = "greenvaran"
+path = "src/bin/greenvaran.rs"
+
+[[bin]]
+name = "greendb_query"
+path = "src/bin/greendb_query.rs"
+
+[features]
+default = []
+static = ["rust-htslib/static"]
+
+[dependencies]
+anyhow = "1.0"
+bzip2-sys = { version = "0.1", features = ["static"] }
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+clap = { version = "4.5", features = ["derive"] }
+rusqlite = { version = "0.32", features = ["bundled"] }
+rust-htslib = { version = "0.49", default-features = false, features = ["bzip2", "lzma"] }
+rustc-hash = "2.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+smallvec = "1.15"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
