@@ -5,3 +5,5 @@ work/
 local_compile.sh
 .nextflow*
 .DS_Store
+test_large_data/
+/target/

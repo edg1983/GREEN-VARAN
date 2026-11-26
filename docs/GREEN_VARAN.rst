@@ -9,25 +9,33 @@ Additionally perform prioritization summing up evidences of regulatory impact fr
 Installation
 ~~~~~~~~~~~~
 
-1. Get the tool binary from the repository
-##########################################
+1. Get the static binaries from GitHub Releases
+###############################################
 
-The easiest way to run GREEN-VARAN is to download the pre-compiled binaries from the latest release at https://github.com/edg1983/GREEN-VARAN
+The easiest way to run GREEN-VARAN on Linux is to download the pre-compiled, completely static executables (``greenvaran`` and ``greendb_query``) from the latest release at https://github.com/edg1983/GREEN-VARAN/releases.
 
-2. Compile the tool
-###################
+2. Compile from source (Rust)
+#############################
 
-Alternatively, you can clone the repository 
-``git clone https://github.com/edg1983/GREEN-VARAN.git``
+Starting from v1.4, GREEN-VARAN is implemented in Rust using ``rust-htslib`` and bundled ``rusqlite``. Clone the repository and build with Cargo:
 
-And then compile the greenvaran using Nim compiler (https://nim-lang.org/). 
-GREEN-VARAN requires
-- nim >= 0.10
-- hts-nim >= 0.3.4
-- argparse 0.10.1 
+.. code-block:: bash
 
-If you have Singularity installed, you can use the script ``nim_compile.sh`` to create a static binary with no dependencies 
-This uses musl-hts-nim as described in hts-nim repository (see https://github.com/brentp/hts-nim#static-binary-with-singularity)
+    git clone https://github.com/edg1983/GREEN-VARAN.git
+    cd GREEN-VARAN
+    cargo build --release
+
+Build requirements:
+
+- Rust toolchain (``rustc`` and ``cargo``, edition 2021)
+- C compiler (``gcc`` or ``clang``), ``cmake``, ``make``, and ``libclang`` (``htslib``, ``zlib-ng``, ``bzip2``, ``lzma``, and ``sqlite3`` are compiled from bundled sources)
+
+Compiled executables are placed at ``target/release/greenvaran`` and ``target/release/greendb_query``.
+To produce completely static Linux musl binaries, build on Alpine Linux (``rust:1-alpine``) with:
+
+.. code-block:: bash
+
+    RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 cargo build --release --features static
 
 Get GREEN-DB files
 ~~~~~~~~~~~~~~~~~~
@@ -48,14 +56,13 @@ Missing datasets will be downloaded automatically during the process.
 See the dedicated page for more usage information
 
 
-Singularity
-~~~~~~~~~~~
-The tool binaries should work on most linux based system. In case you have any issue, we also provdie GREEN-VARAN as docker image. 
-A Dockerfile is included in the repository or you can pull the image from ``htgenomeanalysisunit/greenvaran:<version>``.
+Docker and Singularity / Apptainer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The static release binaries run on most Linux systems without external dependencies. Container images are also built and published to the GitHub Container Registry (GHCR) at ``ghcr.io/edg1983/green-varan:<version>`` (and ``:latest`` for the latest release).
 
-For example to get a singularity image from docker hub you can use
+For example, to pull a Singularity / Apptainer image from GHCR:
 
-``singularity pull docker://htgenomeanalysisunit/greenvaran:1.3.3``
+``singularity pull docker://ghcr.io/edg1983/green-varan:1.4``
 
 See GREEN-VARAN usage for more details
 
