@@ -35,7 +35,8 @@ To produce completely static Linux musl binaries, build on Alpine Linux (``rust:
 
 .. code-block:: bash
 
-    RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 cargo build --release --features static
+    RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 \
+      cargo build --release --target x86_64-unknown-linux-musl --features static
 
 Get GREEN-DB files
 ~~~~~~~~~~~~~~~~~~

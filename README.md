@@ -77,7 +77,8 @@ The compiled executables are produced at `target/release/greenvaran` and `target
 To build completely static musl executables (with zero runtime shared-library dependencies), build inside `rust:1-alpine` (as automated in `.github/workflows/release-static.yml` and `Dockerfile`):
 
 ```bash
-RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 cargo build --release --features static
+RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 \
+  cargo build --release --target x86_64-unknown-linux-musl --features static
 ```
 
 ## Usage

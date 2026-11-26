@@ -21,16 +21,18 @@ RUN mkdir -p src/bin && \
     echo "pub fn _dummy() {}" > src/lib.rs && \
     echo "fn main() {}" > src/bin/greenvaran.rs && \
     echo "fn main() {}" > src/bin/greendb_query.rs && \
+    LIBCLANG_PATH=$(dirname "$(find /usr/lib -name 'libclang.so*' | head -n 1)") \
     RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 \
-    cargo build --release --features static || true
+    cargo build --release --target x86_64-unknown-linux-musl --features static || true
 
 # Build actual binaries
 COPY src ./src
 RUN touch src/lib.rs src/bin/greenvaran.rs src/bin/greendb_query.rs && \
+    LIBCLANG_PATH=$(dirname "$(find /usr/lib -name 'libclang.so*' | head -n 1)") \
     RUSTFLAGS="-C target-feature=+crt-static" HTS_STATIC=1 \
-    cargo build --release --features static && \
-    file /build/target/release/greenvaran | grep -q "statically linked" && \
-    file /build/target/release/greendb_query | grep -q "statically linked"
+    cargo build --release --target x86_64-unknown-linux-musl --features static && \
+    file /build/target/x86_64-unknown-linux-musl/release/greenvaran | grep -q "statically linked" && \
+    file /build/target/x86_64-unknown-linux-musl/release/greendb_query | grep -q "statically linked"
 
 # Stage 2: Minimal runtime image (glibc-compatible for workflow/bin helper tools)
 FROM ubuntu:22.04
@@ -62,8 +64,8 @@ RUN apt-get update && \
 
 # Install compiled Rust binaries
 WORKDIR /opt/green-varan_bin
-COPY --from=builder /build/target/release/greenvaran /opt/green-varan_bin/greenvaran
-COPY --from=builder /build/target/release/greendb_query /opt/green-varan_bin/greendb_query
+COPY --from=builder /build/target/x86_64-unknown-linux-musl/release/greenvaran /opt/green-varan_bin/greenvaran
+COPY --from=builder /build/target/x86_64-unknown-linux-musl/release/greendb_query /opt/green-varan_bin/greendb_query
 RUN chmod a+x /opt/green-varan_bin/greenvaran /opt/green-varan_bin/greendb_query
 
 # Copy configs, workflow, and accessory scripts

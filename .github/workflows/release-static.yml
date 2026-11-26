@@ -49,33 +49,39 @@ jobs:
         env:
           RUSTFLAGS: "-C target-feature=+crt-static"
           HTS_STATIC: "1"
-        run: cargo test --features static
+        run: |
+          export LIBCLANG_PATH=$(dirname "$(find /usr/lib -name 'libclang.so*' | head -n 1)")
+          cargo test --target x86_64-unknown-linux-musl --features static
 
       - name: Build static self-contained release binaries
         env:
           RUSTFLAGS: "-C target-feature=+crt-static"
           HTS_STATIC: "1"
-        run: cargo build --release --features static
+        run: |
+          export LIBCLANG_PATH=$(dirname "$(find /usr/lib -name 'libclang.so*' | head -n 1)")
+          cargo build --release --target x86_64-unknown-linux-musl --features static
 
       - name: Verify static linking and smoke-test binaries
         run: |
-          file target/release/greenvaran
-          file target/release/greendb_query
-          file target/release/greenvaran | grep -q "statically linked"
-          file target/release/greendb_query | grep -q "statically linked"
-          ./target/release/greenvaran version
-          ./target/release/greendb_query --help > /dev/null
+          BIN_DIR="target/x86_64-unknown-linux-musl/release"
+          file "${BIN_DIR}/greenvaran"
+          file "${BIN_DIR}/greendb_query"
+          file "${BIN_DIR}/greenvaran" | grep -q "statically linked"
+          file "${BIN_DIR}/greendb_query" | grep -q "statically linked"
+          "./${BIN_DIR}/greenvaran" version
+          "./${BIN_DIR}/greendb_query" --help > /dev/null
 
       - name: Package release assets
         id: pkg
         run: |
+          BIN_DIR="target/x86_64-unknown-linux-musl/release"
           RAW_TAG="${{ github.event.release.tag_name || github.ref_name }}"
           VERSION="${RAW_TAG#v}"
           mkdir -p dist
 
           # Standalone static executables (compatible with direct download URLs)
-          cp target/release/greenvaran dist/greenvaran
-          cp target/release/greendb_query dist/greendb_query
+          cp "${BIN_DIR}/greenvaran" dist/greenvaran
+          cp "${BIN_DIR}/greendb_query" dist/greendb_query
 
           # Versioned archive containing both binaries
           TARBALL="greenvaran-${VERSION}-x86_64-unknown-linux-musl.tar.gz"

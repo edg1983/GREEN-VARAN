@@ -1,5 +1,5 @@
 __pycache__/
-bin/
+/bin/
 .vscode/
 work/
 local_compile.sh
@@ -7,3 +7,4 @@ local_compile.sh
 .DS_Store
 test_large_data/
 /target/
+*.log
